@@ -1,9 +1,9 @@
 <template>
   <component
-    :is="listType"
+    :is="config.listType"
     contenteditable="true"
-    v-html="innerContent">
-  </component>
+    v-html="content"
+    ref="content" />
 </template>
 
 <script>
@@ -16,12 +16,14 @@ export default {
   ],
   data () {
     return {
-      listType: 'ul',
-      innerContent: '<li></li>'
+      config: {
+        listType: 'ul'
+      },
+      content: '<li></li>'
     };
   },
   mounted () {
-    this.innerContent = this.content;
+    this.content = this.inputContent;
   },
   methods: {
 

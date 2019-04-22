@@ -1,9 +1,9 @@
 <template>
   <component
-    :is="'h' + headingLevel"
-    contenteditable="true">
-    {{ headerText }}
-  </component>
+    :is="'h' + config.headingLevel"
+    contenteditable="true"
+    ref="content"
+    v-html="content" />
 </template>
 
 <script>
@@ -16,12 +16,14 @@ export default {
   ],
   data () {
     return {
-      headingLevel: 2,
-      headerText: ''
+      config: {
+        headingLevel: 2
+      },
+      content: ''
     };
   },
   mounted () {
-    this.headerText = this.content;
+    this.content = this.inputContent;
   },
   methods: {
 

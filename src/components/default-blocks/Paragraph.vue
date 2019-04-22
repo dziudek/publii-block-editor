@@ -1,8 +1,8 @@
 <template>
   <p
     contenteditable="true"
-    v-html="innerContent">
-  </p>
+    v-html="content"
+    ref="content" />
 </template>
 
 <script>
@@ -15,11 +15,11 @@ export default {
   ],
   data () {
     return {
-      innerContent: ''
+      content: ''
     };
   },
   mounted () {
-    this.innerContent = this.content;
+    this.content = this.inputContent;
   },
   methods: {
 
