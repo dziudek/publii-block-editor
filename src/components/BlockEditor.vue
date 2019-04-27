@@ -31,6 +31,7 @@ import PubliiHeader from './default-blocks/Header.vue';
 import PubliiList from './default-blocks/List.vue';
 import PubliiParagraph from './default-blocks/Paragraph.vue';
 import PubliiSeparator from './default-blocks/Separator.vue';
+import PubliiQuote from './default-blocks/Quote.vue';
 
 export default {
   name: 'BlockEditor',
@@ -39,7 +40,8 @@ export default {
     'publii-header': PubliiHeader,
     'publii-list': PubliiList,
     'publii-paragraph': PubliiParagraph,
-    'publii-separator': PubliiSeparator
+    'publii-separator': PubliiSeparator,
+    'publii-quote': PubliiQuote
   },
   data () {
     return {
@@ -73,6 +75,15 @@ export default {
           type: 'publii-paragraph',
           content: 'Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Maecenas sed diam eget risus varius blandit sit amet non magna.',
           config: {}
+        },
+        {
+          id: 1555825318231,
+          type: 'publii-quote',
+          content: {
+            text: '',
+            author: ''
+          },
+          config: {}
         }
       ]
     };
@@ -83,6 +94,7 @@ export default {
     this.$bus.$on('block-editor-save-block', this.saveBlock);
     this.$bus.$on('block-editor-block-selected', this.blockSelection);
     this.$bus.$on('block-editor-delete-block', this.deleteBlock);
+    this.$bus.$on('block-editor-add-block', this.addNewBlock);
   },
   methods: {
     moveBlockUp (blockID) {
@@ -125,6 +137,22 @@ export default {
       let blockIndex = this.content.findIndex(el => el.id === blockID);
       this.content.splice(blockIndex, 1);
       this.state.selectedBlockID = false;
+    },
+    addNewBlock (blockType, afterBlockID) {
+      let blockIndex = this.content.findIndex(el => el.id === afterBlockID);
+      let newBlockID = +new Date();
+      let newBlockObject = {
+        id: newBlockID,
+        type: blockType,
+        content: '',
+        config: {}
+      };
+      this.content.splice(blockIndex + 1, 0, newBlockObject);
+
+      setTimeout(() => {
+        this.$bus.$emit('block-editor-block-selected', newBlockID);
+        this.$refs['block-' + newBlockID][0].$refs['block'].focus();
+      }, 0);
     }
   },
   beforeDestroy () {
@@ -133,6 +161,7 @@ export default {
     this.$bus.$off('block-editor-save-block', this.saveBlock);
     this.$bus.$off('block-editor-block-selected', this.blockSelection);
     this.$bus.$off('block-editor-delete-block', this.deleteBlock);
+    this.$bus.$off('block-editor-add-block', this.addNewBlock);
   }
 }
 </script>

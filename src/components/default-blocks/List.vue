@@ -3,7 +3,7 @@
     :is="config.listType"
     contenteditable="true"
     v-html="content"
-    ref="content" />
+    ref="block" />
 </template>
 
 <script>
@@ -24,9 +24,27 @@ export default {
   },
   mounted () {
     this.content = this.inputContent;
+    this.$refs['block'].addEventListener('keydown', this.handleTabKey);
   },
   methods: {
+    handleTabKey (e) {
+      if (e.code === 'Tab' && e.shiftKey === false) {
+        document.execCommand('indent', false, null);
+        e.returnValue = false;
+      } else if (e.code === 'Tab' && e.shiftKey === true) {
+        document.execCommand('outdent', false, null);
+        e.returnValue = false;
+      }
+    },
+    save () {
+      this.content = this.$refs['block'].innerHTML;
 
+      this.$bus.$emit('block-editor-save-block', {
+        id: this.id,
+        config: JSON.parse(JSON.stringify(this.config)),
+        content: this.content
+      });
+    }
   }
 }
 </script>

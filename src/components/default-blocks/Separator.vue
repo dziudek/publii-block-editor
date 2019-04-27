@@ -18,7 +18,13 @@ export default {
   },
   mounted () {},
   methods: {
-
+    save () {
+      this.$bus.$emit('block-editor-save-block', {
+        id: this.id,
+        config: JSON.parse(JSON.stringify(this.config)),
+        content: this.content
+      });
+    }
   }
 }
 </script>

@@ -2,17 +2,19 @@
   <component
     :is="'h' + config.headingLevel"
     contenteditable="true"
-    ref="content"
+    ref="block"
     v-html="content" />
 </template>
 
 <script>
 import Block from './../Block.vue';
+import ContentEditableImprovements from './../helpers/ContentEditableImprovements.vue';
 
 export default {
   name: 'Header',
   mixins: [
-    Block
+    Block,
+    ContentEditableImprovements
   ],
   data () {
     return {
@@ -26,7 +28,15 @@ export default {
     this.content = this.inputContent;
   },
   methods: {
+    save () {
+      this.content = this.$refs['block'].innerHTML;
 
+      this.$bus.$emit('block-editor-save-block', {
+        id: this.id,
+        config: JSON.parse(JSON.stringify(this.config)),
+        content: this.content
+      });
+    }
   }
 }
 </script>
