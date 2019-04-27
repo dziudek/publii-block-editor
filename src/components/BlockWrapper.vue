@@ -9,12 +9,13 @@
     </div>
 
     <div class="wrapper-ui-left">
-      <div class="wrapper-move-up" @click="moveUp">⬆</div>
-      <div class="wrapper-move-down" @click="moveDown">⬇</div>
+      <div class="wrapper-move-up" @click.stop="moveUp">⬆</div>
+      <div class="wrapper-move-down" @click.stop="moveDown">⬇</div>
     </div>
 
     <div class="wrapper-ui-right">
       <div class="wrapper-show-options">&hellip;</div>
+      <div class="wrapper-delete" @click.stop="deleteBlock">&ndash;</div>
     </div>
 
     <div class="wrapper-ui-bottom">
@@ -35,17 +36,20 @@ export default {
     };
   },
   mounted () {
-    this.$bus.$on('block-editor-block-selected', this.blockSelection);
+
   },
   methods: {
-    blockSelection (blockID) {
-      this.isSelected = this.id === blockID;
+    setSelectionState (newState) {
+      this.isSelected = newState;
     },
     moveUp () {
       this.$bus.$emit('block-editor-move-block-up', this.id);
     },
     moveDown () {
       this.$bus.$emit('block-editor-move-block-down', this.id);
+    },
+    deleteBlock () {
+      this.$bus.$emit('block-editor-delete-block', this.id);
     }
   }
 }
@@ -81,6 +85,7 @@ export default {
     &-bottom {
       opacity: 0;
       position: absolute;
+      z-index: 1;
 
       & > div {
         background: #eee;

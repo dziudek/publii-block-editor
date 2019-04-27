@@ -11,7 +11,11 @@ export default {
   },
   methods: {
     save () {
-      this.content = this.$refs['content'].innerHTML;
+      this.content = '';
+
+      if (this.$refs['content']) {
+        this.content = this.$refs['content'].innerHTML;
+      }
 
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,

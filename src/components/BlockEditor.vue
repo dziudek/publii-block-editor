@@ -4,17 +4,19 @@
     @click="$bus.$emit('block-editor-block-selected', 0)">
     <div
       class="editor-inner"
-      :style="'width: ' + contentWidth + 'px;'">
+      :style="'width: ' + config.contentWidth + 'px;'">
       <block-wrapper
         v-for="block of content"
         :id="block.id"
-        :key="'block-wrapper-' + block.id">
+        :key="'block-wrapper-' + block.id"
+        :ref="'block-wrapper-' + block.id">
         <component
           :is="block.type"
           :id="block.id"
           :inputConfig="block.config"
           :inputContent="block.content"
-          :key="'block-' + block.id" />
+          :key="'block-' + block.id"
+          :ref="'block-' + block.id" />
       </block-wrapper>
     </div>
   </div>
@@ -41,6 +43,12 @@ export default {
   },
   data () {
     return {
+      config: {
+        contentWidth: 720
+      },
+      state: {
+        selectedBlockID: false
+      },
       content: [
         {
           id: 1555941441671,
@@ -66,14 +74,15 @@ export default {
           content: 'Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Maecenas sed diam eget risus varius blandit sit amet non magna.',
           config: {}
         }
-      ],
-      contentWidth: 720
+      ]
     };
   },
   mounted () {
     this.$bus.$on('block-editor-move-block-up', this.moveBlockUp);
     this.$bus.$on('block-editor-move-block-down', this.moveBlockDown);
     this.$bus.$on('block-editor-save-block', this.saveBlock);
+    this.$bus.$on('block-editor-block-selected', this.blockSelection);
+    this.$bus.$on('block-editor-delete-block', this.deleteBlock);
   },
   methods: {
     moveBlockUp (blockID) {
@@ -98,7 +107,32 @@ export default {
       let blockIndex = this.content.findIndex(el => el.id === blockData.id);
       this.content[blockIndex].content = blockData.content;
       this.content[blockIndex].config = blockData.config;
+    },
+    blockSelection (blockID) {
+      if (blockID === this.state.selectedBlockID) {
+        return;
+      }
+
+      if (this.state.selectedBlockID) {
+        this.$refs['block-wrapper-' + this.state.selectedBlockID][0].setSelectionState(false);
+        this.$refs['block-' + this.state.selectedBlockID][0].save();
+      }
+
+      this.state.selectedBlockID = blockID;
+      this.$refs['block-wrapper-' + this.state.selectedBlockID][0].setSelectionState(true);
+    },
+    deleteBlock (blockID) {
+      let blockIndex = this.content.findIndex(el => el.id === blockID);
+      this.content.splice(blockIndex, 1);
+      this.state.selectedBlockID = false;
     }
+  },
+  beforeDestroy () {
+    this.$bus.$off('block-editor-move-block-up', this.moveBlockUp);
+    this.$bus.$off('block-editor-move-block-down', this.moveBlockDown);
+    this.$bus.$off('block-editor-save-block', this.saveBlock);
+    this.$bus.$off('block-editor-block-selected', this.blockSelection);
+    this.$bus.$off('block-editor-delete-block', this.deleteBlock);
   }
 }
 </script>

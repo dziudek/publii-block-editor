@@ -11,7 +11,10 @@ export default {
     Block
   ],
   data () {
-    return {};
+    return {
+      config: {},
+      content: ''
+    };
   },
   mounted () {},
   methods: {
