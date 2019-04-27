@@ -63,7 +63,7 @@ blockquote {
     &:empty {
       &:before {
         content: "Quote text";
-        opacity: .5;
+        opacity: .35;
       }
     }
   }
@@ -77,7 +77,7 @@ blockquote {
     &:empty {
       &:before {
         content: "Quote author";
-        opacity: .5;
+        opacity: .35;
       }
     }
   }

@@ -49,5 +49,12 @@ h4,
 h5,
 h6 {
   outline: none;
+
+  &:empty {
+    &:before {
+      content: 'Insert title';
+      opacity: .35;
+    }
+  }
 }
 </style>

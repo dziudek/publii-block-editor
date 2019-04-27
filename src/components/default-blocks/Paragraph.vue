@@ -52,7 +52,7 @@ p {
   &:empty {
     &:before {
       content: 'Enter text';
-      opacity: .5;
+      opacity: .35;
     }
   }
 }
