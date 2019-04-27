@@ -1,7 +1,7 @@
 <template>
   <div
     class="editor"
-    @click="$bus.$emit('block-editor-block-selected', 0)">
+    @click="$bus.$emit('block-editor-block-selected', false)">
     <div
       class="editor-inner"
       :style="'width: ' + config.contentWidth + 'px;'">
@@ -131,7 +131,10 @@ export default {
       }
 
       this.state.selectedBlockID = blockID;
-      this.$refs['block-wrapper-' + this.state.selectedBlockID][0].setSelectionState(true);
+
+      if (this.state.selectedBlockID) {
+        this.$refs['block-wrapper-' + this.state.selectedBlockID][0].setSelectionState(true);
+      }
     },
     deleteBlock (blockID) {
       let blockIndex = this.content.findIndex(el => el.id === blockID);
