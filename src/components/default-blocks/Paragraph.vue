@@ -28,5 +28,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+p {
+  outline: none;
+}
 </style>

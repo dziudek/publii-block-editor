@@ -32,5 +32,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+ul,
+ol {
+  outline: none;
+}
 </style>

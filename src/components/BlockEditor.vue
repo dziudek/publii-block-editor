@@ -28,6 +28,7 @@ import BlockWrapper from './BlockWrapper.vue';
 import PubliiHeader from './default-blocks/Header.vue';
 import PubliiList from './default-blocks/List.vue';
 import PubliiParagraph from './default-blocks/Paragraph.vue';
+import PubliiSeparator from './default-blocks/Separator.vue';
 
 export default {
   name: 'BlockEditor',
@@ -35,7 +36,8 @@ export default {
     'block-wrapper': BlockWrapper,
     'publii-header': PubliiHeader,
     'publii-list': PubliiList,
-    'publii-paragraph': PubliiParagraph
+    'publii-paragraph': PubliiParagraph,
+    'publii-separator': PubliiSeparator
   },
   data () {
     return {
@@ -50,6 +52,12 @@ export default {
           id: 1555941453146,
           type: 'publii-list',
           content: '<li></li>',
+          config: {}
+        },
+        {
+          id: 1555941432021,
+          type: 'publii-separator',
+          content: '',
           config: {}
         },
         {
