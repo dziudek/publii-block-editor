@@ -3,6 +3,7 @@
     class="editor"
     @click="$bus.$emit('block-editor-block-selected', false)">
     <div
+      v-if="state.externalComponentsLoaded"
       class="editor-inner"
       :style="'width: ' + config.contentWidth + 'px;'">
       <block-wrapper
@@ -25,7 +26,10 @@
 <script>
 // core elements
 import Vue from 'vue';
+import Block from './Block.vue';
 import BlockWrapper from './BlockWrapper.vue';
+import ContentEditableImprovements from './helpers/ContentEditableImprovements.vue';
+import { compileToFunctions } from 'vue-template-compiler';
 // default blocks
 import PubliiHeader from './default-blocks/Header.vue';
 import PubliiList from './default-blocks/List.vue';
@@ -49,13 +53,20 @@ export default {
         contentWidth: 720
       },
       state: {
-        selectedBlockID: false
+        selectedBlockID: false,
+        externalComponentsLoaded: false
       },
       content: [
         {
           id: 1555941441671,
           type: 'publii-header',
           content: 'Lorem ipsum dolor',
+          config: {}
+        },
+        {
+          id: 1555941441670,
+          type: 'publii-header-custom',
+          content: 'CUSTOM Lorem ipsum dolor',
           config: {}
         },
         {
@@ -88,6 +99,15 @@ export default {
       ]
     };
   },
+  beforeMount () {
+    let externalComponent = document.createElement('script');
+    externalComponent.setAttribute('src', 'external-component.js');
+    document.body.appendChild(externalComponent);
+
+    setTimeout(() => {
+      this.state.externalComponentsLoaded = true;
+    }, 500);
+  },
   mounted () {
     this.$bus.$on('block-editor-move-block-up', this.moveBlockUp);
     this.$bus.$on('block-editor-move-block-down', this.moveBlockDown);
@@ -95,8 +115,16 @@ export default {
     this.$bus.$on('block-editor-block-selected', this.blockSelection);
     this.$bus.$on('block-editor-delete-block', this.deleteBlock);
     this.$bus.$on('block-editor-add-block', this.addNewBlock);
+    this.initGlobals();
   },
   methods: {
+    initGlobals () {
+      window.Vue = Vue;
+      window.publiiBlockEditor = {};
+      window.publiiBlockEditor.Block = Block;
+      window.publiiBlockEditor.compileToFunctions = compileToFunctions;
+      window.publiiBlockEditor.ContentEditableImprovements = ContentEditableImprovements;
+    },
     moveBlockUp (blockID) {
       let blockIndex = this.content.findIndex(el => el.id === blockID);
 
