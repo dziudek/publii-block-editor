@@ -1,5 +1,5 @@
 <template>
-  <hr />
+  <hr ref="block" />
 </template>
 
 <script>
