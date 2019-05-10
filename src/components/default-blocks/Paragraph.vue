@@ -28,7 +28,13 @@ export default {
   methods: {
     handleEnterKey (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
-        this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
+        let newElementName = this.checkContentForShortcuts();
+        this.$bus.$emit('block-editor-add-block', 'publii-' + newElementName, this.id);
+
+        if (newElementName !== 'paragraph') {
+          this.$bus.$emit('block-editor-delete-block', this.id);
+        }
+
         e.returnValue = false;
       }
     },
@@ -40,6 +46,20 @@ export default {
         config: JSON.parse(JSON.stringify(this.config)),
         content: this.content
       });
+    },
+    checkContentForShortcuts () {
+      let text = this.$refs['block'].innerHTML;
+
+      if (text !== '' && text[0] === '/') {
+        switch (text) {
+          case '/separator': return 'separator';
+          case '/header': return 'header';
+          case '/list': return 'list';
+          case '/quote': return 'quote';
+        }
+      }
+
+      return 'paragraph';
     }
   },
   beforeDestroy () {
