@@ -26,8 +26,15 @@ export default {
   },
   mounted () {
     this.content = this.inputContent;
+    this.$refs['block'].addEventListener('keydown', this.handleEnterKey);
   },
   methods: {
+    handleEnterKey (e) {
+      if (e.code === 'Enter' && e.shiftKey === false) {
+        this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
+        e.returnValue = false;
+      }
+    },
     save () {
       this.content = this.$refs['block'].innerHTML;
 
@@ -37,6 +44,9 @@ export default {
         content: this.content
       });
     }
+  },
+  beforeDestroy () {
+    this.$refs['block'].removeEventListener('keydown', this.handleEnterKey);
   }
 }
 </script>
