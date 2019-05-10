@@ -41,6 +41,9 @@ export default {
         content: this.content
       });
     }
+  },
+  beforeDestroy () {
+    this.$refs['block'].removeEventListener('keydown', this.handleEnterKey);
   }
 }
 </script>

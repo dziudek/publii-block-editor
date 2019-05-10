@@ -171,6 +171,11 @@ export default {
     },
     addNewBlock (blockType, afterBlockID) {
       let blockIndex = this.content.findIndex(el => el.id === afterBlockID);
+
+      if (this.$refs['block-' + this.content[blockIndex].id][0].$refs['block'].innerHTML === '') {
+        return;
+      }
+
       let newBlockID = +new Date();
       let newBlockObject = {
         id: newBlockID,
