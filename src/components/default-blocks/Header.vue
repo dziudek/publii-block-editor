@@ -49,6 +49,8 @@ export default {
     this.$refs['block'].removeEventListener('keydown', this.handleEnterKey);
   }
 }
+
+window.publiiBlockEditorInstance.$bus.$emit('block-editor-shortcut-manager-add-shortcut', '/header', 'publii-header');
 </script>
 
 <style scoped lang="scss">

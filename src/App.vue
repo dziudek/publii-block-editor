@@ -15,6 +15,9 @@ export default {
   name: 'app',
   components: {
     BlockEditor
+  },
+  mounted () {
+    window.publiiBlockEditorInstance = this;
   }
 }
 </script>

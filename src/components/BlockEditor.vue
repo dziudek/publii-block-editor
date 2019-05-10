@@ -36,6 +36,8 @@ import PubliiList from './default-blocks/List.vue';
 import PubliiParagraph from './default-blocks/Paragraph.vue';
 import PubliiSeparator from './default-blocks/Separator.vue';
 import PubliiQuote from './default-blocks/Quote.vue';
+// extensions
+import ShortcutManager from './extensions/ShortcutManager.js';
 
 export default {
   name: 'BlockEditor',
@@ -55,6 +57,9 @@ export default {
       state: {
         selectedBlockID: false,
         externalComponentsLoaded: false
+      },
+      extensions: {
+        shortcutManager: new ShortcutManager()
       },
       content: [
         {
@@ -115,6 +120,7 @@ export default {
     this.$bus.$on('block-editor-block-selected', this.blockSelection);
     this.$bus.$on('block-editor-delete-block', this.deleteBlock);
     this.$bus.$on('block-editor-add-block', this.addNewBlock);
+    this.$bus.$on('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
     this.initGlobals();
   },
   methods: {
@@ -198,6 +204,7 @@ export default {
     this.$bus.$off('block-editor-block-selected', this.blockSelection);
     this.$bus.$off('block-editor-delete-block', this.deleteBlock);
     this.$bus.$off('block-editor-add-block', this.addNewBlock);
+    this.$bus.$off('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
   }
 }
 </script>

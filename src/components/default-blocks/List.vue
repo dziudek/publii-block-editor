@@ -47,6 +47,8 @@ export default {
     }
   }
 }
+
+window.publiiBlockEditorInstance.$bus.$emit('block-editor-shortcut-manager-add-shortcut', '/list', 'publii-list');
 </script>
 
 <style scoped lang="scss">
