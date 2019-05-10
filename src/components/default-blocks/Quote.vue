@@ -48,7 +48,7 @@ export default {
   }
 }
 
-window.publiiBlockEditorInstance.$bus.$emit('block-editor-shortcut-manager-add-shortcut', '/quote', 'publii-quote');
+// window.publiiBlockEditorInstance.$bus.$emit('block-editor-shortcut-manager-add-shortcut', '/quote', 'publii-quote');
 </script>
 
 <style scoped lang="scss">
