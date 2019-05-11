@@ -174,12 +174,20 @@ export default {
       let blockIndex = this.content.findIndex(el => el.id === blockID);
       this.content.splice(blockIndex, 1);
       this.state.selectedBlockID = false;
+
+      if (!this.content.length) {
+        this.addNewBlock('publii-paragraph', false);
+      }
     },
-    addNewBlock (blockType, afterBlockID) {
+    addNewBlock (blockType, afterBlockID = false) {
       let blockIndex = this.content.findIndex(el => el.id === afterBlockID);
 
-      if (this.$refs['block-' + this.content[blockIndex].id][0].$refs['block'].innerHTML === '') {
+      if (afterBlockID && this.$refs['block-' + this.content[blockIndex].id][0].$refs['block'].innerHTML === '') {
         return;
+      }
+
+      if (!afterBlockID) {
+        blockIndex = -1;
       }
 
       let newBlockID = +new Date();
