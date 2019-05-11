@@ -1,7 +1,10 @@
 <template>
-  <hr
-    ref="block"
-    class="publii-block-separator" />
+  <div
+    class="publii-block-separator"
+    contenteditable="true"
+    ref="block">
+    <hr />
+  </div>
 </template>
 
 <script>
@@ -18,8 +21,17 @@ export default {
       content: ''
     };
   },
-  mounted () {},
+  mounted () {
+    this.$refs['block'].addEventListener('keydown', this.handleEnterKey);
+  },
   methods: {
+    handleEnterKey (e) {
+      if (e.code === 'Enter') {
+        this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
+      }
+
+      e.returnValue = false;
+    },
     save () {
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,
@@ -27,12 +39,18 @@ export default {
         content: this.content
       });
     }
+  },
+  beforeDestroy () {
+    this.$refs['block'].removeEventListener('keydown', this.handleEnterKey);
   }
 }
 </script>
 
 <style lang="scss">
 .publii-block-separator {
+  caret-color: transparent;
   margin: 32px 0;
+  outline: none;
+  width: 100%;
 }
 </style>
