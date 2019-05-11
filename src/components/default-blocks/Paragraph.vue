@@ -31,7 +31,7 @@ export default {
         let newElementName = this.$parent.$parent.extensions.shortcutManager.checkContentForShortcuts(this.$refs['block'].innerHTML);
         this.$bus.$emit('block-editor-add-block', newElementName, this.id);
 
-        if (newElementName !== 'paragraph') {
+        if (newElementName !== 'publii-paragraph') {
           this.$bus.$emit('block-editor-delete-block', this.id);
         }
 

@@ -24,7 +24,7 @@ export default class ShortcutManager {
       return this.shortcuts[text];
     }
 
-    return 'paragraph';
+    return 'publii-paragraph';
   }
 
   add (shortcut, componentName) {
