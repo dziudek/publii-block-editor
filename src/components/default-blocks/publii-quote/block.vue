@@ -35,8 +35,22 @@ export default {
   mounted () {
     this.content.text = this.inputContent.text;
     this.content.author = this.inputContent.author;
+    this.$refs['contentText'].addEventListener('keydown', this.handleTextEnterKey);
+    this.$refs['contentAuthor'].addEventListener('keydown', this.handleAuthorEnterKey);
   },
   methods: {
+    handleTextEnterKey (e) {
+      if (e.code === 'Enter' && e.shiftKey === false) {
+        this.$refs['contentAuthor'].focus();
+        e.returnValue = false;
+      }
+    },
+    handleAuthorEnterKey (e) {
+      if (e.code === 'Enter' && e.shiftKey === false) {
+        this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
+        e.returnValue = false;
+      }
+    },
     save () {
       this.content.text = this.$refs['contentText'].innerHTML;
       this.content.author = this.$refs['contentAuthor'].innerHTML;
@@ -47,6 +61,10 @@ export default {
         content: JSON.parse(JSON.stringify(this.content))
       });
     }
+  },
+  beforeDestroy () {
+    this.$refs['contentText'].removeEventListener('keydown', this.handleTextEnterKey);
+    this.$refs['contentAuthor'].removeEventListener('keydown', this.handleAuthorEnterKey);
   }
 }
 </script>
