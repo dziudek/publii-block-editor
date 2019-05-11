@@ -27,8 +27,6 @@ export default {
     }
   }
 }
-
-// window.publiiBlockEditorInstance.$bus.$emit('block-editor-shortcut-manager-add-shortcut', '/separator', 'publii-separator');
 </script>
 
 <style scoped lang="scss">

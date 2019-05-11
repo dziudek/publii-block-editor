@@ -24,6 +24,11 @@ export default {
   },
   mounted () {
     this.content = this.inputContent;
+
+    if (!this.inputContent) {
+      this.content = '<li></li>';
+    }
+
     this.$refs['block'].addEventListener('keydown', this.handleTabKey);
   },
   methods: {
@@ -47,8 +52,6 @@ export default {
     }
   }
 }
-
-// window.publiiBlockEditorInstance.$bus.$emit('block-editor-shortcut-manager-add-shortcut', '/list', 'publii-list');
 </script>
 
 <style scoped lang="scss">
