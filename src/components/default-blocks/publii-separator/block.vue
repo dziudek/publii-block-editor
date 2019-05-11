@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Block from './../Block.vue';
+import Block from './../../Block.vue';
 
 export default {
   name: 'Separator',

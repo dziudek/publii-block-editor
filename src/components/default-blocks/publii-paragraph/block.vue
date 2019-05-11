@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Block from './../Block.vue';
-import ContentEditableImprovements from './../helpers/ContentEditableImprovements.vue';
+import Block from './../../Block.vue';
+import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 
 export default {
   name: 'Paragraph',

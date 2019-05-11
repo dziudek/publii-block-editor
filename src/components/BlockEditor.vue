@@ -31,11 +31,11 @@ import BlockWrapper from './BlockWrapper.vue';
 import ContentEditableImprovements from './helpers/ContentEditableImprovements.vue';
 import { compileToFunctions } from 'vue-template-compiler';
 // default blocks
-import PubliiHeader from './default-blocks/Header.vue';
-import PubliiList from './default-blocks/List.vue';
-import PubliiParagraph from './default-blocks/Paragraph.vue';
-import PubliiSeparator from './default-blocks/Separator.vue';
-import PubliiQuote from './default-blocks/Quote.vue';
+import PubliiHeader from './default-blocks/publii-header/block.vue';
+import PubliiList from './default-blocks/publii-list/block.vue';
+import PubliiParagraph from './default-blocks/publii-paragraph/block.vue';
+import PubliiSeparator from './default-blocks/publii-separator/block.vue';
+import PubliiQuote from './default-blocks/publii-quote/block.vue';
 // extensions
 import ShortcutManager from './extensions/ShortcutManager.js';
 
