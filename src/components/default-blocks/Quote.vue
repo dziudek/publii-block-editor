@@ -1,5 +1,7 @@
 <template>
-  <blockquote ref="block">
+  <blockquote
+    class="publii-block-quote"
+    ref="block">
     <p
       contenteditable="true"
       v-html="content.text"
@@ -49,8 +51,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-blockquote {
+<style lang="scss">
+.publii-block-quote {
   border-left: 3px solid #aaa;
   margin: 20px 0;
   outline: none;

@@ -1,5 +1,7 @@
 <template>
-  <hr ref="block" />
+  <hr
+    ref="block"
+    class="publii-block-separator" />
 </template>
 
 <script>
@@ -29,8 +31,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-hr {
+<style lang="scss">
+.publii-block-separator {
   margin: 32px 0;
 }
 </style>

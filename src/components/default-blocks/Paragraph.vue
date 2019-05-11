@@ -1,5 +1,6 @@
 <template>
   <p
+    class="publii-block-paragraph"
     ref="block"
     contenteditable="true"
     v-html="content" />
@@ -54,8 +55,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-p {
+<style lang="scss">
+.publii-block-paragraph {
   outline: none;
 
   &:empty {

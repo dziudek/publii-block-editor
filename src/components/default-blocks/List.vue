@@ -3,7 +3,8 @@
     :is="config.listType"
     contenteditable="true"
     v-html="content"
-    ref="block" />
+    ref="block"
+    class="publii-block-list" />
 </template>
 
 <script>
@@ -54,9 +55,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-ul,
-ol {
+<style lang="scss">
+.publii-block-list {
   outline: none;
 }
 </style>

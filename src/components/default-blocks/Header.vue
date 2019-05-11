@@ -3,6 +3,7 @@
     :is="'h' + config.headingLevel"
     contenteditable="true"
     ref="block"
+    class="publii-block-header"
     v-html="content" />
 </template>
 
@@ -52,12 +53,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.publii-block-header {
   outline: none;
 
   &:empty {
