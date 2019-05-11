@@ -39,6 +39,9 @@ export default {
     this.$refs['contentAuthor'].addEventListener('keydown', this.handleAuthorEnterKey);
   },
   methods: {
+    focus () {
+      this.$refs['contentText'].focus();
+    },
     handleTextEnterKey (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
         this.$refs['contentAuthor'].focus();

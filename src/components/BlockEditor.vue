@@ -193,7 +193,7 @@ export default {
 
       setTimeout(() => {
         this.$bus.$emit('block-editor-block-selected', newBlockID);
-        this.$refs['block-' + newBlockID][0].$refs['block'].focus();
+        this.$refs['block-' + newBlockID][0].focus();
       }, 0);
     }
   },

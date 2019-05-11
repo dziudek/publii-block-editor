@@ -9,6 +9,11 @@ export default {
   mounted () {
     this.$on('block-save', this.save);
   },
+  methods: {
+    focus () {
+      this.$refs['block'].focus();
+    }
+  },
   beforeDestroy () {
     this.$off('block-save', this.save);
   }
