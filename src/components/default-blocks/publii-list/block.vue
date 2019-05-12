@@ -34,6 +34,20 @@ export default {
   },
   methods: {
     handleTabKey (e) {
+      if (
+        e.code === 'Backspace' &&
+        (
+          this.$refs['block'].innerHTML === '<li></li>' ||
+          this.$refs['block'].innerHTML === '<li><br></li>'
+        )
+      ) {
+        e.returnValue = false;
+      }
+
+      if (e.code === 'Enter' && this.$refs['block'].innerHTML.substr(-13) === '<li><br></li>') {
+        e.returnValue = false;
+      }
+
       if (e.code === 'Tab' && e.shiftKey === false) {
         document.execCommand('indent', false, null);
         e.returnValue = false;
