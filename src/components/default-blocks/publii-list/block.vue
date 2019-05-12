@@ -45,6 +45,8 @@ export default {
       }
 
       if (e.code === 'Enter' && this.$refs['block'].innerHTML.substr(-13) === '<li><br></li>') {
+        this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
+        this.$refs['block'].innerHTML = this.$refs['block'].innerHTML.substr(0, this.$refs['block'].innerHTML.length - 13);
         e.returnValue = false;
       }
 
