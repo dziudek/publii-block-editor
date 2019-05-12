@@ -2,6 +2,7 @@
   <pre
     class="publii-block-code"
     ref="block"
+    @keyup="getFocusFromTab"
     contenteditable="true"
     v-html="content" />
 </template>

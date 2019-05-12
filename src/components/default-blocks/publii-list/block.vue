@@ -2,6 +2,7 @@
   <component
     :is="config.listType"
     contenteditable="true"
+    @keyup="getFocusFromTab"
     v-html="content"
     ref="block"
     class="publii-block-list" />
@@ -50,6 +51,7 @@ export default {
         e.returnValue = false;
       }
 
+      /*
       if (e.code === 'Tab' && e.shiftKey === false) {
         document.execCommand('indent', false, null);
 
@@ -67,6 +69,7 @@ export default {
         document.execCommand('outdent', false, null);
         e.returnValue = false;
       }
+      */
     },
     save () {
       this.content = this.$refs['block'].innerHTML;

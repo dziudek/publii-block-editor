@@ -12,6 +12,11 @@ export default {
   methods: {
     focus () {
       this.$refs['block'].focus();
+    },
+    getFocusFromTab () {
+      if (!this.$parent.isSelected) {
+        this.$bus.$emit('block-editor-block-selected', this.id);
+      }
     }
   },
   beforeDestroy () {

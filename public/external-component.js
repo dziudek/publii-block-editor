@@ -3,6 +3,7 @@
     <component
       :is="'h' + config.headingLevel"
       contenteditable="true"
+      @keyup="getFocusFromTab"
       ref="block"
       v-html="content" />
   `);

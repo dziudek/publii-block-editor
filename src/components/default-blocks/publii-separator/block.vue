@@ -2,6 +2,7 @@
   <div
     class="publii-block-separator"
     contenteditable="true"
+    @keyup="getFocusFromTab"
     ref="block">
     <hr />
   </div>
@@ -30,7 +31,9 @@ export default {
         this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
       }
 
-      e.returnValue = false;
+      if (e.code !== 'Tab') {
+        e.returnValue = false;
+      }
     },
     save () {
       this.$bus.$emit('block-editor-save-block', {

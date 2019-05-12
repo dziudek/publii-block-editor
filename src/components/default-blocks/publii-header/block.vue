@@ -2,6 +2,7 @@
   <component
     :is="'h' + config.headingLevel"
     contenteditable="true"
+    @keyup="getFocusFromTab"
     ref="block"
     class="publii-block-header"
     v-html="content" />

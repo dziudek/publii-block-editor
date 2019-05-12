@@ -60,6 +60,9 @@ export default {
     },
     deleteBlock () {
       this.$bus.$emit('block-editor-delete-block', this.id);
+    },
+    showMore () {
+
     }
   }
 }
@@ -72,7 +75,7 @@ export default {
   position: relative;
 
   &.is-selected {
-    border: 2px solid rgba(100, 100, 250, .25);
+    border: 2px dashed rgba(100, 100, 250, .25);
 
     .wrapper-ui {
       opacity: 1;

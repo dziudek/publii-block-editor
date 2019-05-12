@@ -5,6 +5,7 @@
     <p
       contenteditable="true"
       v-html="content.text"
+      @keyup="getFocusFromTab"
       ref="contentText" />
     <cite
       contenteditable="true"
