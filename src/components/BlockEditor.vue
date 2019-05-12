@@ -35,6 +35,7 @@ import PubliiCode from './default-blocks/publii-code/block.vue';
 import PubliiHeader from './default-blocks/publii-header/block.vue';
 import PubliiList from './default-blocks/publii-list/block.vue';
 import PubliiParagraph from './default-blocks/publii-paragraph/block.vue';
+import PubliiReadmore from './default-blocks/publii-readmore/block.vue';
 import PubliiSeparator from './default-blocks/publii-separator/block.vue';
 import PubliiQuote from './default-blocks/publii-quote/block.vue';
 // extensions
@@ -48,6 +49,7 @@ export default {
     'publii-header': PubliiHeader,
     'publii-list': PubliiList,
     'publii-paragraph': PubliiParagraph,
+    'publii-readmore': PubliiReadmore,
     'publii-separator': PubliiSeparator,
     'publii-quote': PubliiQuote
   },
@@ -74,6 +76,12 @@ export default {
           id: 1555941441622,
           type: 'publii-code',
           content: 'Lorem ipsum dolor',
+          config: {}
+        },
+        {
+          id: 1555941432000,
+          type: 'publii-readmore',
+          content: '',
           config: {}
         },
         {
