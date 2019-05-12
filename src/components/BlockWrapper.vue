@@ -4,10 +4,6 @@
     @click.stop="$bus.$emit('block-editor-block-selected', id)">
     <slot />
 
-    <div class="wrapper-ui-top">
-      <div class="wrapper-add-above">+</div>
-    </div>
-
     <div class="wrapper-ui-left">
       <div class="wrapper-move-up" @click.stop="moveUp">⬆</div>
       <div class="wrapper-move-down" @click.stop="moveDown">⬇</div>
@@ -16,10 +12,6 @@
     <div class="wrapper-ui-right">
       <div class="wrapper-show-options">&hellip;</div>
       <div class="wrapper-delete" @click.stop="deleteBlock">&ndash;</div>
-    </div>
-
-    <div class="wrapper-ui-bottom">
-      <div class="wrapper-add-below">+</div>
     </div>
   </div>
 </template>
@@ -79,10 +71,8 @@ export default {
   }
 
   &-ui {
-    &-top,
     &-left,
-    &-right,
-    &-bottom {
+    &-right {
       opacity: 0;
       position: absolute;
       z-index: 1;
@@ -96,12 +86,6 @@ export default {
       }
     }
 
-    &-top {
-      left: 50%;
-      top: -20px;
-      transform: translateX(-50%);
-    }
-
     &-left {
       left: -30px;
       top: 50%;
@@ -112,12 +96,6 @@ export default {
       right: -30px;
       top: 50%;
       transform: translateY(-50%);
-    }
-
-    &-bottom {
-      bottom: -20px;
-      left: 50%;
-      transform: translateX(-50%);
     }
   }
 }
