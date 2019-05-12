@@ -31,6 +31,7 @@ import BlockWrapper from './BlockWrapper.vue';
 import ContentEditableImprovements from './helpers/ContentEditableImprovements.vue';
 import { compileToFunctions } from 'vue-template-compiler';
 // default blocks
+import PubliiCode from './default-blocks/publii-code/block.vue';
 import PubliiHeader from './default-blocks/publii-header/block.vue';
 import PubliiList from './default-blocks/publii-list/block.vue';
 import PubliiParagraph from './default-blocks/publii-paragraph/block.vue';
@@ -43,6 +44,7 @@ export default {
   name: 'BlockEditor',
   components: {
     'block-wrapper': BlockWrapper,
+    'publii-code': PubliiCode,
     'publii-header': PubliiHeader,
     'publii-list': PubliiList,
     'publii-paragraph': PubliiParagraph,
@@ -65,6 +67,12 @@ export default {
         {
           id: 1555941441671,
           type: 'publii-header',
+          content: 'Lorem ipsum dolor',
+          config: {}
+        },
+        {
+          id: 1555941441622,
+          type: 'publii-code',
           content: 'Lorem ipsum dolor',
           config: {}
         },

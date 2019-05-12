@@ -33,7 +33,7 @@ export default {
     this.$refs['block'].addEventListener('keydown', this.handleTabKey);
   },
   methods: {
-    handleTabKey (e) {l
+    handleTabKey (e) {
       if (
         e.code === 'Backspace' &&
         (

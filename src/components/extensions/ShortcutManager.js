@@ -10,6 +10,7 @@ export default class ShortcutManager {
     this.shortcuts['/header'] = 'publii-header';
     this.shortcuts['/list'] = 'publii-list';
     this.shortcuts['/quote'] = 'publii-quote';
+    this.shortcuts['/code'] = 'publii-code';
   }
 
   initMarkdownDefaultShortcuts () {
@@ -17,6 +18,7 @@ export default class ShortcutManager {
     this.shortcuts['#'] = 'publii-header';
     this.shortcuts['*'] = 'publii-list';
     this.shortcuts['>'] = 'publii-quote';
+    this.shortcuts['```'] = 'publii-code';
   }
 
   checkContentForShortcuts (text) {
