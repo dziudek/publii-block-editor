@@ -33,7 +33,7 @@ export default {
     this.$refs['block'].addEventListener('keydown', this.handleTabKey);
   },
   methods: {
-    handleTabKey (e) {
+    handleTabKey (e) {l
       if (
         e.code === 'Backspace' &&
         (
@@ -52,6 +52,16 @@ export default {
 
       if (e.code === 'Tab' && e.shiftKey === false) {
         document.execCommand('indent', false, null);
+
+        setTimeout(() => {
+          if (
+            this.$refs['block'].innerHTML.indexOf('<ul><ul>') > -1 ||
+            this.$refs['block'].innerHTML.indexOf('<ol><ol>') > -1
+          ) {
+            document.execCommand('undo', false, null);
+          }
+        }, 0);
+
         e.returnValue = false;
       } else if (e.code === 'Tab' && e.shiftKey === true) {
         document.execCommand('outdent', false, null);
