@@ -2,7 +2,6 @@
   <pre
     class="publii-block-code"
     ref="block"
-    @keyup="getFocusFromTab"
     @paste="pastePlainText"
     @keydown="handleKeyboard"
     contenteditable="true"

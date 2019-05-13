@@ -23,8 +23,10 @@ export default {
       sel.removeAllRanges();
       sel.addRange(range);
     },
-    getFocusFromTab () {
-      this.focus();
+    getFocusFromTab (e) {
+      if (e.code === 'Tab') {
+        this.focus();
+      }
     },
     pastePlainText (e) {
       e.preventDefault();

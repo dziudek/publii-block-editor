@@ -113,5 +113,10 @@ export default {
 <style lang="scss">
 .publii-block-list {
   outline: none;
+  width: 100%;
+
+  li {
+    width: 100%;
+  }
 }
 </style>
