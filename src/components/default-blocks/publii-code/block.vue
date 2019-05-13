@@ -39,6 +39,12 @@ export default {
 
         e.returnValue = false;
       }
+
+      if (e.code === 'Tab' && e.shiftKey === false) {
+        e.preventDefault();
+        // eslint-disable-next-line
+        document.execCommand('insertHTML', false, "  ");
+      }
     },
     save () {
       this.content = this.$refs['block'].innerHTML;
