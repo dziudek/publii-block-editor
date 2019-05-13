@@ -6,11 +6,7 @@
 
 <script>
 import Vue from 'vue';
-import PortalVue from 'portal-vue';
 import BlockEditor from './components/BlockEditor.vue'
-
-// Enable portals
-Vue.use(PortalVue)
 
 // Declare event bus
 Vue.prototype.$bus = new Vue();

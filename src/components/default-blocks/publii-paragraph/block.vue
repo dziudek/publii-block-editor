@@ -1,27 +1,30 @@
 <template>
-  <p
-    class="publii-block-paragraph"
-    :style="'text-align: ' + config.textAlign + ';'"
-    ref="block"
-    slot="block"
-    @keyup="getFocusFromTab"
-    @paste="pastePlainText"
-    contenteditable="true"
-    v-html="content">
-    <portal :to="'ui-top-menu-' + id" :key="'top-menu-' + initID + '-' + lastUpdate">
-      <div class="wrapper-ui-top-menu" @click.stop>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': config.textAlign === 'left' }"
-          @click.stop="alignText('left')">«</button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': config.textAlign === 'center' }"
-          @click.stop="alignText('center')">=</button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': config.textAlign === 'right' }"
-          @click.stop="alignText('right')">»</button>
-      </div>
-    </portal>
-  </p>
+  <div>
+    <p
+      class="publii-block-paragraph"
+      :style="'text-align: ' + config.textAlign + ';'"
+      ref="block"
+      slot="block"
+      @keyup="getFocusFromTab"
+      @paste="pastePlainText"
+      contenteditable="true"
+      v-html="content">
+    </p>
+
+    <div
+      class="wrapper-ui-top-menu"
+      v-if="$parent.isSelected">
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'left' }"
+        @click.stop="alignText('left')">«</button>
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'center' }"
+        @click.stop="alignText('center')">=</button>
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'right' }"
+        @click.stop="alignText('right')">»</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -37,8 +40,6 @@ export default {
   ],
   data () {
     return {
-      lastUpdate: +new Date(),
-      initID: 0,
       config: {
         textAlign: 'left'
       },
@@ -47,7 +48,6 @@ export default {
   },
   mounted () {
     this.content = this.inputContent;
-    this.initID = Math.floor(Math.random() * (999999 - 100001)) + 100000;
     this.$refs['block'].addEventListener('keydown', this.handleEnterKey);
   },
   methods: {
@@ -65,7 +65,7 @@ export default {
     },
     alignText (position) {
       Vue.set(this.config, 'textAlign', position);
-      this.lastUpdate = +new Date();
+      this.$forceUpdate();
     },
     save () {
       this.content = this.$refs['block'].innerHTML;

@@ -4,11 +4,6 @@
     @click.stop="blockClick">
     <slot />
 
-    <portal-target
-      v-if="isSelected"
-      :name="'ui-top-menu-' + id"
-      :slim="true" />
-
     <div class="wrapper-ui">
       <div class="wrapper-ui-show-options" @click.stop="togglePopup">&hellip;</div>
 
@@ -168,7 +163,7 @@ export default {
         width: 32px;
 
         &.is-active {
-          // background: #eee;
+          background: #eee;
         }
       }
     }
