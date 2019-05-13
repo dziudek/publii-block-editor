@@ -21,6 +21,14 @@
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ol' }"
         tabindex="-1"
         @click.stop="setListType('ol')">ol</button>
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true }"
+        tabindex="-1"
+        @click.stop="indentList()">⇉</button>
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true }"
+        tabindex="-1"
+        @click.stop="outdentList()">⇇</button>
     </div>
   </div>
 </template>
@@ -72,30 +80,25 @@ export default {
         this.$refs['block'].innerHTML = this.$refs['block'].innerHTML.substr(0, this.$refs['block'].innerHTML.length - 13);
         e.returnValue = false;
       }
-
-      /*
-      if (e.code === 'Tab' && e.shiftKey === false) {
-        document.execCommand('indent', false, null);
-
-        setTimeout(() => {
-          if (
-            this.$refs['block'].innerHTML.indexOf('<ul><ul>') > -1 ||
-            this.$refs['block'].innerHTML.indexOf('<ol><ol>') > -1
-          ) {
-            document.execCommand('undo', false, null);
-          }
-        }, 0);
-
-        e.returnValue = false;
-      } else if (e.code === 'Tab' && e.shiftKey === true) {
-        document.execCommand('outdent', false, null);
-        e.returnValue = false;
-      }
-      */
     },
     setListType (type) {
       this.save();
       this.config.listType = type;
+    },
+    indentList () {
+      document.execCommand('indent', false, null);
+
+      setTimeout(() => {
+        if (
+          this.$refs['block'].innerHTML.indexOf('<ul><ul>') > -1 ||
+          this.$refs['block'].innerHTML.indexOf('<ol><ol>') > -1
+        ) {
+          document.execCommand('undo', false, null);
+        }
+      }, 0);
+    },
+    outdentList () {
+      document.execCommand('outdent', false, null);
     },
     save () {
       this.content = this.$refs['block'].innerHTML;
