@@ -7,10 +7,12 @@
       v-html="content.text"
       @keyup="getFocusFromTab"
       @paste="pastePlainText"
+      @keydown="handleTextKeyboard"
       ref="contentText" />
     <cite
       contenteditable="true"
       v-html="content.author"
+      @keydown="handleAuthorKeyboard"
       ref="contentAuthor" />
   </blockquote>
 </template>
@@ -37,10 +39,6 @@ export default {
   mounted () {
     this.content.text = this.inputContent.text;
     this.content.author = this.inputContent.author;
-    this.$refs['contentText'].addEventListener('keydown', this.handleTextEnterKey);
-    this.$refs['contentAuthor'].addEventListener('keydown', this.handleAuthorEnterKey);
-    this.$refs['contentText'].addEventListener('keydown', this.handleKeyboard);
-    this.$refs['contentAuthor'].addEventListener('keydown', this.handleKeyboard);
   },
   methods: {
     focus () {
@@ -53,17 +51,21 @@ export default {
         e.returnValue = false;
       }
     },
-    handleTextEnterKey (e) {
+    handleTextKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
         this.$refs['contentAuthor'].focus();
         e.returnValue = false;
       }
+
+      this.handleKeyboard(e);
     },
-    handleAuthorEnterKey (e) {
+    handleAuthorKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
         this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
         e.returnValue = false;
       }
+
+      this.handleKeyboard(e);
     },
     save () {
       this.content.text = this.$refs['contentText'].innerHTML;
@@ -75,12 +77,6 @@ export default {
         content: JSON.parse(JSON.stringify(this.content))
       });
     }
-  },
-  beforeDestroy () {
-    this.$refs['contentText'].removeEventListener('keydown', this.handleTextEnterKey);
-    this.$refs['contentAuthor'].removeEventListener('keydown', this.handleAuthorEnterKey);
-    this.$refs['contentText'].removeEventListener('keydown', this.handleKeyboard);
-    this.$refs['contentAuthor'].removeEventListener('keydown', this.handleKeyboard);
   }
 }
 </script>

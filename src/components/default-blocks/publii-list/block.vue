@@ -5,6 +5,7 @@
       contenteditable="true"
       @keyup="getFocusFromTab"
       @paste="pastePlainText"
+      @keydown="handleKeyboard"
       v-html="content"
       ref="block"
       class="publii-block-list" />
@@ -46,8 +47,6 @@ export default {
     if (!this.inputContent) {
       this.content = '<li></li>';
     }
-
-    this.$refs['block'].addEventListener('keydown', this.handleKeyboard);
   },
   methods: {
     handleKeyboard (e) {
@@ -107,9 +106,6 @@ export default {
         content: this.content
       });
     }
-  },
-  beforeDestroy () {
-    this.$refs['block'].removeEventListener('keydown', this.handleKeyboard);
   }
 }
 </script>

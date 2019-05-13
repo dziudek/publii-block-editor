@@ -4,6 +4,7 @@
       :is="'h' + config.headingLevel"
       contenteditable="true"
       @keyup="getFocusFromTab"
+      @keydown="handleKeyboard"
       @paste="pastePlainText"
       ref="block"
       :style="'text-align: ' + config.textAlign + ';'"
@@ -70,7 +71,6 @@ export default {
   },
   mounted () {
     this.content = this.inputContent;
-    this.$refs['block'].addEventListener('keydown', this.handleKeyboard);
   },
   methods: {
     handleKeyboard (e) {
@@ -99,9 +99,6 @@ export default {
         content: this.content
       });
     }
-  },
-  beforeDestroy () {
-    this.$refs['block'].removeEventListener('keydown', this.handleKeyboard);
   }
 }
 </script>

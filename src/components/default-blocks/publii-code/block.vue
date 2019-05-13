@@ -4,6 +4,7 @@
     ref="block"
     @keyup="getFocusFromTab"
     @paste="pastePlainText"
+    @keydown="handleKeyboard"
     contenteditable="true"
     v-html="content" />
 </template>
@@ -26,7 +27,6 @@ export default {
   },
   mounted () {
     this.content = this.inputContent;
-    this.$refs['block'].addEventListener('keydown', this.handleKeyboard);
   },
   methods: {
     handleKeyboard (e) {
@@ -62,9 +62,6 @@ export default {
         content: this.content
       });
     }
-  },
-  beforeDestroy () {
-    this.$refs['block'].removeEventListener('keydown', this.handleKeyboard);
   }
 }
 </script>
