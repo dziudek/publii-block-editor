@@ -1,12 +1,52 @@
 <template>
-  <component
-    :is="'h' + config.headingLevel"
-    contenteditable="true"
-    @keyup="getFocusFromTab"
-    @paste="pastePlainText"
-    ref="block"
-    class="publii-block-header"
-    v-html="content" />
+  <div>
+    <component
+      :is="'h' + config.headingLevel"
+      contenteditable="true"
+      @keyup="getFocusFromTab"
+      @paste="pastePlainText"
+      ref="block"
+      :style="'text-align: ' + config.textAlign + ';'"
+      class="publii-block-header"
+      v-html="content" />
+
+    <div
+      class="wrapper-ui-top-menu"
+      v-if="$parent.isSelected">
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'left' }"
+        tabindex="-1"
+        @click.stop="alignText('left')">«</button>
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'center' }"
+        tabindex="-1"
+        @click.stop="alignText('center')">=</button>
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'right' }"
+        tabindex="-1"
+        @click.stop="alignText('right')">»</button>
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 2 }"
+        tabindex="-1"
+        @click.stop="setHeadingLevel(2)">H2</button>
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 3 }"
+        tabindex="-1"
+        @click.stop="setHeadingLevel(3)">H3</button>
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 4 }"
+        tabindex="-1"
+        @click.stop="setHeadingLevel(4)">H4</button>
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 5 }"
+        tabindex="-1"
+        @click.stop="setHeadingLevel(5)">H5</button>
+      <button
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 6 }"
+        tabindex="-1"
+        @click.stop="setHeadingLevel(6)">H6</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -22,7 +62,8 @@ export default {
   data () {
     return {
       config: {
-        headingLevel: 2
+        headingLevel: 2,
+        textAlign: 'left'
       },
       content: ''
     };
@@ -43,6 +84,12 @@ export default {
         e.returnValue = false;
       }
     },
+    alignText (position) {
+      this.config.textAlign = position;
+    },
+    setHeadingLevel (level) {
+      this.config.headingLevel = level;
+    },
     save () {
       this.content = this.$refs['block'].innerHTML;
 
@@ -62,6 +109,7 @@ export default {
 <style scoped lang="scss">
 .publii-block-header {
   outline: none;
+  width: 100%;
 
   &:empty {
     &:before {
