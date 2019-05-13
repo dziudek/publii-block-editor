@@ -1,14 +1,31 @@
 <template>
   <p
     class="publii-block-paragraph"
+    :style="'text-align: ' + config.textAlign + ';'"
     ref="block"
+    slot="block"
     @keyup="getFocusFromTab"
     @paste="pastePlainText"
     contenteditable="true"
-    v-html="content" />
+    v-html="content">
+    <portal :to="'ui-top-menu-' + id" :key="'top-menu-' + initID + '-' + lastUpdate">
+      <div class="wrapper-ui-top-menu" @click.stop>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': config.textAlign === 'left' }"
+          @click.stop="alignText('left')">«</button>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': config.textAlign === 'center' }"
+          @click.stop="alignText('center')">=</button>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': config.textAlign === 'right' }"
+          @click.stop="alignText('right')">»</button>
+      </div>
+    </portal>
+  </p>
 </template>
 
 <script>
+import Vue from 'vue';
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 
@@ -20,12 +37,17 @@ export default {
   ],
   data () {
     return {
-      config: {},
+      lastUpdate: +new Date(),
+      initID: 0,
+      config: {
+        textAlign: 'left'
+      },
       content: ''
     };
   },
   mounted () {
     this.content = this.inputContent;
+    this.initID = Math.floor(Math.random() * (999999 - 100001)) + 100000;
     this.$refs['block'].addEventListener('keydown', this.handleEnterKey);
   },
   methods: {
@@ -40,6 +62,10 @@ export default {
 
         e.returnValue = false;
       }
+    },
+    alignText (position) {
+      Vue.set(this.config, 'textAlign', position);
+      this.lastUpdate = +new Date();
     },
     save () {
       this.content = this.$refs['block'].innerHTML;

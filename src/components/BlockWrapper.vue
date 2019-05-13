@@ -1,8 +1,13 @@
 <template>
   <div
     :class="{ 'wrapper': true, 'is-selected': isSelected }"
-    @click.stop="$bus.$emit('block-editor-block-selected', id); popupOpened = false;">
+    @click.stop="blockClick">
     <slot />
+
+    <portal-target
+      v-if="isSelected"
+      :name="'ui-top-menu-' + id"
+      :slim="true" />
 
     <div class="wrapper-ui">
       <div class="wrapper-ui-show-options" @click.stop="togglePopup">&hellip;</div>
@@ -39,6 +44,10 @@ export default {
 
   },
   methods: {
+    blockClick () {
+      this.$bus.$emit('block-editor-block-selected', this.id);
+      this.popupOpened = false;
+    },
     togglePopup () {
       this.popupOpened = !this.popupOpened;
     },
@@ -68,7 +77,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .wrapper {
   border: 2px solid transparent;
   margin: -10px 0;
@@ -133,6 +142,34 @@ export default {
         height: 32px;
         justify-content: center;
         width: 32px;
+      }
+    }
+
+    &-top-menu {
+      background: #fff;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      left: 50%;
+      overflow: hidden;
+      position: absolute;
+      top: 0%;
+      transform: translateX(-50%) translateY(-50%);
+
+      &-button {
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        height: 32px;
+        justify-content: center;
+        outline: none;
+        width: 32px;
+
+        &.is-active {
+          // background: #eee;
+        }
       }
     }
   }
