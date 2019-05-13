@@ -88,6 +88,7 @@ export default {
       this.config.textAlign = position;
     },
     setHeadingLevel (level) {
+      this.save();
       this.config.headingLevel = level;
     },
     save () {
