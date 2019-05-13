@@ -36,12 +36,16 @@ export default {
     };
   },
   mounted () {
-
+    this.$bus.$on('block-editor-deselect-blocks', this.deselectBlock);
   },
   methods: {
     blockClick () {
-      this.$bus.$emit('block-editor-block-selected', this.id);
+      this.$bus.$emit('block-editor-deselect-blocks');
       this.popupOpened = false;
+      this.setSelectionState(true);
+    },
+    deselectBlock () {
+      this.setSelectionState(false);
     },
     togglePopup () {
       this.popupOpened = !this.popupOpened;
@@ -68,6 +72,9 @@ export default {
     showMore () {
 
     }
+  },
+  beforeDestroy () {
+    this.$bus.$off('block-editor-deselect-blocks', this.deselectBlock);
   }
 }
 </script>

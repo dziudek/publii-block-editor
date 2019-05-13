@@ -16,12 +16,15 @@
       v-if="$parent.isSelected">
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'left' }"
+        tabindex="-1"
         @click.stop="alignText('left')">«</button>
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'center' }"
+        tabindex="-1"
         @click.stop="alignText('center')">=</button>
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'right' }"
+        tabindex="-1"
         @click.stop="alignText('right')">»</button>
     </div>
   </div>
@@ -86,6 +89,7 @@ export default {
 <style lang="scss">
 .publii-block-paragraph {
   outline: none;
+  width: 100%;
 
   &:empty {
     &:before {

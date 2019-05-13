@@ -1,7 +1,7 @@
 <template>
   <div
     class="editor"
-    @click="$bus.$emit('block-editor-block-selected', false)">
+    @click="$bus.$emit('block-editor-deselect-blocks')">
     <div
       v-if="state.externalComponentsLoaded"
       class="editor-inner"
@@ -133,7 +133,6 @@ export default {
     this.$bus.$on('block-editor-move-block-up', this.moveBlockUp);
     this.$bus.$on('block-editor-move-block-down', this.moveBlockDown);
     this.$bus.$on('block-editor-save-block', this.saveBlock);
-    this.$bus.$on('block-editor-block-selected', this.blockSelection);
     this.$bus.$on('block-editor-delete-block', this.deleteBlock);
     this.$bus.$on('block-editor-add-block', this.addNewBlock);
     this.$bus.$on('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
@@ -170,22 +169,6 @@ export default {
       this.content[blockIndex].content = blockData.content;
       this.content[blockIndex].config = blockData.config;
     },
-    blockSelection (blockID) {
-      if (blockID === this.state.selectedBlockID) {
-        return;
-      }
-
-      if (this.state.selectedBlockID) {
-        this.$refs['block-wrapper-' + this.state.selectedBlockID][0].setSelectionState(false);
-        this.$refs['block-' + this.state.selectedBlockID][0].save();
-      }
-
-      this.state.selectedBlockID = blockID;
-
-      if (this.state.selectedBlockID) {
-        this.$refs['block-wrapper-' + this.state.selectedBlockID][0].setSelectionState(true);
-      }
-    },
     deleteBlock (blockID) {
       let blockIndex = this.content.findIndex(el => el.id === blockID);
       this.content.splice(blockIndex, 1);
@@ -197,6 +180,7 @@ export default {
     },
     addNewBlock (blockType, afterBlockID = false) {
       let blockIndex = this.content.findIndex(el => el.id === afterBlockID);
+      this.$bus.$emit('block-editor-deselect-blocks');
 
       if (afterBlockID && this.$refs['block-' + this.content[blockIndex].id][0].$refs['block'].innerHTML === '') {
         return;
@@ -216,7 +200,6 @@ export default {
       this.content.splice(blockIndex + 1, 0, newBlockObject);
 
       setTimeout(() => {
-        this.$bus.$emit('block-editor-block-selected', newBlockID);
         this.$refs['block-' + newBlockID][0].focus();
       }, 0);
     }
@@ -225,7 +208,6 @@ export default {
     this.$bus.$off('block-editor-move-block-up', this.moveBlockUp);
     this.$bus.$off('block-editor-move-block-down', this.moveBlockDown);
     this.$bus.$off('block-editor-save-block', this.saveBlock);
-    this.$bus.$off('block-editor-block-selected', this.blockSelection);
     this.$bus.$off('block-editor-delete-block', this.deleteBlock);
     this.$bus.$off('block-editor-add-block', this.addNewBlock);
     this.$bus.$off('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);

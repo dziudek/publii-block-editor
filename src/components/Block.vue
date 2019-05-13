@@ -14,9 +14,7 @@ export default {
       this.$refs['block'].focus();
     },
     getFocusFromTab () {
-      if (!this.$parent.isSelected) {
-        this.$bus.$emit('block-editor-block-selected', this.id);
-      }
+      this.focus();
     },
     pastePlainText (e) {
       e.preventDefault();
