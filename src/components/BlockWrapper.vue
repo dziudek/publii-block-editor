@@ -9,14 +9,29 @@
 
       <div :class="{ 'wrapper-ui-popup': true, 'is-visible': popupOpened }">
         <div class="wrapper-ui-popup-row">
-          <div class="wrapper-ui-popup-button" @click.stop="moveUp">🔼</div>
-          <div class="wrapper-ui-popup-button" @click.stop="deleteBlock">🗑</div>
-          <div class="wrapper-ui-popup-button" @click.stop="moveDown">🔽</div>
+          <button
+            class="wrapper-ui-popup-button"
+            tabindex="-1"
+            @click.stop="moveUp">🔼</button>
+          <button
+            class="wrapper-ui-popup-button"
+            tabindex="-1"
+            @click.stop="deleteBlock">🗑</button>
+          <button
+            class="wrapper-ui-popup-button"
+            tabindex="-1"
+            @click.stop="moveDown">🔽</button>
         </div>
 
         <div class="wrapper-ui-popup-row">
-          <div class="wrapper-ui-popup-button" @click.stop="addBlock">↩️</div>
-          <div class="wrapper-ui-popup-button" @click.stop="showMore">⚙️</div>
+          <button
+            class="wrapper-ui-popup-button"
+            tabindex="-1"
+            @click.stop="addBlock">↩️</button>
+          <button
+            class="wrapper-ui-popup-button"
+            tabindex="-1"
+            @click.stop="showMore">⚙️</button>
         </div>
       </div>
     </div>
@@ -140,9 +155,11 @@ export default {
 
       &-button {
         align-items: center;
+        border: none;
         display: flex;
         height: 32px;
         justify-content: center;
+        outline: none;
         width: 32px;
       }
     }

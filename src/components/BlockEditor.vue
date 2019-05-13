@@ -84,12 +84,14 @@ export default {
           content: '',
           config: {}
         },
+        /*
         {
           id: 1555941441670,
           type: 'publii-header-custom',
           content: 'CUSTOM Lorem ipsum dolor',
           config: {}
         },
+        */
         {
           id: 1555941453146,
           type: 'publii-list',
