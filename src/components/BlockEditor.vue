@@ -184,7 +184,7 @@ export default {
         this.addNewBlock('publii-paragraph', false);
       }
     },
-    addNewBlock (blockType, afterBlockID = false) {
+    addNewBlock (blockType, afterBlockID = false, content = '') {
       let blockIndex = this.content.findIndex(el => el.id === afterBlockID);
       this.$bus.$emit('block-editor-deselect-blocks');
 
@@ -200,7 +200,7 @@ export default {
       let newBlockObject = {
         id: newBlockID,
         type: blockType,
-        content: '',
+        content: content,
         config: {}
       };
       this.content.splice(blockIndex + 1, 0, newBlockObject);
