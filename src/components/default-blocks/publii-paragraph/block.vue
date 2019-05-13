@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 
@@ -72,8 +71,7 @@ export default {
       }
     },
     alignText (position) {
-      Vue.set(this.config, 'textAlign', position);
-      this.$forceUpdate();
+      this.config.textAlign = position;
     },
     save () {
       this.content = this.$refs['block'].innerHTML;
