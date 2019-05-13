@@ -174,6 +174,10 @@ export default {
       this.content.splice(blockIndex, 1);
       this.state.selectedBlockID = false;
 
+      if (blockIndex > 0) {
+        this.$refs['block-' + this.content[blockIndex - 1].id][0].focus();
+      }
+
       if (!this.content.length) {
         this.addNewBlock('publii-paragraph', false);
       }

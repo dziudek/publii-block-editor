@@ -32,10 +32,10 @@ export default {
       this.content = '<li></li>';
     }
 
-    this.$refs['block'].addEventListener('keydown', this.handleTabKey);
+    this.$refs['block'].addEventListener('keydown', this.handleKeyboard);
   },
   methods: {
-    handleTabKey (e) {
+    handleKeyboard (e) {
       if (
         e.code === 'Backspace' &&
         (
@@ -43,6 +43,7 @@ export default {
           this.$refs['block'].innerHTML === '<li><br></li>'
         )
       ) {
+        this.$bus.$emit('block-editor-delete-block', this.id);
         e.returnValue = false;
       }
 
@@ -81,6 +82,9 @@ export default {
         content: this.content
       });
     }
+  },
+  beforeDestroy () {
+    this.$refs['block'].removeEventListener('keydown', this.handleKeyboard);
   }
 }
 </script>

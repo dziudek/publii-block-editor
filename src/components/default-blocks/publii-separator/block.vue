@@ -24,12 +24,18 @@ export default {
     };
   },
   mounted () {
-    this.$refs['block'].addEventListener('keydown', this.handleEnterKey);
+    this.$refs['block'].addEventListener('keydown', this.handleKeyboard);
   },
   methods: {
-    handleEnterKey (e) {
+    handleKeyboard (e) {
       if (e.code === 'Enter') {
         this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
+        e.returnValue = false;
+      }
+
+      if (e.code === 'Backspace') {
+        this.$bus.$emit('block-editor-delete-block', this.id);
+        e.returnValue = false;
       }
 
       if (e.code !== 'Tab') {
@@ -45,7 +51,7 @@ export default {
     }
   },
   beforeDestroy () {
-    this.$refs['block'].removeEventListener('keydown', this.handleEnterKey);
+    this.$refs['block'].removeEventListener('keydown', this.handleKeyboard);
   }
 }
 </script>

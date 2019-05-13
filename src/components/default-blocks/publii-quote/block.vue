@@ -39,10 +39,18 @@ export default {
     this.content.author = this.inputContent.author;
     this.$refs['contentText'].addEventListener('keydown', this.handleTextEnterKey);
     this.$refs['contentAuthor'].addEventListener('keydown', this.handleAuthorEnterKey);
+    this.$refs['contentText'].addEventListener('keydown', this.handleKeyboard);
+    this.$refs['contentAuthor'].addEventListener('keydown', this.handleKeyboard);
   },
   methods: {
     focus () {
       this.$refs['contentText'].focus();
+    },
+    handleKeyboard (e) {
+      if (e.code === 'Backspace' && this.$refs['contentText'].innerHTML === '' && this.$refs['contentAuthor'].innerHTML === '') {
+        this.$bus.$emit('block-editor-delete-block', this.id);
+        e.returnValue = false;
+      }
     },
     handleTextEnterKey (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
@@ -70,6 +78,8 @@ export default {
   beforeDestroy () {
     this.$refs['contentText'].removeEventListener('keydown', this.handleTextEnterKey);
     this.$refs['contentAuthor'].removeEventListener('keydown', this.handleAuthorEnterKey);
+    this.$refs['contentText'].removeEventListener('keydown', this.handleKeyboard);
+    this.$refs['contentAuthor'].removeEventListener('keydown', this.handleKeyboard);
   }
 }
 </script>
