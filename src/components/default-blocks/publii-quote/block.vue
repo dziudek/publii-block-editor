@@ -45,6 +45,7 @@ export default {
   methods: {
     focus () {
       this.$refs['contentText'].focus();
+      this.setCursorAtEndOfElement('contentText');
     },
     handleKeyboard (e) {
       if (e.code === 'Backspace' && this.$refs['contentText'].innerHTML === '' && this.$refs['contentAuthor'].innerHTML === '') {

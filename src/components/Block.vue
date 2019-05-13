@@ -12,6 +12,16 @@ export default {
   methods: {
     focus () {
       this.$refs['block'].focus();
+      this.setCursorAtEndOfElement();
+    },
+    setCursorAtEndOfElement (id = 'block') {
+      let range = document.createRange();
+      range.selectNodeContents(this.$refs[id]);
+      range.collapse(false);
+
+      let sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
     },
     getFocusFromTab () {
       this.focus();
