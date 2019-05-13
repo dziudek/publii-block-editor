@@ -17,6 +17,11 @@ export default {
       if (!this.$parent.isSelected) {
         this.$bus.$emit('block-editor-block-selected', this.id);
       }
+    },
+    pastePlainText (e) {
+      e.preventDefault();
+      let text = (e.originalEvent || e).clipboardData.getData('text/plain');
+      document.execCommand('insertHTML', false, text);
     }
   },
   beforeDestroy () {

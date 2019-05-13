@@ -3,6 +3,7 @@
     class="publii-block-readmore"
     contenteditable="true"
     @keyup="getFocusFromTab"
+    @paste="pastePlainText"
     ref="block">
     <hr />
   </div>

@@ -3,6 +3,7 @@
     class="publii-block-separator"
     contenteditable="true"
     @keyup="getFocusFromTab"
+    @paste="pastePlainText"
     ref="block">
     <hr />
   </div>

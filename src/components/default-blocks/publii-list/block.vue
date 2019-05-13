@@ -3,6 +3,7 @@
     :is="config.listType"
     contenteditable="true"
     @keyup="getFocusFromTab"
+    @paste="pastePlainText"
     v-html="content"
     ref="block"
     class="publii-block-list" />

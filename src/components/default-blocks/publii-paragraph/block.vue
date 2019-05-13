@@ -3,6 +3,7 @@
     class="publii-block-paragraph"
     ref="block"
     @keyup="getFocusFromTab"
+    @paste="pastePlainText"
     contenteditable="true"
     v-html="content" />
 </template>

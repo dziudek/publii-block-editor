@@ -3,6 +3,7 @@
     :is="'h' + config.headingLevel"
     contenteditable="true"
     @keyup="getFocusFromTab"
+    @paste="pastePlainText"
     ref="block"
     class="publii-block-header"
     v-html="content" />
