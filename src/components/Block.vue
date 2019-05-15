@@ -16,6 +16,19 @@ export default {
       if (cursorPosition === 'end') {
         this.setCursorAtEndOfElement();
       }
+
+      if (typeof cursorPosition === 'number') {
+        this.setCursorAtPosition(cursorPosition);
+      }
+    },
+    setCursorAtPosition (position) {
+      let el = this.$refs['block'];
+      let range = document.createRange();
+      let sel = window.getSelection();
+      range.setStart(el.firstChild, position);
+      range.setEnd(el.firstChild, position);
+      sel.removeAllRanges();
+      sel.addRange(range);
     },
     setCursorAtEndOfElement (id = 'block') {
       let range = document.createRange();

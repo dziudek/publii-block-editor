@@ -122,7 +122,6 @@ export default {
       }
 
       if (e.code === 'Backspace' && this.$refs['block'].innerHTML !== '' && this.cursorIsAtTheBeginning()) {
-        // console.log('MERGE');
         this.mergeParagraphs();
         e.returnValue = false;
       }

@@ -226,7 +226,7 @@ export default {
 
         setTimeout(() => {
           this.$refs['block-' + previousBlockID][0].refresh();
-          this.$refs['block-' + previousBlockID][0].focus('content');
+          this.$refs['block-' + previousBlockID][0].focus('start');
         }, 0);
       }
     }
