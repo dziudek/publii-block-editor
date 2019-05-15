@@ -10,9 +10,12 @@ export default {
     this.$on('block-save', this.save);
   },
   methods: {
-    focus () {
+    focus (setCursorAtEnd = true) {
       this.$refs['block'].focus();
-      this.setCursorAtEndOfElement();
+
+      if (setCursorAtEnd) {
+        this.setCursorAtEndOfElement();
+      }
     },
     setCursorAtEndOfElement (id = 'block') {
       let range = document.createRange();

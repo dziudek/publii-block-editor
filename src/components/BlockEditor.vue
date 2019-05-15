@@ -202,7 +202,11 @@ export default {
       this.content.splice(blockIndex + 1, 0, newBlockObject);
 
       setTimeout(() => {
-        this.$refs['block-' + newBlockID][0].focus();
+        if (content === '') {
+          this.$refs['block-' + newBlockID][0].focus(true);
+        } else {
+          this.$refs['block-' + newBlockID][0].focus(false);
+        }
       }, 0);
     }
   },
