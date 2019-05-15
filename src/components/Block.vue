@@ -10,10 +10,10 @@ export default {
     this.$on('block-save', this.save);
   },
   methods: {
-    focus (setCursorAtEnd = true) {
+    focus (cursorPosition = 'end') {
       this.$refs['block'].focus();
 
-      if (setCursorAtEnd) {
+      if (cursorPosition === 'end') {
         this.setCursorAtEndOfElement();
       }
     },

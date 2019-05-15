@@ -101,6 +101,11 @@ export default {
         e.returnValue = false;
       }
 
+      if (e.code === 'Backspace' && this.$refs['block'].innerHTML !== '') {
+        this.mergeParagraphs();
+        e.returnValue = false;
+      }
+
       if (this.blockUIVisible) {
         this.blockUIVisible = false;
         this.$bus.$emit('block-editor-toggle-new-block-ui-in-wrapper', this.id, false);
@@ -114,6 +119,10 @@ export default {
     },
     alignText (position) {
       this.config.textAlign = position;
+    },
+    mergeParagraphs () {
+      this.save();
+      this.$bus.$emit('block-editor-merge-paragprahs', this.id);
     },
     save () {
       this.content = this.$refs['block'].innerHTML;

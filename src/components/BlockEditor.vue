@@ -137,6 +137,7 @@ export default {
     this.$bus.$on('block-editor-save-block', this.saveBlock);
     this.$bus.$on('block-editor-delete-block', this.deleteBlock);
     this.$bus.$on('block-editor-add-block', this.addNewBlock);
+    this.$bus.$on('block-editor-merge-paragraphs', this.mergeParagraphs);
     this.$bus.$on('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
     this.initGlobals();
   },
@@ -203,11 +204,30 @@ export default {
 
       setTimeout(() => {
         if (content === '') {
-          this.$refs['block-' + newBlockID][0].focus(true);
+          this.$refs['block-' + newBlockID][0].focus('end');
         } else {
-          this.$refs['block-' + newBlockID][0].focus(false);
+          this.$refs['block-' + newBlockID][0].focus('start');
         }
       }, 0);
+    },
+    mergeParagraphs (blockIDToMerge) {
+      let blockIndex = this.content.findIndex(el => el.id === blockIDToMerge);
+
+      if (blockIndex === 0) {
+        return;
+      }
+
+      let previousBlockType = this.content[blockIndex - 1].type;
+      let previousBlockID = this.content[blockIndex - 1].id;
+
+      if (previousBlockType === 'publii-paragraph') {
+        this.content[blockIndex - 1].content = this.content[blockIndex - 1].content + this.content[blockIndex].content;
+        this.content.splice(blockIndex, 1);
+
+        setTimeout(() => {
+          this.$refs['block-' + previousBlockID][0].focus('content');
+        }, 0);
+      }
     }
   },
   beforeDestroy () {
@@ -216,6 +236,7 @@ export default {
     this.$bus.$off('block-editor-save-block', this.saveBlock);
     this.$bus.$off('block-editor-delete-block', this.deleteBlock);
     this.$bus.$off('block-editor-add-block', this.addNewBlock);
+    this.$bus.$off('block-editor-merge-paragraphs', this.mergeParagraphs);
     this.$bus.$off('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
   }
 }
