@@ -118,12 +118,11 @@ export default {
         e.returnValue = false;
       }
 
-      /*
-      if (e.code === 'Backspace' && this.$refs['block'].innerHTML !== '') {
+      if (e.code === 'Backspace' && this.$refs['block'].innerHTML !== '' && this.cursorIsAtTheBeginning()) {
+        console.log('MERGE');
         this.mergeParagraphs();
         e.returnValue = false;
       }
-      */
 
       if (this.blockUIVisible) {
         this.blockUIVisible = false;
@@ -151,6 +150,10 @@ export default {
         config: JSON.parse(JSON.stringify(this.config)),
         content: this.content
       });
+    },
+    cursorIsAtTheBeginning () {
+      let selectedObject = window.getSelection();
+      return selectedObject.rangeCount === 1 && selectedObject.baseOffset === 0;
     },
     /**
      * New block UI methods
