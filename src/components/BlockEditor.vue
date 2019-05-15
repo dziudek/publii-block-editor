@@ -225,6 +225,7 @@ export default {
         this.content.splice(blockIndex, 1);
 
         setTimeout(() => {
+          this.$refs['block-' + previousBlockID][0].refresh();
           this.$refs['block-' + previousBlockID][0].focus('content');
         }, 0);
       }
