@@ -71,6 +71,9 @@ export default {
     this.$bus.$on('block-editor-deselect-blocks', this.deselectBlock);
   },
   methods: {
+    refresh () {
+      this.$refs['block'].innerHTML = this.content;
+    },
     handleEditFocus () {
       if (this.$refs['block'].innerHTML === '') {
         this.showNewBlockUI = true;
@@ -119,7 +122,6 @@ export default {
       }
 
       if (e.code === 'Backspace' && this.$refs['block'].innerHTML !== '' && this.cursorIsAtTheBeginning()) {
-        console.log('MERGE');
         this.mergeParagraphs();
         e.returnValue = false;
       }
@@ -140,7 +142,7 @@ export default {
     },
     mergeParagraphs () {
       this.save();
-      this.$bus.$emit('block-editor-merge-paragprahs', this.id);
+      this.$bus.$emit('block-editor-merge-paragraphs', this.id);
     },
     save () {
       this.content = this.$refs['block'].innerHTML;
