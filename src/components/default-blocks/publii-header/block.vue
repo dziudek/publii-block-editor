@@ -75,7 +75,24 @@ export default {
   methods: {
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
-        this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
+        document.execCommand('insertHTML', false, '<line-separator />');
+
+        if (this.$refs['block'].innerHTML.substr(-33) === '<line-separator></line-separator>') {
+          this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
+          this.$refs['block'].innerHTML = this.$refs['block'].innerHTML.replace('<line-separator></line-separator>', '');
+        } else {
+          let separatedContent = this.$refs['block'].innerHTML.split('<line-separator></line-separator>');
+          let firstPart = separatedContent[0];
+          let secondPart = separatedContent[1];
+
+          if (secondPart.substr(0, 4) === '<br>') {
+            secondPart = secondPart.substr(4);
+          }
+
+          this.$refs['block'].innerHTML = firstPart;
+          this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id, secondPart);
+        }
+
         e.returnValue = false;
       }
 
