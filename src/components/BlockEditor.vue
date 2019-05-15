@@ -188,10 +188,6 @@ export default {
       let blockIndex = this.content.findIndex(el => el.id === afterBlockID);
       this.$bus.$emit('block-editor-deselect-blocks');
 
-      if (afterBlockID && this.$refs['block-' + this.content[blockIndex].id][0].$refs['block'].innerHTML === '') {
-        return;
-      }
-
       if (!afterBlockID) {
         blockIndex = -1;
       }

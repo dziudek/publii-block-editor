@@ -5,7 +5,9 @@
       :style="'text-align: ' + config.textAlign + ';'"
       ref="block"
       slot="block"
-      @keyup="getFocusFromTab"
+      @focus="handleEditFocus"
+      @blur="handleEditBlur"
+      @keyup="getFocusFromTab($event); handleKeyUp($event);"
       @paste="pastePlainText"
       @keydown="handleKeyboard"
       contenteditable="true"
@@ -46,13 +48,24 @@ export default {
       config: {
         textAlign: 'left'
       },
-      content: ''
+      content: '',
+      blockUIVisible: false
     };
   },
   mounted () {
     this.content = this.inputContent;
   },
   methods: {
+    handleEditFocus () {
+      if (this.$refs['block'].innerHTML === '') {
+        this.$bus.$emit('block-editor-toggle-new-block-ui-in-wrapper', this.id, true);
+        this.blockUIVisible = true;
+      }
+    },
+    handleEditBlur () {
+      this.$bus.$emit('block-editor-toggle-new-block-ui-in-wrapper', this.id, false);
+      this.blockUIVisible = false;
+    },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
         let newElementName = this.$parent.$parent.extensions.shortcutManager.checkContentForShortcuts(this.$refs['block'].innerHTML);
@@ -86,6 +99,17 @@ export default {
       if (e.code === 'Backspace' && this.$refs['block'].innerHTML === '') {
         this.$bus.$emit('block-editor-delete-block', this.id);
         e.returnValue = false;
+      }
+
+      if (this.blockUIVisible) {
+        this.blockUIVisible = false;
+        this.$bus.$emit('block-editor-toggle-new-block-ui-in-wrapper', this.id, false);
+      }
+    },
+    handleKeyUp (e) {
+      if (!this.blockUIVisible && this.$refs['block'].innerHTML === '') {
+        this.blockUIVisible = true;
+        this.$bus.$emit('block-editor-toggle-new-block-ui-in-wrapper', this.id, true);
       }
     },
     alignText (position) {
