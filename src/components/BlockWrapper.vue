@@ -4,19 +4,6 @@
     @click.stop="blockClick">
     <slot />
 
-    <div :class="{ 'wrapper-ui-block-selector': true, 'is-visible': showNewBlockUI }">
-      <button @click.stop="toggleNewBlockUI">⨁</button>
-
-      <div :class="{ 'wrapper-ui-block-selector-list': true, 'is-visible': newBlockUIListVisible }">
-        <button class="wrapper-ui-block-selector-list-button" @click.stop="addNewBlock('publii-header');">H</button>
-        <button class="wrapper-ui-block-selector-list-button" @click.stop="addNewBlock('publii-code');">C</button>
-        <button class="wrapper-ui-block-selector-list-button" @click.stop="addNewBlock('publii-separator');">HR</button>
-        <button class="wrapper-ui-block-selector-list-button" @click.stop="addNewBlock('publii-list');">UL</button>
-        <button class="wrapper-ui-block-selector-list-button" @click.stop="addNewBlock('publii-quote');">Q</button>
-        <button class="wrapper-ui-block-selector-list-button" @click.stop="addNewBlock('publii-readmore');">RM</button>
-      </div>
-    </div>
-
     <div class="wrapper-ui">
       <div class="wrapper-ui-show-options" @click.stop="togglePopup">&hellip;</div>
 
@@ -60,22 +47,19 @@ export default {
   data () {
     return {
       isSelected: false,
-      popupOpened: false,
-      showNewBlockUI: false,
-      newBlockUIListVisible: false
+      popupOpened: false
     };
   },
   mounted () {
     this.$bus.$on('block-editor-deselect-blocks', this.deselectBlock);
-    this.$bus.$on('block-editor-toggle-new-block-ui-in-wrapper', this.setNewBlockUIVisibility);
   },
   methods: {
     blockClick () {
-      this.$bus.$emit('block-editor-deselect-blocks');
+      this.$bus.$emit('block-editor-deselect-blocks', this.id);
       this.popupOpened = false;
       this.setSelectionState(true);
     },
-    deselectBlock () {
+    deselectBlock (blockID) {
       this.setSelectionState(false);
     },
     togglePopup () {
@@ -87,6 +71,8 @@ export default {
       if (!this.isSelected) {
         this.popupOpened = false;
       }
+
+      this.$bus.$emit('block-editor-block-selected', this.id);
     },
     moveUp () {
       this.$bus.$emit('block-editor-move-block-up', this.id);
@@ -97,31 +83,15 @@ export default {
     addBlock () {
       this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
     },
-    addNewBlock (blockType) {
-      this.$bus.$emit('block-editor-add-block', blockType, this.id);
-      this.$bus.$emit('block-editor-delete-block', this.id);
-      this.toggleNewBlockUI();
-    },
     deleteBlock () {
       this.$bus.$emit('block-editor-delete-block', this.id);
     },
     showMore () {
 
-    },
-    toggleNewBlockUI () {
-      this.newBlockUIListVisible = !this.newBlockUIListVisible;
-    },
-    setNewBlockUIVisibility (blockID, newState) {
-      if (this.id !== blockID) {
-        return;
-      }
-
-      this.showNewBlockUI = newState;
     }
   },
   beforeDestroy () {
     this.$bus.$off('block-editor-deselect-blocks', this.deselectBlock);
-    this.$bus.$off('block-editor-show-new-block-ui-in-wrapper', this.setNewBlockUIVisibility);
   }
 }
 </script>
@@ -158,35 +128,6 @@ export default {
       height: 24px;
       text-align: center;
       width: 24px;
-    }
-
-    &-block-selector {
-      display: none;
-      left: -30px;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-
-      &.is-visible {
-        display: block;
-      }
-
-      &-list {
-        display: none;
-        left: 30px;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 500px;
-
-        &-button {
-          margin-right: 5px;
-        }
-
-        &.is-visible {
-          display: block;
-        }
-      }
     }
 
     &-popup {

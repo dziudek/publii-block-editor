@@ -14,6 +14,19 @@
       v-html="content">
     </p>
 
+    <div :class="{ 'publii-block-paragraph-block-selector': true, 'is-visible': showNewBlockUI }">
+      <button @click.stop="toggleNewBlockUI()">⨁</button>
+
+      <div :class="{ 'publii-block-paragraph-block-selector-list': true, 'is-visible': newBlockUIListVisible }">
+        <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-header');">H</button>
+        <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-code');">C</button>
+        <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-separator');">HR</button>
+        <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-list');">UL</button>
+        <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-quote');">Q</button>
+        <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-readmore');">RM</button>
+      </div>
+    </div>
+
     <div
       class="wrapper-ui-top-menu"
       v-if="$parent.isSelected">
@@ -49,22 +62,26 @@ export default {
         textAlign: 'left'
       },
       content: '',
-      blockUIVisible: false
+      showNewBlockUI: false,
+      newBlockUIListVisible: false
     };
   },
   mounted () {
     this.content = this.inputContent;
+    this.$bus.$on('block-editor-deselect-blocks', this.deselectBlock);
   },
   methods: {
     handleEditFocus () {
       if (this.$refs['block'].innerHTML === '') {
-        this.$bus.$emit('block-editor-toggle-new-block-ui-in-wrapper', this.id, true);
-        this.blockUIVisible = true;
+        this.showNewBlockUI = true;
       }
     },
-    handleEditBlur () {
-      this.$bus.$emit('block-editor-toggle-new-block-ui-in-wrapper', this.id, false);
-      this.blockUIVisible = false;
+    handleEditBlur (e) {
+      setTimeout(() => {
+        if (!this.newBlockUIListVisible) {
+          this.showNewBlockUI = false;
+        }
+      }, 250);
     },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
@@ -101,20 +118,22 @@ export default {
         e.returnValue = false;
       }
 
+      /*
       if (e.code === 'Backspace' && this.$refs['block'].innerHTML !== '') {
         this.mergeParagraphs();
         e.returnValue = false;
       }
+      */
 
       if (this.blockUIVisible) {
         this.blockUIVisible = false;
-        this.$bus.$emit('block-editor-toggle-new-block-ui-in-wrapper', this.id, false);
       }
     },
     handleKeyUp (e) {
-      if (!this.blockUIVisible && this.$refs['block'].innerHTML === '') {
-        this.blockUIVisible = true;
-        this.$bus.$emit('block-editor-toggle-new-block-ui-in-wrapper', this.id, true);
+      if (!this.showNewBlockUI && this.$refs['block'].innerHTML === '') {
+        this.showNewBlockUI = true;
+      } else if (this.showNewBlockUI && this.$refs['block'].innerHTML !== '') {
+        this.showNewBlockUI = false;
       }
     },
     alignText (position) {
@@ -132,7 +151,32 @@ export default {
         config: JSON.parse(JSON.stringify(this.config)),
         content: this.content
       });
+    },
+    /**
+     * New block UI methods
+     */
+    deselectBlock (blockID) {
+      if (blockID !== this.id) {
+        this.showNewBlockUI = false;
+        this.newBlockUIListVisible = false;
+      }
+    },
+    toggleNewBlockUI () {
+      this.showNewBlockUI = true;
+      this.newBlockUIListVisible = !this.newBlockUIListVisible;
+    },
+    addNewBlock (blockType) {
+      this.$bus.$emit('block-editor-add-block', blockType, this.id);
+      this.$bus.$emit('block-editor-delete-block', this.id);
+      this.toggleNewBlockUI();
+    },
+    hideNewBlockUI (blockID) {
+      this.showNewBlockUI = false;
+      this.newBlockUIListVisible = false;
     }
+  },
+  beforeDestroy () {
+    this.$bus.$off('block-editor-deselect-blocks', this.deselectBlock);
   }
 }
 </script>
@@ -146,6 +190,35 @@ export default {
     &:before {
       content: 'Enter text';
       opacity: .35;
+    }
+  }
+
+  &-block-selector {
+    display: none;
+    left: -30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &.is-visible {
+      display: block;
+    }
+
+    &-list {
+      display: none;
+      left: 30px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 500px;
+
+      &-button {
+        margin-right: 5px;
+      }
+
+      &.is-visible {
+        display: block;
+      }
     }
   }
 }
