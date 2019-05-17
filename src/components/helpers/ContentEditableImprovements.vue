@@ -1,12 +1,6 @@
 <script>
 export default {
-  name: 'ContentEditableImprovements',
-  mounted () {
-
-  },
-  methods: {
-
-  }
+  name: 'ContentEditableImprovements'
 }
 </script>
 

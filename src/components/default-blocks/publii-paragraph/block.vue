@@ -10,6 +10,7 @@
       @keyup="getFocusFromTab($event); handleKeyUp($event);"
       @paste="pastePlainText"
       @keydown="handleKeyboard"
+      @mouseup="handleMouseUp"
       contenteditable="true"
       v-html="content">
     </p>
@@ -25,6 +26,17 @@
         <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-quote');">Q</button>
         <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-readmore');">RM</button>
       </div>
+    </div>
+
+    <div
+      class="wrapper-ui-inline-menu"
+      ref="inline-menu"
+      v-if="$parent.isSelected && textIsHighlighted">
+      <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('strong');">B</button>
+      <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('em');">I</button>
+      <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('u');">U</button>
+      <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('s');">S</button>
+      <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('code');">&lt;&gt;</button>
     </div>
 
     <div
@@ -49,12 +61,14 @@
 <script>
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
+import InlineMenu from './../../helpers/InlineMenu.vue';
 
 export default {
   name: 'Paragraph',
   mixins: [
     Block,
-    ContentEditableImprovements
+    ContentEditableImprovements,
+    InlineMenu
   ],
   data () {
     return {
@@ -63,7 +77,8 @@ export default {
       },
       content: '',
       showNewBlockUI: false,
-      newBlockUIListVisible: false
+      newBlockUIListVisible: false,
+      textIsHighlighted: true
     };
   },
   mounted () {
@@ -85,6 +100,16 @@ export default {
           this.showNewBlockUI = false;
         }
       }, 250);
+    },
+    handleMouseUp (e) {
+      let selection = window.getSelection();
+      this.textIsHighlighted = !selection.isCollapsed;
+
+      if (this.textIsHighlighted) {
+        setTimeout(() => {
+          this.showInlineMenu();
+        }, 0);
+      }
     },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
