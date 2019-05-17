@@ -15,7 +15,9 @@
       v-html="content">
     </p>
 
-    <div :class="{ 'publii-block-paragraph-block-selector': true, 'is-visible': showNewBlockUI }">
+    <div
+      :class="{ 'publii-block-paragraph-block-selector': true, 'is-visible': showNewBlockUI }"
+      :key="'new-block-menu-' + id">
       <button @click.stop="toggleNewBlockUI()">⨁</button>
 
       <div :class="{ 'publii-block-paragraph-block-selector-list': true, 'is-visible': newBlockUIListVisible }">
@@ -31,17 +33,20 @@
     <div
       class="wrapper-ui-inline-menu"
       ref="inline-menu"
-      v-if="$parent.isSelected && textIsHighlighted">
+      v-if="$parent.isSelected && textIsHighlighted"
+      :key="'inline-menu-' + id">
       <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('strong');">B</button>
       <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('em');">I</button>
       <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('u');">U</button>
       <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('s');">S</button>
       <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('code');">&lt;&gt;</button>
+      <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('mark');">M</button>
     </div>
 
     <div
       class="wrapper-ui-top-menu"
-      v-if="$parent.isSelected">
+      :key="'top-menu-' + id"
+      v-if="$parent.isSelected && !textIsHighlighted">
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'left' }"
         tabindex="-1"
@@ -215,6 +220,10 @@ export default {
 .publii-block-paragraph {
   outline: none;
   width: 100%;
+
+  code {
+    display: inline-block;
+  }
 
   &:empty {
     &:before {

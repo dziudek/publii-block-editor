@@ -16,6 +16,8 @@ export default {
         case 'em': document.execCommand('italic', false, null); break;
         case 's': document.execCommand('strikeThrough', false, null); break;
         case 'u': document.execCommand('underline', false, null); break;
+        case 'code': document.execCommand('insertHTML', false, '<code>' + document.getSelection() + '</code>'); break;
+        case 'mark': document.execCommand('insertHTML', false, '<mark>' + document.getSelection() + '</mark>'); break;
       }
     }
   }
