@@ -16,6 +16,10 @@ export default {
       this.analyzeSelectedText(sel);
     },
     analyzeSelectedText (selection) {
+      if (!selection || !selection.anchorNode || !selection.focusNode) {
+        return;
+      }
+
       let tags = [
         'bold',
         'italic',
@@ -26,6 +30,47 @@ export default {
       for (let i = 0; i < tags.length; i++) {
         this.selectedTextContains[tags[i]] = document.queryCommandState(tags[i]);
       }
+
+      let specialTags = {
+        'CODE': 'code',
+        'MARK': 'mark',
+        'A': 'link'
+      };
+
+      let specialTagNames = Object.keys(specialTags);
+
+      for (let i = 0; i < specialTagNames.length; i++) {
+        this.selectedTextContains[specialTags[specialTagNames[i]]] = !!this.findParentTag(specialTagNames[i]);
+      }
+    },
+    findParentTag (tagName) {
+      let selection = window.getSelection();
+      let searchDepth = 10;
+      let parentTag = null;
+
+      const boundNodes = [
+        selection.anchorNode,
+        selection.focusNode
+      ];
+
+      boundNodes.forEach((parent) => {
+        let iterator = searchDepth;
+
+        while (iterator > 0 && parent.parentNode) {
+          if (parent.tagName === tagName) {
+            parentTag = parent;
+
+            if (parentTag) {
+              break;
+            }
+          }
+
+          parent = parent.parentNode;
+          iterator--;
+        }
+      });
+
+      return parentTag;
     },
     doInlineOperation (operationType) {
       switch (operationType) {
