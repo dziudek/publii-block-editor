@@ -132,6 +132,7 @@ export default {
     }, 500);
   },
   mounted () {
+    Vue.prototype.$rangy.init();
     this.$bus.$on('block-editor-move-block-up', this.moveBlockUp);
     this.$bus.$on('block-editor-move-block-down', this.moveBlockDown);
     this.$bus.$on('block-editor-save-block', this.saveBlock);

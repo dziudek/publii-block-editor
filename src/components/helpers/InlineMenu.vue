@@ -73,16 +73,36 @@ export default {
       return parentTag;
     },
     doInlineOperation (operationType) {
+      var savedSel, startID, endID;
+
       switch (operationType) {
         case 'strong': document.execCommand('bold', false, null); break;
         case 'em': document.execCommand('italic', false, null); break;
         case 's': document.execCommand('strikeThrough', false, null); break;
         case 'u': document.execCommand('underline', false, null); break;
-        case 'code': document.execCommand('insertHTML', false, '<code>' + document.getSelection() + '</code>'); break;
-        case 'mark': document.execCommand('insertHTML', false, '<mark>' + document.getSelection() + '</mark>'); break;
+        case 'code': {
+          savedSel = this.$rangy.saveSelection();
+          startID = savedSel.rangeInfos[0].startMarkerId;
+          endID = savedSel.rangeInfos[0].endMarkerId;
+          document.execCommand('insertHTML', false, '<span id="' + startID + '"></span><code>' + document.getSelection() + '</code><span id="' + endID + '"></span>');
+          this.$rangy.restoreSelection(savedSel);
+          this.$rangy.removeMarkers(savedSel);
+          break;
+        }
+        case 'mark': {
+          savedSel = this.$rangy.saveSelection();
+          startID = savedSel.rangeInfos[0].startMarkerId;
+          endID = savedSel.rangeInfos[0].endMarkerId;
+          document.execCommand('insertHTML', false, '<span id="' + startID + '"></span><mark>' + document.getSelection() + '</mark><span id="' + endID + '"></span>');
+          this.$rangy.restoreSelection(savedSel);
+          this.$rangy.removeMarkers(savedSel);
+          break;
+        }
       }
 
-      this.refreshSelectedTextState();
+      setTimeout(() => {
+        this.refreshSelectedTextState();
+      }, 0);
     }
   }
 }

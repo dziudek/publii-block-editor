@@ -6,10 +6,13 @@
 
 <script>
 import Vue from 'vue';
-import BlockEditor from './components/BlockEditor.vue'
+import BlockEditor from './components/BlockEditor.vue';
+import Rangy from 'rangy-updated';
+import 'rangy-updated/lib/rangy-selectionsaverestore.js';
 
 // Declare event bus
 Vue.prototype.$bus = new Vue();
+Vue.prototype.$rangy = Rangy;
 
 export default {
   name: 'app',
