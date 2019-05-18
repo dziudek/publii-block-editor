@@ -4,11 +4,28 @@ export default {
   methods: {
     showInlineMenu () {
       let sel = window.getSelection();
+      this.analyzeSelectedText(sel);
       let oRange = sel.getRangeAt(0);
       let oRect = oRange.getBoundingClientRect();
       let wrapperRect = this.$refs['block'].getBoundingClientRect();
       this.$refs['inline-menu'].style.left = ((oRect.left - wrapperRect.left) + (oRect.width / 2)) + 'px';
       this.$refs['inline-menu'].style.top = (oRect.top - wrapperRect.top - 20) + 'px';
+    },
+    refreshSelectedTextState () {
+      let sel = window.getSelection();
+      this.analyzeSelectedText(sel);
+    },
+    analyzeSelectedText (selection) {
+      let tags = [
+        'bold',
+        'italic',
+        'underline',
+        'strikethrough'
+      ];
+
+      for (let i = 0; i < tags.length; i++) {
+        this.selectedTextContains[tags[i]] = document.queryCommandState(tags[i]);
+      }
     },
     doInlineOperation (operationType) {
       switch (operationType) {
@@ -19,6 +36,8 @@ export default {
         case 'code': document.execCommand('insertHTML', false, '<code>' + document.getSelection() + '</code>'); break;
         case 'mark': document.execCommand('insertHTML', false, '<mark>' + document.getSelection() + '</mark>'); break;
       }
+
+      this.refreshSelectedTextState();
     }
   }
 }

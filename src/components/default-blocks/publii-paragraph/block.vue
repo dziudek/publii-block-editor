@@ -35,12 +35,36 @@
       ref="inline-menu"
       v-if="$parent.isSelected && textIsHighlighted"
       :key="'inline-menu-' + id">
-      <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('strong');">B</button>
-      <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('em');">I</button>
-      <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('u');">U</button>
-      <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('s');">S</button>
-      <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('code');">&lt;&gt;</button>
-      <button class="wrapper-ui-inline-menu-button" @click.stop="doInlineOperation('mark');">M</button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.bold }"
+        @click.stop="doInlineOperation('strong');">
+        B
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.italic }"
+        @click.stop="doInlineOperation('em');">
+        I
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.underline }"
+        @click.stop="doInlineOperation('u');">
+        U
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.strikethrough }"
+        @click.stop="doInlineOperation('s');">
+        S
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.code }"
+        @click.stop="doInlineOperation('code');">
+        &lt;&gt;
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.mark }"
+        @click.stop="doInlineOperation('mark');">
+        M
+      </button>
     </div>
 
     <div
@@ -79,6 +103,15 @@ export default {
     return {
       config: {
         textAlign: 'left'
+      },
+      selectedTextContains: {
+        bold: false,
+        italic: false,
+        strikethrough: false,
+        underline: false,
+        code: false,
+        mark: false,
+        link: false
       },
       content: '',
       showNewBlockUI: false,
