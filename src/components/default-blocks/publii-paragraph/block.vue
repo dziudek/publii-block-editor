@@ -140,14 +140,21 @@ export default {
       }, 250);
     },
     handleMouseUp (e) {
-      let selection = window.getSelection();
-      this.textIsHighlighted = !selection.isCollapsed;
+      setTimeout(() => {
+        let sel = window.getSelection();
 
-      if (this.textIsHighlighted) {
-        setTimeout(() => {
-          this.showInlineMenu();
-        }, 0);
-      }
+        if (sel.isCollapsed) {
+          this.textIsHighlighted = false;
+        } else {
+          this.textIsHighlighted = !sel.isCollapsed || (sel.anchorNode === sel.focusNode && sel.anchorOffset === sel.focusOffset);
+        }
+
+        if (this.textIsHighlighted) {
+          setTimeout(() => {
+            this.showInlineMenu();
+          }, 0);
+        }
+      }, 0);
     },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
