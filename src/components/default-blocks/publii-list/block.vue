@@ -72,8 +72,10 @@ export default {
       if (
         e.code === 'Enter' &&
         (
-          this.$refs['block'].innerHTML.substr(-13) === '<li><br></li>' ||
-          this.$refs['block'].innerHTML.substr(-9) === '<li></li>'
+          (
+            this.$refs['block'].innerHTML.substr(-13) === '<li><br></li>' ||
+            this.$refs['block'].innerHTML.substr(-9) === '<li></li>'
+          ) && this.$refs['block'].querySelectorAll('li').length > 1
         )
       ) {
         this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
