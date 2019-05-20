@@ -222,13 +222,27 @@ export default {
       let previousBlockID = this.content[blockIndex - 1].id;
 
       if (previousBlockType === 'publii-paragraph') {
-        this.$refs['block-' + previousBlockID][0].focus('end');
-        this.content[blockIndex - 1].content = this.content[blockIndex - 1].content + this.content[blockIndex].content;
+        this.content[blockIndex - 1].content = this.content[blockIndex - 1].content + '<span class="temp-paragraph-merge-caret"></span>' + this.content[blockIndex].content;
         this.content.splice(blockIndex, 1);
 
         setTimeout(() => {
-          console.log(window.getSelection());
+          this.$refs['block-' + previousBlockID][0].content = this.content[blockIndex - 1].content;
           this.$refs['block-' + previousBlockID][0].refresh();
+
+          setTimeout(() => {
+            let range = document.createRange();
+            let caret = this.$refs['block-' + previousBlockID][0].$refs['block'].querySelector('.temp-paragraph-merge-caret');
+            this.$refs['block-' + previousBlockID][0].focus('none');
+            let sel = window.getSelection();
+
+            setTimeout(() => {
+              range.selectNodeContents(caret);
+              range.deleteContents();
+              sel.removeAllRanges();
+              sel.addRange(range);
+              sel.baseNode.parentNode.removeChild(sel.baseNode);
+            }, 0);
+          }, 0);
         }, 0);
       } else {
         this.$refs['block-' + previousBlockID][0].focus('end');

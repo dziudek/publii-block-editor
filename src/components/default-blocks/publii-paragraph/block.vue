@@ -209,6 +209,8 @@ export default {
             this.$refs['block'].innerHTML = firstPart;
             this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id, secondPart);
           }
+
+          this.save();
         } else {
           this.$bus.$emit('block-editor-add-block', newElementName, this.id);
           this.$bus.$emit('block-editor-delete-block', this.id);
@@ -272,7 +274,10 @@ export default {
     },
     mergeParagraphs () {
       this.save();
-      this.$bus.$emit('block-editor-merge-paragraphs', this.id);
+
+      setTimeout(() => {
+        this.$bus.$emit('block-editor-merge-paragraphs', this.id);
+      }, 0);
     },
     save () {
       this.content = this.$refs['block'].innerHTML;

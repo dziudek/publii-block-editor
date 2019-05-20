@@ -13,6 +13,10 @@ export default {
     focus (cursorPosition = 'end') {
       this.$refs['block'].focus();
 
+      if (cursorPosition === 'none') {
+        return;
+      }
+
       if (cursorPosition === 'end') {
         this.setCursorAtEndOfElement();
       }
