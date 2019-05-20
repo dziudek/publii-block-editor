@@ -188,7 +188,7 @@ export default {
       }, 0);
     },
     handleKeyboard (e) {
-      if (e.code === 'Enter' && e.shiftKey === false && this.newBlockUIListVisible === false) {
+      if (e.code === 'Enter' && e.shiftKey === false && this.showNewBlockUI === false) {
         let newElementName = this.$parent.$parent.extensions.shortcutManager.checkContentForShortcuts(this.$refs['block'].innerHTML);
 
         if (newElementName === 'publii-paragraph') {
@@ -245,7 +245,12 @@ export default {
         return;
       }
 
-      if (e.code === 'Enter' && e.shiftKey === false && this.newBlockUIListVisible === true) {
+      if (
+        e.code === 'Enter' &&
+        e.shiftKey === false &&
+        this.newBlockUIListVisible === true &&
+        this.showNewBlockUI === true
+      ) {
         this.$refs['block'].parentNode.querySelectorAll('.publii-block-paragraph-block-selector-list-button')[this.newBlockUIActiveIndex].click();
         e.returnValue = false;
         return;
