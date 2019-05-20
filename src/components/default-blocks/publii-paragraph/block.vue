@@ -18,15 +18,45 @@
     <div
       :class="{ 'publii-block-paragraph-block-selector': true, 'is-visible': showNewBlockUI }"
       :key="'new-block-menu-' + id">
-      <button @click.stop="toggleNewBlockUI()">⨁</button>
+      <button
+        @click.stop="toggleNewBlockUI()"
+        tabindex="-1">
+        ⨁
+      </button>
 
-      <div :class="{ 'publii-block-paragraph-block-selector-list': true, 'is-visible': newBlockUIListVisible }">
-        <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-header');">H</button>
-        <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-code');">C</button>
-        <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-separator');">HR</button>
-        <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-list');">UL</button>
-        <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-quote');">Q</button>
-        <button class="publii-block-paragraph-block-selector-list-button" @click.stop="addNewBlock('publii-readmore');">RM</button>
+      <div
+        v-if="newBlockUIListVisible"
+        :class="{ 'publii-block-paragraph-block-selector-list': true, 'is-visible': true }">
+        <button
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 0 }"
+          @click.stop="addNewBlock('publii-header');">
+          H
+        </button>
+        <button
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 1 }"
+          @click.stop="addNewBlock('publii-code');">
+          C
+        </button>
+        <button
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 2 }"
+          @click.stop="addNewBlock('publii-separator');">
+          HR
+        </button>
+        <button
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 3 }"
+          @click.stop="addNewBlock('publii-list');">
+          UL
+        </button>
+        <button
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 4 }"
+          @click.stop="addNewBlock('publii-quote');">
+          Q
+        </button>
+        <button
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 5 }"
+          @click.stop="addNewBlock('publii-readmore');">
+          RM
+          </button>
       </div>
     </div>
 
@@ -115,6 +145,7 @@ export default {
       },
       content: '',
       showNewBlockUI: false,
+      newBlockUIActiveIndex: 0,
       newBlockUIListVisible: false,
       textIsHighlighted: true
     };
@@ -157,7 +188,7 @@ export default {
       }, 0);
     },
     handleKeyboard (e) {
-      if (e.code === 'Enter' && e.shiftKey === false) {
+      if (e.code === 'Enter' && e.shiftKey === false && this.newBlockUIListVisible === false) {
         let newElementName = this.$parent.$parent.extensions.shortcutManager.checkContentForShortcuts(this.$refs['block'].innerHTML);
 
         if (newElementName === 'publii-paragraph') {
@@ -194,6 +225,30 @@ export default {
       if (e.code === 'Backspace' && this.$refs['block'].innerHTML !== '' && this.cursorIsAtTheBeginning()) {
         this.mergeParagraphs();
         e.returnValue = false;
+      }
+
+      if (e.code === 'Tab' && this.$refs['block'].innerHTML === '' && this.newBlockUIListVisible === false) {
+        this.toggleNewBlockUI();
+        this.newBlockUIActiveIndex = 0;
+        e.returnValue = false;
+        return;
+      }
+
+      if (e.code === 'Tab' && this.$refs['block'].innerHTML === '' && this.newBlockUIListVisible === true) {
+        this.newBlockUIActiveIndex++;
+
+        if (this.newBlockUIActiveIndex > this.$refs['block'].parentNode.querySelectorAll('.publii-block-paragraph-block-selector-list-button').length - 1) {
+          this.newBlockUIActiveIndex = 0;
+        }
+
+        e.returnValue = false;
+        return;
+      }
+
+      if (e.code === 'Enter' && e.shiftKey === false && this.newBlockUIListVisible === true) {
+        this.$refs['block'].parentNode.querySelectorAll('.publii-block-paragraph-block-selector-list-button')[this.newBlockUIActiveIndex].click();
+        e.returnValue = false;
+        return;
       }
 
       if (this.blockUIVisible) {
@@ -293,6 +348,10 @@ export default {
 
       &-button {
         margin-right: 5px;
+
+        &.is-active {
+          background: #f0f0f0;
+        }
       }
 
       &.is-visible {
