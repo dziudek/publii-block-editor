@@ -222,13 +222,16 @@ export default {
       let previousBlockID = this.content[blockIndex - 1].id;
 
       if (previousBlockType === 'publii-paragraph') {
+        this.$refs['block-' + previousBlockID][0].focus('end');
         this.content[blockIndex - 1].content = this.content[blockIndex - 1].content + this.content[blockIndex].content;
         this.content.splice(blockIndex, 1);
 
         setTimeout(() => {
+          console.log(window.getSelection());
           this.$refs['block-' + previousBlockID][0].refresh();
-          this.$refs['block-' + previousBlockID][0].focus('start');
         }, 0);
+      } else {
+        this.$refs['block-' + previousBlockID][0].focus('end');
       }
     }
   },
