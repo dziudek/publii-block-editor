@@ -13,6 +13,7 @@ export default class ShortcutManager {
     this.shortcuts['/code'] = 'publii-code';
     this.shortcuts['/readmore'] = 'publii-readmore';
     this.shortcuts['/html'] = 'publii-html';
+    this.shortcuts['/toc'] = 'publii-toc';
   }
 
   initMarkdownDefaultShortcuts () {
