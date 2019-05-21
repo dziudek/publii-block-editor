@@ -66,41 +66,46 @@ export default {
     doInlineOperation (operationType) {
       let sel = window.getSelection();
       let savedSel = this.$rangy.saveSelection();
-      let startID = savedSel.rangeInfos[0].startMarkerId;
-      let endID = savedSel.rangeInfos[0].endMarkerId;
 
       switch (operationType) {
         case 'strong': document.execCommand('bold', false, null); break;
         case 'em': document.execCommand('italic', false, null); break;
         case 's': document.execCommand('strikeThrough', false, null); break;
         case 'u': document.execCommand('underline', false, null); break;
-        case 'code': {
-          if (document.getElementById(startID).nextSibling && document.getElementById(startID).nextSibling.tagName === 'CODE') {
-            document.execCommand('insertHTML', false, '<span id="' + startID + '"></span>' + document.getSelection() + '<span id="' + endID + '"></span>');
-            this.selectedTextContains['code'] = false;
-          } else {
-            document.execCommand('insertHTML', false, '<span id="' + startID + '"></span><code>' + document.getSelection() + '</code><span id="' + endID + '"></span>');
-            this.selectedTextContains['code'] = true;
-          }
-
-          break;
-        }
-        case 'mark': {
-          if (document.getElementById(startID).nextSibling && document.getElementById(startID).nextSibling.tagName === 'MARK') {
-            document.execCommand('insertHTML', false, '<span id="' + startID + '"></span>' + document.getSelection() + '<span id="' + endID + '"></span>');
-            this.selectedTextContains['mark'] = false;
-          } else {
-            document.execCommand('insertHTML', false, '<span id="' + startID + '"></span><mark>' + document.getSelection() + '</mark><span id="' + endID + '"></span>');
-            this.selectedTextContains['mark'] = true;
-          }
-
-          break;
-        }
+        case 'code': this.execCommand('code', savedSel); break;
+        case 'mark': this.execCommand('mark', savedSel); break;
       }
 
       this.analyzeSelectedText(sel, savedSel);
       this.$rangy.restoreSelection(savedSel);
       this.$rangy.removeMarkers(savedSel);
+    },
+    execCommand (tagToUse, rangyData) {
+      let startID = rangyData.rangeInfos[0].startMarkerId;
+      let endID = rangyData.rangeInfos[0].endMarkerId;
+      let nextNode = document.getElementById(startID).nextSibling;
+      let tagToUseUpperCase = tagToUse.toUpperCase();
+
+      if (nextNode && nextNode.tagName === tagToUseUpperCase) {
+        let html = [
+          '<span id="' + startID + '"></span>',
+          document.getSelection(),
+          '<span id="' + endID + '"></span>'
+        ];
+
+        document.execCommand('insertHTML', false, html.join(''));
+        this.selectedTextContains[tagToUse] = false;
+      } else {
+        let html = [
+          '<span id="' + startID + '"></span>',
+          '<' + tagToUse + '>',
+          document.getSelection(),
+          '</' + tagToUse + '>',
+          '<span id="' + endID + '"></span>'
+        ];
+        document.execCommand('insertHTML', false, html.join(''));
+        this.selectedTextContains[tagToUse] = true;
+      }
     }
   }
 }

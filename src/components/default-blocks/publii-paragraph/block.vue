@@ -326,8 +326,9 @@ export default {
   outline: none;
   width: 100%;
 
-  code {
-    display: inline-block;
+  code,
+  mark {
+    display: inline;
   }
 
   &:empty {
