@@ -87,7 +87,6 @@ export default {
       let tagToUseUpperCase = tagToUse.toUpperCase();
 
       if (nextNode && nextNode.tagName === tagToUseUpperCase) {
-        console.log('AA');
         let html = [
           '<span id="' + startID + '"></span>',
           document.getSelection().toString().replace(/&nbsp;/gmi, ''),
@@ -97,12 +96,10 @@ export default {
         document.execCommand('insertHTML', false, html.join(''));
         this.selectedTextContains[tagToUse] = false;
       } else {
-        console.log('BB');
         let wrapperTag = document.getElementById(startID).parentNode.tagName;
         let tagPosition = this.checkTagPosition(tagToUse, startID, endID);
 
         if ((tagPosition === -1 || tagPosition > 0) && wrapperTag !== tagToUseUpperCase) {
-          console.log('CC');
           let html = [
             '<span id="' + startID + '"></span>',
             '<' + tagToUse + '>',
@@ -114,7 +111,6 @@ export default {
           document.execCommand('insertHTML', false, html.join(''));
           this.selectedTextContains[tagToUse] = true;
         } else {
-          console.log('DD');
           let selection = document.getSelection();
           this.wrapElementIntoRangy(selection.baseNode, startID, endID);
         }
