@@ -72,7 +72,9 @@ export default {
         this.popupOpened = false;
       }
 
-      this.$bus.$emit('block-editor-block-selected', this.id);
+      if (newState) {
+        this.$bus.$emit('block-editor-block-selected', this.id);
+      }
     },
     moveUp () {
       this.$bus.$emit('block-editor-move-block-up', this.id);

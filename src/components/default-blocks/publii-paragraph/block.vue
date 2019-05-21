@@ -56,7 +56,12 @@
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 5 }"
           @click.stop="addNewBlock('publii-readmore');">
           RM
-          </button>
+        </button>
+        <button
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 6 }"
+          @click.stop="addNewBlock('publii-html');">
+          HTML
+        </button>
       </div>
     </div>
 

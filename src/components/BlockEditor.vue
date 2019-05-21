@@ -33,6 +33,7 @@ import { compileToFunctions } from 'vue-template-compiler';
 // default blocks
 import PubliiCode from './default-blocks/publii-code/block.vue';
 import PubliiHeader from './default-blocks/publii-header/block.vue';
+import PubliiHtml from './default-blocks/publii-html/block.vue';
 import PubliiList from './default-blocks/publii-list/block.vue';
 import PubliiParagraph from './default-blocks/publii-paragraph/block.vue';
 import PubliiReadmore from './default-blocks/publii-readmore/block.vue';
@@ -47,6 +48,7 @@ export default {
     'block-wrapper': BlockWrapper,
     'publii-code': PubliiCode,
     'publii-header': PubliiHeader,
+    'publii-html': PubliiHtml,
     'publii-list': PubliiList,
     'publii-paragraph': PubliiParagraph,
     'publii-readmore': PubliiReadmore,
