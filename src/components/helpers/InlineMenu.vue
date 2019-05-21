@@ -4,18 +4,17 @@ export default {
   methods: {
     showInlineMenu () {
       let sel = window.getSelection();
-      this.analyzeSelectedText(sel);
+      let savedSel = this.$rangy.saveSelection();
+      this.analyzeSelectedText(sel, savedSel);
+      this.$rangy.restoreSelection(savedSel);
+      this.$rangy.removeMarkers(savedSel);
       let oRange = sel.getRangeAt(0);
       let oRect = oRange.getBoundingClientRect();
       let wrapperRect = this.$refs['block'].getBoundingClientRect();
       this.$refs['inline-menu'].style.left = ((oRect.left - wrapperRect.left) + (oRect.width / 2)) + 'px';
       this.$refs['inline-menu'].style.top = (oRect.top - wrapperRect.top - 20) + 'px';
     },
-    refreshSelectedTextState () {
-      let sel = window.getSelection();
-      this.analyzeSelectedText(sel);
-    },
-    analyzeSelectedText (selection) {
+    analyzeSelectedText (selection, rangyData) {
       if (!selection || !selection.anchorNode || !selection.focusNode) {
         return;
       }
@@ -32,48 +31,37 @@ export default {
       }
 
       let specialTags = {
-        'CODE': 'code',
-        'MARK': 'mark',
-        'A': 'link'
+        'code': 'code',
+        'mark': 'mark',
+        'a': 'link'
       };
 
       let specialTagNames = Object.keys(specialTags);
+      let selectedTextResults = this.findTagInSelection(specialTagNames, rangyData);
 
       for (let i = 0; i < specialTagNames.length; i++) {
-        this.selectedTextContains[specialTags[specialTagNames[i]]] = !!this.findParentTag(specialTagNames[i]);
+        this.selectedTextContains[specialTags[specialTagNames[i]]] = selectedTextResults[specialTagNames[i]];
       }
     },
-    findParentTag (tagName) {
-      let selection = window.getSelection();
-      let searchDepth = 10;
-      let parentTag = null;
+    findTagInSelection (tagNames, rangyData) {
+      let startID = rangyData.rangeInfos[0].startMarkerId;
+      let endID = rangyData.rangeInfos[0].endMarkerId;
+      let sourceCode = this.$refs['block'].innerHTML;
+      let partToAnalyze = sourceCode.split(startID)[1];
+      partToAnalyze = partToAnalyze.split(endID)[0];
+      let results = {};
 
-      const boundNodes = [
-        selection.anchorNode,
-        selection.focusNode
-      ];
+      for (let i = 0; i < tagNames.length; i++) {
+        results[tagNames[i]] = partToAnalyze.indexOf('<' + tagNames[i]) > -1;
+      }
 
-      boundNodes.forEach((parent) => {
-        let iterator = searchDepth;
-
-        while (iterator > 0 && parent.parentNode) {
-          if (parent.tagName === tagName) {
-            parentTag = parent;
-
-            if (parentTag) {
-              break;
-            }
-          }
-
-          parent = parent.parentNode;
-          iterator--;
-        }
-      });
-
-      return parentTag;
+      return results;
     },
     doInlineOperation (operationType) {
-      var savedSel, startID, endID;
+      let sel = window.getSelection();
+      let savedSel = this.$rangy.saveSelection();
+      let startID = savedSel.rangeInfos[0].startMarkerId;
+      let endID = savedSel.rangeInfos[0].endMarkerId;
 
       switch (operationType) {
         case 'strong': document.execCommand('bold', false, null); break;
@@ -81,28 +69,32 @@ export default {
         case 's': document.execCommand('strikeThrough', false, null); break;
         case 'u': document.execCommand('underline', false, null); break;
         case 'code': {
-          savedSel = this.$rangy.saveSelection();
-          startID = savedSel.rangeInfos[0].startMarkerId;
-          endID = savedSel.rangeInfos[0].endMarkerId;
-          document.execCommand('insertHTML', false, '<span id="' + startID + '"></span><code>' + document.getSelection() + '</code><span id="' + endID + '"></span>');
-          this.$rangy.restoreSelection(savedSel);
-          this.$rangy.removeMarkers(savedSel);
+          if (document.getElementById(startID).nextSibling && document.getElementById(startID).nextSibling.tagName === 'CODE') {
+            document.execCommand('insertHTML', false, '<span id="' + startID + '"></span>' + document.getSelection() + '<span id="' + endID + '"></span>');
+            this.selectedTextContains['code'] = false;
+          } else {
+            document.execCommand('insertHTML', false, '<span id="' + startID + '"></span><code>' + document.getSelection() + '</code><span id="' + endID + '"></span>');
+            this.selectedTextContains['code'] = true;
+          }
+
           break;
         }
         case 'mark': {
-          savedSel = this.$rangy.saveSelection();
-          startID = savedSel.rangeInfos[0].startMarkerId;
-          endID = savedSel.rangeInfos[0].endMarkerId;
-          document.execCommand('insertHTML', false, '<span id="' + startID + '"></span><mark>' + document.getSelection() + '</mark><span id="' + endID + '"></span>');
-          this.$rangy.restoreSelection(savedSel);
-          this.$rangy.removeMarkers(savedSel);
+          if (document.getElementById(startID).nextSibling && document.getElementById(startID).nextSibling.tagName === 'MARK') {
+            document.execCommand('insertHTML', false, '<span id="' + startID + '"></span>' + document.getSelection() + '<span id="' + endID + '"></span>');
+            this.selectedTextContains['mark'] = false;
+          } else {
+            document.execCommand('insertHTML', false, '<span id="' + startID + '"></span><mark>' + document.getSelection() + '</mark><span id="' + endID + '"></span>');
+            this.selectedTextContains['mark'] = true;
+          }
+
           break;
         }
       }
 
-      setTimeout(() => {
-        this.refreshSelectedTextState();
-      }, 0);
+      this.analyzeSelectedText(sel, savedSel);
+      this.$rangy.restoreSelection(savedSel);
+      this.$rangy.removeMarkers(savedSel);
     }
   }
 }
@@ -114,7 +106,6 @@ export default {
   border: 1px solid #aaa;
   border-radius: 5px;
   display: flex;
-  flex-wrap: wrap;
   left: 50%;
   overflow: hidden;
   position: absolute;
