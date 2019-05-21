@@ -3,7 +3,7 @@ export default {
   name: 'InlineMenu',
   methods: {
     showInlineMenu () {
-      let sel = window.getSelection();
+      let sel = document.getSelection();
       let savedSel = this.$rangy.saveSelection();
       this.analyzeSelectedText(sel, savedSel);
       this.$rangy.restoreSelection(savedSel);
@@ -64,7 +64,7 @@ export default {
       return results;
     },
     doInlineOperation (operationType) {
-      let sel = window.getSelection();
+      let sel = document.getSelection();
       let savedSel = this.$rangy.saveSelection();
 
       switch (operationType) {
@@ -87,25 +87,84 @@ export default {
       let tagToUseUpperCase = tagToUse.toUpperCase();
 
       if (nextNode && nextNode.tagName === tagToUseUpperCase) {
+        console.log('AA');
         let html = [
           '<span id="' + startID + '"></span>',
-          document.getSelection(),
+          document.getSelection().toString().replace(/&nbsp;/gmi, ''),
           '<span id="' + endID + '"></span>'
         ];
 
         document.execCommand('insertHTML', false, html.join(''));
         this.selectedTextContains[tagToUse] = false;
       } else {
-        let html = [
-          '<span id="' + startID + '"></span>',
-          '<' + tagToUse + '>',
-          document.getSelection(),
-          '</' + tagToUse + '>',
-          '<span id="' + endID + '"></span>'
-        ];
-        document.execCommand('insertHTML', false, html.join(''));
-        this.selectedTextContains[tagToUse] = true;
+        console.log('BB');
+        let wrapperTag = document.getElementById(startID).parentNode.tagName;
+        let tagPosition = this.checkTagPosition(tagToUse, startID, endID);
+
+        if ((tagPosition === -1 || tagPosition > 0) && wrapperTag !== tagToUseUpperCase) {
+          console.log('CC');
+          let html = [
+            '<span id="' + startID + '"></span>',
+            '<' + tagToUse + '>',
+            document.getSelection().toString().replace(/&nbsp;/gmi, ''),
+            '</' + tagToUse + '>',
+            '<span id="' + endID + '"></span>'
+          ];
+
+          document.execCommand('insertHTML', false, html.join(''));
+          this.selectedTextContains[tagToUse] = true;
+        } else {
+          console.log('DD');
+          let selection = document.getSelection();
+          this.wrapElementIntoRangy(selection.baseNode, startID, endID);
+        }
       }
+    },
+    checkTagPosition (tag, startID, endID) {
+      let codeToAnalyze = this.$refs['block'].innerHTML.split(startID)[1];
+      codeToAnalyze = codeToAnalyze.split(endID)[0];
+
+      if (codeToAnalyze.indexOf('<' + tag) > -1) {
+        return codeToAnalyze.indexOf('<' + tag);
+      }
+
+      return -1;
+    },
+    wrapElementIntoRangy (element, startID, endID) {
+      if (element.tagName === 'P') {
+        return;
+      }
+
+      let spanStart = document.createElement('span');
+      spanStart.setAttribute('id', startID);
+      let spanEnd = document.createElement('span');
+      spanEnd.setAttribute('id', endID);
+
+      if (document.getElementById(startID)) {
+        element.removeChild(document.getElementById(startID));
+      }
+
+      if (document.getElementById(endID)) {
+        element.removeChild(document.getElementById(endID));
+      }
+
+      element.parentNode.insertBefore(spanStart, element);
+      element.parentNode.insertBefore(spanEnd, element.nextSibling);
+
+      let rawText = element.innerText.replace(/&nbsp;/gmi, '');
+      let textToModify = this.$refs['block'].innerHTML;
+      textToModify = textToModify.split('<span id="' + startID + '"></span>');
+      textToModify[1] = textToModify[1].split('<span id="' + endID + '"></span>');
+
+      let modifiedText = [
+        textToModify[0],
+        '<span id="' + startID + '"></span>',
+        rawText,
+        '<span id="' + endID + '"></span>',
+        textToModify[1][1]
+      ].join('');
+
+      this.$refs['block'].innerHTML = modifiedText;
     }
   }
 }

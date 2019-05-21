@@ -28,7 +28,7 @@ export default {
     setCursorAtPosition (position) {
       let el = this.$refs['block'];
       let range = document.createRange();
-      let sel = window.getSelection();
+      let sel = document.getSelection();
       range.setStart(el.firstChild, position);
       range.setEnd(el.firstChild, position);
       sel.removeAllRanges();
@@ -39,7 +39,7 @@ export default {
       range.selectNodeContents(this.$refs[id]);
       range.collapse(false);
 
-      let sel = window.getSelection();
+      let sel = document.getSelection();
       sel.removeAllRanges();
       sel.addRange(range);
     },

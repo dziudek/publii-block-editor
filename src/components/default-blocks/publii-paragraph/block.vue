@@ -172,7 +172,7 @@ export default {
     },
     handleMouseUp (e) {
       setTimeout(() => {
-        let sel = window.getSelection();
+        let sel = document.getSelection();
 
         if (sel.isCollapsed) {
           this.textIsHighlighted = false;
@@ -289,7 +289,7 @@ export default {
       });
     },
     cursorIsAtTheBeginning () {
-      let selectedObject = window.getSelection();
+      let selectedObject = document.getSelection();
       return selectedObject.rangeCount === 1 && selectedObject.baseOffset === 0;
     },
     /**

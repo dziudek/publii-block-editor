@@ -233,7 +233,7 @@ export default {
             let range = document.createRange();
             let caret = this.$refs['block-' + previousBlockID][0].$refs['block'].querySelector('.temp-paragraph-merge-caret');
             this.$refs['block-' + previousBlockID][0].focus('none');
-            let sel = window.getSelection();
+            let sel = document.getSelection();
 
             setTimeout(() => {
               range.selectNodeContents(caret);
