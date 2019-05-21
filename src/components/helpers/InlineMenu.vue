@@ -53,6 +53,12 @@ export default {
 
       for (let i = 0; i < tagNames.length; i++) {
         results[tagNames[i]] = partToAnalyze.indexOf('<' + tagNames[i]) > -1;
+
+        if (results[tagNames[i]] === false) {
+          if (this.$refs['block'].querySelector('#' + startID).parentNode.tagName === tagNames[i].toUpperCase()) {
+            results[tagNames[i]] = true;
+          }
+        }
       }
 
       return results;
