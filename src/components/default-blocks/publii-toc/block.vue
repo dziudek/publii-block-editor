@@ -1,14 +1,16 @@
 <template>
   <div
     class="publii-block-toc-wrapper"
-    @keydown="handleKeyboard"
-    ref="block"
-    contenteditable="true">
-    <h2>Table of contents</h2>
+    ref="block">
+    <h2
+      class="publii-block-toc-title"
+      ref="title"
+      @keydown="handleKeyboard"
+      contenteditable="true" v-html="content.title"></h2>
     <ol
       class="publii-block-toc"
       ref="content"
-      v-html="content">
+      v-html="content.toc">
     </ol>
   </div>
 </template>
@@ -24,15 +26,18 @@ export default {
   data () {
     return {
       config: {},
-      content: ''
+      content: {
+        title: '',
+        toc: ''
+      }
     };
   },
   computed: {
 
   },
   mounted () {
-    this.content = this.inputContent;
-    this.view = this.content === '' ? 'code' : 'preview';
+    this.content.toc = this.inputContent.toc;
+    this.content.title = this.inputContent.title;
     this.updateToc();
     this.$bus.$on('block-editor-content-updated', this.updateToc);
   },
@@ -43,12 +48,8 @@ export default {
         e.returnValue = false;
       }
 
-      if (e.code === 'Backspace') {
+      if (e.code === 'Backspace' && this.$refs['title'].innerHTML === '') {
         this.$bus.$emit('block-editor-delete-block', this.id);
-        e.returnValue = false;
-      }
-
-      if (e.code !== 'Tab') {
         e.returnValue = false;
       }
     },
@@ -56,7 +57,7 @@ export default {
       let headers = this.$parent.$parent.content.filter(block => block.type === 'publii-header');
 
       if (headers.length === 0) {
-        this.content = '';
+        this.content.toc = '';
         return;
       }
 
@@ -102,15 +103,18 @@ export default {
         prevLevel = headingLevel;
       }
 
-      this.content = html.replace(/<li>[\s]*?<\/li>/gmi, '');
+      this.content.toc = html.replace(/<li>[\s]*?<\/li>/gmi, '');
     },
     save () {
-      this.content = this.$refs['block'].innerHTML;
+      this.content = {
+        toc: this.$refs['content'].innerHTML,
+        title: this.$refs['title'].innerHTML
+      };
 
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,
         config: JSON.parse(JSON.stringify(this.config)),
-        content: this.content
+        content: JSON.parse(JSON.stringify(this.content))
       });
     }
   },
@@ -140,8 +144,17 @@ export default {
       padding: 0 0 0 20px;
     }
 
-    h2 {
+    .publii-block-toc-title {
+      outline: none;
       margin: 10px 0;
+      width: 100%;
+
+      &:empty {
+        &:before {
+          content: "Enter title";
+          opacity: .35;
+        }
+      }
     }
 
     a {
