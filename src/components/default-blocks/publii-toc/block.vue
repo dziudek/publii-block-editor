@@ -4,6 +4,7 @@
     @keydown="handleKeyboard"
     ref="block"
     contenteditable="true">
+    <h2>Table of contents</h2>
     <ol
       class="publii-block-toc"
       ref="content"
@@ -61,42 +62,47 @@ export default {
 
       let html = '';
       let prevLevel = 2;
-      let i, ii, h, nextLevel;
+      let processedHeader;
+      let nextLevel;
 
       if (!headers.length) {
         return '';
       }
 
-      for (i = 0; i < headers.length; i++) {
-        h = headers[i];
-        nextLevel = headers[i + 1] && headers[i + 1].config.headingLevel;
+      for (let i = 0; i < headers.length; i++) {
+        processedHeader = headers[i];
+        let headingLevel = processedHeader.config.headingLevel || 2;
 
-        if (prevLevel === h.config.headingLevel) {
+        if (headers[i + 1]) {
+          nextLevel = headers[i + 1].config.headingLevel;
+        }
+
+        if (prevLevel === headingLevel) {
           html += '<li>';
         } else {
-          for (ii = prevLevel; ii < h.config.headingLevel; ii++) {
-            html += '<ul><li>';
+          for (let j = prevLevel; j < headingLevel; j++) {
+            html += '<ol><li>';
           }
         }
 
-        html += '<a href="#' + h.id + '">' + h.content + '</a>';
+        html += '<a href="#' + processedHeader.id + '">' + processedHeader.content + '</a>';
 
-        if (nextLevel === h.config.headingLevel || !nextLevel) {
+        if (!nextLevel || nextLevel === headingLevel) {
           html += '</li>';
 
           if (!nextLevel) {
-            html += '</ul>';
+            html += '</ol>';
           }
         } else {
-          for (ii = h.config.headingLevel; ii > nextLevel; ii--) {
-            html += '</li></ul><li>';
+          for (let j = headingLevel; j > nextLevel; j--) {
+            html += '</li></ol><li>';
           }
         }
 
-        prevLevel = h.config.headingLevel;
+        prevLevel = headingLevel;
       }
 
-      this.content = html;
+      this.content = html.replace(/<li>[\s]*?<\/li>/gmi, '');
     },
     save () {
       this.content = this.$refs['block'].innerHTML;
@@ -117,14 +123,30 @@ export default {
 <style lang="scss">
 .publii-block-toc {
   caret-color: transparent;
+  display: block;
   font-size: 16px;
   line-height: 1.4;
-  padding: 15px 20px;
+  margin: 10px 0;
+  padding: 15px 0 15px 20px;
   outline: none;
   width: 100%;
 
   &-wrapper {
+    outline: none;
     width: 100%;
+
+    ol {
+      margin: 5px 0;
+      padding: 0 0 0 20px;
+    }
+
+    h2 {
+      margin: 10px 0;
+    }
+
+    a {
+      pointer-events: none;
+    }
   }
 
   &:empty {
