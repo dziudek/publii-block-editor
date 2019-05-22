@@ -6,6 +6,7 @@
     contenteditable="true">
     <ol
       class="publii-block-toc"
+      ref="content"
       v-html="content">
     </ol>
   </div>
@@ -31,6 +32,7 @@ export default {
   mounted () {
     this.content = this.inputContent;
     this.view = this.content === '' ? 'code' : 'preview';
+    this.updateToc();
     this.$bus.$on('block-editor-content-updated', this.updateToc);
   },
   methods: {
@@ -51,7 +53,50 @@ export default {
     },
     updateToc () {
       let headers = this.$parent.$parent.content.filter(block => block.type === 'publii-header');
-      console.log(headers);
+
+      if (headers.length === 0) {
+        this.content = '';
+        return;
+      }
+
+      let html = '';
+      let prevLevel = 2;
+      let i, ii, h, nextLevel;
+
+      if (!headers.length) {
+        return '';
+      }
+
+      for (i = 0; i < headers.length; i++) {
+        h = headers[i];
+        nextLevel = headers[i + 1] && headers[i + 1].config.headingLevel;
+
+        if (prevLevel === h.config.headingLevel) {
+          html += '<li>';
+        } else {
+          for (ii = prevLevel; ii < h.config.headingLevel; ii++) {
+            html += '<ul><li>';
+          }
+        }
+
+        html += '<a href="#' + h.id + '">' + h.content + '</a>';
+
+        if (nextLevel === h.config.headingLevel || !nextLevel) {
+          html += '</li>';
+
+          if (!nextLevel) {
+            html += '</ul>';
+          }
+        } else {
+          for (ii = h.config.headingLevel; ii > nextLevel; ii--) {
+            html += '</li></ul><li>';
+          }
+        }
+
+        prevLevel = h.config.headingLevel;
+      }
+
+      this.content = html;
     },
     save () {
       this.content = this.$refs['block'].innerHTML;

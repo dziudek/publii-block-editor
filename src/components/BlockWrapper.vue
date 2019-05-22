@@ -66,6 +66,10 @@ export default {
       this.popupOpened = !this.popupOpened;
     },
     setSelectionState (newState) {
+      if (this.isSelected && newState === false) {
+        this.$bus.$emit('block-editor-trigger-block-save', this.id);
+      }
+
       this.isSelected = newState;
 
       if (!this.isSelected) {

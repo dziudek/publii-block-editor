@@ -8,6 +8,7 @@ export default {
   ],
   mounted () {
     this.$on('block-save', this.save);
+    this.$bus.$on('block-editor-trigger-block-save', this.saveIsNeeded);
   },
   methods: {
     focus (cursorPosition = 'end') {
@@ -52,10 +53,16 @@ export default {
       e.preventDefault();
       let text = (e.originalEvent || e).clipboardData.getData('text/plain');
       document.execCommand('insertHTML', false, text);
+    },
+    saveIsNeeded (id) {
+      if (this.id === id) {
+        this.save();
+      }
     }
   },
   beforeDestroy () {
     this.$off('block-save', this.save);
+    this.$bus.$off('block-editor-trigger-block-save', this.saveIsNeeded);
   }
 }
 </script>

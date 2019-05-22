@@ -107,9 +107,10 @@ export default {
     setHeadingLevel (level) {
       this.save();
       this.config.headingLevel = level;
+      this.save();
     },
     save () {
-      this.content = this.$refs['block'].innerHTML;
+      this.content = this.$refs['block'].innerHTML.replace('<line-separator></line-separator>', '');
 
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,
