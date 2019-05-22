@@ -5,6 +5,7 @@
       ref="block"
       @paste="pastePlainText"
       @keydown="handleKeyboard"
+      @blur="save"
       contenteditable="true"
       v-html="content" />
     <div

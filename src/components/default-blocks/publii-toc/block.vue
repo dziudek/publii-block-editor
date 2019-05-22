@@ -6,6 +6,7 @@
       class="publii-block-toc-title"
       ref="title"
       @keydown="handleKeyboard"
+      @blur="save"
       contenteditable="true" v-html="content.title"></h2>
     <ol
       class="publii-block-toc"

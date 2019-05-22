@@ -6,6 +6,7 @@
       @keyup="getFocusFromTab"
       @keydown="handleKeyboard"
       @paste="pastePlainText"
+      @blur="save"
       ref="block"
       :style="'text-align: ' + config.textAlign + ';'"
       class="publii-block-header"

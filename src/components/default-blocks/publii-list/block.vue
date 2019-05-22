@@ -6,6 +6,7 @@
       @keyup="getFocusFromTab"
       @paste="pastePlainText"
       @keydown="handleKeyboard"
+      @blur="save"
       v-html="content"
       ref="block"
       class="publii-block-list" />

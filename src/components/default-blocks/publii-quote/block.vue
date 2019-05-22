@@ -8,11 +8,13 @@
       @keyup="getFocusFromTab"
       @paste="pastePlainText"
       @keydown="handleTextKeyboard"
+      @blur="save"
       ref="contentText" />
     <cite
       contenteditable="true"
       v-html="content.author"
       @keydown="handleAuthorKeyboard"
+      @blur="save"
       ref="contentAuthor" />
   </blockquote>
 </template>

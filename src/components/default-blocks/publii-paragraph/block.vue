@@ -174,6 +174,8 @@ export default {
       }
     },
     handleEditBlur (e) {
+      this.save();
+
       setTimeout(() => {
         if (!this.newBlockUIListVisible) {
           this.showNewBlockUI = false;
