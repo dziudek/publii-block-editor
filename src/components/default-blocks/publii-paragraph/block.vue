@@ -59,11 +59,16 @@
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 6 }"
+          @click.stop="addNewBlock('publii-embed');">
+          Em
+        </button>
+        <button
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 7 }"
           @click.stop="addNewBlock('publii-html');">
           HTML
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 7 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 8 }"
           @click.stop="addNewBlock('publii-toc');">
           ToC
         </button>

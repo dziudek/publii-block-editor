@@ -32,6 +32,7 @@ import ContentEditableImprovements from './helpers/ContentEditableImprovements.v
 import { compileToFunctions } from 'vue-template-compiler';
 // default blocks
 import PubliiCode from './default-blocks/publii-code/block.vue';
+import PubliiEmbed from './default-blocks/publii-embed/block.vue';
 import PubliiHeader from './default-blocks/publii-header/block.vue';
 import PubliiHtml from './default-blocks/publii-html/block.vue';
 import PubliiList from './default-blocks/publii-list/block.vue';
@@ -48,6 +49,7 @@ export default {
   components: {
     'block-wrapper': BlockWrapper,
     'publii-code': PubliiCode,
+    'publii-embed': PubliiEmbed,
     'publii-header': PubliiHeader,
     'publii-html': PubliiHtml,
     'publii-list': PubliiList,
@@ -182,8 +184,11 @@ export default {
     },
     saveBlock (blockData) {
       let blockIndex = this.content.findIndex(el => el.id === blockData.id);
-      this.content[blockIndex].content = blockData.content;
-      this.content[blockIndex].config = blockData.config;
+
+      if (blockIndex > -1) {
+        this.content[blockIndex].content = blockData.content;
+        this.content[blockIndex].config = blockData.config;
+      }
     },
     deleteBlock (blockID) {
       let blockIndex = this.content.findIndex(el => el.id === blockID);

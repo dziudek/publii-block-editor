@@ -14,6 +14,7 @@ export default class ShortcutManager {
     this.shortcuts['/readmore'] = 'publii-readmore';
     this.shortcuts['/html'] = 'publii-html';
     this.shortcuts['/toc'] = 'publii-toc';
+    this.shortcuts['/embed'] = 'publii-embed';
   }
 
   initMarkdownDefaultShortcuts () {
