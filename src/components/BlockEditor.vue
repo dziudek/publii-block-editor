@@ -9,6 +9,7 @@
       <block-wrapper
         v-for="block of content"
         :id="block.id"
+        :block-type="block.type"
         :key="'block-wrapper-' + block.id"
         :ref="'block-wrapper-' + block.id">
         <component

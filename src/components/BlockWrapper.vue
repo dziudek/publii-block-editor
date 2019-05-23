@@ -1,5 +1,6 @@
 <template>
   <div
+    :data-block-type="blockType"
     :class="{ 'wrapper': true, 'is-selected': isSelected }"
     @click.stop="blockClick">
     <slot />
@@ -42,7 +43,8 @@
 export default {
   name: 'BlockWrapper',
   props: [
-    'id'
+    'id',
+    'blockType'
   ],
   data () {
     return {
@@ -107,6 +109,10 @@ export default {
   border: 2px solid transparent;
   margin: -10px 0;
   position: relative;
+
+  &[data-block-type="publii-embed"] {
+    margin: 15px 0;
+  }
 
   &.is-selected {
     border: 2px dashed rgba(100, 100, 250, .25);
