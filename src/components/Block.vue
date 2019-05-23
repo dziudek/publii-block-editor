@@ -25,6 +25,12 @@ export default {
       if (typeof cursorPosition === 'number') {
         this.setCursorAtPosition(cursorPosition);
       }
+
+      setTimeout(() => {
+        if (this.$refs['code']) {
+          this.$refs['code'].focus();
+        }
+      }, 100);
     },
     setCursorAtPosition (position) {
       let el = this.$refs['block'];

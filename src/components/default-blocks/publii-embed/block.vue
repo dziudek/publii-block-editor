@@ -1,17 +1,18 @@
 <template>
-  <div>
+  <div class="publii-block-embed-wrapper">
     <div
       :class="{ 'publii-block-embed': true, 'is-visible': view === 'code' }"
       ref="block">
       <textarea
         @keydown="handleKeyboard"
         @blur="save"
+        ref="code"
         v-model="content"></textarea>
     </div>
     <div
       v-if="view === 'preview'"
       v-html="modifiedContent"
-      class="publii-block-embed-preview">
+      :class="{ 'publii-block-embed-preview': true }">
     </div>
     <div
       class="wrapper-ui-top-menu"
@@ -32,6 +33,7 @@
 <script>
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
+import embedHelper from './embed.js';
 
 export default {
   name: 'Embed',
@@ -41,16 +43,18 @@ export default {
   ],
   data () {
     return {
-      config: {
-        retrievedCode: ''
-      },
+      config: {},
       content: '',
       view: 'code'
     };
   },
   computed: {
     modifiedContent () {
-      return this.content.replace(/&gt;/gmi, '>').replace(/&lt;/gmi, '<').replace(/&nbsp;/gmi, '&');
+      if (embedHelper.isEmbedable(this.content)) {
+        return embedHelper.embed(this.content, this.$bus, this.id);
+      }
+
+      return this.content;
     }
   },
   mounted () {
@@ -73,17 +77,23 @@ export default {
         e.returnValue = false;
       }
 
-      if (e.code === 'Backspace' && this.$refs['block'].innerHTML === '') {
+      if (e.code === 'Backspace' && this.content === '') {
         this.$bus.$emit('block-editor-delete-block', this.id);
         e.returnValue = false;
       }
     },
     setView (newView) {
-      if (this.view === 'code' && newView === 'preview') {
+      if (
+        this.view === 'code' &&
+        newView === 'preview'
+      ) {
         this.save();
       }
 
-      if (this.$refs['block'].innerHTML === '' && newView === 'preview') {
+      if (
+        this.content === '' &&
+        newView === 'preview'
+      ) {
         this.view = 'code';
       } else {
         setTimeout(() => {
@@ -92,8 +102,6 @@ export default {
       }
     },
     save () {
-      this.content = this.$refs['block'].querySelector('textarea').innerHTML;
-
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,
         config: JSON.parse(JSON.stringify(this.config)),
@@ -101,11 +109,11 @@ export default {
       });
     },
     selectBlock (id) {
-      if (this.id === id) {
-        this.setView('code');
-      } else {
-        this.setView('preview');
+      if (this.$parent.isSelected) {
+        return;
       }
+
+      this.setView('preview');
     },
     deselectBlock (id) {
       if (this.id !== id) {
@@ -135,6 +143,10 @@ export default {
   textarea {
     background: #fff;
     border: 1px solid #ccc;
+    font-family: monospace;
+    font-size: 16px;
+    padding: 10px 20px;
+    width: 100%;
   }
 
   &.is-visible {
@@ -142,7 +154,16 @@ export default {
   }
 
   &-preview {
-    padding: 15px 0;
+    margin: 0;
+    padding: 0 0 56.25% 0;
+    position: relative;
+
+    iframe {
+      height: 100%;
+      pointer-events: none;
+      position: absolute;
+      width: 100%;
+    }
   }
 }
 </style>
