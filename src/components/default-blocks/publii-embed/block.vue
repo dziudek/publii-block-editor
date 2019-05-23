@@ -7,6 +7,7 @@
         @keydown="handleKeyboard"
         @blur="save"
         ref="code"
+        placeholder="Enter URL or embed code..."
         v-model="content"></textarea>
     </div>
     <div
