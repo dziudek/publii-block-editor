@@ -171,7 +171,6 @@ export default {
   },
   methods: {
     refresh () {
-      console.log('RRR');
       this.$refs['block'].innerHTML = this.content;
     },
     handleEditFocus () {

@@ -62,7 +62,9 @@ export default {
       this.setSelectionState(true);
     },
     deselectBlock (blockID) {
-      this.setSelectionState(false);
+      if (blockID !== this.id) {
+        this.setSelectionState(false);
+      }
     },
     togglePopup () {
       this.popupOpened = !this.popupOpened;
