@@ -179,6 +179,10 @@ export default {
       }
     },
     handleEditBlur (e) {
+      if (e.relatedTarget.classList.contains('wrapper-ui-inline-menu-button')) {
+        return;
+      }
+
       this.save();
 
       setTimeout(() => {
