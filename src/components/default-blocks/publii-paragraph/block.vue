@@ -171,6 +171,7 @@ export default {
   },
   methods: {
     refresh () {
+      console.log('RRR');
       this.$refs['block'].innerHTML = this.content;
     },
     handleEditFocus () {
@@ -179,7 +180,7 @@ export default {
       }
     },
     handleEditBlur (e) {
-      if (e.relatedTarget.classList.contains('wrapper-ui-inline-menu-button')) {
+      if (e.relatedTarget && e.relatedTarget.classList.contains('wrapper-ui-inline-menu-button')) {
         return;
       }
 
