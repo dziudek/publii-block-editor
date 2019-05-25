@@ -26,6 +26,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import './assets/variables.scss';
+
 *,
 *:after,
 *:before {
@@ -33,8 +35,12 @@ export default {
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  ::selection {
+    background: $block-editor-color-gradient-end;
+  }
 }
 </style>

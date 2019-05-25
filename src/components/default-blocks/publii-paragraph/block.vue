@@ -119,15 +119,30 @@
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'left' }"
         tabindex="-1"
-        @click.stop="alignText('left')">«</button>
+        @click.stop="alignText('left')">
+        <icon
+          height="12"
+          name="align-left"
+          width="14" />
+      </button>
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'center' }"
         tabindex="-1"
-        @click.stop="alignText('center')">=</button>
+        @click.stop="alignText('center')">
+        <icon
+          height="12"
+          name="align-center"
+          width="14" />
+      </button>
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'right' }"
         tabindex="-1"
-        @click.stop="alignText('right')">»</button>
+        @click.stop="alignText('right')">
+        <icon
+          height="12"
+          name="align-right"
+          width="14" />
+      </button>
     </div>
   </div>
 </template>
@@ -135,6 +150,7 @@
 <script>
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
+import EditorIcon from './../../elements/EditorIcon.vue';
 import InlineMenu from './../../helpers/InlineMenu.vue';
 
 export default {
@@ -144,6 +160,9 @@ export default {
     ContentEditableImprovements,
     InlineMenu
   ],
+  components: {
+    'icon': EditorIcon
+  },
   data () {
     return {
       config: {

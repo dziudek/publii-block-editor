@@ -6,7 +6,12 @@
     <slot />
 
     <div class="wrapper-ui">
-      <div class="wrapper-ui-show-options" @click.stop="togglePopup">&hellip;</div>
+      <div class="wrapper-ui-show-options" @click.stop="togglePopup">
+        <icon
+          name="menu"
+          width="18"
+          height="4" />
+      </div>
 
       <div :class="{ 'wrapper-ui-popup': true, 'is-visible': popupOpened }">
         <div class="wrapper-ui-popup-row">
@@ -40,12 +45,17 @@
 </template>
 
 <script>
+import Icon from '../components/elements/EditorIcon.vue';
+
 export default {
   name: 'BlockWrapper',
   props: [
     'id',
     'blockType'
   ],
+  components: {
+    'icon': Icon
+  },
   data () {
     return {
       isSelected: false,
@@ -107,6 +117,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/variables.scss';
+
 .wrapper {
   border: 2px solid transparent;
   margin: -10px 0;
@@ -117,8 +129,6 @@ export default {
   }
 
   &.is-selected {
-    border: 2px dashed rgba(100, 100, 250, .25);
-
     .wrapper-ui {
       opacity: 1;
     }
@@ -131,17 +141,25 @@ export default {
   &-ui {
     opacity: 0;
     position: absolute;
-    right: -30px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: -84px;
+    top: -5px;
     z-index: 1;
 
     .wrapper-ui-show-options {
-      background: #eee;
-      border-radius: 50%;
-      height: 24px;
-      text-align: center;
-      width: 24px;
+      background-image: linear-gradient(to right top, rgba(255, 255, 255, 0) 50%, $block-editor-color-gradient-end);
+      background-size: auto;
+      background-repeat: no-repeat;
+      background-position: right top;
+      border-radius: 0 8px 0 0;
+      color: $block-editor-color-primary;
+      height: 80px;
+      width: 150px;
+
+      & > svg {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+      }
     }
 
     &-popup {
@@ -181,29 +199,51 @@ export default {
     }
 
     &-top-menu {
-      background: #fff;
-      border: 1px solid #aaa;
-      border-radius: 5px;
+      align-items: center;
+      background: $block-editor-color-primary;
+      border: none;
+      border-radius: 4px;
+      box-shadow: 0 1px 6px $block-editor-color-shadow;
       display: flex;
       flex-wrap: wrap;
+      height: 43px;
       left: 50%;
-      overflow: hidden;
+      padding: 0 13px;
       position: absolute;
       top: 0%;
-      transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-32px);
+
+      &:after {
+        border: 6px solid $block-editor-color-primary;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        bottom: -12px;
+        content: "";
+        height: 12px;
+        left: 50%;
+        position: absolute;
+        transform: translateX(-50%);
+        width: 12px;
+      }
 
       &-button {
         align-items: center;
+        background: $block-editor-color-primary;
         border: none;
+        border-radius: 2px;
+        color: $block-editor-color-light;
         cursor: pointer;
         display: flex;
-        height: 32px;
+        height: 27px;
         justify-content: center;
+        margin: 0 5px;
         outline: none;
-        width: 32px;
+        padding: 0;
+        width: 28px;
 
         &.is-active {
-          background: #eee;
+          background: $block-editor-color-primary-dark;
         }
       }
     }

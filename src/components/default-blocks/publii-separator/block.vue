@@ -15,35 +15,64 @@
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'long' }"
         tabindex="-1"
-        @click.stop="setType('long')">—</button>
+        @click.stop="setType('long')">
+        <icon
+          height="2"
+          name="long-line"
+          width="20" />
+      </button>
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'medium' }"
         tabindex="-1"
-        @click.stop="setType('medium')">–</button>
+        @click.stop="setType('medium')">
+        <icon
+          height="2"
+          name="shorter-line"
+          width="16" />
+      </button>
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'short' }"
         tabindex="-1"
-        @click.stop="setType('short')">‑</button>
+        @click.stop="setType('short')">
+        <icon
+          height="2"
+          name="short-line"
+          width="8" />
+      </button>
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'dots' }"
         tabindex="-1"
-        @click.stop="setType('dots')">∙∙∙</button>
+        @click.stop="setType('dots')">
+        <icon
+          height="3"
+          name="dotted-line"
+          width="15" />
+      </button>
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'dot' }"
         tabindex="-1"
-        @click.stop="setType('dot')">•</button>
+        @click.stop="setType('dot')">
+        <icon
+          height="3"
+          name="dot"
+          width="3" />
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import Block from './../../Block.vue';
+import EditorIcon from './../../elements/EditorIcon.vue';
 
 export default {
   name: 'Separator',
   mixins: [
     Block
   ],
+  components: {
+    'icon': EditorIcon
+  },
   data () {
     return {
       config: {
