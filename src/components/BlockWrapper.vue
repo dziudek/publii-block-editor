@@ -153,6 +153,7 @@ export default {
   &.is-selected {
     .wrapper-ui {
       opacity: 1;
+      pointer-events: auto;
     }
   }
 
@@ -163,6 +164,7 @@ export default {
   &-ui {
     opacity: 0;
     position: absolute;
+    pointer-events: none;
     right: -84px;
     top: -5px;
     z-index: 1;
@@ -238,6 +240,9 @@ export default {
         padding: 0;
         width: 28px;
 
+        &:active,
+        &:focus,
+        &:hover,
         &.is-active {
           background: $block-editor-color-primary-dark;
         }
@@ -288,6 +293,9 @@ export default {
         padding: 0;
         width: 28px;
 
+        &:active,
+        &:focus,
+        &:hover,
         &.is-active {
           background: $block-editor-color-primary-dark;
         }
