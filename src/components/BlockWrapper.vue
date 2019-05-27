@@ -43,7 +43,7 @@
               height="13" />
           </button>
           <button
-            class="wrapper-ui-popup-button"
+            :class="{ 'wrapper-ui-popup-button': true, 'wrapper-ui-popup-button-danger': confirmDelete }"
             tabindex="-1"
             @click.stop="deleteBlock">
             <icon
@@ -81,7 +81,8 @@ export default {
   data () {
     return {
       isSelected: false,
-      popupOpened: false
+      popupOpened: false,
+      confirmDelete: false
     };
   },
   mounted () {
@@ -91,6 +92,7 @@ export default {
     blockClick () {
       this.$bus.$emit('block-editor-deselect-blocks', this.id);
       this.popupOpened = false;
+      this.confirmDelete = false;
       this.setSelectionState(true);
     },
     deselectBlock (blockID) {
@@ -100,6 +102,10 @@ export default {
     },
     togglePopup () {
       this.popupOpened = !this.popupOpened;
+
+      if (!this.popupOpened) {
+        this.confirmDelete = false;
+      }
     },
     setSelectionState (newState) {
       if (this.isSelected && newState === false) {
@@ -110,6 +116,7 @@ export default {
 
       if (!this.isSelected) {
         this.popupOpened = false;
+        this.confirmDelete = false;
       }
 
       if (newState) {
@@ -126,7 +133,11 @@ export default {
       this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
     },
     deleteBlock () {
-      this.$bus.$emit('block-editor-delete-block', this.id);
+      if (!this.confirmDelete) {
+        this.confirmDelete = true;
+      } else {
+        this.$bus.$emit('block-editor-delete-block', this.id);
+      }
     },
     showMore () {
 
@@ -240,11 +251,15 @@ export default {
         padding: 0;
         width: 28px;
 
-        &:active,
-        &:focus,
         &:hover,
         &.is-active {
           background: $block-editor-color-primary-dark;
+        }
+
+        &-danger,
+        &-danger:hover,
+        &-danger.is-active {
+          background: $block-editor-color-danger;
         }
       }
     }
@@ -293,8 +308,6 @@ export default {
         padding: 0;
         width: 28px;
 
-        &:active,
-        &:focus,
         &:hover,
         &.is-active {
           background: $block-editor-color-primary-dark;
