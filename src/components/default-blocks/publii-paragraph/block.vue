@@ -79,7 +79,7 @@
       <div
         class="wrapper-ui-inline-menu"
         ref="inline-menu"
-        v-if="$parent.isSelected && textIsHighlighted"
+        v-if="$parent.isSelected && textIsHighlighted && !$parent.popupOpened"
         :key="'inline-menu-' + id">
         <button
           :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.bold }"
