@@ -279,13 +279,26 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .editor {
   padding: 50px 0;
   width: 100%;
 
   &-inner {
     margin: 0 auto;
+  }
+
+  // UI animations
+  .block-editor-ui-fade-enter-active {
+    transition: opacity .2s ease;
+    transition-delay: .3s;
+  }
+  .block-editor-ui-fade-leave-active {
+    transition: opacity .2s ease;
+  }
+  .block-editor-ui-fade-enter,
+  .block-editor-ui-fade-leave-to {
+    opacity: 0;
   }
 }
 </style>

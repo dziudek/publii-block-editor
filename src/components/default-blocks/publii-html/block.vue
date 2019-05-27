@@ -14,29 +14,32 @@
       @click="setView('code')"
       class="publii-block-html-preview">
     </div>
-    <div
-      class="wrapper-ui-top-menu"
-      :key="'top-menu-' + id"
-      v-if="$parent.isSelected && !$parent.popupOpened">
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.view === 'code' }"
-        tabindex="-1"
-        @click.stop="setView('code')">
-        <icon
-          height="12"
-          name="html"
-          width="18" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.view === 'preview' }"
-        tabindex="-1"
-        @click.stop="setView('preview')">
-        <icon
-          height="12"
-          name="preview"
-          width="19" />
-      </button>
-    </div>
+
+    <transition name="block-editor-ui-fade">
+      <div
+        class="wrapper-ui-top-menu"
+        :key="'top-menu-' + id"
+        v-if="$parent.isSelected && !$parent.popupOpened">
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.view === 'code' }"
+          tabindex="-1"
+          @click.stop="setView('code')">
+          <icon
+            height="12"
+            name="html"
+            width="18" />
+        </button>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.view === 'preview' }"
+          tabindex="-1"
+          @click.stop="setView('preview')">
+          <icon
+            height="12"
+            name="preview"
+            width="19" />
+        </button>
+      </div>
+    </transition>
   </div>
 </template>
 

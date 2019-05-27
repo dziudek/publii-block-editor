@@ -11,46 +11,48 @@
       ref="block"
       class="publii-block-list" />
 
-    <div
-      class="wrapper-ui-top-menu"
-      v-if="$parent.isSelected && !$parent.popupOpened">
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ul' }"
-        tabindex="-1"
-        @click.stop="setListType('ul')">
-        <icon
-          height="12"
-          name="unordered-list"
-          width="16" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ol' }"
-        tabindex="-1"
-        @click.stop="setListType('ol')">
-        <icon
-          height="14"
-          name="ordered-list"
-          width="17" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true }"
-        tabindex="-1"
-        @click.stop="indentList()">
-        <icon
-          height="12"
-          name="nesting"
-          width="17" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true }"
-        tabindex="-1"
-        @click.stop="outdentList()">
-        <icon
-          height="12"
-          name="flattening"
-          width="17" />
-      </button>
-    </div>
+    <transition name="block-editor-ui-fade">
+      <div
+        class="wrapper-ui-top-menu"
+        v-if="$parent.isSelected && !$parent.popupOpened">
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ul' }"
+          tabindex="-1"
+          @click.stop="setListType('ul')">
+          <icon
+            height="12"
+            name="unordered-list"
+            width="16" />
+        </button>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ol' }"
+          tabindex="-1"
+          @click.stop="setListType('ol')">
+          <icon
+            height="14"
+            name="ordered-list"
+            width="17" />
+        </button>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true }"
+          tabindex="-1"
+          @click.stop="indentList()">
+          <icon
+            height="12"
+            name="nesting"
+            width="17" />
+        </button>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true }"
+          tabindex="-1"
+          @click.stop="outdentList()">
+          <icon
+            height="12"
+            name="flattening"
+            width="17" />
+        </button>
+      </div>
+    </transition>
   </div>
 </template>
 

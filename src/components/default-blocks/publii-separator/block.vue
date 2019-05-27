@@ -9,55 +9,57 @@
       <hr :class="config.type" />
     </div>
 
-    <div
-      class="wrapper-ui-top-menu"
-      v-if="$parent.isSelected && !$parent.popupOpened">
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'long' }"
-        tabindex="-1"
-        @click.stop="setType('long')">
-        <icon
-          height="2"
-          name="long-line"
-          width="20" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'medium' }"
-        tabindex="-1"
-        @click.stop="setType('medium')">
-        <icon
-          height="2"
-          name="shorter-line"
-          width="16" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'short' }"
-        tabindex="-1"
-        @click.stop="setType('short')">
-        <icon
-          height="2"
-          name="short-line"
-          width="8" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'dots' }"
-        tabindex="-1"
-        @click.stop="setType('dots')">
-        <icon
-          height="3"
-          name="dotted-line"
-          width="15" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'dot' }"
-        tabindex="-1"
-        @click.stop="setType('dot')">
-        <icon
-          height="3"
-          name="dot"
-          width="3" />
-      </button>
-    </div>
+    <transition name="block-editor-ui-fade">
+      <div
+        class="wrapper-ui-top-menu"
+        v-if="$parent.isSelected && !$parent.popupOpened">
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'long' }"
+          tabindex="-1"
+          @click.stop="setType('long')">
+          <icon
+            height="2"
+            name="long-line"
+            width="20" />
+        </button>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'medium' }"
+          tabindex="-1"
+          @click.stop="setType('medium')">
+          <icon
+            height="2"
+            name="shorter-line"
+            width="16" />
+        </button>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'short' }"
+          tabindex="-1"
+          @click.stop="setType('short')">
+          <icon
+            height="2"
+            name="short-line"
+            width="8" />
+        </button>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'dots' }"
+          tabindex="-1"
+          @click.stop="setType('dots')">
+          <icon
+            height="3"
+            name="dotted-line"
+            width="15" />
+        </button>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'dot' }"
+          tabindex="-1"
+          @click.stop="setType('dot')">
+          <icon
+            height="3"
+            name="dot"
+            width="3" />
+        </button>
+      </div>
+    </transition>
   </div>
 </template>
 

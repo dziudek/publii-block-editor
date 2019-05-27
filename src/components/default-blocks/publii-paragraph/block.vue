@@ -75,75 +75,79 @@
       </div>
     </div>
 
-    <div
-      class="wrapper-ui-inline-menu"
-      ref="inline-menu"
-      v-if="$parent.isSelected && textIsHighlighted"
-      :key="'inline-menu-' + id">
-      <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.bold }"
-        @click.stop="doInlineOperation('strong');">
-        B
-      </button>
-      <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.italic }"
-        @click.stop="doInlineOperation('em');">
-        I
-      </button>
-      <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.underline }"
-        @click.stop="doInlineOperation('u');">
-        U
-      </button>
-      <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.strikethrough }"
-        @click.stop="doInlineOperation('s');">
-        S
-      </button>
-      <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.code }"
-        @click.stop="doInlineOperation('code');">
-        &lt;&gt;
-      </button>
-      <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.mark }"
-        @click.stop="doInlineOperation('mark');">
-        M
-      </button>
-    </div>
+    <transition name="block-editor-ui-fade">
+      <div
+        class="wrapper-ui-inline-menu"
+        ref="inline-menu"
+        v-if="$parent.isSelected && textIsHighlighted"
+        :key="'inline-menu-' + id">
+        <button
+          :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.bold }"
+          @click.stop="doInlineOperation('strong');">
+          B
+        </button>
+        <button
+          :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.italic }"
+          @click.stop="doInlineOperation('em');">
+          I
+        </button>
+        <button
+          :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.underline }"
+          @click.stop="doInlineOperation('u');">
+          U
+        </button>
+        <button
+          :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.strikethrough }"
+          @click.stop="doInlineOperation('s');">
+          S
+        </button>
+        <button
+          :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.code }"
+          @click.stop="doInlineOperation('code');">
+          &lt;&gt;
+        </button>
+        <button
+          :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.mark }"
+          @click.stop="doInlineOperation('mark');">
+          M
+        </button>
+      </div>
+    </transition>
 
-    <div
-      class="wrapper-ui-top-menu"
-      :key="'top-menu-' + id"
-      v-if="$parent.isSelected && !textIsHighlighted && !$parent.popupOpened">
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'left' }"
-        tabindex="-1"
-        @click.stop="alignText('left')">
-        <icon
-          height="12"
-          name="align-left"
-          width="14" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'center' }"
-        tabindex="-1"
-        @click.stop="alignText('center')">
-        <icon
-          height="12"
-          name="align-center"
-          width="14" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'right' }"
-        tabindex="-1"
-        @click.stop="alignText('right')">
-        <icon
-          height="12"
-          name="align-right"
-          width="14" />
-      </button>
-    </div>
+    <transition name="block-editor-ui-fade">
+      <div
+        class="wrapper-ui-top-menu"
+        :key="'top-menu-' + id"
+        v-if="$parent.isSelected && !textIsHighlighted && !$parent.popupOpened">
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'left' }"
+          tabindex="-1"
+          @click.stop="alignText('left')">
+          <icon
+            height="12"
+            name="align-left"
+            width="14" />
+        </button>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'center' }"
+          tabindex="-1"
+          @click.stop="alignText('center')">
+          <icon
+            height="12"
+            name="align-center"
+            width="14" />
+        </button>
+        <button
+          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'right' }"
+          tabindex="-1"
+          @click.stop="alignText('right')">
+          <icon
+            height="12"
+            name="align-right"
+            width="14" />
+        </button>
+      </div>
+    </transition>
   </div>
 </template>
 
