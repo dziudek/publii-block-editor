@@ -13,7 +13,7 @@
 
     <div
       class="wrapper-ui-top-menu"
-      v-if="$parent.isSelected">
+      v-if="$parent.isSelected && !$parent.popupOpened">
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ul' }"
         tabindex="-1"

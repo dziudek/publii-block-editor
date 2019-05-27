@@ -115,7 +115,7 @@
     <div
       class="wrapper-ui-top-menu"
       :key="'top-menu-' + id"
-      v-if="$parent.isSelected && !textIsHighlighted">
+      v-if="$parent.isSelected && !textIsHighlighted && !$parent.popupOpened">
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'left' }"
         tabindex="-1"
