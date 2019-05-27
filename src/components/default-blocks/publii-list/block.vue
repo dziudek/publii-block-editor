@@ -17,31 +17,55 @@
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ul' }"
         tabindex="-1"
-        @click.stop="setListType('ul')">ul</button>
+        @click.stop="setListType('ul')">
+        <icon
+          height="12"
+          name="unordered-list"
+          width="16" />
+      </button>
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ol' }"
         tabindex="-1"
-        @click.stop="setListType('ol')">ol</button>
+        @click.stop="setListType('ol')">
+        <icon
+          height="14"
+          name="ordered-list"
+          width="17" />
+      </button>
       <button
         :class="{ 'wrapper-ui-top-menu-button': true }"
         tabindex="-1"
-        @click.stop="indentList()">⇉</button>
+        @click.stop="indentList()">
+        <icon
+          height="12"
+          name="nesting"
+          width="17" />
+      </button>
       <button
         :class="{ 'wrapper-ui-top-menu-button': true }"
         tabindex="-1"
-        @click.stop="outdentList()">⇇</button>
+        @click.stop="outdentList()">
+        <icon
+          height="12"
+          name="flattening"
+          width="17" />
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import Block from './../../Block.vue';
+import EditorIcon from './../../elements/EditorIcon.vue';
 
 export default {
   name: 'List',
   mixins: [
     Block
   ],
+  components: {
+    'icon': EditorIcon
+  },
   data () {
     return {
       config: {

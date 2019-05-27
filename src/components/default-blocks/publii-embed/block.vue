@@ -22,11 +22,21 @@
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.view === 'code' }"
         tabindex="-1"
-        @click.stop="setView('code')">Code</button>
+        @click.stop="setView('code')">
+        <icon
+          height="12"
+          name="html"
+          width="18" />
+      </button>
       <button
         :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.view === 'preview' }"
         tabindex="-1"
-        @click.stop="setView('preview')">Preview</button>
+        @click.stop="setView('preview')">
+        <icon
+          height="12"
+          name="preview"
+          width="19" />
+      </button>
     </div>
   </div>
 </template>
@@ -34,7 +44,8 @@
 <script>
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
-import embedHelper from './embed.js';
+import EditorIcon from './../../elements/EditorIcon.vue';
+import EmbedHelper from './embed.js';
 
 export default {
   name: 'Embed',
@@ -42,6 +53,9 @@ export default {
     Block,
     ContentEditableImprovements
   ],
+  components: {
+    'icon': EditorIcon
+  },
   data () {
     return {
       config: {},
@@ -51,8 +65,8 @@ export default {
   },
   computed: {
     modifiedContent () {
-      if (embedHelper.isEmbedable(this.content)) {
-        return embedHelper.embed(this.content, this.$bus, this.id);
+      if (EmbedHelper.isEmbedable(this.content)) {
+        return EmbedHelper.embed(this.content, this.$bus, this.id);
       }
 
       return this.content;
