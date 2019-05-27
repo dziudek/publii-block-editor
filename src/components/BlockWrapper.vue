@@ -13,55 +13,59 @@
           height="4" />
       </div>
 
-      <div :class="{ 'wrapper-ui-popup': true, 'is-visible': popupOpened }">
-        <div class="wrapper-ui-popup-row">
-          <button
-            class="wrapper-ui-popup-button"
-            tabindex="-1"
-            @click.stop="addBlock">
-            <icon
-              name="enter"
-              width="14"
-              height="13" />
-          </button>
-          <button
-            class="wrapper-ui-popup-button"
-            tabindex="-1"
-            @click.stop="moveDown">
-            <icon
-              name="down"
-              width="14"
-              height="13" />
-          </button>
-          <button
-            class="wrapper-ui-popup-button"
-            tabindex="-1"
-            @click.stop="moveUp">
-            <icon
-              name="up"
-              width="14"
-              height="13" />
-          </button>
-          <button
-            :class="{ 'wrapper-ui-popup-button': true, 'wrapper-ui-popup-button-danger': confirmDelete }"
-            tabindex="-1"
-            @click.stop="deleteBlock">
-            <icon
-              name="trash"
-              width="14"
-              height="13" />
-          </button>
-          <button
-            class="wrapper-ui-popup-button"
-            tabindex="-1"
-            @click.stop="showMore">
-            <icon
-              name="gear"
-              width="14"
-              height="13" />
-          </button>
+      <transition name="block-editor-ui-fade">
+        <div
+          v-if="popupOpened"
+          :class="{ 'wrapper-ui-popup': true, 'is-visible': true }">
+          <div class="wrapper-ui-popup-row">
+            <button
+              class="wrapper-ui-popup-button"
+              tabindex="-1"
+              @click.stop="addBlock">
+              <icon
+                name="enter"
+                width="14"
+                height="13" />
+            </button>
+            <button
+              class="wrapper-ui-popup-button"
+              tabindex="-1"
+              @click.stop="moveDown">
+              <icon
+                name="down"
+                width="14"
+                height="13" />
+            </button>
+            <button
+              class="wrapper-ui-popup-button"
+              tabindex="-1"
+              @click.stop="moveUp">
+              <icon
+                name="up"
+                width="14"
+                height="13" />
+            </button>
+            <button
+              :class="{ 'wrapper-ui-popup-button': true, 'wrapper-ui-popup-button-danger': confirmDelete }"
+              tabindex="-1"
+              @click.stop="deleteBlock">
+              <icon
+                name="trash"
+                width="14"
+                height="13" />
+            </button>
+            <button
+              class="wrapper-ui-popup-button"
+              tabindex="-1"
+              @click.stop="showMore">
+              <icon
+                name="gear"
+                width="14"
+                height="13" />
+            </button>
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 </template>
