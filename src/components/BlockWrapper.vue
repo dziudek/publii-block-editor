@@ -18,26 +18,48 @@
           <button
             class="wrapper-ui-popup-button"
             tabindex="-1"
-            @click.stop="moveUp">🔼</button>
+            @click.stop="addBlock">
+            <icon
+              name="enter"
+              width="14"
+              height="13" />
+          </button>
           <button
             class="wrapper-ui-popup-button"
             tabindex="-1"
-            @click.stop="deleteBlock">🗑</button>
+            @click.stop="moveDown">
+            <icon
+              name="down"
+              width="14"
+              height="13" />
+          </button>
           <button
             class="wrapper-ui-popup-button"
             tabindex="-1"
-            @click.stop="moveDown">🔽</button>
-        </div>
-
-        <div class="wrapper-ui-popup-row">
+            @click.stop="moveUp">
+            <icon
+              name="up"
+              width="14"
+              height="13" />
+          </button>
           <button
             class="wrapper-ui-popup-button"
             tabindex="-1"
-            @click.stop="addBlock">↩️</button>
+            @click.stop="deleteBlock">
+            <icon
+              name="trash"
+              width="14"
+              height="13" />
+          </button>
           <button
             class="wrapper-ui-popup-button"
             tabindex="-1"
-            @click.stop="showMore">⚙️</button>
+            @click.stop="showMore">
+            <icon
+              name="gear"
+              width="14"
+              height="13" />
+          </button>
         </div>
       </div>
     </div>
@@ -163,18 +185,21 @@ export default {
     }
 
     &-popup {
-      background: #fff;
-      border: 1px solid #aaa;
-      border-radius: 5px;
+      align-items: center;
+      background: $block-editor-color-primary;
+      border: none;
+      border-radius: 4px;
+      box-shadow: 0 1px 6px $block-editor-color-shadow;
       display: flex;
       flex-wrap: wrap;
-      left: 50%;
+      height: 43px;
+      left: auto;
       opacity: 0;
+      padding: 0 13px;
       pointer-events: none;
       position: absolute;
-      top: 110%;
-      transform: translateX(-50%);
-      width: auto;
+      right: 14px;
+      top: 28px;
 
       &.is-visible {
         opacity: 1;
@@ -183,18 +208,39 @@ export default {
 
       &-row {
         display: flex;
-        justify-content: space-between;
-        width: 100%;
+      }
+
+      &:after {
+        border: 6px solid $block-editor-color-primary;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-top-color: transparent;
+        content: "";
+        height: 12px;
+        position: absolute;
+        right: 4px;
+        top: -12px;
+        width: 12px;
       }
 
       &-button {
         align-items: center;
+        background: $block-editor-color-primary;
         border: none;
+        border-radius: 2px;
+        color: $block-editor-color-light;
+        cursor: pointer;
         display: flex;
-        height: 32px;
+        height: 27px;
         justify-content: center;
+        margin: 0 5px;
         outline: none;
-        width: 32px;
+        padding: 0;
+        width: 28px;
+
+        &.is-active {
+          background: $block-editor-color-primary-dark;
+        }
       }
     }
 
