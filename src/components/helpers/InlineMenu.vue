@@ -1,6 +1,11 @@
 <script>
+import EditorIcon from './../elements/EditorIcon.vue';
+
 export default {
   name: 'InlineMenu',
+  components: {
+    'icon': EditorIcon
+  },
   methods: {
     showInlineMenu () {
       let sel = document.getSelection();
@@ -167,30 +172,57 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../assets/variables.scss';
+
 .wrapper-ui-inline-menu {
-  background: #fff;
-  border: 1px solid #aaa;
-  border-radius: 5px;
+  align-items: center;
+  background: $block-editor-color-light;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 1px 6px $block-editor-color-shadow;
   display: flex;
+  height: 43px;
   left: 50%;
-  overflow: hidden;
+  padding: 0 13px;
   position: absolute;
   top: 0%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(64px);
   z-index: 1;
+
+  &:after {
+    border: 6px solid $block-editor-color-light;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    content: "";
+    filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, .125));
+    height: 12px;
+    left: 50%;
+    position: absolute;
+    top: -12px;
+    transform: translateX(-50%);
+    width: 12px;
+    z-index: 1;
+  }
 
   &-button {
     align-items: center;
+    background: $block-editor-color-light;
     border: none;
+    border-radius: 2px;
+    color: $block-editor-color-text;
     cursor: pointer;
     display: flex;
-    height: 32px;
+    height: 27px;
     justify-content: center;
+    margin: 0 5px;
     outline: none;
-    width: 32px;
+    padding: 0;
+    width: 28px;
 
+    &:hover,
     &.is-active {
-      background: #eee;
+      background: $block-editor-color-light-dark;
     }
   }
 }

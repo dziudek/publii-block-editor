@@ -84,32 +84,50 @@
         <button
           :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.bold }"
           @click.stop="doInlineOperation('strong');">
-          B
+          <icon
+            height="13"
+            name="bold"
+            width="9" />
         </button>
         <button
           :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.italic }"
           @click.stop="doInlineOperation('em');">
-          I
+          <icon
+            height="13"
+            name="italic"
+            width="10" />
         </button>
         <button
           :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.underline }"
           @click.stop="doInlineOperation('u');">
-          U
+          <icon
+            height="14"
+            name="underline"
+            width="10" />
         </button>
         <button
           :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.strikethrough }"
           @click.stop="doInlineOperation('s');">
-          S
+          <icon
+            height="14"
+            name="strikethrough"
+            width="12" />
         </button>
         <button
           :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.code }"
           @click.stop="doInlineOperation('code');">
-          &lt;&gt;
+          <icon
+            height="12"
+            name="code"
+            width="14" />
         </button>
         <button
           :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.mark }"
           @click.stop="doInlineOperation('mark');">
-          M
+          <icon
+            height="13"
+            name="marker"
+            width="16" />
         </button>
       </div>
     </transition>
