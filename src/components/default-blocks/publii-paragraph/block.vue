@@ -21,7 +21,10 @@
       <button
         @click.stop="toggleNewBlockUI()"
         tabindex="-1">
-        ⨁
+        <icon
+          height="12"
+          name="add"
+          width="12" />
       </button>
 
       <div
@@ -30,47 +33,74 @@
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 0 }"
           @click.stop="addNewBlock('publii-header');">
-          H
+          <icon
+            height="14"
+            name="headings"
+            width="10" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 1 }"
-          @click.stop="addNewBlock('publii-code');">
-          C
+          @click.stop="addNewBlock('publii-list');">
+          <icon
+            height="12"
+            name="unordered-list"
+            width="16" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 2 }"
-          @click.stop="addNewBlock('publii-separator');">
-          HR
+          @click.stop="addNewBlock('publii-quote');">
+          <icon
+            height="12"
+            name="quote"
+            width="14" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 3 }"
-          @click.stop="addNewBlock('publii-list');">
-          UL
+          @click.stop="addNewBlock('publii-code');">
+          <icon
+            height="12"
+            name="code"
+            width="14" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 4 }"
-          @click.stop="addNewBlock('publii-quote');">
-          Q
+          @click.stop="addNewBlock('publii-html');">
+          <icon
+            height="12"
+            name="html"
+            width="18" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 5 }"
-          @click.stop="addNewBlock('publii-readmore');">
-          RM
+          @click.stop="addNewBlock('publii-separator');">
+          <icon
+            height="2"
+            name="separator"
+            width="16" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 6 }"
-          @click.stop="addNewBlock('publii-embed');">
-          Em
+          @click.stop="addNewBlock('publii-readmore');">
+          <icon
+            height="12"
+            name="readmore"
+            width="16" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 7 }"
-          @click.stop="addNewBlock('publii-html');">
-          HTML
+          @click.stop="addNewBlock('publii-embed');">
+          <icon
+            height="14"
+            name="video"
+            width="18" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 8 }"
           @click.stop="addNewBlock('publii-toc');">
-          ToC
+          <icon
+            height="12"
+            name="toc"
+            width="16" />
         </button>
       </div>
     </div>
@@ -384,6 +414,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../../assets/variables.scss';
+
 .publii-block-paragraph {
   outline: none;
   width: 100%;
@@ -411,6 +443,12 @@ export default {
       display: block;
     }
 
+    & > button {
+      background: transparent;
+      border: none;
+      outline: none;
+    }
+
     &-list {
       display: none;
       left: 30px;
@@ -420,15 +458,21 @@ export default {
       width: 500px;
 
       &-button {
+        align-items: center;
+        background: transparent;
+        border: none;
+        display: flex;
         margin-right: 5px;
+        outline: none;
 
         &.is-active {
-          background: #f0f0f0;
+          color: $block-editor-color-primary-dark;
         }
       }
 
       &.is-visible {
-        display: block;
+        background: $block-editor-color-light;
+        display: flex;
       }
     }
   }
