@@ -15,39 +15,12 @@
       v-html="modifiedContent"
       :class="{ 'publii-block-embed-preview': true }">
     </div>
-
-    <transition name="block-editor-ui-fade">
-      <div
-        class="wrapper-ui-top-menu"
-        :key="'top-menu-' + id"
-        v-if="$parent.isSelected && content.trim() !== '' && !$parent.popupOpened">
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.view === 'code' }"
-          tabindex="-1"
-          @click.stop="setView('code')">
-          <icon
-            height="12"
-            name="html"
-            width="18" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.view === 'preview' }"
-          tabindex="-1"
-          @click.stop="setView('preview')">
-          <icon
-            height="12"
-            name="preview"
-            width="19" />
-        </button>
-      </div>
-    </transition>
   </div>
 </template>
 
 <script>
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
-import EditorIcon from './../../elements/EditorIcon.vue';
 import EmbedHelper from './embed.js';
 
 export default {
@@ -56,9 +29,6 @@ export default {
     Block,
     ContentEditableImprovements
   ],
-  components: {
-    'icon': EditorIcon
-  },
   data () {
     return {
       config: {},
@@ -127,11 +97,9 @@ export default {
       });
     },
     selectBlock (id) {
-      if (this.$parent.isSelected) {
-        return;
+      if (this.id === id) {
+        this.setView('code');
       }
-
-      this.setView('preview');
     },
     deselectBlock (id) {
       if (this.id !== id) {
