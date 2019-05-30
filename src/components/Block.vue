@@ -41,14 +41,21 @@ export default {
       sel.removeAllRanges();
       sel.addRange(range);
     },
-    setCursorAtEndOfElement (id = 'block') {
-      let range = document.createRange();
-      range.selectNodeContents(this.$refs[id]);
-      range.collapse(false);
+    setCursorAtEndOfElement (id = 'block', contenteditable = true) {
+      if (contenteditable) {
+        let range = document.createRange();
+        range.selectNodeContents(this.$refs[id]);
+        range.collapse(false);
 
-      let sel = document.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
+        let sel = document.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      } else {
+        let val = this.$refs[id].value;
+        this.$refs[id].focus();
+        this.$refs[id].value = '';
+        this.$refs[id].value = val;
+      }
     },
     getFocusFromTab (e) {
       if (e.code === 'Tab') {

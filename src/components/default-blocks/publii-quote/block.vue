@@ -56,14 +56,11 @@ export default {
   },
   methods: {
     focus () {
-      this.$refs['contentText'].focus();
-      this.setCursorAtEndOfElement('contentText');
-    },
-    handleKeyboard (e) {
-      if (e.code === 'Backspace' && this.$refs['contentText'].innerHTML === '' && this.$refs['contentAuthor'].innerHTML === '') {
-        this.$bus.$emit('block-editor-delete-block', this.id);
-        e.returnValue = false;
-      }
+      this.view = 'code';
+
+      setTimeout(() => {
+        this.setCursorAtEndOfElement('contentText', false);
+      }, 0);
     },
     handleTextKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
@@ -71,7 +68,10 @@ export default {
         e.returnValue = false;
       }
 
-      this.handleKeyboard(e);
+      if (e.code === 'Backspace' && this.$refs['contentText'].value === '' && this.$refs['contentAuthor'].value === '') {
+        this.$bus.$emit('block-editor-delete-block', this.id);
+        e.returnValue = false;
+      }
     },
     handleAuthorKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
@@ -79,7 +79,10 @@ export default {
         e.returnValue = false;
       }
 
-      this.handleKeyboard(e);
+      if (e.code === 'Backspace' && this.$refs['contentAuthor'].value === '') {
+        this.$refs['contentText'].focus();
+        e.returnValue = false;
+      }
     },
     save () {
       this.content.text = this.$refs['contentText'].value;
@@ -96,6 +99,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../../assets/variables.scss';
+
 .publii-block-quote {
   border-left: 3px solid #aaa;
   margin: 20px 0;
@@ -138,10 +143,11 @@ export default {
 
     input,
     textarea {
-      border: 1px solid #ddd;
-      border-radius: 4px;
+      border: 1px solid $block-editor-form-input-border;
+      border-radius: $block-editor-form-input-border-radius;
       display: block;
       font-size: 16px;
+      outline: none;
       padding: 20px;
       width: 100%;
     }

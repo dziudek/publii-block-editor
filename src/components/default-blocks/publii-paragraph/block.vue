@@ -201,7 +201,6 @@ export default {
     },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false && this.showNewBlockUI === false) {
-        console.log('A1');
         let newElementName = this.$parent.$parent.extensions.shortcutManager.checkContentForShortcuts(this.$refs['block'].innerHTML);
 
         if (newElementName === 'publii-paragraph') {
@@ -279,7 +278,6 @@ export default {
         this.newBlockUIListVisible === true &&
         this.showNewBlockUI === true
       ) {
-        console.log('A2');
         this.$refs['block'].parentNode.querySelectorAll('.publii-block-paragraph-block-selector-list-button')[this.newBlockUIActiveIndex].click();
         e.returnValue = false;
         return;
