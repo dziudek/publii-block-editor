@@ -105,62 +105,7 @@
       </div>
     </div>
 
-    <transition name="block-editor-ui-fade">
-      <div
-        class="wrapper-ui-inline-menu"
-        ref="inline-menu"
-        v-if="$parent.isSelected && textIsHighlighted && !$parent.popupOpened"
-        :key="'inline-menu-' + id">
-        <button
-          :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.bold }"
-          @click.stop="doInlineOperation('strong');">
-          <icon
-            height="13"
-            name="bold"
-            width="9" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.italic }"
-          @click.stop="doInlineOperation('em');">
-          <icon
-            height="13"
-            name="italic"
-            width="10" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.underline }"
-          @click.stop="doInlineOperation('u');">
-          <icon
-            height="14"
-            name="underline"
-            width="10" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.strikethrough }"
-          @click.stop="doInlineOperation('s');">
-          <icon
-            height="14"
-            name="strikethrough"
-            width="12" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.code }"
-          @click.stop="doInlineOperation('code');">
-          <icon
-            height="12"
-            name="code"
-            width="14" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': selectedTextContains.mark }"
-          @click.stop="doInlineOperation('mark');">
-          <icon
-            height="13"
-            name="marker"
-            width="16" />
-        </button>
-      </div>
-    </transition>
+    <inline-menu ref="inline-menu" />
 
     <transition name="block-editor-ui-fade">
       <div
@@ -204,6 +149,7 @@ import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import EditorIcon from './../../elements/EditorIcon.vue';
 import InlineMenu from './../../helpers/InlineMenu.vue';
+import InlineMenuUI from './../../helpers/InlineMenuUI.vue';
 
 export default {
   name: 'Paragraph',
@@ -213,27 +159,18 @@ export default {
     InlineMenu
   ],
   components: {
-    'icon': EditorIcon
+    'icon': EditorIcon,
+    'inline-menu': InlineMenuUI
   },
   data () {
     return {
       config: {
         textAlign: 'left'
       },
-      selectedTextContains: {
-        bold: false,
-        italic: false,
-        strikethrough: false,
-        underline: false,
-        code: false,
-        mark: false,
-        link: false
-      },
       content: '',
       showNewBlockUI: false,
       newBlockUIActiveIndex: 0,
-      newBlockUIListVisible: false,
-      textIsHighlighted: true
+      newBlockUIListVisible: false
     };
   },
   mounted () {
@@ -261,23 +198,6 @@ export default {
           this.showNewBlockUI = false;
         }
       }, 250);
-    },
-    handleMouseUp (e) {
-      setTimeout(() => {
-        let sel = document.getSelection();
-
-        if (sel.isCollapsed) {
-          this.textIsHighlighted = false;
-        } else {
-          this.textIsHighlighted = !sel.isCollapsed || (sel.anchorNode === sel.focusNode && sel.anchorOffset === sel.focusOffset);
-        }
-
-        if (this.textIsHighlighted) {
-          setTimeout(() => {
-            this.showInlineMenu();
-          }, 0);
-        }
-      }, 0);
     },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false && this.showNewBlockUI === false) {
@@ -417,6 +337,7 @@ export default {
 @import '../../../assets/variables.scss';
 
 .publii-block-paragraph {
+  line-height: 1.4;
   outline: none;
   width: 100%;
 

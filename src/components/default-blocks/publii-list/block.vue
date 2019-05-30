@@ -6,15 +6,18 @@
       @keyup="getFocusFromTab"
       @paste="pastePlainText"
       @keydown="handleKeyboard"
+      @mouseup="handleMouseUp"
       @blur="save"
       v-html="content"
       ref="block"
       class="publii-block-list" />
 
+    <inline-menu ref="inline-menu" />
+
     <transition name="block-editor-ui-fade">
       <div
         class="wrapper-ui-top-menu"
-        v-if="$parent.isSelected && !$parent.popupOpened">
+        v-if="$parent.isSelected && !$parent.popupOpened && !textIsHighlighted">
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ul' }"
           tabindex="-1"
@@ -59,14 +62,18 @@
 <script>
 import Block from './../../Block.vue';
 import EditorIcon from './../../elements/EditorIcon.vue';
+import InlineMenu from './../../helpers/InlineMenu.vue';
+import InlineMenuUI from './../../helpers/InlineMenuUI.vue';
 
 export default {
   name: 'List',
   mixins: [
-    Block
+    Block,
+    InlineMenu
   ],
   components: {
-    'icon': EditorIcon
+    'icon': EditorIcon,
+    'inline-menu': InlineMenuUI
   },
   data () {
     return {

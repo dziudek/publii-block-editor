@@ -6,7 +6,38 @@ export default {
   components: {
     'icon': EditorIcon
   },
+  data () {
+    return {
+      selectedTextContains: {
+        bold: false,
+        italic: false,
+        strikethrough: false,
+        underline: false,
+        code: false,
+        mark: false,
+        link: false
+      },
+      textIsHighlighted: true
+    };
+  },
   methods: {
+    handleMouseUp (e) {
+      setTimeout(() => {
+        let sel = document.getSelection();
+
+        if (sel.isCollapsed) {
+          this.textIsHighlighted = false;
+        } else {
+          this.textIsHighlighted = !sel.isCollapsed || (sel.anchorNode === sel.focusNode && sel.anchorOffset === sel.focusOffset);
+        }
+
+        if (this.textIsHighlighted) {
+          setTimeout(() => {
+            this.showInlineMenu();
+          }, 0);
+        }
+      }, 0);
+    },
     showInlineMenu () {
       let sel = document.getSelection();
       let savedSel = this.$rangy.saveSelection();
@@ -16,8 +47,9 @@ export default {
       let oRange = sel.getRangeAt(0);
       let oRect = oRange.getBoundingClientRect();
       let wrapperRect = this.$refs['block'].getBoundingClientRect();
-      this.$refs['inline-menu'].style.left = ((oRect.left - wrapperRect.left) + (oRect.width / 2)) + 'px';
-      this.$refs['inline-menu'].style.top = (oRect.top - wrapperRect.top - 20) + 'px';
+      let inlineMenuLeft = ((oRect.left - wrapperRect.left) + (oRect.width / 2)) + 'px';
+      let inlineMenuTop = (oRect.top - wrapperRect.top - 20) + 'px';
+      this.$refs['inline-menu'].setPosition(inlineMenuLeft, inlineMenuTop);
     },
     analyzeSelectedText (selection, rangyData) {
       if (!selection || !selection.anchorNode || !selection.focusNode) {
@@ -170,60 +202,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import '../../assets/variables.scss';
-
-.wrapper-ui-inline-menu {
-  align-items: center;
-  background: $block-editor-color-light;
-  border: none;
-  border-radius: 4px;
-  box-shadow: 0 1px 6px $block-editor-color-shadow;
-  display: flex;
-  height: 43px;
-  left: 50%;
-  padding: 0 13px;
-  position: absolute;
-  top: 0%;
-  transform: translateX(-50%) translateY(64px);
-  z-index: 1;
-
-  &:after {
-    border: 6px solid $block-editor-color-light;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    border-top-color: transparent;
-    content: "";
-    filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, .125));
-    height: 12px;
-    left: 50%;
-    position: absolute;
-    top: -12px;
-    transform: translateX(-50%);
-    width: 12px;
-    z-index: 1;
-  }
-
-  &-button {
-    align-items: center;
-    background: $block-editor-color-light;
-    border: none;
-    border-radius: 2px;
-    color: $block-editor-color-text;
-    cursor: pointer;
-    display: flex;
-    height: 27px;
-    justify-content: center;
-    margin: 0 5px;
-    outline: none;
-    padding: 0;
-    width: 28px;
-
-    &:hover,
-    &.is-active {
-      background: $block-editor-color-light-dark;
-    }
-  }
-}
-</style>

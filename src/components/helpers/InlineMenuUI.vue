@@ -1,0 +1,138 @@
+<template>
+  <transition name="block-editor-ui-fade">
+    <div
+      class="wrapper-ui-inline-menu"
+      :style="'left: ' + left + '; top: ' + top + ';'"
+      v-if="$parent.$parent.isSelected && $parent.textIsHighlighted && !$parent.$parent.popupOpened"
+      :key="'inline-menu-' + $parent.id">
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.bold }"
+        @click.stop="$parent.doInlineOperation('strong');">
+        <icon
+          height="13"
+          name="bold"
+          width="9" />
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.italic }"
+        @click.stop="$parent.doInlineOperation('em');">
+        <icon
+          height="13"
+          name="italic"
+          width="10" />
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.underline }"
+        @click.stop="$parent.doInlineOperation('u');">
+        <icon
+          height="14"
+          name="underline"
+          width="10" />
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.strikethrough }"
+        @click.stop="$parent.doInlineOperation('s');">
+        <icon
+          height="14"
+          name="strikethrough"
+          width="12" />
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.code }"
+        @click.stop="$parent.doInlineOperation('code');">
+        <icon
+          height="12"
+          name="code"
+          width="14" />
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.mark }"
+        @click.stop="$parent.doInlineOperation('mark');">
+        <icon
+          height="13"
+          name="marker"
+          width="16" />
+      </button>
+    </div>
+  </transition>
+</template>
+
+<script>
+import EditorIcon from './../elements/EditorIcon.vue';
+
+export default {
+  name: 'inline-menu-ui',
+  components: {
+    'icon': EditorIcon
+  },
+  data () {
+    return {
+      left: '',
+      top: ''
+    };
+  },
+  methods: {
+    setPosition (left, top) {
+      this.left = left;
+      this.top = top;
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../../assets/variables.scss';
+
+.wrapper-ui-inline-menu {
+  align-items: center;
+  background: $block-editor-color-light;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 1px 6px $block-editor-color-shadow;
+  display: flex;
+  height: 43px;
+  left: 50%;
+  padding: 0 13px;
+  position: absolute;
+  top: 0%;
+  transform: translateX(-50%) translateY(64px);
+  z-index: 1;
+
+  &:after {
+    border: 6px solid $block-editor-color-light;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    content: "";
+    filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, .125));
+    height: 12px;
+    left: 50%;
+    position: absolute;
+    top: -12px;
+    transform: translateX(-50%);
+    width: 12px;
+    z-index: 1;
+  }
+
+  &-button {
+    align-items: center;
+    background: $block-editor-color-light;
+    border: none;
+    border-radius: 2px;
+    color: $block-editor-color-text;
+    cursor: pointer;
+    display: flex;
+    height: 27px;
+    justify-content: center;
+    margin: 0 5px;
+    outline: none;
+    padding: 0;
+    width: 28px;
+
+    &:hover,
+    &.is-active {
+      background: $block-editor-color-light-dark;
+    }
+  }
+}
+</style>
