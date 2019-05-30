@@ -140,6 +140,7 @@ export default {
   }
 
   &-preview {
+    background: #f0f0f0;
     margin: 0;
     padding: 0 0 56.25% 0;
     position: relative;
