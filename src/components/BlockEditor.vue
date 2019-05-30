@@ -121,8 +121,8 @@ export default {
           id: 1555825318231,
           type: 'publii-quote',
           content: {
-            text: '',
-            author: ''
+            text: 'Lorem ipsum dolor',
+            author: 'John Doe'
           },
           config: {}
         }
