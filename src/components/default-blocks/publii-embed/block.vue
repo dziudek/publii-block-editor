@@ -22,18 +22,19 @@
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import EmbedHelper from './embed.js';
+import HasPreview from './../../mixins/HasPreview.vue';
 
 export default {
   name: 'Embed',
   mixins: [
     Block,
-    ContentEditableImprovements
+    ContentEditableImprovements,
+    HasPreview
   ],
   data () {
     return {
       config: {},
-      content: '',
-      view: 'code'
+      content: ''
     };
   },
   computed: {
@@ -48,8 +49,6 @@ export default {
   mounted () {
     this.content = this.inputContent;
     this.view = this.content === '' ? 'code' : 'preview';
-    this.$bus.$on('block-editor-deselect-blocks', this.deselectBlock);
-    this.$bus.$on('block-editor-block-selected', this.selectBlock);
   },
   methods: {
     handleKeyboard (e) {
@@ -70,46 +69,13 @@ export default {
         e.returnValue = false;
       }
     },
-    setView (newView) {
-      if (
-        this.view === 'code' &&
-        newView === 'preview'
-      ) {
-        this.save();
-      }
-
-      if (
-        this.content === '' &&
-        newView === 'preview'
-      ) {
-        this.view = 'code';
-      } else {
-        setTimeout(() => {
-          this.view = newView;
-        }, 0);
-      }
-    },
     save () {
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,
         config: JSON.parse(JSON.stringify(this.config)),
         content: this.content
       });
-    },
-    selectBlock (id) {
-      if (this.id === id) {
-        this.setView('code');
-      }
-    },
-    deselectBlock (id) {
-      if (this.id !== id) {
-        this.setView('preview');
-      }
     }
-  },
-  beforeDestroy () {
-    this.$bus.$off('block-editor-deselect-blocks', this.deselectBlock);
-    this.$bus.$off('block-editor-block-selected', this.selectBlock);
   }
 }
 </script>

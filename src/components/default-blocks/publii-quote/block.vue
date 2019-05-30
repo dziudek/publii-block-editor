@@ -1,33 +1,43 @@
 <template>
-  <blockquote
-    class="publii-block-quote"
-    ref="block">
-    <p
-      contenteditable="true"
-      v-html="content.text"
-      @keyup="getFocusFromTab"
-      @paste="pastePlainText"
-      @keydown="handleTextKeyboard"
-      @blur="save"
-      ref="contentText" />
-    <cite
-      contenteditable="true"
-      v-html="content.author"
-      @keydown="handleAuthorKeyboard"
-      @blur="save"
-      ref="contentAuthor" />
-  </blockquote>
+  <div class="publii-block-quote-wrapper">
+    <div
+      :class="{ 'publii-block-quote-form': true, 'is-visible': view === 'code' }"
+      ref="block">
+      <textarea
+        @keyup="getFocusFromTab"
+        @keydown="handleTextKeyboard"
+        @blur="save"
+        ref="contentText"
+        placeholder="Enter Quote"
+        v-model="content.text"></textarea>
+      <input
+        type="text"
+        @keydown="handleAuthorKeyboard"
+        @blur="save"
+        v-model="content.author"
+        ref="contentAuthor" />
+    </div>
+    <blockquote
+      v-if="view === 'preview'"
+      class="publii-block-quote"
+      ref="block">
+      <p v-html="content.text" />
+      <cite v-html="content.author" />
+    </blockquote>
+  </div>
 </template>
 
 <script>
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
+import HasPreview from './../../mixins/HasPreview.vue';
 
 export default {
   name: 'Paragraph',
   mixins: [
     Block,
-    ContentEditableImprovements
+    ContentEditableImprovements,
+    HasPreview
   ],
   data () {
     return {
@@ -41,6 +51,7 @@ export default {
   mounted () {
     this.content.text = this.inputContent.text;
     this.content.author = this.inputContent.author;
+    this.view = (this.content.text === '' && this.content.author === '') ? 'code' : 'preview';
   },
   methods: {
     focus () {

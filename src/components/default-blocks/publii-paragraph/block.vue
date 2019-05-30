@@ -148,7 +148,7 @@
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import EditorIcon from './../../elements/EditorIcon.vue';
-import InlineMenu from './../../helpers/InlineMenu.vue';
+import InlineMenu from './../../mixins/InlineMenu.vue';
 import InlineMenuUI from './../../helpers/InlineMenuUI.vue';
 
 export default {
