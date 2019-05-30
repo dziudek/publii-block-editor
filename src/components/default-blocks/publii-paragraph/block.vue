@@ -201,6 +201,7 @@ export default {
     },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false && this.showNewBlockUI === false) {
+        console.log('A1');
         let newElementName = this.$parent.$parent.extensions.shortcutManager.checkContentForShortcuts(this.$refs['block'].innerHTML);
 
         if (newElementName === 'publii-paragraph') {
@@ -234,11 +235,13 @@ export default {
       if (e.code === 'Backspace' && this.$refs['block'].innerHTML === '') {
         this.$bus.$emit('block-editor-delete-block', this.id);
         e.returnValue = false;
+        return;
       }
 
       if (e.code === 'Backspace' && this.$refs['block'].innerHTML !== '' && this.cursorIsAtTheBeginning()) {
         this.mergeParagraphs();
         e.returnValue = false;
+        return;
       }
 
       if (e.code === 'Tab' && this.$refs['block'].innerHTML === '' && this.newBlockUIListVisible === false) {
@@ -262,9 +265,21 @@ export default {
       if (
         e.code === 'Enter' &&
         e.shiftKey === false &&
+        this.newBlockUIListVisible === false &&
+        this.showNewBlockUI === true
+      ) {
+        this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
+        e.returnValue = false;
+        return;
+      }
+
+      if (
+        e.code === 'Enter' &&
+        e.shiftKey === false &&
         this.newBlockUIListVisible === true &&
         this.showNewBlockUI === true
       ) {
+        console.log('A2');
         this.$refs['block'].parentNode.querySelectorAll('.publii-block-paragraph-block-selector-list-button')[this.newBlockUIActiveIndex].click();
         e.returnValue = false;
         return;

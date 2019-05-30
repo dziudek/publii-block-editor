@@ -17,7 +17,7 @@ export default {
         mark: false,
         link: false
       },
-      textIsHighlighted: true
+      textIsHighlighted: false
     };
   },
   methods: {

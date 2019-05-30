@@ -1,9 +1,9 @@
 <template>
   <transition name="block-editor-ui-fade">
     <div
+      v-if="$parent.$parent.isSelected && $parent.textIsHighlighted && !$parent.$parent.popupOpened"
       class="wrapper-ui-inline-menu"
       :style="'left: ' + left + '; top: ' + top + ';'"
-      v-if="$parent.$parent.isSelected && $parent.textIsHighlighted && !$parent.$parent.popupOpened"
       :key="'inline-menu-' + $parent.id">
       <button
         :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.bold }"
