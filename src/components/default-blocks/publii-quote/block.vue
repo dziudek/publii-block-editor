@@ -8,13 +8,14 @@
         @keydown="handleTextKeyboard"
         @blur="save"
         ref="contentText"
-        placeholder="Enter Quote"
+        placeholder="Quote text"
         v-model="content.text"></textarea>
       <input
         type="text"
         @keydown="handleAuthorKeyboard"
         @blur="save"
         v-model="content.author"
+        placeholder="Quote author"
         ref="contentAuthor" />
     </div>
     <blockquote
@@ -81,8 +82,8 @@ export default {
       this.handleKeyboard(e);
     },
     save () {
-      this.content.text = this.$refs['contentText'].innerHTML;
-      this.content.author = this.$refs['contentAuthor'].innerHTML;
+      this.content.text = this.$refs['contentText'].value;
+      this.content.author = this.$refs['contentAuthor'].value;
 
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,
@@ -124,6 +125,34 @@ export default {
         content: "Quote author";
         opacity: .35;
       }
+    }
+  }
+
+  &-form {
+    display: none;
+    padding: 20px 0;
+
+    &.is-visible {
+      display: block;
+    }
+
+    input,
+    textarea {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      display: block;
+      font-size: 16px;
+      padding: 20px;
+      width: 100%;
+    }
+
+    input {
+      padding: 10px 20px;
+    }
+
+    textarea {
+      height: 150px;
+      margin-bottom: 16px;
     }
   }
 }
