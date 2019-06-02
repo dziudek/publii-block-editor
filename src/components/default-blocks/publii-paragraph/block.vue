@@ -77,31 +77,9 @@
 
     <inline-menu ref="inline-menu" />
 
-    <transition name="block-editor-ui-fade">
-      <div
-        class="wrapper-ui-top-menu"
-        :key="'top-menu-' + id"
-        v-if="$parent.isSelected && !textIsHighlighted && !$parent.popupOpened">
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'left' }"
-          tabindex="-1"
-          @click.stop="alignText('left')">
-          <icon name="align-left" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'center' }"
-          tabindex="-1"
-          @click.stop="alignText('center')">
-          <icon name="align-center" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'right' }"
-          tabindex="-1"
-          @click.stop="alignText('right')">
-          <icon name="align-right" />
-        </button>
-      </div>
-    </transition>
+    <top-menu
+      ref="top-menu"
+      :config="topMenuConfig" />
   </div>
 </template>
 
@@ -111,6 +89,7 @@ import ContentEditableImprovements from './../../helpers/ContentEditableImprovem
 import EditorIcon from './../../elements/EditorIcon.vue';
 import InlineMenu from './../../mixins/InlineMenu.vue';
 import InlineMenuUI from './../../helpers/InlineMenuUI.vue';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Paragraph',
@@ -121,7 +100,8 @@ export default {
   ],
   components: {
     'icon': EditorIcon,
-    'inline-menu': InlineMenuUI
+    'inline-menu': InlineMenuUI,
+    'top-menu': TopMenuUI
   },
   data () {
     return {
@@ -131,7 +111,24 @@ export default {
       content: '',
       showNewBlockUI: false,
       newBlockUIActiveIndex: 0,
-      newBlockUIListVisible: false
+      newBlockUIListVisible: false,
+      topMenuConfig: [
+        {
+          activeState: function () { return this.config.textAlign === 'left'; },
+          onClick: function () { this.alignText('left'); },
+          icon: 'align-left'
+        },
+        {
+          activeState: function () { return this.config.textAlign === 'center'; },
+          onClick: function () { this.alignText('center'); },
+          icon: 'align-center'
+        },
+        {
+          activeState: function () { return this.config.textAlign === 'right'; },
+          onClick: function () { this.alignText('right'); },
+          icon: 'align-right'
+        }
+      ]
     };
   },
   mounted () {

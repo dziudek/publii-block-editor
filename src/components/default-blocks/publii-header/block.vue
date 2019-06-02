@@ -12,67 +12,16 @@
       class="publii-block-header"
       v-html="content" />
 
-    <transition name="block-editor-ui-fade">
-      <div
-        class="wrapper-ui-top-menu"
-        v-if="$parent.isSelected && !$parent.popupOpened">
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 2 }"
-          tabindex="-1"
-          @click.stop="setHeadingLevel(2)">
-          <icon name="h2" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 3 }"
-          tabindex="-1"
-          @click.stop="setHeadingLevel(3)">
-          <icon name="h3" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 4 }"
-          tabindex="-1"
-          @click.stop="setHeadingLevel(4)">
-          <icon name="h4" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 5 }"
-          tabindex="-1"
-          @click.stop="setHeadingLevel(5)">
-          <icon name="h5" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 6 }"
-          tabindex="-1"
-          @click.stop="setHeadingLevel(6)">
-          <icon name="h6" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'left' }"
-          tabindex="-1"
-          @click.stop="alignText('left')">
-          <icon name="align-left" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'center' }"
-          tabindex="-1"
-          @click.stop="alignText('center')">
-          <icon name="align-center" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'right' }"
-          tabindex="-1"
-          @click.stop="alignText('right')">
-          <icon name="align-right" />
-        </button>
-      </div>
-    </transition>
+    <top-menu
+      ref="top-menu"
+      :config="topMenuConfig" />
   </div>
 </template>
 
 <script>
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
-import EditorIcon from './../../elements/EditorIcon.vue';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Header',
@@ -81,7 +30,7 @@ export default {
     ContentEditableImprovements
   ],
   components: {
-    'icon': EditorIcon
+    'top-menu': TopMenuUI
   },
   data () {
     return {
@@ -89,7 +38,54 @@ export default {
         headingLevel: 2,
         textAlign: 'left'
       },
-      content: ''
+      content: '',
+      topMenuConfig: [
+        {
+          activeState: function () { return this.config.headingLevel === 1; },
+          onClick: function () { this.setHeadingLevel(1); },
+          icon: 'h1'
+        },
+        {
+          activeState: function () { return this.config.headingLevel === 2; },
+          onClick: function () { this.setHeadingLevel(2); },
+          icon: 'h2'
+        },
+        {
+          activeState: function () { return this.config.headingLevel === 3; },
+          onClick: function () { this.setHeadingLevel(3); },
+          icon: 'h3'
+        },
+        {
+          activeState: function () { return this.config.headingLevel === 4; },
+          onClick: function () { this.setHeadingLevel(4); },
+          icon: 'h4'
+        },
+        {
+          activeState: function () { return this.config.headingLevel === 5; },
+          onClick: function () { this.setHeadingLevel(5); },
+          icon: 'h5'
+        },
+        {
+          activeState: function () { return this.config.headingLevel === 6; },
+          onClick: function () { this.setHeadingLevel(6); },
+          icon: 'h6'
+        },
+        {
+          activeState: function () { return this.config.textAlign === 'left'; },
+          onClick: function () { this.alignText('left'); },
+          icon: 'align-left'
+        },
+        {
+          activeState: function () { return this.config.textAlign === 'center'; },
+          onClick: function () { this.alignText('center'); },
+          icon: 'align-center'
+        },
+        {
+          activeState: function () { return this.config.textAlign === 'right'; },
+          onClick: function () { this.alignText('right'); },
+          icon: 'align-right'
+        }
+      ]
     };
   },
   mounted () {

@@ -9,48 +9,15 @@
       <hr :class="config.type" />
     </div>
 
-    <transition name="block-editor-ui-fade">
-      <div
-        class="wrapper-ui-top-menu"
-        v-if="$parent.isSelected && !$parent.popupOpened">
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'long' }"
-          tabindex="-1"
-          @click.stop="setType('long')">
-          <icon name="long-line" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'medium' }"
-          tabindex="-1"
-          @click.stop="setType('medium')">
-          <icon name="shorter-line" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'short' }"
-          tabindex="-1"
-          @click.stop="setType('short')">
-          <icon name="short-line" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'dots' }"
-          tabindex="-1"
-          @click.stop="setType('dots')">
-          <icon name="dotted-line" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'dot' }"
-          tabindex="-1"
-          @click.stop="setType('dot')">
-          <icon name="dot" />
-        </button>
-      </div>
-    </transition>
+    <top-menu
+      ref="top-menu"
+      :config="topMenuConfig" />
   </div>
 </template>
 
 <script>
 import Block from './../../Block.vue';
-import EditorIcon from './../../elements/EditorIcon.vue';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Separator',
@@ -58,14 +25,41 @@ export default {
     Block
   ],
   components: {
-    'icon': EditorIcon
+    'top-menu': TopMenuUI
   },
   data () {
     return {
       config: {
         type: 'long'
       },
-      content: ''
+      content: '',
+      topMenuConfig: [
+        {
+          activeState: function () { return this.config.type === 'long'; },
+          onClick: function () { this.setType('long'); },
+          icon: 'long-line'
+        },
+        {
+          activeState: function () { return this.config.type === 'medium'; },
+          onClick: function () { this.setType('medium'); },
+          icon: 'shorter-line'
+        },
+        {
+          activeState: function () { return this.config.type === 'short'; },
+          onClick: function () { this.setType('short'); },
+          icon: 'short-line'
+        },
+        {
+          activeState: function () { return this.config.type === 'dots'; },
+          onClick: function () { this.setType('dots'); },
+          icon: 'dotted-line'
+        },
+        {
+          activeState: function () { return this.config.type === 'dot'; },
+          onClick: function () { this.setType('dot'); },
+          icon: 'dot'
+        }
+      ]
     };
   },
   mounted () {

@@ -14,44 +14,17 @@
 
     <inline-menu ref="inline-menu" />
 
-    <transition name="block-editor-ui-fade">
-      <div
-        class="wrapper-ui-top-menu"
-        v-if="$parent.isSelected && !$parent.popupOpened && !textIsHighlighted">
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ul' }"
-          tabindex="-1"
-          @click.stop="setListType('ul')">
-          <icon name="unordered-list" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ol' }"
-          tabindex="-1"
-          @click.stop="setListType('ol')">
-          <icon name="ordered-list" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true }"
-          tabindex="-1"
-          @click.stop="indentList()">
-          <icon name="nesting" />
-        </button>
-        <button
-          :class="{ 'wrapper-ui-top-menu-button': true }"
-          tabindex="-1"
-          @click.stop="outdentList()">
-          <icon name="flattening" />
-        </button>
-      </div>
-    </transition>
+    <top-menu
+      ref="top-menu"
+      :config="topMenuConfig" />
   </div>
 </template>
 
 <script>
 import Block from './../../Block.vue';
-import EditorIcon from './../../elements/EditorIcon.vue';
 import InlineMenu from './../../mixins/InlineMenu.vue';
 import InlineMenuUI from './../../helpers/InlineMenuUI.vue';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'List',
@@ -60,15 +33,37 @@ export default {
     InlineMenu
   ],
   components: {
-    'icon': EditorIcon,
-    'inline-menu': InlineMenuUI
+    'inline-menu': InlineMenuUI,
+    'top-menu': TopMenuUI
   },
   data () {
     return {
       config: {
         listType: 'ul'
       },
-      content: '<li></li>'
+      content: '<li></li>',
+      topMenuConfig: [
+        {
+          activeState: function () { return this.config.listType === 'ul'; },
+          onClick: function () { this.setListType('ul'); },
+          icon: 'unordered-list'
+        },
+        {
+          activeState: function () { return this.config.listType === 'ol'; },
+          onClick: function () { this.setListType('ol'); },
+          icon: 'ordered-list'
+        },
+        {
+          activeState: function () { return false; },
+          onClick: function () { return this.indentList(); },
+          icon: 'nesting'
+        },
+        {
+          activeState: function () { return false; },
+          onClick: function () { return this.outdentList(); },
+          icon: 'flattening'
+        }
+      ]
     };
   },
   mounted () {

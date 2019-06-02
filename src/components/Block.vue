@@ -6,6 +6,11 @@ export default {
     'inputContent',
     'inputConfig'
   ],
+  data () {
+    return {
+      textIsHighlighted: false
+    };
+  },
   mounted () {
     this.$on('block-save', this.save);
     this.$bus.$on('block-editor-trigger-block-save', this.saveIsNeeded);

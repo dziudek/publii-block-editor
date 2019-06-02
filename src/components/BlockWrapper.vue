@@ -260,7 +260,6 @@ export default {
       border-radius: 4px;
       box-shadow: 0 1px 6px $block-editor-color-shadow;
       display: flex;
-      flex-wrap: wrap;
       height: 43px;
       left: 50%;
       padding: 0 13px;

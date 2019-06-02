@@ -16,8 +16,7 @@ export default {
         code: false,
         mark: false,
         link: false
-      },
-      textIsHighlighted: false
+      }
     };
   },
   methods: {
