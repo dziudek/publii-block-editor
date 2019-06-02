@@ -20,73 +20,49 @@
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 2 }"
           tabindex="-1"
           @click.stop="setHeadingLevel(2)">
-          <icon
-            height="12"
-            name="h2"
-            width="19" />
+          <icon name="h2" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 3 }"
           tabindex="-1"
           @click.stop="setHeadingLevel(3)">
-          <icon
-            height="12"
-            name="h3"
-            width="19" />
+          <icon name="h3" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 4 }"
           tabindex="-1"
           @click.stop="setHeadingLevel(4)">
-          <icon
-            height="12"
-            name="h4"
-            width="20" />
+          <icon name="h4" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 5 }"
           tabindex="-1"
           @click.stop="setHeadingLevel(5)">
-          <icon
-            height="12"
-            name="h5"
-            width="18" />
+          <icon name="h5" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.headingLevel === 6 }"
           tabindex="-1"
           @click.stop="setHeadingLevel(6)">
-          <icon
-            height="12"
-            name="h6"
-            width="18" />
+          <icon name="h6" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'left' }"
           tabindex="-1"
           @click.stop="alignText('left')">
-          <icon
-            height="12"
-            name="align-left"
-            width="14" />
+          <icon name="align-left" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'center' }"
           tabindex="-1"
           @click.stop="alignText('center')">
-          <icon
-            height="12"
-            name="align-center"
-            width="14" />
+          <icon name="align-center" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'right' }"
           tabindex="-1"
           @click.stop="alignText('right')">
-          <icon
-            height="12"
-            name="align-right"
-            width="14" />
+          <icon name="align-right" />
         </button>
       </div>
     </transition>

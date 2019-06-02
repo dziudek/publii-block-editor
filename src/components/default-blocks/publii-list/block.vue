@@ -22,37 +22,25 @@
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ul' }"
           tabindex="-1"
           @click.stop="setListType('ul')">
-          <icon
-            height="12"
-            name="unordered-list"
-            width="16" />
+          <icon name="unordered-list" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.listType === 'ol' }"
           tabindex="-1"
           @click.stop="setListType('ol')">
-          <icon
-            height="14"
-            name="ordered-list"
-            width="17" />
+          <icon name="ordered-list" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true }"
           tabindex="-1"
           @click.stop="indentList()">
-          <icon
-            height="12"
-            name="nesting"
-            width="17" />
+          <icon name="nesting" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true }"
           tabindex="-1"
           @click.stop="outdentList()">
-          <icon
-            height="12"
-            name="flattening"
-            width="17" />
+          <icon name="flattening" />
         </button>
       </div>
     </transition>

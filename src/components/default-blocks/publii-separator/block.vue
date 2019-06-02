@@ -17,46 +17,31 @@
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'long' }"
           tabindex="-1"
           @click.stop="setType('long')">
-          <icon
-            height="2"
-            name="long-line"
-            width="20" />
+          <icon name="long-line" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'medium' }"
           tabindex="-1"
           @click.stop="setType('medium')">
-          <icon
-            height="2"
-            name="shorter-line"
-            width="16" />
+          <icon name="shorter-line" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'short' }"
           tabindex="-1"
           @click.stop="setType('short')">
-          <icon
-            height="2"
-            name="short-line"
-            width="8" />
+          <icon name="short-line" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'dots' }"
           tabindex="-1"
           @click.stop="setType('dots')">
-          <icon
-            height="3"
-            name="dotted-line"
-            width="15" />
+          <icon name="dotted-line" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.type === 'dot' }"
           tabindex="-1"
           @click.stop="setType('dot')">
-          <icon
-            height="3"
-            name="dot"
-            width="3" />
+          <icon name="dot" />
         </button>
       </div>
     </transition>

@@ -8,50 +8,32 @@
       <button
         :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.bold }"
         @click.stop="$parent.doInlineOperation('strong');">
-        <icon
-          height="13"
-          name="bold"
-          width="9" />
+        <icon name="bold" />
       </button>
       <button
         :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.italic }"
         @click.stop="$parent.doInlineOperation('em');">
-        <icon
-          height="13"
-          name="italic"
-          width="10" />
+        <icon name="italic" />
       </button>
       <button
         :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.underline }"
         @click.stop="$parent.doInlineOperation('u');">
-        <icon
-          height="14"
-          name="underline"
-          width="10" />
+        <icon name="underline" />
       </button>
       <button
         :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.strikethrough }"
         @click.stop="$parent.doInlineOperation('s');">
-        <icon
-          height="14"
-          name="strikethrough"
-          width="12" />
+        <icon name="strikethrough" />
       </button>
       <button
         :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.code }"
         @click.stop="$parent.doInlineOperation('code');">
-        <icon
-          height="12"
-          name="code"
-          width="14" />
+        <icon name="code" />
       </button>
       <button
         :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.mark }"
         @click.stop="$parent.doInlineOperation('mark');">
-        <icon
-          height="13"
-          name="marker"
-          width="16" />
+        <icon name="marker" />
       </button>
     </div>
   </transition>

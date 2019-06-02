@@ -21,10 +21,7 @@
       <button
         @click.stop="toggleNewBlockUI()"
         tabindex="-1">
-        <icon
-          height="12"
-          name="add"
-          width="12" />
+        <icon name="add" />
       </button>
 
       <div
@@ -33,74 +30,47 @@
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 0 }"
           @click.stop="addNewBlock('publii-header');">
-          <icon
-            height="14"
-            name="headings"
-            width="10" />
+          <icon name="headings" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 1 }"
           @click.stop="addNewBlock('publii-list');">
-          <icon
-            height="12"
-            name="unordered-list"
-            width="16" />
+          <icon name="unordered-list" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 2 }"
           @click.stop="addNewBlock('publii-quote');">
-          <icon
-            height="12"
-            name="quote"
-            width="14" />
+          <icon name="quote" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 3 }"
           @click.stop="addNewBlock('publii-code');">
-          <icon
-            height="12"
-            name="code"
-            width="14" />
+          <icon name="code" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 4 }"
           @click.stop="addNewBlock('publii-html');">
-          <icon
-            height="12"
-            name="html"
-            width="18" />
+          <icon name="html" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 5 }"
           @click.stop="addNewBlock('publii-separator');">
-          <icon
-            height="2"
-            name="separator"
-            width="16" />
+          <icon name="separator" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 6 }"
           @click.stop="addNewBlock('publii-readmore');">
-          <icon
-            height="12"
-            name="readmore"
-            width="16" />
+          <icon name="readmore" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 7 }"
           @click.stop="addNewBlock('publii-embed');">
-          <icon
-            height="14"
-            name="video"
-            width="18" />
+          <icon name="video" />
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 8 }"
           @click.stop="addNewBlock('publii-toc');">
-          <icon
-            height="12"
-            name="toc"
-            width="16" />
+          <icon name="toc" />
         </button>
       </div>
     </div>
@@ -116,28 +86,19 @@
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'left' }"
           tabindex="-1"
           @click.stop="alignText('left')">
-          <icon
-            height="12"
-            name="align-left"
-            width="14" />
+          <icon name="align-left" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'center' }"
           tabindex="-1"
           @click.stop="alignText('center')">
-          <icon
-            height="12"
-            name="align-center"
-            width="14" />
+          <icon name="align-center" />
         </button>
         <button
           :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': this.config.textAlign === 'right' }"
           tabindex="-1"
           @click.stop="alignText('right')">
-          <icon
-            height="12"
-            name="align-right"
-            width="14" />
+          <icon name="align-right" />
         </button>
       </div>
     </transition>

@@ -9,8 +9,8 @@
       <div class="wrapper-ui-show-options" @click.stop="togglePopup">
         <icon
           name="menu"
-          width="18"
-          height="4" />
+          customWidth="18"
+          customHeight="4" />
       </div>
 
       <transition name="block-editor-ui-fade">
@@ -22,46 +22,31 @@
               class="wrapper-ui-popup-button"
               tabindex="-1"
               @click.stop="addBlock">
-              <icon
-                name="enter"
-                width="14"
-                height="13" />
+              <icon name="enter" />
             </button>
             <button
               class="wrapper-ui-popup-button"
               tabindex="-1"
               @click.stop="moveDown">
-              <icon
-                name="down"
-                width="14"
-                height="13" />
+              <icon name="down" />
             </button>
             <button
               class="wrapper-ui-popup-button"
               tabindex="-1"
               @click.stop="moveUp">
-              <icon
-                name="up"
-                width="14"
-                height="13" />
+              <icon name="up" />
             </button>
             <button
               :class="{ 'wrapper-ui-popup-button': true, 'wrapper-ui-popup-button-danger': confirmDelete }"
               tabindex="-1"
               @click.stop="deleteBlock">
-              <icon
-                name="trash"
-                width="14"
-                height="13" />
+              <icon name="trash" />
             </button>
             <button
               class="wrapper-ui-popup-button"
               tabindex="-1"
               @click.stop="showMore">
-              <icon
-                name="gear"
-                width="14"
-                height="13" />
+              <icon name="gear" />
             </button>
           </div>
         </div>
