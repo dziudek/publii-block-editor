@@ -18,7 +18,8 @@
           :inputConfig="block.config"
           :inputContent="block.content"
           :key="'block-' + block.id"
-          :ref="'block-' + block.id" />
+          :ref="'block-' + block.id"
+          :editor="$self" />
       </block-wrapper>
     </div>
   </div>
@@ -59,6 +60,11 @@ export default {
     'publii-separator': PubliiSeparator,
     'publii-toc': PubliiToc,
     'publii-quote': PubliiQuote
+  },
+  computed: {
+    hasReadMore () {
+      return this.content.filter(block => block.type === 'publii-readmore').length > 0;
+    }
   },
   data () {
     return {
@@ -147,6 +153,7 @@ export default {
     }, 500);
   },
   mounted () {
+    this.$self = this;
     Vue.prototype.$rangy.init();
     this.$bus.$on('block-editor-move-block-up', this.moveBlockUp);
     this.$bus.$on('block-editor-move-block-down', this.moveBlockDown);

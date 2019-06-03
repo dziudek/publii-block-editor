@@ -58,17 +58,18 @@
           <icon name="separator" />
         </button>
         <button
+          v-if="!editor.hasReadMore"
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 6 }"
           @click.stop="addNewBlock('publii-readmore');">
           <icon name="readmore" />
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 7 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 7 : 6) }"
           @click.stop="addNewBlock('publii-embed');">
           <icon name="video" />
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 8 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 8 : 7) }"
           @click.stop="addNewBlock('publii-toc');">
           <icon name="toc" />
         </button>
@@ -160,6 +161,12 @@ export default {
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false && this.showNewBlockUI === false) {
         let newElementName = this.$parent.$parent.extensions.shortcutManager.checkContentForShortcuts(this.$refs['block'].innerHTML);
+
+        if (newElementName === 'publii-readmore' && this.editor.hasReadMore) {
+          alert('You can add only one read more per post.');
+          e.returnValue = false;
+          return;
+        }
 
         if (newElementName === 'publii-paragraph') {
           document.execCommand('insertHTML', false, '<line-separator />');

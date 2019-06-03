@@ -4,7 +4,8 @@ export default {
   props: [
     'id',
     'inputContent',
-    'inputConfig'
+    'inputConfig',
+    'editor'
   ],
   data () {
     return {
