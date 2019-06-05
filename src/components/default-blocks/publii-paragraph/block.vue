@@ -34,42 +34,47 @@
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 1 }"
+          @click.stop="addNewBlock('publii-image');">
+          <icon name="image" />
+        </button>
+        <button
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 2 }"
           @click.stop="addNewBlock('publii-list');">
           <icon name="unordered-list" />
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 2 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 3 }"
           @click.stop="addNewBlock('publii-quote');">
           <icon name="quote" />
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 3 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 4 }"
           @click.stop="addNewBlock('publii-code');">
           <icon name="code" />
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 4 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 5 }"
           @click.stop="addNewBlock('publii-html');">
           <icon name="html" />
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 5 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 6 }"
           @click.stop="addNewBlock('publii-separator');">
           <icon name="separator" />
         </button>
         <button
           v-if="!editor.hasReadMore"
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 6 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 7 }"
           @click.stop="addNewBlock('publii-readmore');">
           <icon name="readmore" />
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 7 : 6) }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 8 : 7) }"
           @click.stop="addNewBlock('publii-embed');">
           <icon name="video" />
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 8 : 7) }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 9 : 8) }"
           @click.stop="addNewBlock('publii-toc');">
           <icon name="toc" />
         </button>
