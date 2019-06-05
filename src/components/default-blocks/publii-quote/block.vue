@@ -49,19 +49,19 @@ export default {
       }
     };
   },
+  watch: {
+    'view': function (oldValue, newValue) {
+      if (oldValue === 'code' && newValue === 'preview') {
+        this.setCursorAtEndOfElement('contentText', false);
+      }
+    }
+  },
   mounted () {
     this.content.text = this.inputContent.text;
     this.content.author = this.inputContent.author;
     this.view = (this.content.text === '' && this.content.author === '') ? 'code' : 'preview';
   },
   methods: {
-    focus () {
-      this.view = 'code';
-
-      setTimeout(() => {
-        this.setCursorAtEndOfElement('contentText', false);
-      }, 0);
-    },
     handleTextKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
         this.$refs['contentAuthor'].focus();

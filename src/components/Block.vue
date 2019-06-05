@@ -58,9 +58,11 @@ export default {
         sel.addRange(range);
       } else {
         let val = this.$refs[id].value;
-        this.$refs[id].focus();
-        this.$refs[id].value = '';
-        this.$refs[id].value = val;
+
+        setTimeout(() => {
+          this.$refs[id].focus();
+          this.$refs[id].setSelectionRange(val.length, val.length);
+        }, 0);
       }
     },
     getFocusFromTab (e) {
