@@ -2,7 +2,7 @@
   <transition name="block-editor-ui-fade">
     <div
       class="wrapper-ui-top-menu"
-      v-if="$parent.$parent.isSelected && !$parent.$parent.popupOpened && !$parent.textIsHighlighted">
+      v-if="$parent.$parent.isSelected && !$parent.$parent.popupOpened && !$parent.textIsHighlighted && !$parent.newBlockUIListVisible">
       <button
         v-for="(button, index) of config"
         :key="'top-menu-button-' + index"
