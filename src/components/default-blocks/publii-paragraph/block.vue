@@ -24,6 +24,15 @@
         <icon name="add" />
       </button>
 
+      <div class="publii-block-paragraph-block-selector-tooltip">
+        <span class="publii-block-paragraph-block-selector-tooltip-label1">
+          Add
+        </span>
+        <span class="publii-block-paragraph-block-selector-tooltip-label2">
+          <icon name="tab" /> Tab
+        </span>
+      </div>
+
       <div
         v-if="newBlockUIListVisible"
         :class="{ 'publii-block-paragraph-block-selector-list': true, 'is-visible': true }">
@@ -342,6 +351,56 @@ export default {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+
+    &-tooltip {
+      background: $color-editor-color-light-medium;
+      border-radius: $block-editor-form-input-border-radius;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      height: 40px;
+      left: 50%;
+      padding: 5px 0;
+      position: absolute;
+      top: 30px;
+      transform: translateX(-50%);
+      width: 64px;
+
+      &:after {
+        border: 6px solid $color-editor-color-light-medium;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-top-color: transparent;
+        content: "";
+        filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, .08));
+        height: 12px;
+        left: 50%;
+        position: absolute;
+        top: -12px;
+        transform: translateX(-50%);
+        width: 12px;
+      }
+
+      &-label1,
+      &-label2 {
+        align-items: center;
+        display: flex;
+        font-size: 13px;
+        height: 13px;
+        justify-content: center;
+        line-height: 1;
+        width: 100%;
+      }
+
+      &-label2 {
+        opacity: .3;
+
+        svg {
+          margin-right: 3px;
+        }
+      }
+    }
 
     &.is-visible {
       display: block;
