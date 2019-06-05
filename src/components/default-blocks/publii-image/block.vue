@@ -1,20 +1,33 @@
 <template>
   <div class="publii-block-image-wrapper">
     <div
-      :class="{ 'publii-block-image': true, 'is-visible': view === 'code' }"
+      :class="{ 'publii-block-image-form': true, 'is-visible': view === 'code' }"
       ref="block">
-      <textarea
-        @keydown="handleKeyboard"
+      <input
+        type="text"
+        @keydown="handleCaptionKeyboard"
         @blur="save"
-        ref="code"
-        placeholder="Enter URL or embed code..."
-        v-model="content"></textarea>
+        v-model="content.caption"
+        placeholder="Enter a caption"
+        ref="contentCaption" />
+      <input
+        type="text"
+        @keydown="handleAltKeyboard"
+        @blur="save"
+        v-model="content.alt"
+        placeholder="Enter alt text"
+        ref="contentAlt" />
     </div>
-    <div
+    <blockquote
       v-if="view === 'preview'"
-      v-html="modifiedContent"
-      :class="{ 'publii-block-image-preview': true }">
-    </div>
+      class="publii-block-quote"
+      ref="block">
+
+    </blockquote>
+
+    <top-menu
+      ref="top-menu"
+      :config="topMenuConfig" />
   </div>
 </template>
 
@@ -22,6 +35,7 @@
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import HasPreview from './../../mixins/HasPreview.vue';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'PImage',
@@ -30,45 +44,95 @@ export default {
     ContentEditableImprovements,
     HasPreview
   ],
+  components: {
+    'top-menu': TopMenuUI
+  },
   data () {
     return {
-      config: {},
-      content: ''
+      config: {
+        imageAlign: 'center'
+      },
+      content: {
+        image: '',
+        alt: '',
+        caption: ''
+      },
+      topMenuConfig: [
+        {
+          activeState: function () { return this.config.imageAlign === 'left'; },
+          onClick: function () { this.alignImage('left'); },
+          icon: 'left'
+        },
+        {
+          activeState: function () { return this.config.imageAlign === 'center'; },
+          onClick: function () { this.alignImage('center'); },
+          icon: 'center'
+        },
+        {
+          activeState: function () { return this.config.imageAlign === 'right'; },
+          onClick: function () { this.alignImage('right'); },
+          icon: 'right'
+        },
+        {
+          activeState: function () { return this.config.imageAlign === 'wide'; },
+          onClick: function () { this.alignImage('wide'); },
+          icon: 'wide'
+        },
+        {
+          activeState: function () { return this.config.imageAlign === 'full'; },
+          onClick: function () { this.alignImage('full'); },
+          icon: 'full'
+        }
+      ]
     };
   },
-  computed: {
-    modifiedContent () {
-      return this.content;
-    }
-  },
   mounted () {
-    this.content = this.inputContent;
-    this.view = this.content === '' ? 'code' : 'preview';
+    this.content.image = this.inputContent.image;
+    this.content.alt = this.inputContent.alt;
+    this.content.caption = this.inputContent.caption;
+    this.view = (this.content.image === '') ? 'code' : 'preview';
   },
   methods: {
-    handleKeyboard (e) {
+    alignImage (newValue) {
+      this.config.imageAlign = newValue;
+    },
+    focus () {
+      this.view = 'code';
+
+      setTimeout(() => {
+        this.setCursorAtEndOfElement('contentCaption', false);
+      }, 0);
+    },
+    handleCaptionKeyboard (e) {
+      if (e.code === 'Enter' && e.shiftKey === false) {
+        this.$refs['contentAlt'].focus();
+        e.returnValue = false;
+      }
+
+      if (e.code === 'Backspace' && this.$refs['contentCaption'].value === '' && this.$refs['contentAlt'].value === '') {
+        this.$bus.$emit('block-editor-delete-block', this.id);
+        e.returnValue = false;
+      }
+    },
+    handleAltKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
         this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
         e.returnValue = false;
       }
 
-      if (e.code === 'Tab' && e.shiftKey === false) {
-        e.preventDefault();
-        // eslint-disable-next-line
-        document.execCommand('insertHTML', false, "  ");
-        e.returnValue = false;
-      }
-
-      if (e.code === 'Backspace' && this.content === '') {
-        this.$bus.$emit('block-editor-delete-block', this.id);
+      if (e.code === 'Backspace' && this.$refs['contentCaption'].value === '') {
+        this.$refs['contentCaption'].focus();
         e.returnValue = false;
       }
     },
     save () {
+      this.content.alt = this.$refs['contentAlt'].value;
+      this.content.caption = this.$refs['contentCaption'].value;
+
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,
         config: JSON.parse(JSON.stringify(this.config)),
-        content: this.content
+        content: JSON.parse(JSON.stringify(this.content))
       });
     }
   }
@@ -76,41 +140,51 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../../assets/variables.scss';
+
 .publii-block-image {
-  background: #eee;
-  border: 1px solid #ccc;
-  color: #ccc;
-  display: none;
-  font-size: 16px;
-  line-height: 1.4;
-  padding: 15px 20px;
+  border-left: 3px solid #aaa;
+  margin: 20px 0;
   outline: none;
-  width: 100%;
+  padding: 10px 20px;
 
-  textarea {
-    background: #fff;
-    border: 1px solid #ccc;
-    font-family: monospace;
-    font-size: 16px;
-    padding: 10px 20px;
-    width: 100%;
-  }
-
-  &.is-visible {
-    display: block;
-  }
-
-  &-preview {
-    background: #f0f0f0;
+  p {
     margin: 0;
-    padding: 0 0 56.25% 0;
-    position: relative;
+    outline: none;
 
-    iframe {
-      height: 100%;
-      pointer-events: none;
-      position: absolute;
+    &:empty {
+      &:before {
+        content: "Quote text";
+        opacity: .35;
+      }
+    }
+  }
+
+  &-form {
+    display: none;
+    padding: 20px 0;
+
+    &.is-visible {
+      display: block;
+    }
+
+    input,
+    textarea {
+      border: 1px solid $block-editor-form-input-border;
+      border-radius: $block-editor-form-input-border-radius;
+      display: block;
+      font-size: 16px;
+      outline: none;
+      padding: 20px;
       width: 100%;
+    }
+
+    input {
+      padding: 10px 20px;
+    }
+
+    input + input {
+      margin-top: 16px;
     }
   }
 }
