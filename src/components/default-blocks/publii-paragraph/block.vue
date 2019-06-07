@@ -351,6 +351,7 @@ export default {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 10;
 
     &-tooltip {
       background: $color-editor-color-light-medium;
@@ -366,6 +367,7 @@ export default {
       top: 30px;
       transform: translateX(-50%);
       width: 64px;
+      z-index: 10;
 
       &:after {
         border: 6px solid $color-editor-color-light-medium;

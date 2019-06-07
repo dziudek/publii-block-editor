@@ -59,19 +59,9 @@ export default {
       },
       topMenuConfig: [
         {
-          activeState: function () { return this.config.imageAlign === 'left'; },
-          onClick: function () { this.alignImage('left'); },
-          icon: 'left'
-        },
-        {
           activeState: function () { return this.config.imageAlign === 'center'; },
           onClick: function () { this.alignImage('center'); },
           icon: 'center'
-        },
-        {
-          activeState: function () { return this.config.imageAlign === 'right'; },
-          onClick: function () { this.alignImage('right'); },
-          icon: 'right'
         },
         {
           activeState: function () { return this.config.imageAlign === 'wide'; },
