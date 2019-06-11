@@ -1,9 +1,25 @@
 <template>
   <div class="publii-block-image-wrapper">
     <div
+      v-if="view === 'preview' || content.image !== ''"
+      ref="block"
+      class="publii-block-image">
+      <img :src="content.image" />
+    </div>
+
+    <div
       :class="{ 'publii-block-image-form': true, 'is-visible': view === 'code' }"
       ref="block">
-      <div class="publii-block-image-uploader">
+      <div
+        v-if="content.image === ''"
+        :class="{ 'publii-block-image-uploader': true, 'is-hovered': isHovered }"
+        @drag.stop.prevent
+        @dragstart.stop.prevent
+        @dragend.stop.prevent
+        @dragover.stop.prevent="dragOver"
+        @dragenter.stop.prevent
+        @dragleave.stop.prevent="dragLeave"
+        @drop.stop.prevent="drop">
         <div class="publii-block-image-uploader-inner">
           <icon
             name="image"
@@ -29,12 +45,6 @@
         placeholder="Enter alt text"
         ref="contentAlt" />
     </div>
-    <blockquote
-      v-if="view === 'preview'"
-      class="publii-block-quote"
-      ref="block">
-
-    </blockquote>
 
     <top-menu
       ref="top-menu"
@@ -62,6 +72,7 @@ export default {
   },
   data () {
     return {
+      isHovered: false,
       config: {
         imageAlign: 'center'
       },
@@ -90,12 +101,22 @@ export default {
     };
   },
   mounted () {
-    this.content.image = this.inputContent.image;
-    this.content.alt = this.inputContent.alt;
-    this.content.caption = this.inputContent.caption;
+    this.content.image = this.inputContent.image || '';
+    this.content.alt = this.inputContent.alt || '';
+    this.content.caption = this.inputContent.caption || '';
     this.view = (this.content.image === '') ? 'code' : 'preview';
   },
   methods: {
+    dragOver (e) {
+      this.isHovered = true;
+    },
+    dragLeave (e) {
+      this.isHovered = false;
+    },
+    drop (e) {
+      let blob = e.dataTransfer.items[0].getAsFile();
+      this.content.image = window.URL.createObjectURL(blob);
+    },
     setView (newView) {
       if (
         this.view === 'code' &&
@@ -165,21 +186,14 @@ export default {
 @import '../../../assets/variables.scss';
 
 .publii-block-image {
-  border-left: 3px solid #aaa;
-  margin: 20px 0;
+  margin: 20px 0 0 0;
   outline: none;
-  padding: 10px 20px;
 
-  p {
+  & > img {
+    display: block;
+    height: auto;
     margin: 0;
-    outline: none;
-
-    &:empty {
-      &:before {
-        content: "Quote text";
-        opacity: .35;
-      }
-    }
+    max-width: 100%;
   }
 
   &-form {
@@ -217,6 +231,10 @@ export default {
     margin: 0 0 16px 0;
     padding: 10px;
     width: 100%;
+
+    &.is-hovered {
+      border-color: $block-editor-color-primary;
+    }
 
     &-inner {
       align-items: center;
