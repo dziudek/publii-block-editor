@@ -5,6 +5,12 @@
       ref="block"
       class="publii-block-image">
       <img :src="content.image" />
+      <button
+        v-if="view === 'code'"
+        class="publii-block-image-delete"
+        @click.stop.prevent="clearImage()">
+        <icon name="trash" />
+      </button>
     </div>
 
     <div
@@ -117,6 +123,9 @@ export default {
       let blob = e.dataTransfer.items[0].getAsFile();
       this.content.image = window.URL.createObjectURL(blob);
     },
+    clearImage () {
+      this.content.image = '';
+    },
     setView (newView) {
       if (
         this.view === 'code' &&
@@ -188,12 +197,37 @@ export default {
 .publii-block-image {
   margin: 20px 0 0 0;
   outline: none;
+  position: relative;
 
   & > img {
     display: block;
     height: auto;
     margin: 0;
     max-width: 100%;
+  }
+
+  &-delete {
+    align-items: center;
+    background: $block-editor-color-danger;
+    border: none;
+    border-radius: $block-editor-form-input-border-radius;
+    color: $block-editor-color-light;
+    cursor: pointer;
+    display: flex;
+    height: 24px;
+    justify-content: center;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    transition: all .25s ease-out;
+    width: 24px;
+    z-index: 10;
+
+    &:active,
+    &:focus,
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
   &-form {
