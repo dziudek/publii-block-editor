@@ -159,7 +159,7 @@ export default {
   position: relative;
 
   &[data-block-type="publii-embed"] {
-    margin: 15px 0;
+    margin: 15px auto;
   }
 
   &.is-selected {
