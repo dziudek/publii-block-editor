@@ -1,8 +1,9 @@
 <template>
   <div
     :data-block-type="blockType"
-    :class="{ 'wrapper': true, 'is-selected': isSelected }"
-    @click.stop="blockClick">
+    :class="{ 'wrapper': true, 'is-selected': isSelected, [customCssClasses.join(' ')]: true }"
+    @click.stop="blockClick"
+    :style="'width: ' + $parent.config.contentWidth + 'px;'">
     <slot />
 
     <div class="wrapper-ui">
@@ -69,6 +70,7 @@ export default {
   },
   data () {
     return {
+      customCssClasses: [],
       isSelected: false,
       popupOpened: false,
       confirmDelete: false
@@ -112,6 +114,16 @@ export default {
         this.$bus.$emit('block-editor-block-selected', this.id);
       }
     },
+    addCustomCssClass (cssClass) {
+      if (this.customCssClasses.indexOf(cssClass) === -1) {
+        this.customCssClasses.push(cssClass);
+      }
+    },
+    removeCustomCssClass (cssClass) {
+      if (this.customCssClasses.indexOf(cssClass) > -1) {
+        this.customCssClasses = this.customCssClasses.filter(item => item !== cssClass);
+      }
+    },
     moveUp () {
       this.$bus.$emit('block-editor-move-block-up', this.id);
     },
@@ -143,7 +155,7 @@ export default {
 
 .wrapper {
   border: 2px solid transparent;
-  margin: -10px 0;
+  margin: -10px auto;
   position: relative;
 
   &[data-block-type="publii-embed"] {
@@ -157,8 +169,22 @@ export default {
     }
   }
 
+  &.contains-full-image {
+    width: 100%!important;
+
+    .publii-block-image-form input {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 720px;
+    }
+
+    .wrapper-ui {
+      right: 0;
+    }
+  }
+
   &:first-child {
-    margin: 0 0 -10px 0;
+    margin: 0 auto -10px auto;
   }
 
   &-ui {

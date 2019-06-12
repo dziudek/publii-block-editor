@@ -3,7 +3,7 @@
     <figure
       v-if="view === 'preview' || content.image !== ''"
       ref="block"
-      class="publii-block-image">
+      :class="{ 'publii-block-image': true, 'is-wide': config.imageAlign === 'wide', 'is-full': config.imageAlign === 'full' }">
       <img :src="content.image" />
       <button
         v-if="view === 'code' && !$parent.popupOpened"
@@ -152,6 +152,12 @@ export default {
     },
     alignImage (newValue) {
       this.config.imageAlign = newValue;
+
+      if (newValue === 'full') {
+        this.$parent.addCustomCssClass('contains-full-image');
+      } else {
+        this.$parent.removeCustomCssClass('contains-full-image');
+      }
     },
     focus () {
       this.view = 'code';
@@ -209,6 +215,7 @@ export default {
     height: auto;
     margin: 0;
     max-width: 100%;
+    transition: all .25s ease-out;
   }
 
   & > figcaption {
@@ -323,6 +330,17 @@ export default {
           background: $block-editor-color-text-medium-dark;
         }
       }
+    }
+  }
+
+  &.is-wide {
+    & > img {
+      margin: 0 -84px;
+      max-width: calc(100% + 168px);
+    }
+
+    .publii-block-image-delete {
+      right: -64px;
     }
   }
 }

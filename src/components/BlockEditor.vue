@@ -4,8 +4,7 @@
     @click="$bus.$emit('block-editor-deselect-blocks')">
     <div
       v-if="state.externalComponentsLoaded"
-      class="editor-inner"
-      :style="'width: ' + config.contentWidth + 'px;'">
+      class="editor-inner">
       <block-wrapper
         v-for="block of content"
         :id="block.id"
