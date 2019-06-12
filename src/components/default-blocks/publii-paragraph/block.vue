@@ -309,6 +309,11 @@ export default {
       this.showNewBlockUI = true;
       this.newBlockUIListVisible = !this.newBlockUIListVisible;
     },
+    toggleNewBlockUIIcon () {
+      setTimeout(() => {
+        this.showNewBlockUI = true;
+      }, 0);
+    },
     addNewBlock (blockType) {
       this.$bus.$emit('block-editor-add-block', blockType, this.id);
       this.$bus.$emit('block-editor-delete-block', this.id);

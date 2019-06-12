@@ -20,6 +20,10 @@
           :ref="'block-' + block.id"
           :editor="$self" />
       </block-wrapper>
+      <div
+        class="editor-inner-trigger"
+        :style="'width: ' + config.contentWidth + 'px;'"
+        @click="addNewParagraphAtEnd"></div>
     </div>
   </div>
 </template>
@@ -237,6 +241,24 @@ export default {
         }
       }, 0);
     },
+    addNewParagraphAtEnd () {
+      let lastContentBlockIndex = this.content.length - 1;
+      let lastContentBlock = this.content[lastContentBlockIndex];
+
+      if (!lastContentBlock) {
+        this.addNewBlock('publii-paragraph', false);
+        return;
+      }
+
+      if (lastContentBlock.type === 'publii-paragraph' && lastContentBlock.content === '') {
+        let blockID = lastContentBlock.id;
+        this.$refs['block-' + blockID][0].focus();
+        this.$refs['block-' + blockID][0].toggleNewBlockUIIcon();
+        return;
+      }
+
+      this.addNewBlock('publii-paragraph', lastContentBlock.id);
+    },
     mergeParagraphs (blockIDToMerge) {
       let blockIndex = this.content.findIndex(el => el.id === blockIDToMerge);
 
@@ -290,10 +312,21 @@ export default {
 <style lang="scss">
 .editor {
   padding: 50px 0;
+  position: relative;
   width: 100%;
 
   &-inner {
     margin: 0 auto;
+
+    &-trigger {
+      height: 100%;
+      left: 50%;
+      min-height: 100vh;
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
   }
 
   // UI animations
