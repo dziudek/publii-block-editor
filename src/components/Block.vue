@@ -121,15 +121,15 @@ export default {
       }
     },
     handleCaret (e) {
-      if (e.code === 'ArrowUp') {
-        console.log('POS UP:', this.getCursorPosition('block'))
-      }
+      let cursorPosition = this.getCursorPosition('block');
 
-      if (e.code === 'ArrowDown') {
-        console.log('POS DOWN:', this.getCursorPosition('block'))
-      }
-
-      if (e.code === 'ArrowUp' && this.getCursorPosition('block') <= 2) {
+      if (
+        e.code === 'ArrowUp' && (
+          cursorPosition <= 2 ||
+          cursorPosition === this.$refs['block'].innerHTML.length ||
+          (cursorPosition <= 15 && this.$options.name === 'List')
+        )
+      ) {
         if (!this.caretIsAtStart) {
           this.caretIsAtStart = true;
           return;
@@ -143,7 +143,13 @@ export default {
         }
       }
 
-      if (e.code === 'ArrowDown' && this.getCursorPosition('block') >= this.$refs['block'].innerHTML.length - 2) {
+      if (
+        e.code === 'ArrowDown' && (
+          cursorPosition >= this.$refs['block'].innerHTML.length - 5 ||
+          (cursorPosition === 0 && this.$options.name === 'Separator') ||
+          (cursorPosition === 0 && this.$options.name === 'ReadMore')
+        )
+      ) {
         if (!this.caretIsAtEnd) {
           this.caretIsAtEnd = true;
           return;
