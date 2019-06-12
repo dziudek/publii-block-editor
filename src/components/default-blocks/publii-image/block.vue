@@ -42,6 +42,7 @@
       <input
         type="text"
         @keydown="handleCaptionKeyboard"
+        @keyup="handleCaretCaption"
         @blur="save"
         v-model="content.caption"
         placeholder="Enter a caption"
@@ -49,6 +50,7 @@
       <input
         type="text"
         @keydown="handleAltKeyboard"
+        @keyup="handleCaretAlt"
         @blur="save"
         v-model="content.alt"
         placeholder="Enter alt text"
@@ -81,6 +83,10 @@ export default {
   },
   data () {
     return {
+      caretIsAtStartCaption: false,
+      caretIsAtEndCaption: false,
+      caretIsAtStartAlt: false,
+      caretIsAtEndAlt: false,
       isHovered: false,
       config: {
         imageAlign: 'center'
@@ -186,6 +192,66 @@ export default {
       if (e.code === 'Backspace' && this.$refs['contentCaption'].value === '') {
         this.$refs['contentCaption'].focus();
         e.returnValue = false;
+      }
+    },
+    handleCaretCaption (e) {
+      if (e.code === 'ArrowUp' && this.getCursorPosition('contentCaption') === 0) {
+        if (!this.caretIsAtStartCaption) {
+          this.caretIsAtStartCaption = true;
+          return;
+        }
+
+        let previousBlockID = this.findPreviousBlockID();
+
+        if (previousBlockID) {
+          this.editor.$refs['block-wrapper-' + previousBlockID][0].blockClick();
+          this.editor.$refs['block-' + previousBlockID][0].focus();
+        }
+      }
+
+      if (e.code === 'ArrowDown' && this.getCursorPosition('contentCaption') >= this.$refs['contentCaption'].value.length - 2) {
+        if (!this.caretIsAtEndCaption) {
+          this.caretIsAtEndCaption = true;
+          return;
+        }
+
+        this.$refs['contentAlt'].focus();
+        e.returnValue = false;
+      }
+
+      if (e.code === 'ArrowDown' || e.code === 'ArrowUp') {
+        this.caretIsAtStartCaption = false;
+        this.caretIsAtEndCaption = false;
+      }
+    },
+    handleCaretAlt (e) {
+      if (e.code === 'ArrowUp' && this.getCursorPosition('contentAlt') === 0) {
+        if (!this.caretIsAtStartAlt) {
+          this.caretIsAtStartAlt = true;
+          return;
+        }
+
+        this.$refs['contentCaption'].focus();
+        e.returnValue = false;
+      }
+
+      if (e.code === 'ArrowDown' && this.getCursorPosition('contentAlt') >= this.$refs['contentAlt'].value.length - 2) {
+        if (!this.caretIsAtEndAlt) {
+          this.caretIsAtEndAlt = true;
+          return;
+        }
+
+        let nextBlockID = this.findNextBlockID();
+
+        if (nextBlockID) {
+          this.editor.$refs['block-wrapper-' + nextBlockID][0].blockClick();
+          this.editor.$refs['block-' + nextBlockID][0].focus('none');
+        }
+      }
+
+      if (e.code === 'ArrowDown' || e.code === 'ArrowUp') {
+        this.caretIsAtStartAlt = false;
+        this.caretIsAtEndAlt = false;
       }
     },
     save () {

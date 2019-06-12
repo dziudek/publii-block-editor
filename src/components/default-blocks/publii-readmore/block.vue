@@ -2,7 +2,7 @@
   <div
     class="publii-block-readmore"
     contenteditable="true"
-    @keyup="getFocusFromTab"
+    @keyup="getFocusFromTab($event); handleCaret($event)"
     @paste="pastePlainText"
     ref="block">
     <hr />

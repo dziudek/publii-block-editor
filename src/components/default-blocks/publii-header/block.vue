@@ -3,7 +3,7 @@
     <component
       :is="'h' + config.headingLevel"
       contenteditable="true"
-      @keyup="getFocusFromTab"
+      @keyup="getFocusFromTab($event); handleCaret($event)"
       @keydown="handleKeyboard"
       @paste="pastePlainText"
       @blur="save"

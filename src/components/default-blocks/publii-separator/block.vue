@@ -3,7 +3,7 @@
     <div
       class="publii-block-separator"
       contenteditable="true"
-      @keyup="getFocusFromTab"
+      @keyup="getFocusFromTab($event); handleCaret($event)"
       @paste="pastePlainText"
       ref="block">
       <hr :class="config.type" />

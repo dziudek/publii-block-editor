@@ -4,6 +4,7 @@
     ref="block"
     @paste="pastePlainText"
     @keydown="handleKeyboard"
+    @keyup="handleCaret"
     @blur="save"
     contenteditable="true"
     v-html="content" />

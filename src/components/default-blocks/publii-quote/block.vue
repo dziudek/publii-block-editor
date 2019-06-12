@@ -4,7 +4,7 @@
       :class="{ 'publii-block-quote-form': true, 'is-visible': view === 'code' }"
       ref="block">
       <textarea
-        @keyup="getFocusFromTab"
+        @keyup="getFocusFromTab($event); handleCaretText($event)"
         @keydown="handleTextKeyboard"
         @blur="save"
         ref="contentText"
@@ -12,6 +12,7 @@
         v-model="content.text"></textarea>
       <input
         type="text"
+        @keyup="handleCaretAuthor($event)"
         @keydown="handleAuthorKeyboard"
         @blur="save"
         v-model="content.author"
@@ -42,6 +43,10 @@ export default {
   ],
   data () {
     return {
+      caretIsAtStartText: false,
+      caretIsAtEndText: false,
+      caretIsAtStartAuthor: false,
+      caretIsAtEndAuthor: false,
       config: {},
       content: {
         text: '',
@@ -82,6 +87,66 @@ export default {
       if (e.code === 'Backspace' && this.$refs['contentAuthor'].value === '') {
         this.$refs['contentText'].focus();
         e.returnValue = false;
+      }
+    },
+    handleCaretText (e) {
+      if (e.code === 'ArrowUp' && this.getCursorPosition('contentText') === 0) {
+        if (!this.caretIsAtStartText) {
+          this.caretIsAtStartText = true;
+          return;
+        }
+
+        let previousBlockID = this.findPreviousBlockID();
+
+        if (previousBlockID) {
+          this.editor.$refs['block-wrapper-' + previousBlockID][0].blockClick();
+          this.editor.$refs['block-' + previousBlockID][0].focus();
+        }
+      }
+
+      if (e.code === 'ArrowDown' && this.getCursorPosition('contentText') >= this.$refs['contentText'].innerHTML.length - 2) {
+        if (!this.caretIsAtEndText) {
+          this.caretIsAtEndText = true;
+          return;
+        }
+
+        this.$refs['contentAuthor'].focus();
+        e.returnValue = false;
+      }
+
+      if (e.code === 'ArrowDown' || e.code === 'ArrowUp') {
+        this.caretIsAtStartText = false;
+        this.caretIsAtEndText = false;
+      }
+    },
+    handleCaretAuthor (e) {
+      if (e.code === 'ArrowUp' && this.getCursorPosition('contentAuthor') === 0) {
+        if (!this.caretIsAtStartAuthor) {
+          this.caretIsAtStartAuthor = true;
+          return;
+        }
+
+        this.$refs['contentText'].focus();
+        e.returnValue = false;
+      }
+
+      if (e.code === 'ArrowDown' && this.getCursorPosition('contentAuthor') >= this.$refs['contentAuthor'].value.length - 2) {
+        if (!this.caretIsAtEndAuthor) {
+          this.caretIsAtEndAuthor = true;
+          return;
+        }
+
+        let nextBlockID = this.findNextBlockID();
+
+        if (nextBlockID) {
+          this.editor.$refs['block-wrapper-' + nextBlockID][0].blockClick();
+          this.editor.$refs['block-' + nextBlockID][0].focus('none');
+        }
+      }
+
+      if (e.code === 'ArrowDown' || e.code === 'ArrowUp') {
+        this.caretIsAtStartAuthor = false;
+        this.caretIsAtEndAuthor = false;
       }
     },
     save () {

@@ -7,7 +7,7 @@
       slot="block"
       @focus="handleEditFocus"
       @blur="handleEditBlur"
-      @keyup="getFocusFromTab($event); handleKeyUp($event);"
+      @keyup="getFocusFromTab($event); handleKeyUp($event); handleCaret($event)"
       @paste="pastePlainText"
       @keydown="handleKeyboard"
       @mouseup="handleMouseUp"

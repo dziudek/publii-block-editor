@@ -3,7 +3,7 @@
     <component
       :is="config.listType"
       contenteditable="true"
-      @keyup="getFocusFromTab"
+      @keyup="getFocusFromTab($event); handleCaret($event)"
       @paste="pastePlainText"
       @keydown="handleKeyboard"
       @mouseup="handleMouseUp"
