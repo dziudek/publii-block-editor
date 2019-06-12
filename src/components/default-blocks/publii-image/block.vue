@@ -1,17 +1,20 @@
 <template>
   <div class="publii-block-image-wrapper">
-    <div
+    <figure
       v-if="view === 'preview' || content.image !== ''"
       ref="block"
       class="publii-block-image">
       <img :src="content.image" />
       <button
-        v-if="view === 'code'"
+        v-if="view === 'code' && !$parent.popupOpened"
         class="publii-block-image-delete"
         @click.stop.prevent="clearImage()">
         <icon name="trash" />
       </button>
-    </div>
+      <figcaption v-if="content.caption !== '' && view === 'preview'">
+        {{ content.caption }}
+      </figcaption>
+    </figure>
 
     <div
       :class="{ 'publii-block-image-form': true, 'is-visible': view === 'code' }"
@@ -122,9 +125,11 @@ export default {
     drop (e) {
       let blob = e.dataTransfer.items[0].getAsFile();
       this.content.image = window.URL.createObjectURL(blob);
+      this.isHovered = false;
     },
     clearImage () {
       this.content.image = '';
+      this.isHovered = false;
     },
     setView (newView) {
       if (
@@ -206,6 +211,14 @@ export default {
     max-width: 100%;
   }
 
+  & > figcaption {
+    display: block;
+    font-size: 13px;
+    font-style: italic;
+    padding: 10px 0;
+    text-align: center;
+  }
+
   &-delete {
     align-items: center;
     background: $block-editor-color-danger;
@@ -221,12 +234,13 @@ export default {
     top: 20px;
     transition: all .25s ease-out;
     width: 24px;
-    z-index: 10;
+    z-index: 2;
 
     &:active,
     &:focus,
     &:hover {
-      transform: scale(1.2);
+      background: $block-editor-color-light;
+      color: $block-editor-color-danger;
     }
   }
 
