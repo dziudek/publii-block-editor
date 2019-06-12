@@ -157,6 +157,7 @@ export default {
   border: 2px solid transparent;
   margin: -10px auto;
   position: relative;
+  transition: width .25s ease-out;
   z-index: 1;
 
   &[data-block-type="publii-embed"] {
