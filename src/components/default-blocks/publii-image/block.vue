@@ -6,7 +6,7 @@
       :class="{ 'publii-block-image': true, 'is-wide': config.imageAlign === 'wide', 'is-full': config.imageAlign === 'full' }">
       <img :src="content.image" />
       <button
-        v-if="view === 'code' && !$parent.popupOpened"
+        v-if="view === 'code' && !$parent.uiOpened"
         class="publii-block-image-delete"
         @click.stop.prevent="clearImage()">
         <icon name="trash" />
@@ -111,6 +111,11 @@ export default {
           activeState: function () { return this.config.imageAlign === 'full'; },
           onClick: function () { this.alignImage('full'); },
           icon: 'full'
+        },
+        {
+          activeState: () => false,
+          onClick: () => false,
+          icon: 'gear'
         }
       ]
     };

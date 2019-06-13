@@ -7,51 +7,36 @@
     <slot />
 
     <div class="wrapper-ui">
-      <div class="wrapper-ui-show-options" @click.stop="togglePopup">
+      <div :class="{ 'wrapper-ui-show-options': true, 'is-confirming-delete': confirmDelete }" @click.stop="togglePopup">
         <icon
-          name="menu"
-          customWidth="18"
-          customHeight="4" />
-      </div>
+          v-if="!uiOpened"
+          name="gear" />
 
-      <transition name="block-editor-ui-fade">
-        <div
-          v-if="popupOpened"
-          :class="{ 'wrapper-ui-popup': true, 'is-visible': true }">
-          <div class="wrapper-ui-popup-row">
+        <transition name="block-editor-ui-fade">
+          <div
+            v-if="uiOpened"
+            :class="{ 'wrapper-ui-options': true, 'is-visible': true }">
             <button
-              class="wrapper-ui-popup-button"
-              tabindex="-1"
-              @click.stop="addBlock">
-              <icon name="enter" />
-            </button>
-            <button
-              class="wrapper-ui-popup-button"
-              tabindex="-1"
-              @click.stop="moveDown">
-              <icon name="down" />
-            </button>
-            <button
-              class="wrapper-ui-popup-button"
-              tabindex="-1"
-              @click.stop="moveUp">
-              <icon name="up" />
-            </button>
-            <button
-              :class="{ 'wrapper-ui-popup-button': true, 'wrapper-ui-popup-button-danger': confirmDelete }"
+              :class="{ 'wrapper-ui-options-button-trash': true }"
               tabindex="-1"
               @click.stop="deleteBlock">
               <icon name="trash" />
             </button>
             <button
-              class="wrapper-ui-popup-button"
+              class="wrapper-ui-options-button-move"
               tabindex="-1"
-              @click.stop="showMore">
-              <icon name="gear" />
+              @click.stop="moveUp">
+              <icon name="up" />
+            </button>
+            <button
+              class="wrapper-ui-options-button-move"
+              tabindex="-1"
+              @click.stop="moveDown">
+              <icon name="down" />
             </button>
           </div>
-        </div>
-      </transition>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
@@ -72,7 +57,7 @@ export default {
     return {
       customCssClasses: [],
       isSelected: false,
-      popupOpened: false,
+      uiOpened: false,
       confirmDelete: false
     };
   },
@@ -82,7 +67,7 @@ export default {
   methods: {
     blockClick () {
       this.$bus.$emit('block-editor-deselect-blocks', this.id);
-      this.popupOpened = false;
+      this.uiOpened = false;
       this.confirmDelete = false;
       this.setSelectionState(true);
     },
@@ -92,9 +77,9 @@ export default {
       }
     },
     togglePopup () {
-      this.popupOpened = !this.popupOpened;
+      this.uiOpened = !this.uiOpened;
 
-      if (!this.popupOpened) {
+      if (!this.uiOpened) {
         this.confirmDelete = false;
       }
     },
@@ -106,7 +91,7 @@ export default {
       this.isSelected = newState;
 
       if (!this.isSelected) {
-        this.popupOpened = false;
+        this.uiOpened = false;
         this.confirmDelete = false;
       }
 
@@ -129,9 +114,6 @@ export default {
     },
     moveDown () {
       this.$bus.$emit('block-editor-move-block-down', this.id);
-    },
-    addBlock () {
-      this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
     },
     deleteBlock () {
       if (!this.confirmDelete) {
@@ -172,7 +154,7 @@ export default {
   }
 
   &.contains-full-image {
-    width: 100%!important;
+    width: calc(100% - 80px)!important;
 
     .publii-block-image-form input {
       margin-left: auto;
@@ -194,42 +176,35 @@ export default {
     position: absolute;
     pointer-events: none;
     right: -84px;
-    top: -5px;
+    top: -10px;
     z-index: 1;
 
     .wrapper-ui-show-options {
-      background-image: linear-gradient(to right top, rgba(255, 255, 255, 0) 50%, $block-editor-color-gradient-end);
+      background-image: linear-gradient(to right top, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, .05));
       background-size: auto;
       background-repeat: no-repeat;
       background-position: right top;
       border-radius: 0 8px 0 0;
-      color: $block-editor-color-primary;
+      color: $block-editor-color-shadow;
       height: 80px;
+      transition: all .25s ease-out;
       width: 150px;
 
       & > svg {
         position: absolute;
         right: 15px;
-        top: 15px;
+        top: 12px;
+      }
+
+      &.is-confirming-delete {
+        background-image: linear-gradient(to right top, rgba(255, 255, 255, 0) 50%, rgba(255, 0, 0, .125));
       }
     }
 
-    &-popup {
-      align-items: center;
-      background: $block-editor-color-primary;
-      border: none;
-      border-radius: 4px;
-      box-shadow: 0 1px 6px $block-editor-color-shadow;
-      display: flex;
-      flex-wrap: wrap;
-      height: 43px;
-      left: auto;
-      opacity: 0;
-      padding: 0 13px;
-      pointer-events: none;
+    &-options {
       position: absolute;
-      right: 14px;
-      top: 28px;
+      right: 4px;
+      top: 5px;
 
       &.is-visible {
         opacity: 1;
@@ -240,25 +215,12 @@ export default {
         display: flex;
       }
 
-      &:after {
-        border: 6px solid $block-editor-color-primary;
-        border-left-color: transparent;
-        border-right-color: transparent;
-        border-top-color: transparent;
-        content: "";
-        height: 12px;
-        position: absolute;
-        right: 4px;
-        top: -12px;
-        width: 12px;
-      }
-
-      &-button {
+      &-button-move,
+      &-button-trash {
         align-items: center;
-        background: $block-editor-color-primary;
+        background: transparent;
         border: none;
-        border-radius: 2px;
-        color: $block-editor-color-light;
+        color: $block-editor-color-text-medium-dark;
         cursor: pointer;
         display: flex;
         height: 27px;
@@ -266,18 +228,29 @@ export default {
         margin: 0 5px;
         outline: none;
         padding: 0;
+        position: absolute;
         width: 28px;
 
         &:hover,
         &.is-active {
-          background: $block-editor-color-primary-dark;
+          color: $block-editor-color-text;
         }
+      }
 
-        &-danger,
-        &-danger:hover,
-        &-danger.is-active {
-          background: $block-editor-color-danger;
-        }
+      &-button-trash,
+      &-button-danger,
+      &-button-trash:hover,
+      &-button-trash.is-active{
+        color: $block-editor-color-danger;
+      }
+
+      &-button-trash {
+        right: 0;
+        top: 0;
+      }
+
+      &-button-move + .wrapper-ui-options-button-move {
+        top: 20px;
       }
     }
 

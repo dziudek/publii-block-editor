@@ -84,6 +84,11 @@ export default {
           activeState: function () { return this.config.textAlign === 'right'; },
           onClick: function () { this.alignText('right'); },
           icon: 'align-right'
+        },
+        {
+          activeState: () => false,
+          onClick: () => false,
+          icon: 'gear'
         }
       ]
     };

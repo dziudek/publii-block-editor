@@ -1,31 +1,37 @@
 <template>
-  <div class="publii-block-quote-wrapper">
-    <div
-      :class="{ 'publii-block-quote-form': true, 'is-visible': view === 'code' }"
-      ref="block">
-      <textarea
-        @keyup="getFocusFromTab($event); handleCaretText($event)"
-        @keydown="handleTextKeyboard"
-        @blur="save"
-        ref="contentText"
-        placeholder="Quote text"
-        v-model="content.text"></textarea>
-      <input
-        type="text"
-        @keyup="handleCaretAuthor($event)"
-        @keydown="handleAuthorKeyboard"
-        @blur="save"
-        v-model="content.author"
-        placeholder="Quote author"
-        ref="contentAuthor" />
+  <div>
+    <div class="publii-block-quote-wrapper">
+      <div
+        :class="{ 'publii-block-quote-form': true, 'is-visible': view === 'code' }"
+        ref="block">
+        <textarea
+          @keyup="getFocusFromTab($event); handleCaretText($event)"
+          @keydown="handleTextKeyboard"
+          @blur="save"
+          ref="contentText"
+          placeholder="Quote text"
+          v-model="content.text"></textarea>
+        <input
+          type="text"
+          @keyup="handleCaretAuthor($event)"
+          @keydown="handleAuthorKeyboard"
+          @blur="save"
+          v-model="content.author"
+          placeholder="Quote author"
+          ref="contentAuthor" />
+      </div>
+      <blockquote
+        v-if="view === 'preview'"
+        class="publii-block-quote"
+        ref="block">
+        <p v-html="content.text" />
+        <cite v-html="content.author" />
+      </blockquote>
     </div>
-    <blockquote
-      v-if="view === 'preview'"
-      class="publii-block-quote"
-      ref="block">
-      <p v-html="content.text" />
-      <cite v-html="content.author" />
-    </blockquote>
+
+    <top-menu
+      ref="top-menu"
+      :config="topMenuConfig" />
   </div>
 </template>
 
@@ -33,6 +39,7 @@
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import HasPreview from './../../mixins/HasPreview.vue';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Paragraph',
@@ -41,6 +48,9 @@ export default {
     ContentEditableImprovements,
     HasPreview
   ],
+  components: {
+    'top-menu': TopMenuUI
+  },
   data () {
     return {
       caretIsAtStartText: false,
@@ -51,7 +61,14 @@ export default {
       content: {
         text: '',
         author: ''
-      }
+      },
+      topMenuConfig: [
+        {
+          activeState: () => false,
+          onClick: () => false,
+          icon: 'gear'
+        }
+      ]
     };
   },
   watch: {

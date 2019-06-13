@@ -1,37 +1,54 @@
 <template>
-  <div
-    class="publii-block-toc-wrapper"
-    ref="block">
-    <h2
-      class="publii-block-toc-title"
-      ref="title"
-      @keydown="handleKeyboard"
-      @keyup="handleCaret"
-      @blur="save"
-      contenteditable="true" v-html="content.title"></h2>
-    <ol
-      class="publii-block-toc"
-      ref="content"
-      v-html="content.toc">
-    </ol>
+  <div>
+    <div
+      class="publii-block-toc-wrapper"
+      ref="block">
+      <h2
+        class="publii-block-toc-title"
+        ref="title"
+        @keydown="handleKeyboard"
+        @keyup="handleCaret"
+        @blur="save"
+        contenteditable="true" v-html="content.title"></h2>
+      <ol
+        class="publii-block-toc"
+        ref="content"
+        v-html="content.toc">
+      </ol>
+    </div>
+
+    <top-menu
+      ref="top-menu"
+      :config="topMenuConfig" />
   </div>
 </template>
 
 <script>
 import Block from './../../Block.vue';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'ToC',
   mixins: [
     Block
   ],
+  components: {
+    'top-menu': TopMenuUI
+  },
   data () {
     return {
       config: {},
       content: {
         title: '',
         toc: ''
-      }
+      },
+      topMenuConfig: [
+        {
+          activeState: () => false,
+          onClick: () => false,
+          icon: 'gear'
+        }
+      ]
     };
   },
   computed: {

@@ -58,6 +58,11 @@ export default {
           activeState: function () { return this.config.type === 'dot'; },
           onClick: function () { this.setType('dot'); },
           icon: 'dot'
+        },
+        {
+          activeState: () => false,
+          onClick: () => false,
+          icon: 'gear'
         }
       ]
     };

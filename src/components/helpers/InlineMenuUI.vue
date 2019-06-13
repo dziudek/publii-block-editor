@@ -1,7 +1,7 @@
 <template>
   <transition name="block-editor-ui-fade">
     <div
-      v-if="$parent.$parent.isSelected && $parent.textIsHighlighted && !$parent.$parent.popupOpened"
+      v-if="$parent.$parent.isSelected && $parent.textIsHighlighted && !$parent.$parent.uiOpened"
       class="wrapper-ui-inline-menu"
       :style="'left: ' + left + '; top: ' + top + ';'"
       :key="'inline-menu-' + $parent.id">
