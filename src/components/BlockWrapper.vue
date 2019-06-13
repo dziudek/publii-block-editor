@@ -12,7 +12,6 @@
           v-if="!uiOpened"
           name="gear" />
 
-        <transition name="block-editor-ui-fade">
           <div
             v-if="uiOpened"
             :class="{ 'wrapper-ui-options': true, 'is-visible': true }">
@@ -35,7 +34,6 @@
               <icon name="down" />
             </button>
           </div>
-        </transition>
       </div>
     </div>
   </div>
@@ -245,7 +243,7 @@ export default {
       }
 
       &-button-trash {
-        right: 0;
+        right: -2px;
         top: 0;
       }
 

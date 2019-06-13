@@ -1,18 +1,16 @@
 <template>
-  <transition name="block-editor-ui-fade">
-    <div
-      class="wrapper-ui-top-menu"
-      v-if="$parent.$parent.uiOpened && !$parent.textIsHighlighted">
-      <button
-        v-for="(button, index) of config"
-        :key="'top-menu-button-' + index"
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': button.activeState.bind($parent)() }"
-        tabindex="-1"
-        @click.stop="button.onClick.bind($parent)()">
-        <icon :name="button.icon" />
-      </button>
-    </div>
-  </transition>
+  <div
+    class="wrapper-ui-top-menu"
+    v-if="$parent.$parent.uiOpened && !$parent.textIsHighlighted">
+    <button
+      v-for="(button, index) of config"
+      :key="'top-menu-button-' + index"
+      :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': button.activeState.bind($parent)() }"
+      tabindex="-1"
+      @click.stop="button.onClick.bind($parent)()">
+      <icon :name="button.icon" />
+    </button>
+  </div>
 </template>
 
 <script>
