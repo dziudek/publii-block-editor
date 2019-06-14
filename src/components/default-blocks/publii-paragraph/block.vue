@@ -151,6 +151,15 @@ export default {
       ]
     };
   },
+  watch: {
+    showNewBlockUI (newValue, oldValue) {
+      if (newValue) {
+        this.$parent.addCustomCssClass('has-block-selector-visible');
+      } else {
+        this.$parent.removeCustomCssClass('has-block-selector-visible');
+      }
+    }
+  },
   mounted () {
     this.content = this.inputContent;
     this.$bus.$on('block-editor-deselect-blocks', this.deselectBlock);

@@ -145,10 +145,16 @@ export default {
   }
 
   &.is-selected {
+    z-index: 10;
+
     .wrapper-ui {
       opacity: 1;
       pointer-events: auto;
     }
+  }
+
+  &.has-block-selector-visible {
+    z-index: 10;
   }
 
   &.contains-full-image {
