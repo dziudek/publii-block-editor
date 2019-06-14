@@ -9,6 +9,8 @@ import Vue from 'vue';
 import BlockEditor from './components/BlockEditor.vue';
 import Rangy from 'rangy-updated';
 import 'rangy-updated/lib/rangy-selectionsaverestore.js';
+import 'rangy-updated/lib/rangy-classapplier.js';
+import 'rangy-updated/lib/rangy-highlighter.js';
 
 // Declare event bus
 Vue.prototype.$bus = new Vue();
@@ -21,6 +23,12 @@ export default {
   },
   mounted () {
     window.publiiBlockEditorInstance = this;
+    Vue.prototype.$highlighter = this.$rangy.createHighlighter();
+
+    this.$highlighter.addClassApplier(this.$rangy.createClassApplier('is-highlighted', {
+      ignoreWhiteSpace: true,
+      tagNames: ['span', 'a']
+    }));
   }
 }
 </script>

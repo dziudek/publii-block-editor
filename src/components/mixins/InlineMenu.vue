@@ -16,6 +16,10 @@ export default {
         code: false,
         mark: false,
         link: false
+      },
+      linkUI: {
+        visible: false,
+        url: ''
       }
     };
   },
@@ -37,6 +41,10 @@ export default {
         }
       }, 0);
     },
+    showLinkUI () {
+      this.$highlighter.highlightSelection('is-highlighted');
+      this.linkUI.visible = true;
+    },
     showInlineMenu () {
       let sel = document.getSelection();
       let savedSel = this.$rangy.saveSelection();
@@ -49,6 +57,9 @@ export default {
       let inlineMenuLeft = ((oRect.left - wrapperRect.left) + (oRect.width / 2)) + 'px';
       let inlineMenuTop = (oRect.top - wrapperRect.top - 20) + 'px';
       this.$refs['inline-menu'].setPosition(inlineMenuLeft, inlineMenuTop);
+      this.linkUI.visible = false;
+      this.linkUI.url = '';
+      this.$highlighter.removeAllHighlights();
     },
     analyzeSelectedText (selection, rangyData) {
       if (!selection || !selection.anchorNode || !selection.focusNode) {
@@ -80,6 +91,10 @@ export default {
       }
     },
     findTagInSelection (tagNames, rangyData) {
+      if (!rangyData || rangyData.rangeInfos[0].collapsed) {
+        return false;
+      }
+
       let startID = rangyData.rangeInfos[0].startMarkerId;
       let endID = rangyData.rangeInfos[0].endMarkerId;
       let sourceCode = this.$refs['block'].innerHTML;
@@ -110,6 +125,8 @@ export default {
         case 'u': document.execCommand('underline', false, null); break;
         case 'code': this.execCommand('code', savedSel); break;
         case 'mark': this.execCommand('mark', savedSel); break;
+        case 'link': this.addLink(); break;
+        case 'unlink': this.removeLink(savedSel); break;
       }
 
       this.analyzeSelectedText(sel, savedSel);
@@ -151,6 +168,39 @@ export default {
           this.wrapElementIntoRangy(selection.baseNode, startID, endID);
         }
       }
+    },
+    addLink () {
+      let selection = document.querySelector('.is-highlighted');
+
+      if (!selection) {
+        return;
+      }
+
+      if (
+        this.linkUI.url.indexOf('http://') === -1 &&
+        this.linkUI.url.indexOf('https://') === -1 &&
+        this.linkUI.url.indexOf('://') === -1 &&
+        this.linkUI.url.indexOf('dat://') === -1 &&
+        this.linkUI.url.indexOf('ipfs://') === -1 &&
+        this.linkUI.url.indexOf('//') !== 0
+      ) {
+        this.linkUI.url = 'https://' + this.linkUI.url;
+      }
+
+      selection.outerHTML = '<a href="' + this.linkUI.url + '">' + selection.innerHTML + '</a>';
+      this.selectedTextContains['link'] = true;
+    },
+    removeLink (rangyData) {
+      let startID = rangyData.rangeInfos[0].startMarkerId;
+      let endID = rangyData.rangeInfos[0].endMarkerId;
+      let html = [
+        '<span id="' + startID + '"></span>',
+        document.getSelection().toString().replace(/&nbsp;/gmi, ''),
+        '<span id="' + endID + '"></span>'
+      ];
+
+      document.execCommand('insertHTML', false, html.join(''));
+      this.selectedTextContains['link'] = false;
     },
     checkTagPosition (tag, startID, endID) {
       let codeToAnalyze = this.$refs['block'].innerHTML.split(startID)[1];

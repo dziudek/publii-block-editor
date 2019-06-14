@@ -1,7 +1,7 @@
 <template>
   <transition name="block-editor-ui-fade">
     <div
-      v-if="$parent.$parent.isSelected && $parent.textIsHighlighted && !$parent.$parent.uiOpened"
+      v-if="showInlineMenu"
       class="wrapper-ui-inline-menu"
       :style="'left: ' + left + '; top: ' + top + ';'"
       :key="'inline-menu-' + $parent.id">
@@ -26,6 +26,18 @@
         <icon name="strikethrough" />
       </button>
       <button
+        v-if="!$parent.selectedTextContains.link"
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.linkUI.visible }"
+        @click.stop="$parent.showLinkUI();">
+        <icon name="link" />
+      </button>
+      <button
+        v-if="$parent.selectedTextContains.link"
+        :class="{ 'wrapper-ui-inline-menu-button': true }"
+        @click.stop="$parent.doInlineOperation('unlink');">
+        <icon name="unlink" />
+      </button>
+      <button
         :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.code }"
         @click.stop="$parent.doInlineOperation('code');">
         <icon name="code" />
@@ -35,6 +47,16 @@
         @click.stop="$parent.doInlineOperation('mark');">
         <icon name="marker" />
       </button>
+
+      <div
+        v-if="$parent.linkUI.visible || $parent.selectedTextContains.link"
+        class="wrapper-ui-inline-menu-link">
+        <input
+          type="text"
+          class="wrapper-ui-inline-menu-link-input"
+          v-model="$parent.linkUI.url"
+          @keyup.enter="$parent.doInlineOperation('link')" />
+      </div>
     </div>
   </transition>
 </template>
@@ -46,6 +68,18 @@ export default {
   name: 'inline-menu-ui',
   components: {
     'icon': EditorIcon
+  },
+  computed: {
+    showInlineMenu () {
+      return this.$parent.$parent.isSelected && this.$parent.textIsHighlighted && !this.$parent.$parent.uiOpened;
+    }
+  },
+  watch: {
+    showInlineMenu (newValue, oldValue) {
+      if (!newValue) {
+        this.$highlighter.removeAllHighlights();
+      }
+    }
   },
   data () {
     return {
@@ -64,6 +98,10 @@ export default {
 
 <style lang="scss">
 @import '../../assets/variables.scss';
+
+.is-highlighted {
+  background: $block-editor-color-gradient-end;
+}
 
 .wrapper-ui-inline-menu {
   align-items: center;
