@@ -95,6 +95,7 @@ export default {
   },
   mounted () {
     this.content = this.inputContent;
+    this.config.headingLevel = this.inputConfig.headingLevel || 2;
   },
   methods: {
     handleKeyboard (e) {

@@ -218,10 +218,17 @@ export default {
     },
     addNewBlock (blockType, afterBlockID = false, content = '') {
       let blockIndex = this.content.findIndex(el => el.id === afterBlockID);
+      let blockConfig = {};
       this.$bus.$emit('block-editor-deselect-blocks');
 
       if (!afterBlockID) {
         blockIndex = -1;
+      }
+
+      if (blockType.indexOf('publii-header-') === 0) {
+        let headerSize = parseInt(blockType.replace('publii-header-', ''), 10);
+        blockConfig.headingLevel = headerSize;
+        blockType = 'publii-header';
       }
 
       let newBlockID = +new Date();
@@ -229,7 +236,7 @@ export default {
         id: newBlockID,
         type: blockType,
         content: content,
-        config: {}
+        config: blockConfig
       };
       this.content.splice(blockIndex + 1, 0, newBlockObject);
 
