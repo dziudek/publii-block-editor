@@ -241,10 +241,18 @@ export default {
       this.content.splice(blockIndex + 1, 0, newBlockObject);
 
       setTimeout(() => {
-        if (content === '') {
-          this.$refs['block-' + newBlockID][0].focus('end');
+        if (blockType === 'publii-readmore' || blockType === 'publii-separator') {
+          let newlyAddedBlockIndex = this.content.findIndex(el => el.id === newBlockID);
+
+          if (newlyAddedBlockIndex === this.content.length - 1) {
+            this.addNewParagraphAtEnd();
+          }
         } else {
-          this.$refs['block-' + newBlockID][0].focus('start');
+          if (content === '') {
+            this.$refs['block-' + newBlockID][0].focus('end');
+          } else {
+            this.$refs['block-' + newBlockID][0].focus('start');
+          }
         }
       }, 0);
     },
