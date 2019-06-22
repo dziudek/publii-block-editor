@@ -24,7 +24,9 @@
         <icon name="add" />
       </button>
 
-      <div class="publii-block-paragraph-block-selector-tooltip">
+      <div
+        v-if="!newBlockUIListVisible"
+        class="publii-block-paragraph-block-selector-tooltip">
         <span class="publii-block-paragraph-block-selector-tooltip-label1">
           Add
         </span>
@@ -40,52 +42,122 @@
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 0 }"
           @click.stop="addNewBlock('publii-header');">
           <icon name="headings" />
+          <div
+            v-if="newBlockUIActiveIndex === 0"
+            class="publii-block-paragraph-block-selector-tooltip is-small">
+            <span class="publii-block-paragraph-block-selector-tooltip-label1">
+              Header
+            </span>
+          </div>
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 1 }"
           @click.stop="addNewBlock('publii-image');">
           <icon name="image" />
+          <div
+            v-if="newBlockUIActiveIndex === 1"
+            class="publii-block-paragraph-block-selector-tooltip is-small">
+            <span class="publii-block-paragraph-block-selector-tooltip-label1">
+              Image
+            </span>
+          </div>
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 2 }"
           @click.stop="addNewBlock('publii-list');">
           <icon name="unordered-list" />
+          <div
+            v-if="newBlockUIActiveIndex === 2"
+            class="publii-block-paragraph-block-selector-tooltip is-small">
+            <span class="publii-block-paragraph-block-selector-tooltip-label1">
+              List
+            </span>
+          </div>
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 3 }"
           @click.stop="addNewBlock('publii-quote');">
           <icon name="quote" />
+          <div
+            v-if="newBlockUIActiveIndex === 3"
+            class="publii-block-paragraph-block-selector-tooltip is-small">
+            <span class="publii-block-paragraph-block-selector-tooltip-label1">
+              Quote
+            </span>
+          </div>
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 4 }"
           @click.stop="addNewBlock('publii-code');">
           <icon name="code" />
+          <div
+            v-if="newBlockUIActiveIndex === 4"
+            class="publii-block-paragraph-block-selector-tooltip is-small">
+            <span class="publii-block-paragraph-block-selector-tooltip-label1">
+              Code
+            </span>
+          </div>
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 5 }"
           @click.stop="addNewBlock('publii-html');">
           <icon name="html" />
+          <div
+            v-if="newBlockUIActiveIndex === 5"
+            class="publii-block-paragraph-block-selector-tooltip is-small">
+            <span class="publii-block-paragraph-block-selector-tooltip-label1">
+              Custom HTML code
+            </span>
+          </div>
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 6 }"
           @click.stop="addNewBlock('publii-separator');">
           <icon name="separator" />
+          <div
+            v-if="newBlockUIActiveIndex === 6"
+            class="publii-block-paragraph-block-selector-tooltip is-small">
+            <span class="publii-block-paragraph-block-selector-tooltip-label1">
+              Separator
+            </span>
+          </div>
         </button>
         <button
           v-if="!editor.hasReadMore"
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 7 }"
           @click.stop="addNewBlock('publii-readmore');">
           <icon name="readmore" />
+          <div
+            v-if="newBlockUIActiveIndex === 7"
+            class="publii-block-paragraph-block-selector-tooltip is-small">
+            <span class="publii-block-paragraph-block-selector-tooltip-label1">
+              Readmore
+            </span>
+          </div>
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 8 : 7) }"
           @click.stop="addNewBlock('publii-embed');">
           <icon name="video" />
+          <div
+            v-if="newBlockUIActiveIndex === (!editor.hasReadMore ? 8 : 7)"
+            class="publii-block-paragraph-block-selector-tooltip is-small">
+            <span class="publii-block-paragraph-block-selector-tooltip-label1">
+              Video
+            </span>
+          </div>
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 9 : 8) }"
           @click.stop="addNewBlock('publii-toc');">
           <icon name="toc" />
+          <div
+            v-if="newBlockUIActiveIndex === (!editor.hasReadMore ? 9 : 8)"
+            class="publii-block-paragraph-block-selector-tooltip is-small">
+            <span class="publii-block-paragraph-block-selector-tooltip-label1">
+              Table of Contents
+            </span>
+          </div>
         </button>
       </div>
     </div>
@@ -388,6 +460,18 @@ export default {
       width: 64px;
       z-index: 10;
 
+      &.is-small {
+        color: $block-editor-color-text;
+        display: block;
+        height: auto;
+        padding: 5px 10px;
+        width: auto;
+
+        .publii-block-paragraph-block-selector-tooltip-label1 {
+          height: auto;
+        }
+      }
+
       &:after {
         border: 6px solid $color-editor-color-light-medium;
         border-left-color: transparent;
@@ -448,6 +532,7 @@ export default {
         display: flex;
         margin-right: 5px;
         outline: none;
+        position: relative;
 
         &.is-active {
           color: $block-editor-color-primary-dark;
