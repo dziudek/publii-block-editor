@@ -246,6 +246,11 @@ export default {
 
           if (newlyAddedBlockIndex === this.content.length - 1) {
             this.addNewParagraphAtEnd();
+          } else {
+            let nextIndex = newlyAddedBlockIndex + 1;
+            let nextBlockID = this.content[nextIndex].id;
+            this.$refs['block-' + nextBlockID][0].focus('end');
+            this.$bus.$emit('block-editor-block-selected', nextBlockID);
           }
         } else {
           if (content === '') {

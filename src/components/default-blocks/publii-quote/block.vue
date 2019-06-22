@@ -72,7 +72,7 @@ export default {
     };
   },
   watch: {
-    'view': function (oldValue, newValue) {
+    'view': function (newValue, oldValue) {
       if (oldValue === 'code' && newValue === 'preview') {
         this.setCursorAtEndOfElement('contentText', false);
       }
@@ -81,7 +81,7 @@ export default {
   mounted () {
     this.content.text = this.inputContent.text;
     this.content.author = this.inputContent.author;
-    this.view = (this.content.text === '' && this.content.author === '') ? 'code' : 'preview';
+    this.view = (!this.content.text && !this.content.author) ? 'code' : 'preview';
   },
   methods: {
     handleTextKeyboard (e) {
@@ -164,6 +164,26 @@ export default {
       if (e.code === 'ArrowDown' || e.code === 'ArrowUp') {
         this.caretIsAtStartAuthor = false;
         this.caretIsAtEndAuthor = false;
+      }
+    },
+    setView (newView) {
+      if (
+        this.view === 'code' &&
+        newView === 'preview'
+      ) {
+        this.save();
+      }
+
+      if (
+        !this.content.text &&
+        !this.content.author &&
+        newView === 'preview'
+      ) {
+        this.view = 'code';
+      } else {
+        setTimeout(() => {
+          this.view = newView;
+        }, 0);
       }
     },
     save () {
