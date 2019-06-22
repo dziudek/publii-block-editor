@@ -1,64 +1,62 @@
 <template>
-  <transition name="block-editor-ui-fade">
-    <div
-      v-if="showInlineMenu"
-      class="wrapper-ui-inline-menu"
-      :style="'left: ' + left + '; top: ' + top + ';'"
-      :key="'inline-menu-' + $parent.id">
-      <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.bold }"
-        @click.stop="$parent.doInlineOperation('strong');">
-        <icon name="bold" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.italic }"
-        @click.stop="$parent.doInlineOperation('em');">
-        <icon name="italic" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.underline }"
-        @click.stop="$parent.doInlineOperation('u');">
-        <icon name="underline" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.strikethrough }"
-        @click.stop="$parent.doInlineOperation('s');">
-        <icon name="strikethrough" />
-      </button>
-      <button
-        v-if="!$parent.selectedTextContains.link"
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.linkUI.visible }"
-        @click.stop="$parent.showLinkUI();">
-        <icon name="link" />
-      </button>
-      <button
-        v-if="$parent.selectedTextContains.link"
-        :class="{ 'wrapper-ui-inline-menu-button': true }"
-        @click.stop="$parent.doInlineOperation('unlink');">
-        <icon name="unlink" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.code }"
-        @click.stop="$parent.doInlineOperation('code');">
-        <icon name="code" />
-      </button>
-      <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.mark }"
-        @click.stop="$parent.doInlineOperation('mark');">
-        <icon name="marker" />
-      </button>
+  <div
+    v-if="showInlineMenu"
+    class="wrapper-ui-inline-menu"
+    :style="'left: ' + left + '; top: ' + top + ';'"
+    :key="'inline-menu-' + $parent.id">
+    <button
+      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.bold }"
+      @click.stop="$parent.doInlineOperation('strong');">
+      <icon name="bold" />
+    </button>
+    <button
+      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.italic }"
+      @click.stop="$parent.doInlineOperation('em');">
+      <icon name="italic" />
+    </button>
+    <button
+      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.underline }"
+      @click.stop="$parent.doInlineOperation('u');">
+      <icon name="underline" />
+    </button>
+    <button
+      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.strikethrough }"
+      @click.stop="$parent.doInlineOperation('s');">
+      <icon name="strikethrough" />
+    </button>
+    <button
+      v-if="!$parent.selectedTextContains.link"
+      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.linkUI.visible }"
+      @click.stop="$parent.showLinkUI();">
+      <icon name="link" />
+    </button>
+    <button
+      v-if="$parent.selectedTextContains.link"
+      :class="{ 'wrapper-ui-inline-menu-button': true }"
+      @click.stop="$parent.doInlineOperation('unlink');">
+      <icon name="unlink" />
+    </button>
+    <button
+      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.code }"
+      @click.stop="$parent.doInlineOperation('code');">
+      <icon name="code" />
+    </button>
+    <button
+      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.mark }"
+      @click.stop="$parent.doInlineOperation('mark');">
+      <icon name="marker" />
+    </button>
 
-      <div
-        v-if="$parent.linkUI.visible || $parent.selectedTextContains.link"
-        class="wrapper-ui-inline-menu-link">
-        <input
-          type="text"
-          class="wrapper-ui-inline-menu-link-input"
-          v-model="$parent.linkUI.url"
-          @keyup.enter="$parent.doInlineOperation('link')" />
-      </div>
+    <div
+      v-if="$parent.linkUI.visible || $parent.selectedTextContains.link"
+      class="wrapper-ui-inline-menu-link">
+      <input
+        type="text"
+        class="wrapper-ui-inline-menu-link-input"
+        v-model="$parent.linkUI.url"
+        @keyup.enter="$parent.doInlineOperation('link')" />
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
@@ -116,7 +114,7 @@ export default {
   position: absolute;
   top: 0%;
   transform: translateX(-50%) translateY(64px);
-  z-index: 1;
+  z-index: 10;
 
   &:after {
     border: 6px solid $block-editor-color-light;
