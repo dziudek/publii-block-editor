@@ -62,11 +62,6 @@ export default {
           activeState: function () { return false; },
           onClick: function () { return this.outdentList(); },
           icon: 'flattening'
-        },
-        {
-          activeState: () => false,
-          onClick: () => false,
-          icon: 'gear'
         }
       ]
     };

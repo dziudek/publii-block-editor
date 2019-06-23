@@ -8,36 +8,21 @@
       ref="block">
       <hr />
     </div>
-
-    <top-menu
-      ref="top-menu"
-      :config="topMenuConfig" />
   </div>
 </template>
 
 <script>
 import Block from './../../Block.vue';
-import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'ReadMore',
   mixins: [
     Block
   ],
-  components: {
-    'top-menu': TopMenuUI
-  },
   data () {
     return {
       config: {},
-      content: '',
-      topMenuConfig: [
-        {
-          activeState: () => false,
-          onClick: () => false,
-          icon: 'gear'
-        }
-      ]
+      content: ''
     };
   },
   mounted () {

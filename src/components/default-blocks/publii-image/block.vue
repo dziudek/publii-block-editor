@@ -111,11 +111,6 @@ export default {
           activeState: function () { return this.config.imageAlign === 'full'; },
           onClick: function () { this.alignImage('full'); },
           icon: 'full'
-        },
-        {
-          activeState: () => false,
-          onClick: () => false,
-          icon: 'gear'
         }
       ]
     };

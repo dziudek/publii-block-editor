@@ -16,25 +16,17 @@
         v-html="content.toc">
       </ol>
     </div>
-
-    <top-menu
-      ref="top-menu"
-      :config="topMenuConfig" />
   </div>
 </template>
 
 <script>
 import Block from './../../Block.vue';
-import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'ToC',
   mixins: [
     Block
   ],
-  components: {
-    'top-menu': TopMenuUI
-  },
   data () {
     return {
       focusable: ['title'],
@@ -42,14 +34,7 @@ export default {
       content: {
         title: '',
         toc: ''
-      },
-      topMenuConfig: [
-        {
-          activeState: () => false,
-          onClick: () => false,
-          icon: 'gear'
-        }
-      ]
+      }
     };
   },
   computed: {

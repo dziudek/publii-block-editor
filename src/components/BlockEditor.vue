@@ -1,6 +1,8 @@
 <template>
   <div
     class="editor"
+    data-ui-opened-block=""
+    ref="editor-main"
     @click="$bus.$emit('block-editor-deselect-blocks')">
     <div
       v-if="state.externalComponentsLoaded"
@@ -167,6 +169,8 @@ export default {
     this.$bus.$on('block-editor-add-block', this.addNewBlock);
     this.$bus.$on('block-editor-merge-paragraphs', this.mergeParagraphs);
     this.$bus.$on('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
+    this.$bus.$on('block-editor-ui-opened-for-block', this.uiOpenedForBlock);
+    this.$bus.$on('block-editor-ui-closed-for-block', this.uiClosedForBlock);
     this.initGlobals();
   },
   methods: {
@@ -215,6 +219,8 @@ export default {
       if (!this.content.length) {
         this.addNewBlock('publii-paragraph', false);
       }
+
+      this.$refs['editor-main'].setAttribute('data-ui-opened-block', '');
     },
     addNewBlock (blockType, afterBlockID = false, content = '') {
       let blockIndex = this.content.findIndex(el => el.id === afterBlockID);
@@ -315,6 +321,12 @@ export default {
       } else {
         this.$refs['block-' + previousBlockID][0].focus('end');
       }
+    },
+    uiClosedForBlock (blockID) {
+      this.$refs['editor-main'].setAttribute('data-ui-opened-block', '');
+    },
+    uiOpenedForBlock (blockID) {
+      this.$refs['editor-main'].setAttribute('data-ui-opened-block', blockID);
     }
   },
   beforeDestroy () {
@@ -325,6 +337,8 @@ export default {
     this.$bus.$off('block-editor-add-block', this.addNewBlock);
     this.$bus.$off('block-editor-merge-paragraphs', this.mergeParagraphs);
     this.$bus.$off('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
+    this.$bus.$off('block-editor-ui-opened-for-block', this.uiOpenedForBlock);
+    this.$bus.$off('block-editor-ui-closed-for-block', this.uiClosedForBlock);
   }
 }
 </script>

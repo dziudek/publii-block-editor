@@ -214,11 +214,6 @@ export default {
           activeState: function () { return this.config.textAlign === 'right'; },
           onClick: function () { this.alignText('right'); },
           icon: 'align-right'
-        },
-        {
-          activeState: () => false,
-          onClick: () => false,
-          icon: 'gear'
         }
       ]
     };
@@ -438,7 +433,7 @@ export default {
 
   &-block-selector {
     display: none;
-    left: -30px;
+    left: -16px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

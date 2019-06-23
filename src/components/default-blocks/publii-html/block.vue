@@ -15,10 +15,6 @@
       @click="setView('code')"
       class="publii-block-html-preview">
     </div>
-
-    <top-menu
-      ref="top-menu"
-      :config="topMenuConfig" />
   </div>
 </template>
 
@@ -26,7 +22,6 @@
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import HasPreview from './../../mixins/HasPreview.vue';
-import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Html',
@@ -35,20 +30,10 @@ export default {
     ContentEditableImprovements,
     HasPreview
   ],
-  components: {
-    'top-menu': TopMenuUI
-  },
   data () {
     return {
       config: {},
-      content: '',
-      topMenuConfig: [
-        {
-          activeState: () => false,
-          onClick: () => false,
-          icon: 'gear'
-        }
-      ]
+      content: ''
     };
   },
   computed: {

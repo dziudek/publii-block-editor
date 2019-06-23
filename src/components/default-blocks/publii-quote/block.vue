@@ -28,10 +28,6 @@
         <cite v-html="content.author" />
       </blockquote>
     </div>
-
-    <top-menu
-      ref="top-menu"
-      :config="topMenuConfig" />
   </div>
 </template>
 
@@ -39,7 +35,6 @@
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import HasPreview from './../../mixins/HasPreview.vue';
-import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Paragraph',
@@ -48,9 +43,6 @@ export default {
     ContentEditableImprovements,
     HasPreview
   ],
-  components: {
-    'top-menu': TopMenuUI
-  },
   data () {
     return {
       focusable: ['contentText', 'contentAuthor'],
@@ -62,14 +54,7 @@ export default {
       content: {
         text: '',
         author: ''
-      },
-      topMenuConfig: [
-        {
-          activeState: () => false,
-          onClick: () => false,
-          icon: 'gear'
-        }
-      ]
+      }
     };
   },
   watch: {
