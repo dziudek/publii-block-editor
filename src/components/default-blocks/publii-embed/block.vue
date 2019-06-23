@@ -41,6 +41,7 @@ export default {
   },
   data () {
     return {
+      focusable: ['code'],
       config: {},
       content: '',
       topMenuConfig: [

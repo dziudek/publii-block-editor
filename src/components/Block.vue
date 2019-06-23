@@ -20,28 +20,52 @@ export default {
   },
   methods: {
     focus (cursorPosition = 'end') {
-      this.$refs['block'].focus();
+      let focusElement = this.getFocusableElement();
+
+      if (
+        document.activeElement === this.$refs[focusElement] ||
+        document.activeElement.parentNode === this.$refs[focusElement].parentNode
+      ) {
+        return;
+      }
+
+      this.$refs[focusElement].focus();
 
       if (cursorPosition === 'none') {
         return;
       }
 
       if (cursorPosition === 'end') {
-        this.setCursorAtEndOfElement();
+        this.setCursorAtEndOfElement(focusElement, this.isContentEditable(focusElement));
       }
 
       if (typeof cursorPosition === 'number') {
         this.setCursorAtPosition(cursorPosition);
       }
+    },
+    isContentEditable (el) {
+      let formElements = [
+        'INPUT',
+        'SELECT',
+        'TEXTAREA'
+      ];
 
-      setTimeout(() => {
-        if (this.$refs['code']) {
-          this.$refs['code'].focus();
-        }
-      }, 100);
+      if (formElements.indexOf(this.$refs[el].tagName) > -1) {
+        return false;
+      }
+
+      return true;
+    },
+    getFocusableElement () {
+      if (this.focusable) {
+        let focusElement = this.focusable[0];
+        return focusElement;
+      } else {
+        return 'block';
+      }
     },
     setCursorAtPosition (position) {
-      let el = this.$refs['block'];
+      let el = this.$refs[this.getFocusableElement()];
       let range = document.createRange();
       let sel = document.getSelection();
       range.setStart(el.firstChild, position);

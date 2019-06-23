@@ -33,7 +33,10 @@ export default {
     selectBlock (id) {
       if (this.id === id) {
         this.setView('code');
-        this.focus('end');
+
+        setTimeout(() => {
+          this.focus('end');
+        }, 0);
       }
     },
     deselectBlock (id) {

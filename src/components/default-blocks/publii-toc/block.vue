@@ -37,6 +37,7 @@ export default {
   },
   data () {
     return {
+      focusable: ['title'],
       config: {},
       content: {
         title: '',
@@ -59,6 +60,7 @@ export default {
     this.content.title = this.inputContent.title;
     this.updateToc();
     this.$bus.$on('block-editor-content-updated', this.updateToc);
+    this.$bus.$on('block-editor-block-selected', this.selectBlock);
   },
   methods: {
     handleKeyboard (e) {
@@ -124,6 +126,11 @@ export default {
 
       this.content.toc = html.replace(/<li>[\s]*?<\/li>/gmi, '');
     },
+    selectBlock (id) {
+      if (this.id === id) {
+        this.focus('end');
+      }
+    },
     save () {
       this.content = {
         toc: this.$refs['content'].innerHTML,
@@ -139,6 +146,7 @@ export default {
   },
   beforeDestroy () {
     this.$bus.$off('block-editor-content-updated', this.updateToc);
+    this.$bus.$off('block-editor-block-selected', this.selectBlock);
   }
 }
 </script>

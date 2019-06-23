@@ -53,6 +53,7 @@ export default {
   },
   data () {
     return {
+      focusable: ['contentText', 'contentAuthor'],
       caretIsAtStartText: false,
       caretIsAtEndText: false,
       caretIsAtStartAuthor: false,
