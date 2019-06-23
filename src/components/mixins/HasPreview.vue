@@ -33,6 +33,7 @@ export default {
     selectBlock (id) {
       if (this.id === id) {
         this.setView('code');
+        this.focus('end');
       }
     },
     deselectBlock (id) {
