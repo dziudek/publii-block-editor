@@ -1,6 +1,7 @@
 <template>
   <div
     :data-block-type="blockType"
+    ref="block-wrapper"
     :class="{ 'wrapper': true, 'is-selected': isSelected, 'has-ui-opened': uiOpened, [customCssClasses.join(' ')]: true }"
     @click.stop="blockClick"
     :style="'width: ' + ($parent.config.contentWidth + 40) + 'px;'">
@@ -126,10 +127,12 @@ export default {
       }
     },
     moveUp () {
-      this.$bus.$emit('block-editor-move-block-up', this.id);
+      let startBlockTop = this.$refs['block-wrapper'].getBoundingClientRect().top;
+      this.$bus.$emit('block-editor-move-block-up', this.id, startBlockTop);
     },
     moveDown () {
-      this.$bus.$emit('block-editor-move-block-down', this.id);
+      let startBlockTop = this.$refs['block-wrapper'].getBoundingClientRect().top;
+      this.$bus.$emit('block-editor-move-block-down', this.id, startBlockTop);
     },
     deleteBlock () {
       if (!this.confirmDelete) {

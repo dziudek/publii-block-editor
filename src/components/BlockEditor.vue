@@ -82,6 +82,9 @@ export default {
         selectedBlockID: false,
         externalComponentsLoaded: false
       },
+      internal: {
+        lastScroll: 0
+      },
       extensions: {
         shortcutManager: new ShortcutManager()
       },
@@ -181,7 +184,7 @@ export default {
       window.publiiBlockEditor.compileToFunctions = compileToFunctions;
       window.publiiBlockEditor.ContentEditableImprovements = ContentEditableImprovements;
     },
-    moveBlockUp (blockID) {
+    moveBlockUp (blockID, startBlockTop) {
       let blockIndex = this.content.findIndex(el => el.id === blockID);
 
       if (blockIndex > 0) {
@@ -189,8 +192,10 @@ export default {
         Vue.set(this.content, blockIndex, this.content[blockIndex - 1]);
         Vue.set(this.content, blockIndex - 1, tempBlock);
       }
+
+      this.scrollWindow(blockID, startBlockTop);
     },
-    moveBlockDown (blockID) {
+    moveBlockDown (blockID, startBlockTop) {
       let blockIndex = this.content.findIndex(el => el.id === blockID);
 
       if (blockIndex < this.content.length - 1) {
@@ -198,6 +203,20 @@ export default {
         Vue.set(this.content, blockIndex, this.content[blockIndex + 1]);
         Vue.set(this.content, blockIndex + 1, tempBlock);
       }
+
+      this.scrollWindow(blockID, startBlockTop);
+    },
+    scrollWindow (blockID, startBlockTop) {
+      if (+new Date() < this.internal.lastScroll + 100) {
+        return;
+      }
+
+      this.internal.lastScroll = +new Date();
+
+      this.$nextTick(() => {
+        let endBlockTop = this.$refs['block-wrapper-' + blockID][0].$refs['block-wrapper'].getBoundingClientRect().top;
+        window.scrollBy(0, endBlockTop - startBlockTop);
+      });
     },
     saveBlock (blockData) {
       let blockIndex = this.content.findIndex(el => el.id === blockData.id);
