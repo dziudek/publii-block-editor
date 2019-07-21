@@ -7,11 +7,12 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "main": "src/PubliiBlockEditor.vue",
   "dependencies": {
-    "rangy-updated": "^1.3.3",
-    "vue": "^2.6.10"
+    "rangy-updated": "^1.3.3"
   },
   "devDependencies": {
+    "vue": "^2.6.10",
     "@vue/cli-plugin-babel": "^3.6.0",
     "@vue/cli-plugin-eslint": "^3.6.0",
     "@vue/cli-service": "^3.6.0",
