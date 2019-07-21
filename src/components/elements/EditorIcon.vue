@@ -155,7 +155,12 @@ export default {
       return style.join(';')
     },
     iconPath () {
-      return `../../assets/svg/editor-ui-svg-map.svg#${this.name}`;
+      // Detect if editor is running in Publii or standalone
+      if (window.process) {
+        return `../node_modules/publii-block-editor/public/assets/svg/editor-ui-svg-map.svg#${this.name}`;
+      }
+
+      return `../assets/svg/editor-ui-svg-map.svg#${this.name}`;
     }
   }
 }
