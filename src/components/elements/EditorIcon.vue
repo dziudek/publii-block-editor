@@ -155,7 +155,7 @@ export default {
       return style.join(';')
     },
     iconPath () {
-      return `assets/svg/editor-ui-svg-map.svg#${this.name}`;
+      return `../../assets/svg/editor-ui-svg-map.svg#${this.name}`;
     }
   }
 }
