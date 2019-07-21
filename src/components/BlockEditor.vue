@@ -90,56 +90,9 @@ export default {
       },
       content: [
         {
-          id: 1555941441671,
-          type: 'publii-header',
-          content: 'Lorem ipsum dolor',
-          config: {}
-        },
-        {
-          id: 1555941441622,
-          type: 'publii-code',
-          content: 'Lorem ipsum dolor',
-          config: {}
-        },
-        {
-          id: 1555941432000,
-          type: 'publii-readmore',
-          content: '',
-          config: {}
-        },
-        /*
-        {
-          id: 1555941441670,
-          type: 'publii-header-custom',
-          content: 'CUSTOM Lorem ipsum dolor',
-          config: {}
-        },
-        */
-        {
-          id: 1555941453146,
-          type: 'publii-list',
-          content: '<li></li>',
-          config: {}
-        },
-        {
-          id: 1555941432021,
-          type: 'publii-separator',
-          content: '',
-          config: {}
-        },
-        {
           id: 1555941466744,
           type: 'publii-paragraph',
-          content: 'Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Maecenas sed diam eget risus varius blandit sit amet non magna.',
-          config: {}
-        },
-        {
-          id: 1555825318231,
-          type: 'publii-quote',
-          content: {
-            text: 'Lorem ipsum dolor',
-            author: 'John Doe'
-          },
+          content: '',
           config: {}
         }
       ]
@@ -364,7 +317,7 @@ export default {
 
 <style lang="scss">
 .editor {
-  padding: 50px 0;
+  padding: 0 0 50px 0;
   position: relative;
   width: 100%;
 
