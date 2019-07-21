@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="publii-block-editor">
     <block-editor />
   </div>
 </template>
@@ -12,18 +12,25 @@ import 'rangy-updated/lib/rangy-selectionsaverestore.js';
 import 'rangy-updated/lib/rangy-classapplier.js';
 import 'rangy-updated/lib/rangy-highlighter.js';
 
-// Declare event bus
-Vue.prototype.$bus = new Vue();
-Vue.prototype.$rangy = Rangy;
+if (!Vue.prototype.$bus) {
+  Vue.prototype.$bus = new Vue();
+}
+
+if (!Vue.prototype.$rangy) {
+  Vue.prototype.$rangy = Rangy;
+}
 
 export default {
-  name: 'app',
+  name: 'publii-block-editor',
   components: {
     BlockEditor
   },
   mounted () {
     window.publiiBlockEditorInstance = this;
-    Vue.prototype.$highlighter = this.$rangy.createHighlighter();
+
+    if (!Vue.prototype.$highlighter) {
+      Vue.prototype.$highlighter = this.$rangy.createHighlighter();
+    }
 
     this.$highlighter.addClassApplier(this.$rangy.createClassApplier('is-highlighted', {
       ignoreWhiteSpace: true,
@@ -32,23 +39,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import './assets/variables.scss';
-
-*,
-*:after,
-*:before {
-  box-sizing: border-box;
-}
-
-#app {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  ::selection {
-    background: $block-editor-color-gradient-end;
-  }
-}
-</style>
