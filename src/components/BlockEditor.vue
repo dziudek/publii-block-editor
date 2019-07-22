@@ -305,8 +305,8 @@ export default {
     loadAllBlocks () {
       let inputField = document.querySelector('#post-editor');
 
-      if (inputField.innerText !== '') {
-        this.content = JSON.parse(inputField.innerText);
+      if (inputField.value !== '') {
+        this.content = JSON.parse(inputField.value);
       }
     },
     saveAllBlocks () {
@@ -316,7 +316,7 @@ export default {
         this.$refs['block-' + block.id][0].save();
       }
 
-      inputField.innerText = JSON.stringify(this.content);
+      inputField.value = JSON.stringify(this.content);
     }
   },
   beforeDestroy () {
