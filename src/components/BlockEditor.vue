@@ -127,7 +127,9 @@ export default {
     this.$bus.$on('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
     this.$bus.$on('block-editor-ui-opened-for-block', this.uiOpenedForBlock);
     this.$bus.$on('block-editor-ui-closed-for-block', this.uiClosedForBlock);
+    this.$bus.$on('publii-block-editor-save', this.saveAllBlocks);
     this.initGlobals();
+    this.loadAllBlocks();
   },
   methods: {
     initGlobals () {
@@ -299,6 +301,22 @@ export default {
     },
     uiOpenedForBlock (blockID) {
       this.$refs['editor-main'].setAttribute('data-ui-opened-block', blockID);
+    },
+    loadAllBlocks () {
+      let inputField = document.querySelector('#post-editor');
+
+      if (inputField.innerText !== '') {
+        this.content = JSON.parse(inputField.innerText);
+      }
+    },
+    saveAllBlocks () {
+      let inputField = document.querySelector('#post-editor');
+
+      for (let block in this.content) {
+        this.$refs['block-' + block.id].save();
+      }
+
+      inputField.innerText = JSON.stringify(this.content);
     }
   },
   beforeDestroy () {
@@ -311,6 +329,7 @@ export default {
     this.$bus.$off('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
     this.$bus.$off('block-editor-ui-opened-for-block', this.uiOpenedForBlock);
     this.$bus.$off('block-editor-ui-closed-for-block', this.uiClosedForBlock);
+    this.$bus.$off('publii-block-editor-save', this.saveAllBlocks);
   }
 }
 </script>
