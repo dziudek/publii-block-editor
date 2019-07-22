@@ -313,7 +313,7 @@ export default {
       let inputField = document.querySelector('#post-editor');
 
       for (let block in this.content) {
-        this.$refs['block-' + block.id].save();
+        this.$refs['block-' + block.id][0].save();
       }
 
       inputField.innerText = JSON.stringify(this.content);
