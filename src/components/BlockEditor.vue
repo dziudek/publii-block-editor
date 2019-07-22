@@ -128,8 +128,8 @@ export default {
     this.$bus.$on('block-editor-ui-opened-for-block', this.uiOpenedForBlock);
     this.$bus.$on('block-editor-ui-closed-for-block', this.uiClosedForBlock);
     this.$bus.$on('publii-block-editor-save', this.saveAllBlocks);
+    this.$bus.$on('publii-block-editor-load', this.loadAllBlocks);
     this.initGlobals();
-    this.loadAllBlocks();
   },
   methods: {
     initGlobals () {
@@ -330,6 +330,7 @@ export default {
     this.$bus.$off('block-editor-ui-opened-for-block', this.uiOpenedForBlock);
     this.$bus.$off('block-editor-ui-closed-for-block', this.uiClosedForBlock);
     this.$bus.$off('publii-block-editor-save', this.saveAllBlocks);
+    this.$bus.$off('publii-block-editor-load', this.loadAllBlocks);
   }
 }
 </script>
