@@ -312,7 +312,7 @@ export default {
     saveAllBlocks () {
       let inputField = document.querySelector('#post-editor');
 
-      for (let block in this.content) {
+      for (let block of this.content) {
         this.$refs['block-' + block.id][0].save();
       }
 
