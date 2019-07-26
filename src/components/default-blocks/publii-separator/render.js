@@ -6,4 +6,4 @@ function render (blockData) {
   return html;
 };
 
-export default render;
+module.exports = render;
