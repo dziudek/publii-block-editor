@@ -38,7 +38,15 @@ export default {
   },
   computed: {
     modifiedContent () {
-      return this.content.replace(/&gt;/gmi, '>').replace(/&lt;/gmi, '<').replace(/&nbsp;/gmi, '&');
+      let code = this.content;
+      code = code.replace(/&gt;/gmi, '>');
+      code = code.replace(/&lt;/gmi, '<');
+      code = code.replace(/&nbsp;/gmi, '&');
+      code = code.replace(/<script/gmi, '<publii-script');
+      code = code.replace(/<\/script/gmi, '</publii-script');
+      code = code.replace(/<iframe/gmi, '<publii-iframe');
+      code = code.replace(/<\/iframe/gmi, '</publii-iframe');
+      return code;
     }
   },
   mounted () {
@@ -103,6 +111,39 @@ export default {
 
   &-preview {
     padding: 15px 0;
+
+    publii-script,
+    publii-iframe {
+      background: #f5f5f5;
+      border: 1px solid #eee;
+      color: #888;
+      display: block;
+      height: 48px;
+      overflow: hidden;
+      padding: 15px;
+      position: relative;
+      width: 100%;
+
+      &:after {
+        align-content: center;
+        align-items: center;
+        background: #f5f5f5;
+        content: "This JavaScript code will be evaluated in the preview";
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
+    }
+
+    publii-iframe {
+      &:after {
+        content: "This iframe will be loaded in the preview";
+      }
+    }
   }
 }
 </style>
