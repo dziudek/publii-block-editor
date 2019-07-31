@@ -258,7 +258,13 @@ export default {
         let newElementName = this.$parent.$parent.extensions.shortcutManager.checkContentForShortcuts(this.$refs['block'].innerHTML);
 
         if (newElementName === 'publii-readmore' && this.editor.hasReadMore) {
-          alert('You can add only one read more per post.');
+          if (window.app) {
+            this.$bus.$emit('alert-display', {
+              message: 'You can add only one read more per post.'
+            });
+          } else {
+            alert('You can add only one read more per post.');
+          }
           e.returnValue = false;
           return;
         }

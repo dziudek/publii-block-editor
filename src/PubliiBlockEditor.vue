@@ -13,7 +13,11 @@ import 'rangy-updated/lib/rangy-classapplier.js';
 import 'rangy-updated/lib/rangy-highlighter.js';
 
 if (!Vue.prototype.$bus) {
-  Vue.prototype.$bus = new Vue();
+  if (window.app && window.app.$bus) {
+    Vue.prototype.$bus = window.app.$bus;
+  } else {
+    Vue.prototype.$bus = new Vue();
+  }
 }
 
 if (!Vue.prototype.$rangy) {
