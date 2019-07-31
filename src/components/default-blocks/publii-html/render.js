@@ -1,4 +1,4 @@
-import contentFilter from './content-filter.js';
+const contentFilter = require('./content-filter.js');
 
 function render (blockData) {
   let id = blockData.config.id ? 'id="' + blockData.config.id + '"' : '';
