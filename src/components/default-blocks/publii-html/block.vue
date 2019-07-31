@@ -21,6 +21,7 @@
 <script>
 import Block from './../../Block.vue';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
+import contentFilter from './content-filter.js';
 import HasPreview from './../../mixins/HasPreview.vue';
 
 export default {
@@ -38,15 +39,7 @@ export default {
   },
   computed: {
     modifiedContent () {
-      let code = this.content;
-      code = code.replace(/&gt;/gmi, '>');
-      code = code.replace(/&lt;/gmi, '<');
-      code = code.replace(/&nbsp;/gmi, '&');
-      code = code.replace(/<script/gmi, '<publii-script');
-      code = code.replace(/<\/script/gmi, '</publii-script');
-      code = code.replace(/<iframe/gmi, '<publii-iframe');
-      code = code.replace(/<\/iframe/gmi, '</publii-iframe');
-      return code;
+      return contentFilter(this.content);
     }
   },
   mounted () {
