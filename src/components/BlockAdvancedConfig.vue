@@ -86,6 +86,7 @@ export default {
 @import '../assets/variables.scss';
 
 .block-advanced-config {
+  background: $block-editor-color-light;
   box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
   border-radius: $block-editor-form-input-border-radius;
   padding: 20px;
