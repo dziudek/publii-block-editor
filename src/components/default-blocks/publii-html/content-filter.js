@@ -9,4 +9,4 @@ function contentFilter (code) {
   return code;
 }
 
-module.exports = contentFilter;
+// module.exports = contentFilter;

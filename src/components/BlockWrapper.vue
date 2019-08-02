@@ -28,7 +28,7 @@
             <button
               :class="{ 'wrapper-ui-options-button-more-options': true }"
               tabindex="-1"
-              @click.stop="showMore">
+              @click.stop="showAdvancedConfig">
               <icon name="gear" />
             </button>
             <button
@@ -141,8 +141,8 @@ export default {
         this.$bus.$emit('block-editor-delete-block', this.id);
       }
     },
-    showMore () {
-
+    showAdvancedConfig () {
+      this.$bus.$emit('block-editor-trigger-advanced-config', this.id);
     }
   },
   beforeDestroy () {

@@ -171,7 +171,9 @@
 </template>
 
 <script>
+import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
+import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import EditorIcon from './../../elements/EditorIcon.vue';
 import InlineMenu from './../../mixins/InlineMenu.vue';
@@ -181,6 +183,7 @@ import TopMenuUI from './../../helpers/TopMenuUI.vue';
 export default {
   name: 'Paragraph',
   mixins: [
+    AdvancedConfig,
     Block,
     ContentEditableImprovements,
     InlineMenu
@@ -193,7 +196,11 @@ export default {
   data () {
     return {
       config: {
-        textAlign: 'left'
+        textAlign: 'left',
+        advanced: {
+          cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
+          id: this.getAdvancedConfigDefaultValue('id')
+        }
       },
       content: '',
       showNewBlockUI: false,
@@ -226,6 +233,9 @@ export default {
         this.$parent.removeCustomCssClass('has-block-selector-visible');
       }
     }
+  },
+  beforeCreate () {
+    this.configForm = ConfigForm;
   },
   mounted () {
     this.content = this.inputContent;

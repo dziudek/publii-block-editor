@@ -27,6 +27,8 @@
         :style="'width: ' + config.contentWidth + 'px;'"
         @click="addNewParagraphAtEnd"></div>
     </div>
+
+    <block-advanced-config />
   </div>
 </template>
 
@@ -34,6 +36,7 @@
 // core elements
 import Vue from 'vue';
 import Block from './Block.vue';
+import BlockAdvancedConfig from './BlockAdvancedConfig.vue';
 import BlockWrapper from './BlockWrapper.vue';
 import ContentEditableImprovements from './helpers/ContentEditableImprovements.vue';
 import { compileToFunctions } from 'vue-template-compiler';
@@ -55,6 +58,7 @@ import ShortcutManager from './extensions/ShortcutManager.js';
 export default {
   name: 'BlockEditor',
   components: {
+    'block-advanced-config': BlockAdvancedConfig,
     'block-wrapper': BlockWrapper,
     'publii-code': PubliiCode,
     'publii-embed': PubliiEmbed,
