@@ -19,13 +19,16 @@
 </template>
 
 <script>
+import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
+import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Header',
   mixins: [
+    AdvancedConfig,
     Block,
     ContentEditableImprovements
   ],
@@ -36,7 +39,11 @@ export default {
     return {
       config: {
         headingLevel: 2,
-        textAlign: 'left'
+        textAlign: 'left',
+        advanced: {
+          cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
+          id: this.getAdvancedConfigDefaultValue('id')
+        }
       },
       content: '',
       topMenuConfig: [
@@ -87,6 +94,9 @@ export default {
         }
       ]
     };
+  },
+  beforeCreate () {
+    this.configForm = ConfigForm;
   },
   mounted () {
     this.content = this.inputContent;

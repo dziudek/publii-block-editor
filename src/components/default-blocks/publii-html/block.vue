@@ -19,7 +19,9 @@
 </template>
 
 <script>
+import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
+import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import contentFilter from './content-filter.js';
 import HasPreview from './../../mixins/HasPreview.vue';
@@ -27,13 +29,19 @@ import HasPreview from './../../mixins/HasPreview.vue';
 export default {
   name: 'Html',
   mixins: [
+    AdvancedConfig,
     Block,
     ContentEditableImprovements,
     HasPreview
   ],
   data () {
     return {
-      config: {},
+      config: {
+        advanced: {
+          cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
+          id: this.getAdvancedConfigDefaultValue('id')
+        }
+      },
       content: ''
     };
   },
@@ -41,6 +49,9 @@ export default {
     modifiedContent () {
       return contentFilter(this.content);
     }
+  },
+  beforeCreate () {
+    this.configForm = ConfigForm;
   },
   mounted () {
     this.content = this.inputContent;

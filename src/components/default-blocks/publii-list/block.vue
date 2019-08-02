@@ -21,7 +21,9 @@
 </template>
 
 <script>
+import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
+import ConfigForm from './config-form.json';
 import InlineMenu from './../../mixins/InlineMenu.vue';
 import InlineMenuUI from './../../helpers/InlineMenuUI.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
@@ -29,6 +31,7 @@ import TopMenuUI from './../../helpers/TopMenuUI.vue';
 export default {
   name: 'List',
   mixins: [
+    AdvancedConfig,
     Block,
     InlineMenu
   ],
@@ -39,7 +42,11 @@ export default {
   data () {
     return {
       config: {
-        listType: 'ul'
+        listType: 'ul',
+        advanced: {
+          cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
+          id: this.getAdvancedConfigDefaultValue('id')
+        }
       },
       content: '<li></li>',
       topMenuConfig: [
@@ -65,6 +72,9 @@ export default {
         }
       ]
     };
+  },
+  beforeCreate () {
+    this.configForm = ConfigForm;
   },
   mounted () {
     this.content = this.inputContent;

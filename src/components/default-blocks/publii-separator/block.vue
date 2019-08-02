@@ -16,12 +16,15 @@
 </template>
 
 <script>
+import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
+import ConfigForm from './config-form.json';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Separator',
   mixins: [
+    AdvancedConfig,
     Block
   ],
   components: {
@@ -30,7 +33,11 @@ export default {
   data () {
     return {
       config: {
-        type: 'long'
+        type: 'long',
+        advanced: {
+          cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
+          id: this.getAdvancedConfigDefaultValue('id')
+        }
       },
       content: '',
       topMenuConfig: [
@@ -61,6 +68,9 @@ export default {
         }
       ]
     };
+  },
+  beforeCreate () {
+    this.configForm = ConfigForm;
   },
   mounted () {
     this.$refs['block'].addEventListener('keydown', this.handleKeyboard);

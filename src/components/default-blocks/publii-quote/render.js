@@ -1,8 +1,8 @@
 function render (blockData) {
-  let id = blockData.config.id ? 'id="' + blockData.config.id + '"' : '';
-  let cssClasses = blockData.config.cssClasses ? 'class="' + blockData.config.cssClasses + '"' : '';
+  let id = blockData.config.advanced.id ? ' id="' + blockData.config.advanced.id + '"' : '';
+  let cssClasses = blockData.config.advanced.cssClasses ? ' class="' + blockData.config.cssClasses + '"' : '';
   let html = `
-  <blockquote>
+  <blockquote${id}${cssClasses}>
     <p>${blockData.content.text}</p>
     <cite>${blockData.content.author}</cite>
   </blockquote>`;

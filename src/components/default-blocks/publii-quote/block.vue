@@ -32,13 +32,16 @@
 </template>
 
 <script>
+import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
+import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import HasPreview from './../../mixins/HasPreview.vue';
 
 export default {
   name: 'Paragraph',
   mixins: [
+    AdvancedConfig,
     Block,
     ContentEditableImprovements,
     HasPreview
@@ -50,7 +53,12 @@ export default {
       caretIsAtEndText: false,
       caretIsAtStartAuthor: false,
       caretIsAtEndAuthor: false,
-      config: {},
+      config: {
+        advanced: {
+          cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
+          id: this.getAdvancedConfigDefaultValue('id')
+        }
+      },
       content: {
         text: '',
         author: ''
@@ -63,6 +71,9 @@ export default {
         this.setCursorAtEndOfElement('contentText', false);
       }
     }
+  },
+  beforeCreate () {
+    this.configForm = ConfigForm;
   },
   mounted () {
     this.content.text = this.inputContent.text;

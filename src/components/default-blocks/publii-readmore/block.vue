@@ -12,18 +12,29 @@
 </template>
 
 <script>
+import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
+import ConfigForm from './config-form.json';
 
 export default {
   name: 'ReadMore',
   mixins: [
+    AdvancedConfig,
     Block
   ],
   data () {
     return {
-      config: {},
+      config: {
+        advanced: {
+          cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
+          id: this.getAdvancedConfigDefaultValue('id')
+        }
+      },
       content: ''
     };
+  },
+  beforeCreate () {
+    this.configForm = ConfigForm;
   },
   mounted () {
     this.$refs['block'].addEventListener('keydown', this.handleKeyboard);

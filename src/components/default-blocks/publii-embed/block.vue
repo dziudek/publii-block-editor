@@ -20,7 +20,9 @@
 </template>
 
 <script>
+import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
+import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import EmbedHelper from './embed.js';
 import HasPreview from './../../mixins/HasPreview.vue';
@@ -28,6 +30,7 @@ import HasPreview from './../../mixins/HasPreview.vue';
 export default {
   name: 'Embed',
   mixins: [
+    AdvancedConfig,
     Block,
     ContentEditableImprovements,
     HasPreview
@@ -35,7 +38,12 @@ export default {
   data () {
     return {
       focusable: ['code'],
-      config: {},
+      config: {
+        advanced: {
+          cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
+          id: this.getAdvancedConfigDefaultValue('id')
+        }
+      },
       content: ''
     };
   },
@@ -47,6 +55,9 @@ export default {
 
       return this.content;
     }
+  },
+  beforeCreate () {
+    this.configForm = ConfigForm;
   },
   mounted () {
     this.content = this.inputContent;

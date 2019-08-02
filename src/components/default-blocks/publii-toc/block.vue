@@ -20,17 +20,25 @@
 </template>
 
 <script>
+import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
+import ConfigForm from './config-form.json';
 
 export default {
   name: 'ToC',
   mixins: [
+    AdvancedConfig,
     Block
   ],
   data () {
     return {
       focusable: ['title'],
-      config: {},
+      config: {
+        advanced: {
+          cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
+          id: this.getAdvancedConfigDefaultValue('id')
+        }
+      },
       content: {
         title: '',
         toc: ''
@@ -39,6 +47,9 @@ export default {
   },
   computed: {
 
+  },
+  beforeCreate () {
+    this.configForm = ConfigForm;
   },
   mounted () {
     this.content.toc = this.inputContent.toc;

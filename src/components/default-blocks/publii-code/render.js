@@ -1,7 +1,7 @@
 function render (blockData) {
-  let id = blockData.config.id ? 'id="' + blockData.config.id + '"' : '';
-  let cssClasses = blockData.config.cssClasses ? 'class="' + blockData.config.cssClasses + '"' : '';
-  let html = `<pre ${id} ${cssClasses}>${blockData.content}</pre>`;
+  let id = blockData.config.advanced.id ? ' id="' + blockData.config.advanced.id + '"' : '';
+  let cssClasses = blockData.config.advanced.cssClasses ? ' class="' + blockData.config.cssClasses + '"' : '';
+  let html = `<pre${id}${cssClasses}>${blockData.content}</pre>`;
   return html;
 };
 

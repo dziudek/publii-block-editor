@@ -64,7 +64,9 @@
 </template>
 
 <script>
+import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
+import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import EditorIcon from './../../elements/EditorIcon.vue';
 import HasPreview from './../../mixins/HasPreview.vue';
@@ -73,6 +75,7 @@ import TopMenuUI from './../../helpers/TopMenuUI.vue';
 export default {
   name: 'PImage',
   mixins: [
+    AdvancedConfig,
     Block,
     ContentEditableImprovements,
     HasPreview
@@ -89,7 +92,11 @@ export default {
       caretIsAtEndAlt: false,
       isHovered: false,
       config: {
-        imageAlign: 'center'
+        imageAlign: 'center',
+        advanced: {
+          cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
+          id: this.getAdvancedConfigDefaultValue('id')
+        }
       },
       content: {
         image: '',
@@ -114,6 +121,9 @@ export default {
         }
       ]
     };
+  },
+  beforeCreate () {
+    this.configForm = ConfigForm;
   },
   mounted () {
     this.content.image = this.inputContent.image || '';
