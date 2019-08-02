@@ -15,6 +15,7 @@ export default {
     };
   },
   mounted () {
+    this.config = Object.assign(this.config, this.inputConfig);
     this.$on('block-save', this.save);
     this.$bus.$on('block-editor-trigger-block-save', this.saveIsNeeded);
   },
