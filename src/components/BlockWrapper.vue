@@ -19,6 +19,11 @@
           <div
             v-if="uiOpened"
             :class="{ 'wrapper-ui-options': true, 'is-visible': true }">
+            <div
+              v-if="confirmDelete"
+              class="wrapper-ui-options-confirm-tooltip">
+              Click to confirm
+            </div>
             <button
               :class="{ 'wrapper-ui-options-button-trash': true }"
               tabindex="-1"
@@ -311,6 +316,41 @@ export default {
 
       &-button-move + .wrapper-ui-options-button-move {
         top: 12px;
+      }
+
+      &-confirm-tooltip {
+        background: $block-editor-color-danger;
+        border-radius: $block-editor-form-input-border-radius;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
+        color: $block-editor-color-light;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 12px;
+        justify-content: center;
+        height: auto;
+        right: 24px;
+        padding: 5px;
+        position: absolute;
+        top: -30px;
+        transform: translateX(50%);
+        white-space: nowrap;
+        width: auto;
+        z-index: 10;
+
+        &:after {
+          bottom: -12px;
+          border: 6px solid $block-editor-color-danger;
+          border-left-color: transparent;
+          border-right-color: transparent;
+          border-bottom-color: transparent;
+          content: "";
+          filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, .08));
+          height: 12px;
+          left: 50%;
+          position: absolute;
+          transform: translateX(-50%);
+          width: 12px;
+        }
       }
     }
 
