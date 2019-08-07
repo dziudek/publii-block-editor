@@ -27,7 +27,8 @@ import TopMenuUI from './../../helpers/TopMenuUI.vue';
 let mainProcess;
 
 if (window.app && window.remote) {
-  mainProcess = window.remote.require('./main.js');
+  const { remote } = require('electron');
+  mainProcess = remote.require('./main.js');
 } else {
   mainProcess = {
     slug: function (text) {
