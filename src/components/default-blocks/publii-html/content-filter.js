@@ -9,4 +9,4 @@ function contentFilter (code) {
   return code;
 }
 
-export default contentFilter;
+module.exports = contentFilter;
