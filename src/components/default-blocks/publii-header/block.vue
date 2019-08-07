@@ -32,7 +32,7 @@ if (window.app && window.remote) {
 } else {
   mainProcess = {
     slug: function (text) {
-      return text.replace(/[^a-zA-Z0-9\s]/gmi, '').replace(/\s/gmi, '-');
+      return text.toLowerCase().replace(/[^a-zA-Z0-9\s]/gmi, '').replace(/\s/gmi, '-').trim();
     }
   };
 }

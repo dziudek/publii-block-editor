@@ -103,7 +103,7 @@ export default {
           }
         }
 
-        html += '<a href="#' + processedHeader.id + '">' + processedHeader.content + '</a>';
+        html += '<a href="#' + processedHeader.config.advanced.id + '">' + processedHeader.content + '</a>';
 
         if (!nextLevel || nextLevel === headingLevel) {
           html += '</li>';
