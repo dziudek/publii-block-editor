@@ -7,10 +7,21 @@
         "defaultValue": ""
     },
     {
+        "name": "customId",
+        "type": "checkbox",
+        "label": "Use custom ID",
+        "tooltip": "Enable this option if you want to use own ID, instead of the auto-generated one",
+        "defaultValue": false
+    },
+    {
         "name": "id",
         "type": "text",
         "label": "ID",
         "tooltip": "This value will be used as ID of the paragraph",
-        "defaultValue": ""
+        "defaultValue": "",
+        "disabled": {
+            "field": "customId",
+            "value": false
+        }
     }
 ]

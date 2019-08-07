@@ -24,6 +24,17 @@ import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
+let mainProcess;
+
+if (window.app && window.remote) {
+  mainProcess = window.remote.require('./main.js');
+} else {
+  mainProcess = {
+    slug: function (text) {
+      return text.replace(/[^a-zA-Z0-9\s]/gmi, '').replace(/\s/gmi, '-');
+    }
+  };
+}
 
 export default {
   name: 'Header',
@@ -42,6 +53,7 @@ export default {
         textAlign: 'left',
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
+          customId: this.getAdvancedConfigDefaultValue('customId'),
           id: this.getAdvancedConfigDefaultValue('id')
         }
       },
@@ -141,6 +153,10 @@ export default {
     },
     save () {
       this.content = this.$refs['block'].innerHTML.replace('<line-separator></line-separator>', '');
+
+      if (!this.config.advanced.customId) {
+        this.config.advanced.id = mainProcess.slug(this.content);
+      }
 
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,

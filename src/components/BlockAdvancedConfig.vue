@@ -22,6 +22,13 @@
           v-if="field.type === 'text'"
           :id="'advanced-config-field-' + index"
           type="text"
+          :disabled="getDisabledState(field.disabled)"
+          v-model="config[field.name]" />
+        <input
+          v-if="field.type === 'checkbox'"
+          :id="'advanced-config-field-' + index"
+          type="checkbox"
+          :disabled="getDisabledState(field.disabled)"
           v-model="config[field.name]" />
       </div>
 
@@ -74,6 +81,15 @@ export default {
     save () {
       this.$bus.$emit('block-editor-save-advanced-config', this.currentBlockID, this.config);
       this.hide();
+    },
+    getDisabledState (fieldDisabledRules) {
+      for (let rule in fieldDisabledRules) {
+        if (this.config[rule.field] === rule.value) {
+          return true;
+        }
+      }
+
+      return false;
     }
   },
   beforeDestroy () {
