@@ -145,13 +145,13 @@ export default {
         }, 0);
       }
     },
-    handleCaret (e) {
-      let cursorPosition = this.getCursorPosition('block');
+    handleCaret (e, blockRefName = 'block') {
+      let cursorPosition = this.getCursorPosition(blockRefName);
 
       if (
         e.code === 'ArrowUp' && (
           cursorPosition <= 2 ||
-          cursorPosition === this.$refs['block'].innerHTML.length ||
+          cursorPosition === this.$refs[blockRefName].innerHTML.length ||
           (cursorPosition <= 15 && this.$options.name === 'List')
         )
       ) {
@@ -170,7 +170,7 @@ export default {
 
       if (
         e.code === 'ArrowDown' && (
-          cursorPosition >= this.$refs['block'].innerHTML.length - 5 ||
+          cursorPosition >= this.$refs[blockRefName].innerHTML.length - 5 ||
           (cursorPosition === 0 && this.$options.name === 'Separator') ||
           (cursorPosition === 0 && this.$options.name === 'ReadMore')
         )

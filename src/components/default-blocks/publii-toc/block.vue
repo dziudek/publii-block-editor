@@ -7,7 +7,7 @@
         class="publii-block-toc-title"
         ref="title"
         @keydown="handleKeyboard"
-        @keyup="handleCaret"
+        @keyup="handleCaret($event, 'title')"
         @blur="save"
         contenteditable="true" v-html="content.title"></h2>
       <ol
