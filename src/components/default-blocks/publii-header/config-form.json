@@ -19,9 +19,11 @@
         "label": "ID",
         "tooltip": "This value will be used as ID of the paragraph",
         "defaultValue": "",
-        "disabled": {
-            "field": "customId",
-            "value": false
-        }
+        "disabled": [
+            {
+                "field": "customId",
+                "value": false
+            }
+        ]
     }
 ]

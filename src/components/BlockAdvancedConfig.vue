@@ -21,13 +21,14 @@
         <input
           v-if="field.type === 'text'"
           :id="'advanced-config-field-' + index"
+          :key="'field-input-' + index"
           type="text"
           :disabled="getDisabledState(field.disabled)"
           v-model="config[field.name]" />
-        <input
+        <switcher
           v-if="field.type === 'checkbox'"
           :id="'advanced-config-field-' + index"
-          type="checkbox"
+          :key="'field-input-' + index"
           :disabled="getDisabledState(field.disabled)"
           v-model="config[field.name]" />
       </div>
@@ -45,8 +46,13 @@
 </template>
 
 <script>
+import Switcher from './elements/Switcher.vue';
+
 export default {
   name: 'block-advanced-config',
+  components: {
+    'switcher': Switcher
+  },
   data () {
     return {
       isVisible: false,
@@ -83,7 +89,11 @@ export default {
       this.hide();
     },
     getDisabledState (fieldDisabledRules) {
-      for (let rule in fieldDisabledRules) {
+      if (typeof fieldDisabledRules === 'undefined') {
+        return false;
+      }
+
+      for (let rule of fieldDisabledRules) {
         if (this.config[rule.field] === rule.value) {
           return true;
         }
@@ -168,6 +178,11 @@ export default {
       font-size: 16px;
       padding: 8px 12px;
       width: 100%;
+
+      &[disabled] {
+        opacity: .5;
+        pointer-events: none;
+      }
     }
   }
 }
