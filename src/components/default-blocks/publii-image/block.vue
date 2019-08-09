@@ -34,11 +34,21 @@
         @drop.stop.prevent="drop">
         <div class="publii-block-image-uploader-inner">
           <icon
+            v-if="!imageUploadInProgress"
             name="image"
             height="50"
             width="100" />
-          <span>Drop to upload your photo or</span>
-          <button @click="filePickerCallback">Select file</button>
+          <span v-if="!imageUploadInProgress">
+            Drop to upload your photo or
+          </span>
+          <button
+            v-if="!imageUploadInProgress"
+            @click="filePickerCallback">
+            Select file
+          </button>
+          <span
+            v-if="imageUploadInProgress"
+            class="publii-block-image-uploader-loader"></span>
         </div>
       </div>
 
@@ -456,10 +466,24 @@ export default {
     height: 250px;
     margin: 0 0 16px 0;
     padding: 10px;
+    position: relative;
     width: 100%;
 
     &.is-hovered {
       border-color: $block-editor-color-primary;
+    }
+
+    &-loader {
+      animation: loader 1s linear infinite;
+      border: 2px solid $block-editor-color-primary;
+      border-left-color: transparent;
+      border-radius: $block-editor-form-input-border-radius;
+      height: 32px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      width: 32px;
     }
 
     &-inner {
@@ -513,6 +537,16 @@ export default {
     .publii-block-image-delete {
       right: -64px;
     }
+  }
+}
+
+@keyframes loader {
+  from {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateX(-50%) translateY(-50%) rotate(360deg);
   }
 }
 </style>
