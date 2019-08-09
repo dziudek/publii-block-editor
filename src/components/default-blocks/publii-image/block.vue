@@ -38,7 +38,7 @@
             height="50"
             width="100" />
           <span>Drop to upload your photo or</span>
-          <button>Select file</button>
+          <button @click="filePickerCallback">Select file</button>
         </div>
       </div>
 
@@ -141,6 +141,7 @@ export default {
     this.content.alt = this.inputContent.alt || '';
     this.content.caption = this.inputContent.caption || '';
     this.view = (this.content.image === '') ? 'code' : 'preview';
+    this.initFakeFilePicker();
   },
   methods: {
     dragOver (e) {
@@ -185,6 +186,57 @@ export default {
       }
 
       this.isHovered = false;
+    },
+    initFakeFilePicker () {
+      if (!this.isInsidePublii) {
+        return;
+      }
+
+      let imageUploader = document.getElementById('post-editor-fake-image-uploader');
+
+      imageUploader.addEventListener('change', () => {
+        if (!imageUploader.value) {
+          return;
+        }
+
+        setTimeout(() => {
+          if (!this.fileSelectionCallback) {
+            return;
+          }
+
+          let filePath = false;
+
+          if (imageUploader.files) {
+            filePath = imageUploader.files[0].path;
+          }
+
+          if (!filePath) {
+            return;
+          }
+
+          // eslint-disable-next-line
+          ipcRenderer.send('app-image-upload', {
+            id: this.postID,
+            site: window.app.$store.state.currentSite.config.name,
+            path: filePath,
+            imageType: 'contentImages'
+          });
+
+          // eslint-disable-next-line
+          ipcRenderer.once('app-image-uploaded', (event, data) => {
+            this.content.imageWidth = data.baseImage.size[0];
+            this.content.imageHeight = data.baseImage.size[1];
+            this.content.image = data.baseImage.url;
+            this.fileSelectionCallback = false;
+          });
+
+          imageUploader.value = '';
+        }, 50);
+      });
+    },
+    filePickerCallback () {
+      this.fileSelectionCallback = true;
+      document.getElementById('post-editor-fake-image-uploader').click();
     },
     clearImage () {
       this.content.image = '';
