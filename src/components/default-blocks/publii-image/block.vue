@@ -150,7 +150,7 @@ export default {
       this.isHovered = false;
     },
     drop (e) {
-      if (this.isInsidePublii()) {
+      if (this.isInsidePublii) {
         let files = e.dataTransfer.files;
         let siteName = window.app.$store.state.currentSite.config.name;
         this.imageUploadInProgress = true;
