@@ -477,15 +477,16 @@ export default {
 
     &-loader {
       animation: loader 1s linear infinite;
-      border: 2px solid $block-editor-color-primary;
+      border: 3px solid $block-editor-color-primary;
       border-left-color: transparent;
-      border-radius: $block-editor-form-input-border-radius;
+      border-radius: 50%;
+      display: block;
       height: 32px;
       left: 50%;
       position: absolute;
       top: 50%;
       transform: translateX(-50%) translateY(-50%);
-      width: 32px;
+      width: 32px!important;
     }
 
     &-inner {
