@@ -4,7 +4,10 @@
       v-if="view === 'preview' || content.image !== ''"
       ref="block"
       :class="{ 'publii-block-image': true, 'is-wide': config.imageAlign === 'wide', 'is-full': config.imageAlign === 'full' }">
-      <img :src="content.image" />
+      <img
+        :src="content.image"
+        :height="content.imageHeight"
+        :width="content.imageWidth" />
       <button
         v-if="view === 'code' && !$parent.uiOpened"
         class="publii-block-image-delete"
@@ -91,6 +94,7 @@ export default {
       caretIsAtStartAlt: false,
       caretIsAtEndAlt: false,
       isHovered: false,
+      imageUploadInProgress: false,
       config: {
         imageAlign: 'center',
         advanced: {
@@ -100,6 +104,8 @@ export default {
       },
       content: {
         image: '',
+        imageHeight: '',
+        imageWidth: '',
         alt: '',
         caption: ''
       },
@@ -122,6 +128,11 @@ export default {
       ]
     };
   },
+  computed: {
+    isInsidePublii () {
+      return !!document.getElementById('post-editor-fake-image-uploader');
+    }
+  },
   beforeCreate () {
     this.configForm = ConfigForm;
   },
@@ -139,8 +150,40 @@ export default {
       this.isHovered = false;
     },
     drop (e) {
-      let blob = e.dataTransfer.items[0].getAsFile();
-      this.content.image = window.URL.createObjectURL(blob);
+      if (this.isInsidePublii()) {
+        let files = e.dataTransfer.files;
+        let siteName = window.app.$store.state.currentSite.config.name;
+        this.imageUploadInProgress = true;
+
+        if (!files[0] || !files[0].path) {
+          this.imageUploadInProgress = false;
+        } else {
+          console.log('POST ID:', this.editor.config.postID);
+          const { ipcRenderer } = require('electron');
+
+          ipcRenderer.send('app-image-upload', {
+            'id': this.editor.config.postID,
+            'site': siteName,
+            'path': files[0].path
+          });
+
+          ipcRenderer.once('app-image-uploaded', (event, data) => {
+            if (data?.baseImage?.size?.length >= 2) {
+              this.content.imageWidth = data.baseImage.size[0];
+              this.content.imageHeight = data.baseImage.size[1];
+              this.content.image = data.baseImage.url;
+            } else {
+              this.content.image = data.url;
+            }
+
+            this.imageUploadInProgress = false;
+          });
+        }
+      } else {
+        let blob = e.dataTransfer.items[0].getAsFile();
+        this.content.image = window.URL.createObjectURL(blob);
+      }
+
       this.isHovered = false;
     },
     clearImage () {

@@ -80,7 +80,8 @@ export default {
   data () {
     return {
       config: {
-        contentWidth: 720
+        contentWidth: 720,
+        postID: ''
       },
       state: {
         selectedBlockID: false,
@@ -321,6 +322,9 @@ export default {
       }
 
       inputField.value = JSON.stringify(this.content);
+    },
+    setPostID (postID) {
+      this.config.postID = postID;
     }
   },
   beforeDestroy () {

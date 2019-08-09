@@ -1,6 +1,6 @@
 <template>
   <div id="publii-block-editor">
-    <block-editor />
+    <block-editor ref="block-editor" />
   </div>
 </template>
 
@@ -40,6 +40,11 @@ export default {
       ignoreWhiteSpace: true,
       tagNames: ['span', 'a']
     }));
+  },
+  methods: {
+    setPostID (postID) {
+      this.$refs['block-editor'].setPostID(postID);
+    }
   }
 }
 </script>
