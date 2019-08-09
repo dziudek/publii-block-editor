@@ -168,7 +168,7 @@ export default {
           });
 
           ipcRenderer.once('app-image-uploaded', (event, data) => {
-            if (data?.baseImage?.size?.length >= 2) {
+            if (data.baseImage && data.baseImage.size && data.baseImage.size.length >= 2) {
               this.content.imageWidth = data.baseImage.size[0];
               this.content.imageHeight = data.baseImage.size[1];
               this.content.image = data.baseImage.url;
