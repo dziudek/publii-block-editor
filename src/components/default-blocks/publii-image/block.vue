@@ -159,7 +159,6 @@ export default {
         if (!files[0] || !files[0].path) {
           this.imageUploadInProgress = false;
         } else {
-          console.log('POST ID:', this.editor.config.postID);
           const { ipcRenderer } = require('electron');
 
           ipcRenderer.send('app-image-upload', {
@@ -192,6 +191,7 @@ export default {
         return;
       }
 
+      const { ipcRenderer } = require('electron');
       let imageUploader = document.getElementById('post-editor-fake-image-uploader');
 
       imageUploader.addEventListener('change', () => {
