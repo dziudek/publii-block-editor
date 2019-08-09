@@ -165,9 +165,11 @@ export default {
         let files = e.dataTransfer.files;
         let siteName = window.app.$store.state.currentSite.config.name;
         this.imageUploadInProgress = true;
+        console.log('TRUE');
 
         if (!files[0] || !files[0].path) {
           this.imageUploadInProgress = false;
+          console.log('FALSE1');
         } else {
           const { ipcRenderer } = require('electron');
 
@@ -187,6 +189,7 @@ export default {
             }
 
             this.imageUploadInProgress = false;
+            console.log('FALSE2');
           });
         }
       } else {
