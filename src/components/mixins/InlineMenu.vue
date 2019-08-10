@@ -97,7 +97,7 @@ export default {
       let oRange = sel.getRangeAt(0);
       let oRect = oRange.getBoundingClientRect();
       let wrapperRect = this.$refs['block'].getBoundingClientRect();
-      let inlineMenuLeft = ((oRect.left - wrapperRect.left) + (oRect.width / 2)) + 'px';
+      let inlineMenuLeft = (((oRect.left - wrapperRect.left) + (oRect.width / 2)) + 20) + 'px';
       let inlineMenuTop = (oRect.top - wrapperRect.top - 20) + 'px';
       this.$refs['inline-menu'].setPosition(inlineMenuLeft, inlineMenuTop);
       this.linkUI.visible = false;
