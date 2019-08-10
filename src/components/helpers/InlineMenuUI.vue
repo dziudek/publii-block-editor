@@ -4,56 +4,115 @@
     class="wrapper-ui-inline-menu"
     :style="'left: ' + left + '; top: ' + top + ';'"
     :key="'inline-menu-' + $parent.id">
-    <button
-      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.bold }"
-      @click.stop="$parent.doInlineOperation('strong');">
-      <icon name="bold" />
-    </button>
-    <button
-      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.italic }"
-      @click.stop="$parent.doInlineOperation('em');">
-      <icon name="italic" />
-    </button>
-    <button
-      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.underline }"
-      @click.stop="$parent.doInlineOperation('u');">
-      <icon name="underline" />
-    </button>
-    <button
-      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.strikethrough }"
-      @click.stop="$parent.doInlineOperation('s');">
-      <icon name="strikethrough" />
-    </button>
-    <button
-      v-if="!$parent.selectedTextContains.link"
-      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.linkUI.visible }"
-      @click.stop="$parent.showLinkUI();">
-      <icon name="link" />
-    </button>
-    <button
-      v-if="$parent.selectedTextContains.link"
-      :class="{ 'wrapper-ui-inline-menu-button': true }"
-      @click.stop="$parent.doInlineOperation('unlink');">
-      <icon name="unlink" />
-    </button>
-    <button
-      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.code }"
-      @click.stop="$parent.doInlineOperation('code');">
-      <icon name="code" />
-    </button>
-    <button
-      :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.mark }"
-      @click.stop="$parent.doInlineOperation('mark');">
-      <icon name="marker" />
-    </button>
+    <div class="wrapper-ui-inline-menu-buttons">
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.bold }"
+        @click.stop="$parent.doInlineOperation('strong');">
+        <icon name="bold" />
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.italic }"
+        @click.stop="$parent.doInlineOperation('em');">
+        <icon name="italic" />
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.underline }"
+        @click.stop="$parent.doInlineOperation('u');">
+        <icon name="underline" />
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.strikethrough }"
+        @click.stop="$parent.doInlineOperation('s');">
+        <icon name="strikethrough" />
+      </button>
+      <button
+        v-if="!$parent.selectedTextContains.link"
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.linkUI.visible }"
+        @click.stop="$parent.toggleLinkUI();">
+        <icon name="link" />
+      </button>
+      <button
+        v-if="$parent.selectedTextContains.link"
+        :class="{ 'wrapper-ui-inline-menu-button': true }"
+        @click.stop="$parent.doInlineOperation('unlink');">
+        <icon name="unlink" />
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.code }"
+        @click.stop="$parent.doInlineOperation('code');">
+        <icon name="code" />
+      </button>
+      <button
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.mark }"
+        @click.stop="$parent.doInlineOperation('mark');">
+        <icon name="marker" />
+      </button>
+    </div>
 
     <div
       v-if="$parent.linkUI.visible || $parent.selectedTextContains.link"
       class="wrapper-ui-inline-menu-link">
+      <div class="wrapper-ui-inline-menu-link-type">
+        <div
+          :class="{ 'wrapper-ui-inline-menu-link-type-item': true, 'is-active': $parent.linkUI.linkType === 'post' }"
+          @click="$parent.setLinkType('post')">
+          Post
+        </div>
+        <div
+          :class="{ 'wrapper-ui-inline-menu-link-type-item': true, 'is-active': $parent.linkUI.linkType === 'tag' }"
+          @click="$parent.setLinkType('tag')">
+          Tag
+        </div>
+        <div
+          :class="{ 'wrapper-ui-inline-menu-link-type-item': true, 'is-active': $parent.linkUI.linkType === 'author' }"
+          @click="$parent.setLinkType('author')">
+          Author
+        </div>
+        <div
+          :class="{ 'wrapper-ui-inline-menu-link-type-item': true, 'is-active': $parent.linkUI.linkType === 'external' }"
+          @click="$parent.setLinkType('external')">
+          External
+        </div>
+      </div>
+      <vue-select
+        v-if="$parent.linkUI.linkType === 'post'"
+        slot="field"
+        ref="postPagesSelect"
+        :options="$parent.postPages"
+        v-model="$parent.linkUI.linkSelectedPost"
+        :custom-label="$parent.customPostLabels"
+        :close-on-select="true"
+        :show-labels="false"
+        @select="$parent.closeDropdown('postPagesSelect')"
+        placeholder="Select post page"></vue-select>
+      <vue-select
+        v-if="$parent.linkUI.linkType === 'tag'"
+        slot="field"
+        ref="tagPagesSelect"
+        :options="$parent.tagPages"
+        v-model="$parent.linkUI.linkSelectedTag"
+        :custom-label="$parent.customTagLabels"
+        :close-on-select="true"
+        :show-labels="false"
+        @select="$parent.closeDropdown('tagPagesSelect')"
+        placeholder="Select tag page"></vue-select>
+      <vue-select
+        v-if="$parent.linkUI.linkType === 'author'"
+        slot="field"
+        ref="authorPagesSelect"
+        :options="$parent.authorPages"
+        v-model="$parent.linkUI.linkSelectedAuthor"
+        :custom-label="$parent.customAuthorsLabels"
+        :close-on-select="true"
+        :show-labels="false"
+        @select="$parent.closeDropdown('authorPagesSelect')"
+        placeholder="Select author page"></vue-select>
       <input
+        v-if="$parent.linkUI.linkType === 'external'"
         type="text"
-        class="wrapper-ui-inline-menu-link-input"
+        class="wrapper-ui-inline-menu-link-external-input"
         v-model="$parent.linkUI.url"
+        placeholder="https://example.com"
         @keyup.enter="$parent.doInlineOperation('link')" />
     </div>
   </div>
@@ -61,11 +120,13 @@
 
 <script>
 import EditorIcon from './../elements/EditorIcon.vue';
+import vSelect from '../../../node_modules/vue-multiselect/dist/vue-multiselect.min.js';
 
 export default {
   name: 'inline-menu-ui',
   components: {
-    'icon': EditorIcon
+    'icon': EditorIcon,
+    'vue-select': vSelect
   },
   computed: {
     showInlineMenu () {
@@ -96,6 +157,7 @@ export default {
 
 <style lang="scss">
 @import '../../assets/variables.scss';
+@import '../../assets/vue-multiselect.scss';
 
 .is-highlighted {
   background: $block-editor-color-gradient-end;
@@ -107,13 +169,13 @@ export default {
   border: none;
   border-radius: 4px;
   box-shadow: 0 1px 6px $block-editor-color-shadow;
-  display: flex;
-  height: 43px;
   left: 50%;
+  min-height: 43px;
   padding: 0 13px;
   position: absolute;
   top: 0%;
   transform: translateX(-50%) translateY(64px);
+  width: auto;
   z-index: 10;
 
   &:after {
@@ -142,7 +204,7 @@ export default {
     display: flex;
     height: 27px;
     justify-content: center;
-    margin: 0 5px;
+    margin: 8px 5px;
     outline: none;
     padding: 0;
     width: 28px;
@@ -150,6 +212,56 @@ export default {
     &:hover,
     &.is-active {
       background: $block-editor-color-light-dark;
+    }
+  }
+
+  &-buttons {
+    display: flex;
+    width: 100%;
+  }
+
+  &-link {
+    width: 100%;
+
+    &-type {
+      border-radius: $block-editor-form-input-border-radius;
+      display: flex;
+      margin: 3px 0 12px 0;
+
+      &-item {
+        border: 1px solid $block-editor-form-input-border;
+        border-right: none;
+        cursor: pointer;
+        font-size: 12px;
+        padding: 5px;
+        text-align: center;
+        width: 25%;
+
+        &:first-child {
+          border-radius: 20px 0 0 20px;
+        }
+
+        &:last-child {
+          border-radius: 0 20px 20px 0;
+          border-right: 1px solid $block-editor-form-input-border;
+        }
+
+        &.is-active {
+          background: $block-editor-color-primary;
+          border-color: $block-editor-color-primary;
+          color: $block-editor-color-light;
+        }
+      }
+    }
+
+    &-external-input {
+      background: $block-editor-color-light-dark;
+      border: none;
+      border-radius: $block-editor-form-input-border-radius;
+      padding: 8px;
+      margin-bottom: 12px;
+      outline: none;
+      width: 100%;
     }
   }
 }

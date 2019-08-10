@@ -19,9 +19,48 @@ export default {
       },
       linkUI: {
         visible: false,
-        url: ''
+        url: '',
+        linkSelectedPost: '',
+        linkSelectedTag: '',
+        linkSelectedAuthor: '',
+        linkType: 'post',
+        linkTargetBlank: false,
+        linkNofollow: false
       }
     };
+  },
+  computed: {
+    tagPages () {
+      if (!this.$store) {
+        return [1];
+      }
+
+      return this.$store.state.currentSite.tags.map(tag => tag.id);
+    },
+    authorPages () {
+      if (!this.$store) {
+        return ['test author'];
+      }
+
+      return this.$store.state.currentSite.authors.map(author => author.username).sort((a, b) => {
+        if (a.toLowerCase() < b.toLowerCase()) {
+          return -1;
+        }
+
+        if (a.toLowerCase() > b.toLowerCase()) {
+          return 1;
+        }
+
+        return 0;
+      });
+    },
+    postPages () {
+      if (!this.$store) {
+        return [1];
+      }
+
+      return this.$store.state.currentSite.posts.map(post => post.id);
+    }
   },
   methods: {
     handleMouseUp (e) {
@@ -41,9 +80,13 @@ export default {
         }
       }, 0);
     },
-    showLinkUI () {
-      this.$highlighter.highlightSelection('is-highlighted');
-      this.linkUI.visible = true;
+    toggleLinkUI () {
+      if (!this.linkUI.visible) {
+        this.$highlighter.highlightSelection('is-highlighted');
+        this.linkUI.visible = true;
+      } else {
+        this.linkUI.visible = false;
+      }
     },
     showInlineMenu () {
       let sel = document.getSelection();
@@ -247,6 +290,33 @@ export default {
       ].join('');
 
       this.$refs['block'].innerHTML = modifiedText;
+    },
+    setLinkType (type) {
+      this.linkUI.linkType = type;
+    },
+    closeDropdown (refID) {
+      this.$refs[refID].isOpen = false;
+    },
+    customTagLabels (value) {
+      if (!this.$store) {
+        return 'Test tag';
+      }
+
+      return this.$store.state.currentSite.tags.filter(tag => tag.id === value).map(tag => tag.name)[0];
+    },
+    customAuthorsLabels (value) {
+      if (!this.$store) {
+        return 'Test author';
+      }
+
+      return this.$store.state.currentSite.authors.filter(author => author.username === value).map(author => author.name)[0];
+    },
+    customPostLabels (value) {
+      if (!this.$store) {
+        return 'Test post';
+      }
+
+      return this.$store.state.currentSite.posts.filter(post => post.id === value).map(post => post.title)[0];
     }
   }
 }
