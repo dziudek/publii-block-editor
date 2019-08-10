@@ -114,18 +114,33 @@
         v-model="$parent.linkUI.url"
         placeholder="https://example.com"
         @keyup.enter="$parent.doInlineOperation('link')" />
+      <div class="wrapper-ui-inline-menu-link-switcher">
+        <switcher
+          is-mini="true"
+          v-model="$parent.linkUI.linkTargetBlank" />
+        Open in new tab
+      </div>
+
+      <div class="wrapper-ui-inline-menu-link-switcher">
+        <switcher
+          is-mini="true"
+          v-model="$parent.linkUI.linkNofollow" />
+        Add rel="nofollow" attribute
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import EditorIcon from './../elements/EditorIcon.vue';
+import Switcher from './../elements/Switcher.vue';
 import vSelect from '../../../node_modules/vue-multiselect/dist/vue-multiselect.min.js';
 
 export default {
   name: 'inline-menu-ui',
   components: {
     'icon': EditorIcon,
+    'switcher': Switcher,
     'vue-select': vSelect
   },
   computed: {
@@ -262,6 +277,22 @@ export default {
       margin-bottom: 12px;
       outline: none;
       width: 100%;
+    }
+
+    &-switcher {
+      align-items: center;
+      color: $block-editor-color-text-medium;
+      display: flex;
+      font-size: 12px;
+      margin-bottom: 2px;
+
+      .switcher {
+        top: 0;
+      }
+
+      &:last-of-type {
+        margin-bottom: 12px;
+      }
     }
   }
 }
