@@ -134,7 +134,7 @@
 <script>
 import EditorIcon from './../elements/EditorIcon.vue';
 import Switcher from './../elements/Switcher.vue';
-import vSelect from '../../../node_modules/vue-multiselect/dist/vue-multiselect.min.js';
+import vSelect from 'vue-multiselect/dist/vue-multiselect.min.js';
 
 export default {
   name: 'inline-menu-ui',
