@@ -83,7 +83,6 @@
         :custom-label="$parent.customPostLabels"
         :close-on-select="true"
         :show-labels="false"
-        @select="$parent.closeDropdown('postPagesSelect')"
         placeholder="Select post page"></vue-select>
       <vue-select
         v-if="$parent.linkUI.linkType === 'tag'"
@@ -94,7 +93,6 @@
         :custom-label="$parent.customTagLabels"
         :close-on-select="true"
         :show-labels="false"
-        @select="$parent.closeDropdown('tagPagesSelect')"
         placeholder="Select tag page"></vue-select>
       <vue-select
         v-if="$parent.linkUI.linkType === 'author'"
@@ -105,7 +103,6 @@
         :custom-label="$parent.customAuthorsLabels"
         :close-on-select="true"
         :show-labels="false"
-        @select="$parent.closeDropdown('authorPagesSelect')"
         placeholder="Select author page"></vue-select>
       <input
         v-if="$parent.linkUI.linkType === 'external'"
@@ -116,14 +113,14 @@
         @keyup.enter="$parent.doInlineOperation('link')" />
       <div class="wrapper-ui-inline-menu-link-switcher">
         <switcher
-          is-mini="true"
+          :is-mini="true"
           v-model="$parent.linkUI.linkTargetBlank" />
         Open in new tab
       </div>
 
       <div class="wrapper-ui-inline-menu-link-switcher">
         <switcher
-          is-mini="true"
+          :is-mini="true"
           v-model="$parent.linkUI.linkNofollow" />
         Add rel="nofollow" attribute
       </div>

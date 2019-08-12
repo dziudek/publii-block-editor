@@ -294,9 +294,6 @@ export default {
     setLinkType (type) {
       this.linkUI.linkType = type;
     },
-    closeDropdown (refID) {
-      this.$refs[refID].isOpen = false;
-    },
     customTagLabels (value) {
       if (!this.$store) {
         return 'Test tag';
