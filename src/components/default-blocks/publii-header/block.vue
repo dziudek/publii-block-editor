@@ -181,16 +181,6 @@ export default {
         config: JSON.parse(JSON.stringify(this.config)),
         content: this.content
       });
-    },
-    showLinkPopup () {
-      this.$bus.$emit('block-editor-show-link-popup', this.id, this.config.link);
-    },
-    removeLink () {
-      this.config.link = {
-        url: '',
-        noFollow: false,
-        targetBlank: false
-      };
     }
   }
 }

@@ -10,10 +10,25 @@
         :width="content.imageWidth" />
       <button
         v-if="view === 'code' && !$parent.uiOpened"
+        :class="{ 'publii-block-image-link': true, 'has-unlink-button': config.link.url !== '' }"
+        @click.stop.prevent="showLinkPopup()">
+        <icon name="link" />
+      </button>
+
+      <button
+        v-if="view === 'code' && !$parent.uiOpened && config.link.url !== ''"
+        class="publii-block-image-unlink"
+        @click.stop.prevent="removeLink()">
+        <icon name="unlink" />
+      </button>
+
+      <button
+        v-if="view === 'code' && !$parent.uiOpened"
         class="publii-block-image-delete"
         @click.stop.prevent="clearImage()">
         <icon name="trash" />
       </button>
+
       <figcaption v-if="content.caption !== '' && view === 'preview'">
         {{ content.caption }}
       </figcaption>
@@ -82,6 +97,7 @@ import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import EditorIcon from './../../elements/EditorIcon.vue';
 import HasPreview from './../../mixins/HasPreview.vue';
+import LinkConfig from './../../mixins/LinkConfig.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
@@ -89,7 +105,8 @@ export default {
   mixins: [
     Block,
     ContentEditableImprovements,
-    HasPreview
+    HasPreview,
+    LinkConfig
   ],
   components: {
     'icon': EditorIcon,
@@ -105,6 +122,11 @@ export default {
       imageUploadInProgress: false,
       config: {
         imageAlign: 'center',
+        link: {
+          url: '',
+          noFollow: false,
+          targetBlank: false
+        },
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
           id: this.getAdvancedConfigDefaultValue('id')
@@ -407,7 +429,9 @@ export default {
     text-align: center;
   }
 
-  &-delete {
+  &-delete,
+  &-link,
+  &-unlink {
     align-items: center;
     background: $block-editor-color-danger;
     border: none;
@@ -429,6 +453,26 @@ export default {
     &:hover {
       background: $block-editor-color-light;
       color: $block-editor-color-danger;
+    }
+  }
+
+  &-unlink {
+    right: 54px;
+  }
+
+  &-link {
+    background: $block-editor-color-primary;
+    right: 54px;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background: $block-editor-color-light;
+      color: $block-editor-color-primary;
+    }
+
+    &.has-unlink-button {
+      right: 88px;
     }
   }
 

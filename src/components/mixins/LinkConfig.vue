@@ -12,6 +12,16 @@ export default {
 
       this.config.link = JSON.parse(JSON.stringify(linkConfig));
       this.save();
+    },
+    showLinkPopup () {
+      this.$bus.$emit('block-editor-show-link-popup', this.id, this.config.link);
+    },
+    removeLink () {
+      this.config.link = {
+        url: '',
+        noFollow: false,
+        targetBlank: false
+      };
     }
   },
   beforeDestroy () {
