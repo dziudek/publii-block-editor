@@ -9,7 +9,8 @@
       @blur="save"
       ref="block"
       :style="'text-align: ' + config.textAlign + ';'"
-      class="publii-block-header"
+      :class="{ 'publii-block-header': true, 'is-link': config.link.url !== '' }"
+      :title="config.link.url !== '' ? config.link.url : ''"
       v-html="content" />
 
     <top-menu
@@ -23,6 +24,7 @@ import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
+import LinkConfig from './../../mixins/LinkConfig.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
 let mainProcess;
 
@@ -42,7 +44,8 @@ export default {
   mixins: [
     AdvancedConfig,
     Block,
-    ContentEditableImprovements
+    ContentEditableImprovements,
+    LinkConfig
   ],
   components: {
     'top-menu': TopMenuUI
@@ -54,8 +57,8 @@ export default {
         textAlign: 'left',
         link: {
           url: '',
-          rel: '',
-          target: ''
+          noFollow: false,
+          targetBlank: false
         },
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
@@ -111,9 +114,15 @@ export default {
           icon: 'align-right'
         },
         {
-          activeState: function () { return false; },
-          onClick: function () { this.showLinkPopup(); },
+          activeState: () => false,
+          onClick: this.showLinkPopup,
           icon: 'link'
+        },
+        {
+          activeState: () => false,
+          onClick: this.removeLink,
+          isVisible: () => this.config.link.url !== '',
+          icon: 'unlink'
         }
       ]
     };
@@ -176,7 +185,14 @@ export default {
       });
     },
     showLinkPopup () {
-      this.$bus.$on('block-editor-show-link-popup', this.config.link);
+      this.$bus.$emit('block-editor-show-link-popup', this.id, this.config.link);
+    },
+    removeLink () {
+      this.config.link = {
+        url: '',
+        noFollow: false,
+        targetBlank: false
+      };
     }
   }
 }
@@ -192,6 +208,11 @@ export default {
       content: 'Insert title';
       opacity: .35;
     }
+  }
+
+  &.is-link {
+    cursor: pointer;
+    text-decoration: underline;
   }
 }
 </style>

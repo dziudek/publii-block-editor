@@ -28,53 +28,53 @@
         </div>
       </div>
       <vue-select
-        v-if="$parent.linkUI.linkType === 'post'"
+        v-if="linkType === 'post'"
         slot="field"
         ref="postPagesSelect"
-        :options="$parent.postPages"
-        v-model="$parent.linkUI.linkSelectedPost"
-        :custom-label="$parent.customPostLabels"
+        :options="postPages"
+        v-model="linkSelectedPost"
+        :custom-label="customPostLabels"
         :close-on-select="true"
         :show-labels="false"
         placeholder="Select post page"></vue-select>
       <vue-select
-        v-if="$parent.linkUI.linkType === 'tag'"
+        v-if="linkType === 'tag'"
         slot="field"
         ref="tagPagesSelect"
-        :options="$parent.tagPages"
-        v-model="$parent.linkUI.linkSelectedTag"
-        :custom-label="$parent.customTagLabels"
+        :options="tagPages"
+        v-model="linkSelectedTag"
+        :custom-label="customTagLabels"
         :close-on-select="true"
         :show-labels="false"
         placeholder="Select tag page"></vue-select>
       <vue-select
-        v-if="$parent.linkUI.linkType === 'author'"
+        v-if="linkType === 'author'"
         slot="field"
         ref="authorPagesSelect"
-        :options="$parent.authorPages"
-        v-model="$parent.linkUI.linkSelectedAuthor"
-        :custom-label="$parent.customAuthorsLabels"
+        :options="authorPages"
+        v-model="linkSelectedAuthor"
+        :custom-label="customAuthorsLabels"
         :close-on-select="true"
         :show-labels="false"
         placeholder="Select author page"></vue-select>
       <input
-        v-if="$parent.linkUI.linkType === 'external'"
+        v-if="linkType === 'external'"
         type="text"
         class="wrapper-ui-inline-menu-link-external-input"
-        v-model="$parent.linkUI.url"
+        v-model="link.url"
         placeholder="https://example.com"
-        @keyup.enter="$parent.doInlineOperation('link')" />
+        @keyup.enter="save()" />
       <div class="wrapper-ui-inline-menu-link-switcher">
         <switcher
           :is-mini="true"
-          v-model="$parent.linkUI.linkTargetBlank" />
+          v-model="link.targetBlank" />
         Open in new tab
       </div>
 
       <div class="wrapper-ui-inline-menu-link-switcher">
         <switcher
           :is-mini="true"
-          v-model="$parent.linkUI.linkNofollow" />
+          v-model="link.nofollow" />
         Add rel="nofollow" attribute
       </div>
 
@@ -92,21 +92,30 @@
 
 <script>
 import Switcher from './elements/Switcher.vue';
+import LinkHelpers from './mixins/LinkHelpers.vue';
+import vSelect from 'vue-multiselect/dist/vue-multiselect.min.js';
 
 export default {
   name: 'block-link-popup',
+  mixins: [
+    LinkHelpers
+  ],
   components: {
-    'switcher': Switcher
+    'switcher': Switcher,
+    'vue-select': vSelect
   },
   data () {
     return {
       isVisible: false,
       currentBlockID: '',
-      linkType: '',
+      linkType: 'post',
+      linkSelectedAuthor: '',
+      linkSelectedPost: '',
+      linkSelectedTag: '',
       link: {
         url: '',
-        rel: '',
-        target: ''
+        noFollow: false,
+        targetBlank: false
       }
     };
   },
@@ -118,7 +127,7 @@ export default {
       this.isVisible = true;
       this.currentBlockID = blockID;
       this.link = JSON.parse(JSON.stringify(link));
-      this.linkType = this.getLinkType(this.link.url);
+      this.parseLink();
     },
     hide () {
       this.isVisible = false;
@@ -127,13 +136,43 @@ export default {
         this.currentBlockID = '';
       }, 500);
     },
-    getLinkType (linkUrl) {
+    parseLink () {
+      if (this.link.url === '') {
+        this.linkType = 'post';
+        return;
+      }
 
+      if (this.link.url.indexOf('#INTERNAL_LINK#') > -1) {
+        if (this.link.url.indexOf('POST') > -1) {
+          this.linkType = 'post';
+          this.linkSelectedPost = parseInt(this.link.url.split('/').pop(), 10);
+        } else if (this.link.url.indexOf('TAG') > -1) {
+          this.linkType = 'tag';
+          this.linkSelectedTag = parseInt(this.link.url.split('/').pop(), 10);
+        } else if (this.link.url.indexOf('AUTHOR') > -1) {
+          this.linkType = 'author';
+          this.linkSelectedAuthor = parseInt(this.link.url.split('/').pop(), 10);
+        }
+      } else {
+        this.linkType = 'external';
+      }
     },
     setLinkType (type) {
       this.linkType = type;
     },
+    prepareLink () {
+      if (this.linkType === 'post') {
+        return '#INTERNAL_LINK#/POST/' + this.linkSelectedPost;
+      } else if (this.linkType === 'author') {
+        return '#INTERNAL_LINK#/AUTHOR/' + this.linkSelectedAuthor;
+      } else if (this.linkType === 'tag') {
+        return '#INTERNAL_LINK#/TAG/' + this.linkSelectedTag;
+      }
+
+      return this.link.url;
+    },
     save () {
+      this.link.url = this.prepareLink();
       this.$bus.$emit('block-editor-save-link-popup', this.currentBlockID, this.link);
       this.hide();
     }
@@ -154,7 +193,7 @@ export default {
   padding: 20px;
   transform: translateY(30px);
   transition: all .3s ease-out;
-  width: 580px;
+  width: 320px;
 
   &-overlay {
     align-items: center;

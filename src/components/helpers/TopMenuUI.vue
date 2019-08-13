@@ -3,7 +3,7 @@
     class="wrapper-ui-top-menu"
     v-if="$parent.$parent.uiOpened && !$parent.textIsHighlighted">
     <button
-      v-for="(button, index) of config"
+      v-for="(button, index) of filteredConfig"
       :key="'top-menu-button-' + index"
       :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': button.activeState.bind($parent)() }"
       tabindex="-1"
@@ -23,6 +23,11 @@ export default {
   ],
   components: {
     'icon': EditorIcon
+  },
+  computed: {
+    filteredConfig () {
+      return this.config.filter(button => typeof button.isVisible === 'undefined' || button.isVisible());
+    }
   }
 }
 </script>

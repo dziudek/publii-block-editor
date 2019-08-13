@@ -1,8 +1,12 @@
 <script>
 import EditorIcon from './../elements/EditorIcon.vue';
+import LinkHelpers from './../mixins/LinkHelpers.vue';
 
 export default {
   name: 'InlineMenu',
+  mixins: [
+    LinkHelpers
+  ],
   components: {
     'icon': EditorIcon
   },
@@ -28,39 +32,6 @@ export default {
         linkNofollow: false
       }
     };
-  },
-  computed: {
-    tagPages () {
-      if (!this.$store) {
-        return [1];
-      }
-
-      return this.$store.state.currentSite.tags.map(tag => tag.id);
-    },
-    authorPages () {
-      if (!this.$store) {
-        return ['test author'];
-      }
-
-      return this.$store.state.currentSite.authors.map(author => author.username).sort((a, b) => {
-        if (a.toLowerCase() < b.toLowerCase()) {
-          return -1;
-        }
-
-        if (a.toLowerCase() > b.toLowerCase()) {
-          return 1;
-        }
-
-        return 0;
-      });
-    },
-    postPages () {
-      if (!this.$store) {
-        return [1];
-      }
-
-      return this.$store.state.currentSite.posts.map(post => post.id);
-    }
   },
   methods: {
     handleMouseUp (e) {
@@ -219,14 +190,7 @@ export default {
         return;
       }
 
-      if (
-        this.linkUI.url.indexOf('http://') === -1 &&
-        this.linkUI.url.indexOf('https://') === -1 &&
-        this.linkUI.url.indexOf('://') === -1 &&
-        this.linkUI.url.indexOf('dat://') === -1 &&
-        this.linkUI.url.indexOf('ipfs://') === -1 &&
-        this.linkUI.url.indexOf('//') !== 0
-      ) {
+      if (this.linkIsInvalid(this.linkUI.url)) {
         this.linkUI.url = 'https://' + this.linkUI.url;
       }
 
@@ -293,27 +257,6 @@ export default {
     },
     setLinkType (type) {
       this.linkUI.linkType = type;
-    },
-    customTagLabels (value) {
-      if (!this.$store) {
-        return 'Test tag';
-      }
-
-      return this.$store.state.currentSite.tags.filter(tag => tag.id === value).map(tag => tag.name)[0];
-    },
-    customAuthorsLabels (value) {
-      if (!this.$store) {
-        return 'Test author';
-      }
-
-      return this.$store.state.currentSite.authors.filter(author => author.username === value).map(author => author.name)[0];
-    },
-    customPostLabels (value) {
-      if (!this.$store) {
-        return 'Test post';
-      }
-
-      return this.$store.state.currentSite.posts.filter(post => post.id === value).map(post => post.title)[0];
     }
   }
 }
