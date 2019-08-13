@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
@@ -21,7 +20,6 @@ import ContentEditableImprovements from './../../helpers/ContentEditableImprovem
 export default {
   name: 'Code',
   mixins: [
-    AdvancedConfig,
     Block,
     ContentEditableImprovements
   ],
