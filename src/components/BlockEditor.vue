@@ -29,6 +29,7 @@
     </div>
 
     <block-advanced-config />
+    <block-link-popup />
   </div>
 </template>
 
@@ -37,6 +38,7 @@
 import Vue from 'vue';
 import Block from './Block.vue';
 import BlockAdvancedConfig from './BlockAdvancedConfig.vue';
+import BlockLinkPopup from './BlockLinkPopup.vue';
 import BlockWrapper from './BlockWrapper.vue';
 import ContentEditableImprovements from './helpers/ContentEditableImprovements.vue';
 import { compileToFunctions } from 'vue-template-compiler';
@@ -59,6 +61,7 @@ export default {
   name: 'BlockEditor',
   components: {
     'block-advanced-config': BlockAdvancedConfig,
+    'block-link-popup': BlockLinkPopup,
     'block-wrapper': BlockWrapper,
     'publii-code': PubliiCode,
     'publii-embed': PubliiEmbed,

@@ -52,6 +52,11 @@ export default {
       config: {
         headingLevel: 2,
         textAlign: 'left',
+        link: {
+          url: '',
+          rel: '',
+          target: ''
+        },
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
           customId: this.getAdvancedConfigDefaultValue('customId'),
@@ -104,6 +109,11 @@ export default {
           activeState: function () { return this.config.textAlign === 'right'; },
           onClick: function () { this.alignText('right'); },
           icon: 'align-right'
+        },
+        {
+          activeState: function () { return false; },
+          onClick: function () { this.showLinkPopup(); },
+          icon: 'link'
         }
       ]
     };
@@ -164,6 +174,9 @@ export default {
         config: JSON.parse(JSON.stringify(this.config)),
         content: this.content
       });
+    },
+    showLinkPopup () {
+      this.$bus.$on('block-editor-show-link-popup', this.config.link);
     }
   }
 }
