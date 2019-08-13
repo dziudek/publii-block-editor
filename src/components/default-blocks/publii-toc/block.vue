@@ -20,14 +20,12 @@
 </template>
 
 <script>
-import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 
 export default {
   name: 'ToC',
   mixins: [
-    AdvancedConfig,
     Block
   ],
   data () {

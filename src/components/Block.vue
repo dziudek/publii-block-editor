@@ -1,6 +1,11 @@
 <script>
+import AdvancedConfig from './mixins/AdvancedConfig.vue';
+
 export default {
   name: 'Block',
+  mixins: [
+    AdvancedConfig
+  ],
   props: [
     'id',
     'inputContent',

@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import InlineMenu from './../../mixins/InlineMenu.vue';
@@ -31,7 +30,6 @@ import TopMenuUI from './../../helpers/TopMenuUI.vue';
 export default {
   name: 'List',
   mixins: [
-    AdvancedConfig,
     Block,
     InlineMenu
   ],

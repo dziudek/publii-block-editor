@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
@@ -42,7 +41,6 @@ if (window.app && window.remote) {
 export default {
   name: 'Header',
   mixins: [
-    AdvancedConfig,
     Block,
     ContentEditableImprovements,
     LinkConfig

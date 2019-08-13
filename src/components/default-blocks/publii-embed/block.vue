@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
@@ -30,7 +29,6 @@ import HasPreview from './../../mixins/HasPreview.vue';
 export default {
   name: 'Embed',
   mixins: [
-    AdvancedConfig,
     Block,
     ContentEditableImprovements,
     HasPreview

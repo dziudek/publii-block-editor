@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import AdvancedConfig from './../../mixins/AdvancedConfig.vue';
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
@@ -24,7 +23,6 @@ import TopMenuUI from './../../helpers/TopMenuUI.vue';
 export default {
   name: 'Separator',
   mixins: [
-    AdvancedConfig,
     Block
   ],
   components: {
