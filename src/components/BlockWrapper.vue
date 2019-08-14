@@ -18,7 +18,7 @@
 
           <div
             v-if="uiOpened"
-            :class="{ 'wrapper-ui-options': true, 'is-visible': true }">
+            :class="{ 'wrapper-ui-options': true, 'is-visible': true, 'is-narrow': blockType === 'publii-readmore' }">
             <div
               v-if="confirmDelete"
               class="wrapper-ui-options-confirm-tooltip">
@@ -31,6 +31,7 @@
               <icon name="trash" />
             </button>
             <button
+              v-if="blockType !== 'publii-readmore'"
               :class="{ 'wrapper-ui-options-button-more-options': true }"
               tabindex="-1"
               @click.stop="showAdvancedConfig">
@@ -262,6 +263,10 @@ export default {
       right: 50px;
       top: 0;
       width: 86px;
+
+      &.is-narrow {
+        width: 48px;
+      }
 
       &.is-visible {
         opacity: 1;

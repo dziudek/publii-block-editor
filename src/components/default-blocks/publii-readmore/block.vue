@@ -23,10 +23,7 @@ export default {
   data () {
     return {
       config: {
-        advanced: {
-          cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
-          id: this.getAdvancedConfigDefaultValue('id')
-        }
+        advanced: {}
       },
       content: ''
     };
