@@ -72,7 +72,7 @@ export default {
         case 'long-line': return 20;
         case 'shorter-line': return 16;
         case 'short-line': return 8;
-        case 'dotted-line': return 15;
+        case 'dotted-line': return 17;
         case 'dot': return 3;
         case 'preview': return 19;
         case 'left': return 14;
@@ -81,8 +81,8 @@ export default {
         case 'wide': return 14;
         case 'full': return 14;
         case 'enter': return 11;
-        case 'down': return 11;
-        case 'up': return 11;
+        case 'down': return 10;
+        case 'up': return 10;
         case 'trash': return 11;
         case 'gear': return 13;
       }
@@ -132,7 +132,7 @@ export default {
         case 'long-line': return 2;
         case 'shorter-line': return 2;
         case 'short-line': return 2;
-        case 'dotted-line': return 3;
+        case 'dotted-line': return 4;
         case 'dot': return 3;
         case 'preview': return 12;
         case 'left': return 13;
@@ -140,9 +140,9 @@ export default {
         case 'right': return 13;
         case 'wide': return 13;
         case 'full': return 13;
-        case 'enter': return 13;
-        case 'down': return 13;
-        case 'up': return 13;
+        case 'enter': return 13; 
+        case 'down': return 6;
+        case 'up': return 6;
         case 'trash': return 12;
         case 'gear': return 13;
       }

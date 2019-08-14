@@ -11,10 +11,12 @@
       <div
         :class="{ 'wrapper-ui-show-options': true, 'is-confirming-delete': confirmDelete }"
         @click.stop="togglePopup">
-        <icon
-          :class="{ 'wrapper-ui-show-options-button': true, 'is-visible': isSelected && !uiOpened }"
-          color="#5da4ef"
-          name="dotted-line" />
+          <button 
+            :class="{ 'wrapper-ui-show-options-button': true, 'is-visible': isSelected && !uiOpened }">
+            <icon          
+              color="#5da4ef"
+              name="dotted-line" />              
+          </button>
 
           <div
             v-if="uiOpened"
@@ -22,7 +24,7 @@
             <div
               v-if="confirmDelete"
               class="wrapper-ui-options-confirm-tooltip">
-              Click to confirm
+              Confirm
             </div>
             <button
               :class="{ 'wrapper-ui-options-button-trash': true }"
@@ -192,7 +194,7 @@ export default {
       content: "";
       position: absolute;
       right: -1px;
-      top: -40px;
+      top: -46px;
       width: 3px;
       z-index: 10;
     }
@@ -225,26 +227,64 @@ export default {
     position: absolute;
     pointer-events: none;
     right: -50px;
-    top: -40px;
+    top: -46px;
     z-index: 1;
 
     .wrapper-ui-show-options {
-      height: 40px;
+      height: 46px;
       transition: all .25s ease-out;
       width: 150px;
 
       &-button {
-        opacity: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        opacity: 0;     
+        padding: 16px;
         position: absolute;
-        right: 15px;
-        top: 38px;
+        right: 6px;
+        top: 14px;
         transform: scale(.5);
         transform-origin: center center;
         transition: transform .25s ease-out;
+          
+        &::after { 
+          content:"";
+          border: 2px solid rgba($block-editor-color-primary, .4);         
+          border-radius: 50%;
+          height: 50px;             
+          left: 50%; 
+          opacity: 0;
+          position: absolute;
+          top: 50%;
+          transform: translate(-50%, -50%);  
+          width: 50px;
+            
+          @keyframes example {
+            0% {
+                opacity: 0;
+            }            
+            25% {
+                 opacity: 1;
+            }
+          }
+        }
+          
+        & > svg {             
+          vertical-align: middle;
+        }
 
         &.is-visible {
-          opacity: 1;
-          transform: scale(1.2);
+          opacity: 1;          
+          transform: scale(1.2);  
+            
+            &:hover {
+                 transform: scale(1.5);
+            }
+            
+          &::after {
+            animation: example .75s ease-out backwards;
+          }
         }
       }
 
@@ -258,7 +298,7 @@ export default {
     &-options {
       background: $block-editor-color-light;
       border: 1px solid $block-editor-form-input-border;
-      height: 40px;
+      height: 46px;
       position: absolute;
       right: 50px;
       top: 0;
@@ -286,18 +326,42 @@ export default {
         color: $block-editor-color-text-medium-dark;
         cursor: pointer;
         display: flex;
-        height: 27px;
+        height: 100%;
         justify-content: center;
-        margin: 5px;
+        margin: 0;
         outline: none;
         padding: 0;
         position: absolute;
-        width: 28px;
+          top: 0;
+        width: 38px;
+        z-index: 0;
+          
+        // hover effect
+        &::before {
+          content: "";
+          background: $block-editor-color-light-dark; 
+          border-radius: 3px;
+          display: block;
+          left: 50%;
+          opacity: 0;
+          position: absolute;         
+          height: 27px;
+          top: 50%;
+          transition: all .15s cubic-bezier(.4,0,.2,1);
+          transform: scale(.5) translate(-50%, -50%);
+          transform-origin: left center;           
+          width: 28px;
+          z-index: -1;        
+        }
 
         &:hover,
-        &.is-active {
-          background: $block-editor-color-light-dark;
+        &.is-active {      
           color: $block-editor-color-text;
+            
+          &::before {
+            opacity: 1;
+            transform: scale(1) translate(-50%, -50%);
+          }
         }
       }
 
@@ -306,21 +370,20 @@ export default {
       }
 
       &-button-more-options {
-        left: 5px;
+        left: 5px;        
       }
 
       &-button-trash {
-        right: 5px;
-        top: 0;
+        right: 5px;        
       }
 
       &-button-move {
         right: -40px;
-        top: -12px;
+        top: -1px;
       }
 
       &-button-move + .wrapper-ui-options-button-move {
-        top: 12px;
+        top: 35px;
       }
 
       &-confirm-tooltip {
@@ -336,7 +399,7 @@ export default {
         right: 24px;
         padding: 5px;
         position: absolute;
-        top: -30px;
+        top: -36px;
         transform: translateX(50%);
         white-space: nowrap;
         width: auto;
@@ -364,33 +427,57 @@ export default {
       background: $block-editor-color-light;
       border: none;
       display: flex;
-      height: 40px;
+      height: 46px;
       border: 1px solid $block-editor-form-input-border;
       border-right: none;
       padding: 0 0 0 5px;
       position: absolute;
-      top: -40px;
+      top: -46px;
       right: 80px;
       z-index: 10;
 
       &-button {
         align-items: center;
-        background: $block-editor-color-light;
+        background: transparent;
         border: none;
         border-radius: 2px;
         color: $block-editor-color-text-medium-dark;
         cursor: pointer;
         display: flex;
-        height: 27px;
+        height: 100%;
         justify-content: center;
-        margin: 0 5px;
+        margin: 0;
         outline: none;
         padding: 0;
-        width: 28px;
+        position: relative;
+        width: 38px;
+       
+        // hover effect
+        &::before {
+          content: "";
+          background: $block-editor-color-light-dark; 
+          border-radius: 3px;
+          display: block;
+          left: 50%;
+          opacity: 0;
+          position: absolute;         
+          height: 27px;
+          top: 50%;
+          transition: all .15s cubic-bezier(.4,0,.2,1);
+          transform: scale(.5) translate(-50%, -50%);
+          transform-origin: left center;           
+          width: 28px;
+          z-index: -1;
+        }
 
         &:hover,
-        &.is-active {
-          background: $block-editor-color-light-dark;
+        &.is-active {    
+            color: $block-editor-color-text;
+            
+          &::before {
+            opacity: 1;
+            transform: scale(1) translate(-50%, -50%);
+          }
         }
       }
     }
