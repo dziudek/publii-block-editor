@@ -31,6 +31,20 @@
           :key="'field-input-' + index"
           :disabled="getDisabledState(field.disabled)"
           v-model="config[field.name]" />
+        <select
+          v-if="field.type === 'select'"
+          :id="'advanced-config-field-' + index"
+          :key="'field-input-' + index"
+          blockData.config.advanced.style
+          v-model="config[field.name]">
+          <option value="">- Select -</option>
+          <option
+            v-for="(option, index) of field.values"
+            :key="'option-' + index"
+            :value="option.value">
+            {{ option.label }}
+          </option>
+        </select>
       </div>
 
       <div class="block-advanced-config-buttons">

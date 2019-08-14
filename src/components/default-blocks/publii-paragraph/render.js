@@ -1,6 +1,6 @@
 function render (blockData) {
   let id = blockData.config.advanced.id ? ' id="' + blockData.config.advanced.id + '"' : '';
-  let cssClasses = blockData.config.advanced.cssClasses ? ' class="' + blockData.config.cssClasses + '"' : '';
+  let cssClasses = (blockData.config.advanced.cssClasses || blockData.config.advanced.style) ? ' class="' + blockData.config.cssClasses + ' ' + blockData.config.advanced.style + '"' : '';
   let textAlign = blockData.config.textAlign;
   let textAlignStyle = '';
 

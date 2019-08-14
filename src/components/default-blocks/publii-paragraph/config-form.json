@@ -7,6 +7,27 @@
         "defaultValue": ""
     },
     {
+        "name": "style",
+        "type": "select",
+        "label": "Paragraph style",
+        "tooltip": "Select additional styling for the paragraph block",
+        "values": [
+            {
+                "value": "warning",
+                "label": "Warning"
+            },
+            {
+                "value": "alert",
+                "label": "Alert"
+            },
+            {
+                "value": "info",
+                "label": "Info"
+            }
+        ],
+        "defaultValue": ""
+    },
+    {
         "name": "id",
         "type": "text",
         "label": "ID",

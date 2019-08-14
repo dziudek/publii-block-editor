@@ -196,6 +196,7 @@ export default {
       config: {
         textAlign: 'left',
         advanced: {
+          style: this.getAdvancedConfigDefaultValue('style'),
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
           id: this.getAdvancedConfigDefaultValue('id')
         }
