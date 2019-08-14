@@ -108,7 +108,9 @@ export default {
     border: 1px solid #ccc;
     font-family: monospace;
     font-size: 16px;
+    min-height: 150px;
     padding: 10px 20px;
+    resize: vertical;
     width: 100%;
   }
 

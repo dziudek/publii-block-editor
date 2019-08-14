@@ -254,8 +254,9 @@ export default {
     }
 
     textarea {
-      height: 150px;
+      min-height: 150px;
       margin-bottom: 16px;
+      resize: vertical;
     }
   }
 }
