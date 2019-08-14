@@ -112,7 +112,7 @@ export default {
           icon: 'align-right'
         },
         {
-          activeState: () => false,
+          activeState: () => this.config.link.url !== '',
           onClick: this.showLinkPopup,
           icon: 'link'
         },
