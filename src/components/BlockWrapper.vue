@@ -349,7 +349,7 @@ export default {
           top: 50%;
           transition: all .15s cubic-bezier(.4,0,.2,1);
           transform: scale(.5) translate(-50%, -50%);
-          transform-origin: left center;           
+          transform-origin: left top;           
           width: 28px;
           z-index: -1;        
         }
@@ -465,7 +465,7 @@ export default {
           top: 50%;
           transition: all .15s cubic-bezier(.4,0,.2,1);
           transform: scale(.5) translate(-50%, -50%);
-          transform-origin: left center;           
+          transform-origin: left top;           
           width: 28px;
           z-index: -1;
         }
