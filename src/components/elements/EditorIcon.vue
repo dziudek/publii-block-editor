@@ -63,7 +63,7 @@ export default {
         case 'h1': return 16;
         case 'h2': return 19;
         case 'h3': return 20;
-        case 'h4': return 16;
+        case 'h4': return 20;
         case 'h5': return 18;
         case 'h6': return 18;
         case 'ordered-list': return 17;
