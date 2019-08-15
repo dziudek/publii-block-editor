@@ -84,6 +84,7 @@ export default {
         case 'down': return 10;
         case 'up': return 10;
         case 'trash': return 11;
+        case 'open-trash': return 12;
         case 'gear': return 13;
       }
 
@@ -144,6 +145,7 @@ export default {
         case 'down': return 6;
         case 'up': return 6;
         case 'trash': return 12;
+        case 'open-trash': return 14;
         case 'gear': return 13;
       }
 

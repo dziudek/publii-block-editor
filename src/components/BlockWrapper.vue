@@ -21,16 +21,18 @@
           <div
             v-if="uiOpened"
             :class="{ 'wrapper-ui-options': true, 'is-visible': true, 'is-narrow': blockType === 'publii-readmore' }">
-            <div
-              v-if="confirmDelete"
-              class="wrapper-ui-options-confirm-tooltip">
-              Confirm
-            </div>
             <button
               :class="{ 'wrapper-ui-options-button-trash': true }"
               tabindex="-1"
               @click.stop="deleteBlock">
               <icon name="trash" />
+            </button>
+              <button  
+              v-if="confirmDelete"
+              :class="{ 'wrapper-ui-options-button-trash': true }"
+              tabindex="-1"
+              @click.stop="deleteBlock">
+              <icon name="open-trash" />
             </button>
             <button
               v-if="blockType !== 'publii-readmore'"
@@ -248,6 +250,10 @@ export default {
         transform-origin: center center;
         transition: transform .25s ease-out;
           
+        &:focus {
+          outline: none;
+        }
+          
         &::after { 
           content:"";
           border: 2px solid rgba($block-editor-color-primary, .4);         
@@ -260,7 +266,7 @@ export default {
           transform: translate(-50%, -50%);  
           width: 50px;
             
-          @keyframes example {
+          @keyframes focusOut {
             0% {
                 opacity: 0;
             }            
@@ -278,19 +284,25 @@ export default {
           opacity: 1;          
           transform: scale(1.2);  
             
-            &:hover {
-                 transform: scale(1.5);
-            }
+          &:hover {
+            transform: scale(1.4);
+          }
             
           &::after {
-            animation: example .75s ease-out backwards;
+            animation: focusOut .75s ease-out backwards;
           }
         }
       }
 
-      &.is-confirming-delete {
+      &.is-confirming-delete { 
         .wrapper-ui-options-button-trash {
-          color: $block-editor-color-danger;
+          color: $block-editor-color-light;
+            
+          &::before {
+             background: $block-editor-color-danger;
+             opacity: 1;
+             transform: scale(1) translate(-50%, -50%);
+          }
         }
       }
     }
@@ -332,7 +344,7 @@ export default {
         outline: none;
         padding: 0;
         position: absolute;
-          top: 0;
+        top: 0;
         width: 38px;
         z-index: 0;
           
@@ -345,12 +357,12 @@ export default {
           left: 50%;
           opacity: 0;
           position: absolute;         
-          height: 27px;
+          height: 30px;
           top: 50%;
           transition: all .15s cubic-bezier(.4,0,.2,1);
           transform: scale(.5) translate(-50%, -50%);
           transform-origin: left top;           
-          width: 28px;
+          width: 30px;
           z-index: -1;        
         }
 
@@ -384,41 +396,6 @@ export default {
 
       &-button-move + .wrapper-ui-options-button-move {
         top: 35px;
-      }
-
-      &-confirm-tooltip {
-        background: $block-editor-color-danger;
-        border-radius: $block-editor-form-input-border-radius;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
-        color: $block-editor-color-light;
-        display: flex;
-        flex-wrap: wrap;
-        font-size: 12px;
-        justify-content: center;
-        height: auto;
-        right: 24px;
-        padding: 5px;
-        position: absolute;
-        top: -36px;
-        transform: translateX(50%);
-        white-space: nowrap;
-        width: auto;
-        z-index: 10;
-
-        &:after {
-          bottom: -12px;
-          border: 6px solid $block-editor-color-danger;
-          border-left-color: transparent;
-          border-right-color: transparent;
-          border-bottom-color: transparent;
-          content: "";
-          filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, .08));
-          height: 12px;
-          left: 50%;
-          position: absolute;
-          transform: translateX(-50%);
-          width: 12px;
-        }
       }
     }
 
@@ -461,12 +438,12 @@ export default {
           left: 50%;
           opacity: 0;
           position: absolute;         
-          height: 27px;
+          height: 30px;
           top: 50%;
           transition: all .15s cubic-bezier(.4,0,.2,1);
           transform: scale(.5) translate(-50%, -50%);
           transform-origin: left top;           
-          width: 28px;
+          width: 30px;
           z-index: -1;
         }
 

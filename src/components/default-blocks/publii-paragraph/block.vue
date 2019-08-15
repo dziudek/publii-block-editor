@@ -106,7 +106,7 @@
             v-if="newBlockUIActiveIndex === 5"
             class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
-              Custom HTML code
+            HTML
             </span>
           </div>
         </button>
@@ -155,7 +155,7 @@
             v-if="newBlockUIActiveIndex === (!editor.hasReadMore ? 9 : 8)"
             class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
-              Table of Contents
+              TOC
             </span>
           </div>
         </button>
@@ -545,7 +545,28 @@ export default {
         position: relative;
 
         &.is-active {
+          animation: fadeIn .75s 1 forwards;
           color: $block-editor-color-primary-dark;
+            
+          @keyframes fadeIn {
+            0% {
+               opacity: 0;
+               transform: scale(.5);
+            }
+
+            50% {
+               opacity: 1;
+               transform: scale(1.05);
+            }
+
+            70% {
+               transform: scale(.9);
+            }
+              
+            100% {
+               transform: scale(1);
+            }
+          }
         }
       }
 
