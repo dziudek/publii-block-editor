@@ -50,7 +50,7 @@ export default {
         case 'toc': return 16;
         case 'menu': return 15;
         case 'tab': return 9;
-        case 'bold': return 9;
+        case 'bold': return 11;
         case 'italic': return 10;
         case 'underline': return 10;
         case 'strikethrough': return 12;
