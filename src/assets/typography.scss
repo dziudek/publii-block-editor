@@ -22,206 +22,216 @@
     }
 }
 
-.editor > .editor-inner > .wrapper > div {
+.editor > .editor-inner > .wrapper > div a:not(.btn) {
+    border-bottom: 3px solid #ffc400;
+    color: #2a2e30;
+    cursor: pointer;
+    text-decoration: none !important;
+    -webkit-text-decoration-skip: ink;
+    text-decoration-skip: ink;
+}
 
-    p,
-    ul,
-    ol,
-    dl,
-    table,
-    hr {
-        margin-top: 1.6rem;
+.editor > .editor-inner > .wrapper > div a:not(.btn):hover {
+    background: #FFF8E1;
+    color: #2a2e30;
+}
+
+.editor > .editor-inner > .wrapper > div a:not(.btn):active {
+    color: #2a2e30;
+}
+
+.editor > .editor-inner > .wrapper > div a:not(.btn):focus {
+    color: #2a2e30;
+    outline: 2px dotted #42a5f5;
+}
+
+.editor > .editor-inner > .wrapper > div p,
+.editor > .editor-inner > .wrapper > div ul,
+.editor > .editor-inner > .wrapper > div ol,
+.editor > .editor-inner > .wrapper > div dl,
+.editor > .editor-inner > .wrapper > div table,
+.editor > .editor-inner > .wrapper > div hr,
+.editor > .editor-inner > .wrapper > div blockquote,
+.editor > .editor-inner > .wrapper > div figure,
+.editor > .editor-inner > .wrapper > div pre,
+.editor > .editor-inner > .wrapper > div table,
+.editor > .editor-inner > .wrapper > div script {
+    margin: 0;
+}
+
+.editor > .editor-inner > .wrapper > div h1,
+.editor > .editor-inner > .wrapper > div h2,
+.editor > .editor-inner > .wrapper > div h3,
+.editor > .editor-inner > .wrapper > div h4,
+.editor > .editor-inner > .wrapper > div h5,
+.editor > .editor-inner > .wrapper > div h6 {
+    color: #2a2e30;
+    font-family: -apple-system, BlinkMacSystemFont, Arial, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: 600;
+    letter-spacing: -0.03rem;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.editor > .editor-inner > .wrapper > div h1 {
+    margin: 0;
+}
+
+.editor > .editor-inner > .wrapper > div h1 {
+    font-size: 1.80203em;
+}
+
+@media screen and (min-width: 20rem) {
+    .editor > .editor-inner > .wrapper > div h1 {
+        font-size: calc(1.80203em + 0.22525 * ((100vw - 20rem) / 80));
     }
+}
 
-    blockquote,
-    figure,
-    .gallery {
-        margin-top: 2.4rem;
-        margin-bottom: 2.4rem;
+@media screen and (min-width: 100rem) {
+    .editor > .editor-inner > .wrapper > div h1 {
+        font-size: 2.02729em;
     }
+}
 
-    pre,
-    table,
-    script {
-        margin-top: 1.6rem;
-        margin-bottom: 2.13333rem;
+.editor > .editor-inner > .wrapper > div h2 {
+    font-size: 1.42383em;
+}
+
+@media screen and (min-width: 20rem) {
+    .editor > .editor-inner > .wrapper > div h2 {
+        font-size: calc(1.42383em + 0.17798 * ((100vw - 20rem) / 80));
     }
+}
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        color: #2a2e30;
-        font-family: -apple-system, BlinkMacSystemFont, Arial, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        font-weight: 700;
-        letter-spacing: -0.03rem;
-        line-height: 1.3;
-        margin-top: 2.4rem;
-        margin-bottom: -0.8rem;
+@media screen and (min-width: 100rem) {
+    .editor > .editor-inner > .wrapper > div h2 {
+        font-size: 1.60181em;
     }
+}
 
-    h1 {
-        margin: 0;
+.editor > .editor-inner > .wrapper > div h3 {
+    font-size: 1.26562em;
+}
+
+@media screen and (min-width: 20rem) {
+    .editor > .editor-inner > .wrapper > div h3 {
+        font-size: calc(1.26562em + 0.1582 * ((100vw - 20rem) / 80));
     }
+}
 
-    h1 {
-        font-size: 2.88651em;
-    }
-
-    @media screen and (min-width: 20rem) {
-        h1 {
-            font-size: calc(2.88651em + 0.76673 * ((100vw - 20rem) / 80));
-        }
-    }
-
-    @media screen and (min-width: 100rem) {
-        h1 {
-            font-size: 3.65324em;
-        }
-    }
-
-    h2 {
+@media screen and (min-width: 100rem) {
+    .editor > .editor-inner > .wrapper > div h3 {
         font-size: 1.42383em;
     }
+}
 
-    @media screen and (min-width: 20rem) {
-        h2 {
-            font-size: calc(1.42383em + 0.17798 * ((100vw - 20rem) / 80));
-        }
+.editor > .editor-inner > .wrapper > div h4 {
+    font-size: 1.125em;
+}
+
+@media screen and (min-width: 20rem) {
+    .editor > .editor-inner > .wrapper > div h4 {
+        font-size: calc(1.125em + 0.14062 * ((100vw - 20rem) / 80));
     }
+}
 
-    @media screen and (min-width: 100rem) {
-        h2 {
-            font-size: 1.60181em;
-        }
-    }
-
-    h3 {
+@media screen and (min-width: 100rem) {
+    .editor > .editor-inner > .wrapper > div h4 {
         font-size: 1.26562em;
     }
+}
 
-    @media screen and (min-width: 20rem) {
-        h3 {
-            font-size: calc(1.26562em + 0.1582 * ((100vw - 20rem) / 80));
-        }
+.editor > .editor-inner > .wrapper > div h5 {
+    font-size: 1em;
+}
+
+@media screen and (min-width: 20rem) {
+    .editor > .editor-inner > .wrapper > div h5 {
+        font-size: calc(1em + 0.125 * ((100vw - 20rem) / 80));
     }
+}
 
-    @media screen and (min-width: 100rem) {
-        h3 {
-            font-size: 1.42383em;
-        }
-    }
-
-    h4 {
+@media screen and (min-width: 100rem) {
+    .editor > .editor-inner > .wrapper > div h5 {
         font-size: 1.125em;
     }
+}
 
-    @media screen and (min-width: 20rem) {
-        h4 {
-            font-size: calc(1.125em + 0.14062 * ((100vw - 20rem) / 80));
-        }
+.editor > .editor-inner > .wrapper > div h6 {
+    font-size: 0.88889em;
+}
+
+@media screen and (min-width: 20rem) {
+    .editor > .editor-inner > .wrapper > div h6 {
+        font-size: calc(0.88889em + 0.11111 * ((100vw - 20rem) / 80));
     }
+}
 
-    @media screen and (min-width: 100rem) {
-        h4 {
-            font-size: 1.26562em;
-        }
-    }
-
-    h5 {
+@media screen and (min-width: 100rem) {
+    .editor > .editor-inner > .wrapper > div h6 {
         font-size: 1em;
     }
+}
 
-    @media screen and (min-width: 20rem) {
-        h5 {
-            font-size: calc(1em + 0.125 * ((100vw - 20rem) / 80));
-        }
-    }
+.editor > .editor-inner > .wrapper > div b,
+.editor > .editor-inner > .wrapper > div strong {
+    font-weight: 600;
+}
 
-    @media screen and (min-width: 100rem) {
-        h5 {
-            font-size: 1.125em;
-        }
-    }
+.editor > .editor-inner > .wrapper > div blockquote {
+    font-family: Georgia, Times New Roman, Times, Serif;
+    padding: 3.73333rem 2rem 0.8rem;
+    position: relative;
+    text-align: center;
+}
 
-    h6 {
-        font-size: 0.88889em;
-    }
+.editor > .editor-inner > .wrapper > div blockquote {
+    font-size: 1.125em;
+}
 
-    @media screen and (min-width: 20rem) {
-        h6 {
-            font-size: calc(0.88889em + 0.11111 * ((100vw - 20rem) / 80));
-        }
+@media screen and (min-width: 20rem) {
+    .editor > .editor-inner > .wrapper > div blockquote {
+        font-size: calc(1.125em + 0.14062 * ((100vw - 20rem) / 80));
     }
+}
 
-    @media screen and (min-width: 100rem) {
-        h6 {
-            font-size: 1em;
-        }
+@media screen and (min-width: 100rem) {
+    .editor > .editor-inner > .wrapper > div blockquote {
+        font-size: 1.26562em;
     }
+}
 
-    b,
-    strong {
-        font-weight: 600;
-    }
+.editor > .editor-inner > .wrapper > div blockquote::before {
+    color: #42a5f5;
+    content: "“";
+    font: normal 380%/0.9 Georgia, Times New Roman, Times, Serif;
+    top: 0.53333rem;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+}
 
-    blockquote {
-        font-family: Georgia, Times New Roman, Times, Serif;
-        padding: 3.73333rem 2rem 0.8rem;
-        position: relative;
-        text-align: center;
-    }
+.editor > .editor-inner > .wrapper > div blockquote > :nth-child(1) {
+    margin-top: 0;
+}
 
-    blockquote {
-        font-size: 1.125em;
-    }
+.editor > .editor-inner > .wrapper > div ul,
+.editor > .editor-inner > .wrapper > div ol {
+    margin-left: 2rem;
+}
 
-    @media screen and (min-width: 20rem) {
-        blockquote {
-            font-size: calc(1.125em + 0.14062 * ((100vw - 20rem) / 80));
-        }
-    }
+.editor > .editor-inner > .wrapper > div ul > li,
+.editor > .editor-inner > .wrapper > div ol > li {
+    list-style: inherit;
+    padding-left: 0.53333rem;
+}
 
-    @media screen and (min-width: 100rem) {
-        blockquote {
-            font-size: 1.26562em;
-        }
-    }
-
-    blockquote::before {
-        color: #42a5f5;
-        content: "“";
-        font: normal 380%/0.9 Georgia, Times New Roman, Times, Serif;
-        top: 0.53333rem;
-        position: absolute;
-        left: 50%;
-        -webkit-transform: translate(-50%, 0);
-        -ms-transform: translate(-50%, 0);
-        transform: translate(-50%, 0);
-    }
-
-    blockquote > :nth-child(1) {
-        margin-top: 0;
-    }
-
-    ul,
-    ol {
-        margin-left: 2rem;
-    }
-
-    ul > li,
-    ol > li {
-        list-style: inherit;
-        padding-left: 0.53333rem;
-    }
-
-    ul ul,
-    ul ol,
-    ol ul,
-    ol ol {
-        margin-bottom: 0.53333rem;
-        margin-top: 0.53333rem;
-    }
+.editor > .editor-inner > .wrapper > div ul ul,
+.editor > .editor-inner > .wrapper > div ul ol,
+.editor > .editor-inner > .wrapper > div ol ul,
+.editor > .editor-inner > .wrapper > div ol ol {
+    margin-bottom: 0.53333rem;
+    margin-top: 0.53333rem;
 }

@@ -166,7 +166,7 @@ export default {
 
 .wrapper {
   border: 1px solid transparent;
-  margin: -10px auto;
+  margin: 0 auto;
   opacity: .33;
   padding: 0 32px;
   position: relative;
@@ -175,6 +175,10 @@ export default {
 
   &[data-block-type="publii-embed"] {
     margin: 15px auto;
+  }
+    
+  &[data-block-type="publii-header"] {   
+    margin-bottom: -.8rem;
   }
 
   &.is-selected {
@@ -185,12 +189,16 @@ export default {
       pointer-events: auto;
     }
   }
+    
+  & > div {
+    padding: 1rem 0;   
+  }
 
   &.has-ui-opened {  
     background: $block-editor-color-light;
     border-radius: 6px;
     box-shadow: 0 0 32px $block-editor-color-shadow;
-    margin-top: -54px;
+    margin-top: -44px;
     opacity: 1;
     z-index: 2;
 
@@ -228,10 +236,7 @@ export default {
       right: 0;
     }
   }
-
-  &:first-child {
-    margin: 0 auto -10px auto;
-  }
+ 
 
   &-ui {
     opacity: 0;
@@ -253,7 +258,7 @@ export default {
         opacity: 0;     
         padding: 16px;
         position: absolute;
-        right: 6px;
+        right: 0px;
         top: 14px;
         transform: scale(.5);
         transform-origin: center center;
@@ -411,11 +416,9 @@ export default {
       border: none;
       display: flex;
       height: 44px;  
-      justify-content: flex-end;
-      left: 0;
-      padding: 12px 0 0 0;     
-      margin-right: 64px;
-      z-index: 10;      
+      justify-content: flex-end;         
+      margin: -9px 64px 9px 0;
+        
           
       &-title {
           color: $block-editor-color-text-medium;
