@@ -1,0 +1,227 @@
+.editor > .editor-inner > .wrapper > div {
+    color: #2a2e30;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, Arial, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.editor > .editor-inner > .wrapper > div {
+    font-size: 1rem;
+}
+
+@media screen and (min-width: 20rem) {
+    .editor > .editor-inner > .wrapper > div {
+        font-size: calc(1rem + 0.15 * ((100vw - 20rem) / 80));
+    }
+}
+
+@media screen and (min-width: 100rem) {
+    .editor > .editor-inner > .wrapper > div {
+        font-size: 1.15rem;
+    }
+}
+
+.editor > .editor-inner > .wrapper > div {
+
+    p,
+    ul,
+    ol,
+    dl,
+    table,
+    hr {
+        margin-top: 1.6rem;
+    }
+
+    blockquote,
+    figure,
+    .gallery {
+        margin-top: 2.4rem;
+        margin-bottom: 2.4rem;
+    }
+
+    pre,
+    table,
+    script {
+        margin-top: 1.6rem;
+        margin-bottom: 2.13333rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: #2a2e30;
+        font-family: -apple-system, BlinkMacSystemFont, Arial, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-weight: 600;
+        letter-spacing: -0.03rem;
+        line-height: 1.2;
+        margin-top: 2.4rem;
+        margin-bottom: -0.8rem;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    h1 {
+        font-size: 2.88651em;
+    }
+
+    @media screen and (min-width: 20rem) {
+        h1 {
+            font-size: calc(2.88651em + 0.76673 * ((100vw - 20rem) / 80));
+        }
+    }
+
+    @media screen and (min-width: 100rem) {
+        h1 {
+            font-size: 3.65324em;
+        }
+    }
+
+    h2 {
+        font-size: 1.42383em;
+    }
+
+    @media screen and (min-width: 20rem) {
+        h2 {
+            font-size: calc(1.42383em + 0.17798 * ((100vw - 20rem) / 80));
+        }
+    }
+
+    @media screen and (min-width: 100rem) {
+        h2 {
+            font-size: 1.60181em;
+        }
+    }
+
+    h3 {
+        font-size: 1.26562em;
+    }
+
+    @media screen and (min-width: 20rem) {
+        h3 {
+            font-size: calc(1.26562em + 0.1582 * ((100vw - 20rem) / 80));
+        }
+    }
+
+    @media screen and (min-width: 100rem) {
+        h3 {
+            font-size: 1.42383em;
+        }
+    }
+
+    h4 {
+        font-size: 1.125em;
+    }
+
+    @media screen and (min-width: 20rem) {
+        h4 {
+            font-size: calc(1.125em + 0.14062 * ((100vw - 20rem) / 80));
+        }
+    }
+
+    @media screen and (min-width: 100rem) {
+        h4 {
+            font-size: 1.26562em;
+        }
+    }
+
+    h5 {
+        font-size: 1em;
+    }
+
+    @media screen and (min-width: 20rem) {
+        h5 {
+            font-size: calc(1em + 0.125 * ((100vw - 20rem) / 80));
+        }
+    }
+
+    @media screen and (min-width: 100rem) {
+        h5 {
+            font-size: 1.125em;
+        }
+    }
+
+    h6 {
+        font-size: 0.88889em;
+    }
+
+    @media screen and (min-width: 20rem) {
+        h6 {
+            font-size: calc(0.88889em + 0.11111 * ((100vw - 20rem) / 80));
+        }
+    }
+
+    @media screen and (min-width: 100rem) {
+        h6 {
+            font-size: 1em;
+        }
+    }
+
+    b,
+    strong {
+        font-weight: 600;
+    }
+
+    blockquote {
+        font-family: Georgia, Times New Roman, Times, Serif;
+        padding: 3.73333rem 2rem 0.8rem;
+        position: relative;
+        text-align: center;
+    }
+
+    blockquote {
+        font-size: 1.125em;
+    }
+
+    @media screen and (min-width: 20rem) {
+        blockquote {
+            font-size: calc(1.125em + 0.14062 * ((100vw - 20rem) / 80));
+        }
+    }
+
+    @media screen and (min-width: 100rem) {
+        blockquote {
+            font-size: 1.26562em;
+        }
+    }
+
+    blockquote::before {
+        color: #42a5f5;
+        content: "“";
+        font: normal 380%/0.9 Georgia, Times New Roman, Times, Serif;
+        top: 0.53333rem;
+        position: absolute;
+        left: 50%;
+        -webkit-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+    }
+
+    blockquote > :nth-child(1) {
+        margin-top: 0;
+    }
+
+    ul,
+    ol {
+        margin-left: 2rem;
+    }
+
+    ul > li,
+    ol > li {
+        list-style: inherit;
+        padding-left: 0.53333rem;
+    }
+
+    ul ul,
+    ul ol,
+    ol ul,
+    ol ol {
+        margin-bottom: 0.53333rem;
+        margin-top: 0.53333rem;
+    }
+}
