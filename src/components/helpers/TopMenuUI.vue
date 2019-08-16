@@ -2,6 +2,7 @@
   <div
     class="wrapper-ui-top-menu"
     v-if="$parent.$parent.uiOpened && !$parent.textIsHighlighted">
+    <span class="wrapper-ui-top-menu-title">Edit block</span>
     <button
       v-for="(button, index) of filteredConfig"
       :key="'top-menu-button-' + index"

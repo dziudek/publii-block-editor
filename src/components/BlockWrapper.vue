@@ -168,7 +168,7 @@ export default {
   border: 1px solid transparent;
   margin: -10px auto;
   opacity: .33;
-  padding: 0 20px;
+  padding: 0 32px;
   position: relative;
   transition: width .25s ease-out, opacity .35s ease-out;
   z-index: 1;
@@ -193,16 +193,21 @@ export default {
     opacity: 1;
     z-index: 2;
 
-    &:after {
+    &::after {
       background: $block-editor-color-primary;
       bottom: -1px;
       content: "";
       position: absolute;
       right: -1px;
-      top: -41px;
+      top: -1px;
       width: 3px;
       z-index: 10;
     }
+      
+      & > div {
+          display: flex;
+          flex-direction: column-reverse;
+      }
   }
 
   &.has-block-selector-visible {
@@ -310,13 +315,11 @@ export default {
       }
     }
 
-    &-options {
-      background: $block-editor-color-light;
-      box-shadow: 0 -12px 12px rgba($block-editor-color-text, 0.08);
+    &-options {     
       height: 44px;
       position: absolute;
-      right: 51px;
-      top: 0;
+      right: 64px;
+      top: 47px;
       width: 86px;
 
       &.is-narrow {
@@ -385,35 +388,42 @@ export default {
       }
 
       &-button-more-options {
-        left: 5px;        
+        left: 4px;        
       }
 
       &-button-trash {
-        right: 5px;        
+        right: 7px;        
       }
 
       &-button-move {
-        right: -42px;
-        top: -1px;
+        right: -60px;
+        top: 0;
       }
 
       &-button-move + .wrapper-ui-options-button-move {
-        top: 35px;
+        top: 36px;
       }
     }
 
     &-top-menu {
-      align-items: center;
-      background: $block-editor-color-light; 
-      box-shadow: -12px -12px 12px rgba($block-editor-color-text, 0.08);
+      align-items: center;     
       border: none;
       display: flex;
-      height: 44px;     
-      padding: 0 0 0 6px;
-      position: absolute;
-      top: -41px;
-      right: 80px;
-      z-index: 10;
+      height: 44px;  
+      justify-content: flex-end;
+      left: 0;
+      padding: 12px 0 0 0;     
+      margin-right: 64px;
+      z-index: 10;      
+          
+      &-title {
+          color: $block-editor-color-text-medium;
+          display: block;
+          font-size: 11px;
+          font-weight: 700;
+          margin: 3px auto 0 0;
+          text-transform: uppercase;          
+      }
 
       &-button {
         align-items: center;
