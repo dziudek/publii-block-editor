@@ -190,6 +190,7 @@ export default {
     background: $block-editor-color-light;
     border-radius: 6px;
     box-shadow: 0 0 32px $block-editor-color-shadow;
+    margin-top: -54px;
     opacity: 1;
     z-index: 2;
 
