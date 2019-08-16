@@ -4,7 +4,7 @@
     ref="block-wrapper"
     :class="{ 'wrapper': true, 'is-selected': isSelected, 'has-ui-opened': uiOpened, [customCssClasses.join(' ')]: true }"
     @click.stop="blockClick"
-    :style="'width: ' + ($parent.config.contentWidth + 40) + 'px;'">
+    :style="'width: ' + ($parent.config.contentWidth + 64) + 'px;'">
     <slot />
 
     <div class="wrapper-ui">
