@@ -198,11 +198,8 @@ export default {
 <style lang="scss">
 @import '../../../assets/variables.scss';
 
-.publii-block-quote {
-  border-left: 3px solid #aaa;
-  margin: 20px 0;
-  outline: none;
-  padding: 10px 20px;
+.publii-block-quote {  
+  outline: none; 
 
   p {
     margin: 0;

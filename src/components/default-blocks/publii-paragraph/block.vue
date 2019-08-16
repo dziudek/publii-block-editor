@@ -528,7 +528,7 @@ export default {
 
     &-list {
       display: none;
-      left: 30px;
+      left: 42px;
       padding: 16px 0;
       position: absolute;
       top: 50%;
@@ -542,6 +542,7 @@ export default {
         display: flex;
         margin-right: 6px;
         outline: none;
+        padding: 1px 6px 2px;
         position: relative;
 
         &.is-active {

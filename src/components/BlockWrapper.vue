@@ -176,10 +176,6 @@ export default {
   &[data-block-type="publii-embed"] {
     margin: 15px auto;
   }
-    
-  &[data-block-type="publii-header"] {   
-    margin-bottom: -.8rem;
-  }
 
   &.is-selected {
     z-index: 10;
