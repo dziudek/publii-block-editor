@@ -357,12 +357,12 @@ export default {
           left: 50%;
           opacity: 0;
           position: absolute;         
-          height: 30px;
+          height: 34px;
           top: 50%;
           transition: all .15s cubic-bezier(.4,0,.2,1);
           transform: scale(.5) translate(-50%, -50%);
           transform-origin: left top;           
-          width: 30px;
+          width: 34px;
           z-index: -1;        
         }
 
@@ -416,8 +416,7 @@ export default {
       &-button {
         align-items: center;
         background: transparent;
-        border: none;
-        border-radius: 2px;
+        border: none;        
         color: $block-editor-color-text-medium-dark;
         cursor: pointer;
         display: flex;
@@ -438,12 +437,12 @@ export default {
           left: 50%;
           opacity: 0;
           position: absolute;         
-          height: 30px;
+          height: 34px;
           top: 50%;
           transition: all .15s cubic-bezier(.4,0,.2,1);
           transform: scale(.5) translate(-50%, -50%);
           transform-origin: left top;           
-          width: 30px;
+          width: 34px;
           z-index: -1;
         }
 

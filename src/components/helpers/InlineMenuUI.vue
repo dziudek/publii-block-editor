@@ -180,17 +180,31 @@ export default {
   background: $block-editor-color-light;
   border: none;
   border-radius: 4px;
-  box-shadow: 0 1px 6px $block-editor-color-shadow;
+  box-shadow: 0 5px 10px -5px $block-editor-color-shadow, 4px -11px 26px -12px $block-editor-color-shadow, 0 24px 50px 2px $block-editor-color-shadow;
   left: 50%;
   min-height: 43px;
-  padding: 0 13px;
+  padding: 0 4px;
   position: absolute;
   top: 0%;
-  transform: translateX(-50%) translateY(64px);
+  transform: scale(1) translateX(-50%) translateY(64px);
+    transform-origin: center left;
   width: auto;
   z-index: 10;
+      
+     animation: aaa .15s ease backwards;
+    
+    @keyframes aaa {
+            0% {
+                opacity: 0;
+                 transform: scale(.9) translateX(-50%) translateY(78px);
+            }            
+            100% {
+                 opacity: 1;
+                 
+            }
+          }
 
-  &:after {
+  &::after {
     border: 6px solid $block-editor-color-light;
     border-left-color: transparent;
     border-right-color: transparent;
@@ -208,27 +222,52 @@ export default {
 
   &-button {
     align-items: center;
-    background: $block-editor-color-light;
-    border: none;
-    border-radius: 2px;
-    color: $block-editor-color-text;
+    background: transparent;
+    border: none;   
+    color: $block-editor-color-text-medium-dark;
     cursor: pointer;
     display: flex;
-    height: 27px;
+    height: 100%;
     justify-content: center;
-    margin: 8px 5px;
+    margin: 0;
     outline: none;
     padding: 0;
-    width: 28px;
+    position: relative;
+    width: 38px;
+      
+    // hover effect
+    &::before {
+       content: "";
+       background: $block-editor-color-light-dark; 
+       border-radius: 3px;
+       display: block;
+       left: 50%;
+       opacity: 0;
+       position: absolute;         
+       height: 34px;
+       top: 50%;
+       transition: all .15s cubic-bezier(.4,0,.2,1);
+       transform: scale(.5) translate(-50%, -50%);
+       transform-origin: left top;           
+       width: 34px;
+       z-index: -1;
+    }
 
     &:hover,
     &.is-active {
-      background: $block-editor-color-light-dark;
+      color: $block-editor-color-text;
+        
+      &::before {
+         opacity: 1;
+         transform: scale(1) translate(-50%, -50%);
+      }
     }
   }
 
-  &-buttons {
+  &-buttons { 
+    cursor: pointer;
     display: flex;
+    height: 43px;
     width: 100%;
   }
 
