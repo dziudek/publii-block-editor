@@ -398,11 +398,11 @@ export default {
 
       &-button-move {
         right: -60px;
-        top: 0;
+        top: -2px;
       }
 
       &-button-move + .wrapper-ui-options-button-move {
-        top: 36px;
+        top: 32px;
       }
     }
 
