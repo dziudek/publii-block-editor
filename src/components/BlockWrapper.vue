@@ -186,9 +186,12 @@ export default {
     }
   }
 
-  &.has-ui-opened {
-    border: 1px solid $block-editor-form-input-border;
+  &.has-ui-opened {  
+    background: $block-editor-color-light;
+    border-radius: 6px;
+    box-shadow: 0 0 32px $block-editor-color-shadow;
     opacity: 1;
+    z-index: 2;
 
     &:after {
       background: $block-editor-color-primary;
@@ -196,7 +199,7 @@ export default {
       content: "";
       position: absolute;
       right: -1px;
-      top: -46px;
+      top: -41px;
       width: 3px;
       z-index: 10;
     }
@@ -229,11 +232,11 @@ export default {
     position: absolute;
     pointer-events: none;
     right: -50px;
-    top: -46px;
+    top: -41px;
     z-index: 1;
 
     .wrapper-ui-show-options {
-      height: 46px;
+      height: 44px;
       transition: all .25s ease-out;
       width: 150px;
 
@@ -309,10 +312,10 @@ export default {
 
     &-options {
       background: $block-editor-color-light;
-      border: 1px solid $block-editor-form-input-border;
-      height: 46px;
+      box-shadow: 0 -12px 12px rgba($block-editor-color-text, 0.08);
+      height: 44px;
       position: absolute;
-      right: 50px;
+      right: 51px;
       top: 0;
       width: 86px;
 
@@ -390,7 +393,7 @@ export default {
       }
 
       &-button-move {
-        right: -40px;
+        right: -42px;
         top: -1px;
       }
 
@@ -401,15 +404,14 @@ export default {
 
     &-top-menu {
       align-items: center;
-      background: $block-editor-color-light;
+      background: $block-editor-color-light; 
+      box-shadow: -12px -12px 12px rgba($block-editor-color-text, 0.08);
       border: none;
       display: flex;
-      height: 46px;
-      border: 1px solid $block-editor-form-input-border;
-      border-right: none;
-      padding: 0 0 0 5px;
+      height: 44px;     
+      padding: 0 0 0 6px;
       position: absolute;
-      top: -46px;
+      top: -41px;
       right: 80px;
       z-index: 10;
 

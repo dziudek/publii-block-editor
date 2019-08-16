@@ -429,8 +429,7 @@ export default {
 <style lang="scss">
 @import '../../../assets/variables.scss';
 
-.publii-block-paragraph {
-  line-height: 1.4;
+.publii-block-paragraph { 
   outline: none;
   width: 100%;
 
@@ -530,6 +529,7 @@ export default {
     &-list {
       display: none;
       left: 30px;
+      padding: 16px 0;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -540,7 +540,7 @@ export default {
         background: transparent;
         border: none;
         display: flex;
-        margin-right: 5px;
+        margin-right: 6px;
         outline: none;
         position: relative;
 

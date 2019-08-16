@@ -183,21 +183,22 @@ export default {
   border-radius: 4px;
   box-shadow: 0 5px 10px -5px $block-editor-color-shadow, 4px -11px 26px -12px $block-editor-color-shadow, 0 24px 50px 2px $block-editor-color-shadow;
   left: 50%;
-    margin-top: 6px;
+  margin-top: 16px;
   min-height: 43px;
   padding: 0 4px;
   position: absolute;
   top: 0%;
   transform: scale(1) translateX(-50%) translateY(64px);
-  transform-origin: center left;
+  transform-origin: center left; 
   width: auto;
   z-index: 10;  
-    
+
   @keyframes inlineMenuIn {
     0% {
         opacity: 0;
         transform: scale(.9) translateX(-50%) translateY(78px);
-    }            
+    }  
+   
     100% {
         opacity: 1;                 
     }
@@ -232,6 +233,7 @@ export default {
     padding: 0;
     position: relative;
     width: 38px;
+   
       
     // hover effect
     &::before {

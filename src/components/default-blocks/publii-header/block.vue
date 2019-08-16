@@ -191,13 +191,6 @@ export default {
   outline: none;
   width: 100%;
 
-  &:empty {
-    &:before {
-      content: 'Insert title';
-      opacity: .35;
-    }
-  }
-
   &.is-link {
     cursor: pointer;
     text-decoration: underline;

@@ -185,7 +185,7 @@ export default {
 
   &:empty {
     &:before {
-      content: 'Put headers to generate Table of Contents';
+      content: 'Create headings (H1-H6) to generate Table of Contents';
       display: block;
       opacity: .35;
       text-align: center;
