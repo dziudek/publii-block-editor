@@ -176,47 +176,45 @@ export default {
 }
 
 .wrapper-ui-inline-menu {
+  animation: inlineMenuIn .15s ease backwards;
   align-items: center;
   background: $block-editor-color-light;
   border: none;
   border-radius: 4px;
   box-shadow: 0 5px 10px -5px $block-editor-color-shadow, 4px -11px 26px -12px $block-editor-color-shadow, 0 24px 50px 2px $block-editor-color-shadow;
   left: 50%;
+    margin-top: 6px;
   min-height: 43px;
   padding: 0 4px;
   position: absolute;
   top: 0%;
   transform: scale(1) translateX(-50%) translateY(64px);
-    transform-origin: center left;
+  transform-origin: center left;
   width: auto;
-  z-index: 10;
-      
-     animation: aaa .15s ease backwards;
+  z-index: 10;  
     
-    @keyframes aaa {
-            0% {
-                opacity: 0;
-                 transform: scale(.9) translateX(-50%) translateY(78px);
-            }            
-            100% {
-                 opacity: 1;
-                 
-            }
-          }
+  @keyframes inlineMenuIn {
+    0% {
+        opacity: 0;
+        transform: scale(.9) translateX(-50%) translateY(78px);
+    }            
+    100% {
+        opacity: 1;                 
+    }
+  }
 
   &::after {
-    border: 6px solid $block-editor-color-light;
+    border: 9px solid $block-editor-color-light;
     border-left-color: transparent;
     border-right-color: transparent;
     border-top-color: transparent;
-    content: "";
-    filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, .125));
-    height: 12px;
+    content: "";   
+    height: 18px;
     left: 50%;
     position: absolute;
-    top: -12px;
+    top: -18px;
     transform: translateX(-50%);
-    width: 12px;
+    width: 18px;
     z-index: 1;
   }
 
