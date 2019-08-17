@@ -204,7 +204,7 @@
 .editor > .editor-inner > .wrapper > div blockquote::before {
     color: #42a5f5;
     content: "“";
-    font: normal 340%/0.9 Georgia, Times New Roman, Times, Serif;
+    font: normal 330%/0.9 Georgia, Times New Roman, Times, Serif;
     top: 0.8rem;
     position: absolute;
     left: 50%;
@@ -214,6 +214,7 @@
 }
 
 .editor > .editor-inner > .wrapper > div blockquote + figcaption {
+    color: #6a7081;
     font-size: 0.79012em;
     text-align: center;
 }

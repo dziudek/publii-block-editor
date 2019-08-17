@@ -199,7 +199,7 @@ export default {
 @import '../../../assets/variables.scss';
 
 .publii-block-quote {  
-  outline: none; 
+    outline: none;    
 
   p {
     margin: 0;
