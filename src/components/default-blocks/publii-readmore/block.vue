@@ -66,18 +66,20 @@ export default {
 <style lang="scss">
 .publii-block-readmore {
   caret-color: transparent;
-  margin: 32px 0;
+  margin: 16px 0;
   outline: none;
   position: relative;
   width: 100%;
 
   &:after {
-    background: #fff;
+    background: #FFF;
+    border: 1px solid;
+    border-radius: 3px;
     content: "Read More";
     display: inline-block;
     font-size: 12px;
     left: 50%;
-    padding: 0 10px;
+    padding: 6px 16px;
     position: absolute;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
