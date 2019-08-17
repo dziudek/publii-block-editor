@@ -226,11 +226,7 @@ export default {
       margin-left: auto;
       margin-right: auto;
       max-width: 720px;
-    }
-
-    .wrapper-ui {
-      right: 0;
-    }
+    }   
   }
  
   &-ui {
