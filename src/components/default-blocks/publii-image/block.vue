@@ -482,6 +482,7 @@ export default {
 
     &.is-visible {
       display: block;
+      order: -1;
     }
 
     input,
