@@ -18,12 +18,14 @@
     <div
       :class="{ 'publii-block-paragraph-block-selector': true, 'is-visible': showNewBlockUI }"
       :key="'new-block-menu-' + id">
-      <button
+      <button 
+        class="publii-block-paragraph-block-selector-list-add-button"
         @click.stop="toggleNewBlockUI()"
         tabindex="-1">
         <icon name="add" />
       </button>
 
+<!--
       <div
         v-if="!newBlockUIListVisible"
         class="publii-block-paragraph-block-selector-tooltip">
@@ -34,6 +36,7 @@
           <icon name="tab" /> Tab
         </span>
       </div>
+-->
 
       <div
         v-if="newBlockUIListVisible"
@@ -440,20 +443,20 @@ export default {
 
   &:empty {
     &:before {
-      content: 'Enter text';
-      opacity: .35;
+      content: 'Start writing or press the TAB key to choose a block';
+      opacity: .4;
     }
   }
 
   &-block-selector {
     display: none;
-    left: -16px;
+    left: -26px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
 
-    &-tooltip {
+    &-tooltip { 
       background: $color-editor-color-light-medium;
       border-radius: $block-editor-form-input-border-radius;
       box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
@@ -461,18 +464,18 @@ export default {
       flex-wrap: wrap;
       justify-content: center;
       height: 40px;
-      left: 50%;
+      left: 50%;     
       padding: 5px 0;
       position: absolute;
       top: 30px;
       transform: translateX(-50%);
       width: 64px;
-      z-index: 10;
+      z-index: 10; 
 
       &.is-small {
         color: $block-editor-color-text;
         display: block;
-        height: auto;
+        height: auto;       
         padding: 5px 10px;
         width: auto;
 
@@ -520,30 +523,58 @@ export default {
       display: block;
     }
 
-    & > button {
-      background: transparent;
-      border: none;
-      outline: none;
-    }
-
     &-list {
       display: none;
-      left: 42px;
+      left: 48px;
       padding: 16px 0;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       width: 500px;
+        
+      &-add-button {
+        animation: fadeInAddButton .25s ease-out forwards;
+        background: transparent;  
+        border: none;
+        border-radius: 50%;  
+        cursor: pointer;      
+        height: 34px;          
+        outline: none;        
+        width: 34px;    
+       
+          
+        @keyframes fadeInAddButton {
+          0% {
+            opacity: 0;
+            transform: scale(.5) ;
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+          
+        & > svg {
+          fill: $block-editor-color-primary-dark !important; 
+          vertical-align:text-bottom; 
+          transition: all .25s ease-out;
+        }
+          
+        &:hover {
+          border: 1px solid $block-editor-color-primary-dark;          
+        }
+      }
 
       &-button {
         align-items: center;
         background: transparent;
         border: none;
-        display: flex;
-        margin-right: 6px;
+        cursor: pointer;
+        display: flex;       
         outline: none;
-        padding: 1px 6px 2px;
+        padding: 1px 10px 2px;
         position: relative;
+        transition: all .125s ease-out; 
 
         &.is-active {
           animation: fadeIn .75s 1 forwards;
@@ -569,11 +600,15 @@ export default {
             }
           }
         }
+          
+        &:hover {
+          color: $block-editor-color-primary-dark;
+        }
       }
 
       &.is-visible {
         background: $block-editor-color-light;
-        display: flex;
+        display: flex;        
       }
     }
   }

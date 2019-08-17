@@ -190,6 +190,13 @@ export default {
 .publii-block-header {
   outline: none;
   width: 100%;
+    
+  &:empty {
+    &:before {
+      content: 'Add a heading';
+      opacity: .4;
+    }
+  }
 
   &.is-link {
     cursor: pointer;

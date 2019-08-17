@@ -190,7 +190,7 @@ export default {
     padding: 1rem 0;   
   }
 
-  &.has-ui-opened {  
+  &.has-ui-opened {
     background: $block-editor-color-light;
     border-radius: 6px;
     box-shadow: 0 0 32px $block-editor-color-shadow;
@@ -209,10 +209,10 @@ export default {
       z-index: 10;
     }
       
-      & > div {
-          display: flex;
-          flex-direction: column-reverse;
-      }
+    & > div {
+      display: flex;
+      flex-direction: column-reverse;
+    }
   }
 
   &.has-block-selector-visible {
@@ -233,7 +233,6 @@ export default {
     }
   }
  
-
   &-ui {
     opacity: 0;
     position: absolute;
