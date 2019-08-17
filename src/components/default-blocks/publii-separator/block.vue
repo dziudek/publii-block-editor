@@ -31,7 +31,7 @@ export default {
   data () {
     return {
       config: {
-        type: 'long',
+        type: 'dots',
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
           id: this.getAdvancedConfigDefaultValue('id')
@@ -43,17 +43,7 @@ export default {
           activeState: function () { return this.config.type === 'long'; },
           onClick: function () { this.setType('long'); },
           icon: 'long-line'
-        },
-        {
-          activeState: function () { return this.config.type === 'medium'; },
-          onClick: function () { this.setType('medium'); },
-          icon: 'shorter-line'
-        },
-        {
-          activeState: function () { return this.config.type === 'short'; },
-          onClick: function () { this.setType('short'); },
-          icon: 'short-line'
-        },
+        },        
         {
           activeState: function () { return this.config.type === 'dots'; },
           onClick: function () { this.setType('dots'); },
@@ -109,17 +99,29 @@ export default {
 <style lang="scss">
 .publii-block-separator {
   caret-color: transparent;
-  margin: 32px 0;
+  margin: 8px 0;
   outline: none;
   width: 100%;
 
   hr {
-    margin: 5px auto;
+    border: none;
+    height: 18px;
+    line-height: 0;
+    margin: 0;
     position: relative;
   }
 
   hr.long {
-    width: 100%;
+        
+      &::after {
+          border-bottom: 1px solid;
+          bottom: 8px;
+          content: "";
+          height: 1px;
+          left: 0;
+          position: absolute;
+          width: 100%;  
+      }
   }
 
   hr.medium {
@@ -131,17 +133,15 @@ export default {
   }
 
   hr.dots,
-  hr.dot {
-    border: none;
-    height: 12px;
+  hr.dot {     
     margin: 0 auto;
 
     &:before {
       content: "* * *";
-      left: 50%;
-      line-height: 6px;
+      font-size: 30px;
+      left: 50%;     
       position: absolute;
-      top: 75%;
+      bottom: 0;
       transform: translateX(-50%) translateY(-50%);
     }
   }

@@ -193,7 +193,7 @@ export default {
     
   &:empty {
     &:before {
-      content: 'Add a heading';
+      content: 'Add heading';
       opacity: .4;
     }
   }
