@@ -16,18 +16,26 @@
         v-html="content.toc">
       </ol>
     </div>
+
+    <top-menu
+      ref="top-menu"
+      :config="[]" />
   </div>
 </template>
 
 <script>
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'ToC',
   mixins: [
     Block
   ],
+  components: {
+    'top-menu': TopMenuUI
+  },
   data () {
     return {
       focusable: ['title'],
@@ -158,7 +166,7 @@ export default {
 
   &-wrapper {
     outline: none;
-    width: 100%;   
+    width: 100%;
 
     .publii-block-toc-title {
       outline: none;
@@ -174,7 +182,7 @@ export default {
     }
 
     a {
-      pointer-events: none;       
+      pointer-events: none;
     }
   }
 

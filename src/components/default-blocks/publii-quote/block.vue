@@ -20,14 +20,18 @@
           placeholder="Quote author"
           ref="contentAuthor" />
       </div>
-      <figure 
+      <figure
         v-if="view === 'preview'"
         class="publii-block-quote"
         ref="block">
-          <blockquote v-html="content.text" />        
-          <figcaption v-html="content.author" />       
+          <blockquote v-html="content.text" />
+          <figcaption v-html="content.author" />
       </figure>
     </div>
+
+    <top-menu
+      ref="top-menu"
+      :config="[]" />
   </div>
 </template>
 
@@ -36,6 +40,7 @@ import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import HasPreview from './../../mixins/HasPreview.vue';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Paragraph',
@@ -44,6 +49,9 @@ export default {
     ContentEditableImprovements,
     HasPreview
   ],
+  components: {
+    'top-menu': TopMenuUI
+  },
   data () {
     return {
       focusable: ['contentText', 'contentAuthor'],
@@ -198,14 +206,14 @@ export default {
 <style lang="scss">
 @import '../../../assets/variables.scss';
 
-.publii-block-quote {  
-    outline: none;    
+.publii-block-quote {
+    outline: none;
 
   p {
     margin: 0;
-    outline: none;    
-  }  
-  
+    outline: none;
+  }
+
   &-form {
     display: none;
     padding: 20px 0;

@@ -141,7 +141,7 @@ export default {
         case 'right': return 13;
         case 'wide': return 13;
         case 'full': return 13;
-        case 'enter': return 13; 
+        case 'enter': return 13;
         case 'down': return 6;
         case 'up': return 6;
         case 'trash': return 12;

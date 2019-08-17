@@ -43,7 +43,7 @@ export default {
           activeState: function () { return this.config.type === 'long'; },
           onClick: function () { this.setType('long'); },
           icon: 'long-line'
-        },        
+        },
         {
           activeState: function () { return this.config.type === 'dots'; },
           onClick: function () { this.setType('dots'); },
@@ -112,7 +112,7 @@ export default {
   }
 
   hr.long {
-        
+
       &::after {
           border-bottom: 1px solid;
           bottom: 8px;
@@ -120,7 +120,7 @@ export default {
           height: 1px;
           left: 0;
           position: absolute;
-          width: 100%;  
+          width: 100%;
       }
   }
 
@@ -133,13 +133,13 @@ export default {
   }
 
   hr.dots,
-  hr.dot {     
+  hr.dot {
     margin: 0 auto;
 
     &:before {
       content: "* * *";
       font-size: 30px;
-      left: 50%;     
+      left: 50%;
       position: absolute;
       bottom: 0;
       transform: translateX(-50%) translateY(-50%);

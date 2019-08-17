@@ -27,8 +27,7 @@
     color: #2a2e30;
     cursor: pointer;
     text-decoration: none !important;
-    -webkit-text-decoration-skip: ink;
-    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
 }
 
 .editor > .editor-inner > .wrapper > div a:not(.btn):hover {
@@ -208,8 +207,6 @@
     top: 0.8rem;
     position: absolute;
     left: 50%;
-    -webkit-transform: translate(-50%, 0);
-    -ms-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
 }
 

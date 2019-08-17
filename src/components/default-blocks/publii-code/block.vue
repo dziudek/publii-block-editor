@@ -9,6 +9,10 @@
       @blur="save"
       contenteditable="true"
       v-html="content" />
+
+    <top-menu
+      ref="top-menu"
+      :config="[]" />
   </div>
 </template>
 
@@ -16,6 +20,7 @@
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Code',
@@ -23,6 +28,9 @@ export default {
     Block,
     ContentEditableImprovements
   ],
+  components: {
+    'top-menu': TopMenuUI
+  },
   data () {
     return {
       config: {

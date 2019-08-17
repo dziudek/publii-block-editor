@@ -8,18 +8,26 @@
       ref="block">
       <hr />
     </div>
+
+    <top-menu
+      ref="top-menu"
+      :config="[]" />
   </div>
 </template>
 
 <script>
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'ReadMore',
   mixins: [
     Block
   ],
+  components: {
+    'top-menu': TopMenuUI
+  },
   data () {
     return {
       config: {

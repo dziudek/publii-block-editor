@@ -16,6 +16,10 @@
       v-html="modifiedContent"
       :class="{ 'publii-block-embed-preview': true }">
     </div>
+
+    <top-menu
+      ref="top-menu"
+      :config="[]" />
   </div>
 </template>
 
@@ -25,6 +29,7 @@ import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import EmbedHelper from './embed.js';
 import HasPreview from './../../mixins/HasPreview.vue';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Embed',
@@ -33,6 +38,9 @@ export default {
     ContentEditableImprovements,
     HasPreview
   ],
+  components: {
+    'top-menu': TopMenuUI
+  },
   data () {
     return {
       focusable: ['code'],

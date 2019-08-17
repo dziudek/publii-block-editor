@@ -11,11 +11,11 @@
       <div
         :class="{ 'wrapper-ui-show-options': true, 'is-confirming-delete': confirmDelete }"
         @click.stop="togglePopup">
-          <button 
+          <button
             :class="{ 'wrapper-ui-show-options-button': true, 'is-visible': isSelected && !uiOpened }">
-            <icon          
+            <icon
               color="#5da4ef"
-              name="dotted-line" />              
+              name="dotted-line" />
           </button>
 
           <div
@@ -27,7 +27,7 @@
               @click.stop="deleteBlock">
               <icon name="trash" />
             </button>
-              <button  
+              <button
               v-if="confirmDelete"
               :class="{ 'wrapper-ui-options-button-trash': true }"
               tabindex="-1"
@@ -185,9 +185,9 @@ export default {
       pointer-events: auto;
     }
   }
-    
+
   & > div {
-    padding: 1rem 0;   
+    padding: 1rem 0;
   }
 
   &.has-ui-opened {
@@ -208,7 +208,7 @@ export default {
       width: 3px;
       z-index: 10;
     }
-      
+
     & > div {
       display: flex;
       flex-direction: column-reverse;
@@ -226,9 +226,9 @@ export default {
       margin-left: auto;
       margin-right: auto;
       max-width: 720px;
-    }   
+    }
   }
- 
+
   &-ui {
     opacity: 0;
     position: absolute;
@@ -246,7 +246,7 @@ export default {
         background: none;
         border: none;
         cursor: pointer;
-        opacity: 0;     
+        opacity: 0;
         padding: 16px;
         position: absolute;
         right: 0px;
@@ -254,55 +254,55 @@ export default {
         transform: scale(.5);
         transform-origin: center center;
         transition: transform .25s ease-out;
-          
+
         &:focus {
           outline: none;
         }
-          
-        &::after { 
+
+        &::after {
           content:"";
-          border: 2px solid rgba($block-editor-color-primary, .4);         
+          border: 2px solid rgba($block-editor-color-primary, .4);
           border-radius: 50%;
-          height: 50px;             
-          left: 50%; 
+          height: 50px;
+          left: 50%;
           opacity: 0;
           position: absolute;
           top: 50%;
-          transform: translate(-50%, -50%);  
+          transform: translate(-50%, -50%);
           width: 50px;
-            
+
           @keyframes focusOut {
             0% {
                 opacity: 0;
-            }            
+            }
             25% {
                  opacity: 1;
             }
           }
         }
-          
-        & > svg {             
+
+        & > svg {
           vertical-align: middle;
         }
 
         &.is-visible {
-          opacity: 1;          
-          transform: scale(1.2);  
-            
+          opacity: 1;
+          transform: scale(1.2);
+
           &:hover {
             transform: scale(1.4);
           }
-            
+
           &::after {
             animation: focusOut .75s ease-out backwards;
           }
         }
       }
 
-      &.is-confirming-delete { 
+      &.is-confirming-delete {
         .wrapper-ui-options-button-trash {
           color: $block-editor-color-light;
-            
+
           &::before {
              background: $block-editor-color-danger;
              opacity: 1;
@@ -312,7 +312,7 @@ export default {
       }
     }
 
-    &-options {     
+    &-options {
       height: 44px;
       position: absolute;
       right: 64px;
@@ -350,29 +350,29 @@ export default {
         top: 0;
         width: 38px;
         z-index: 0;
-          
+
         // hover effect
         &::before {
           content: "";
-          background: $block-editor-color-light-dark; 
+          background: $block-editor-color-light-dark;
           border-radius: 3px;
           display: block;
           left: 50%;
           opacity: 0;
-          position: absolute;         
+          position: absolute;
           height: 34px;
           top: 50%;
           transition: all .15s cubic-bezier(.4,0,.2,1);
           transform: scale(.5) translate(-50%, -50%);
-          transform-origin: left top;           
+          transform-origin: left top;
           width: 34px;
-          z-index: -1;        
+          z-index: -1;
         }
 
         &:hover,
-        &.is-active {      
+        &.is-active {
           color: $block-editor-color-text;
-            
+
           &::before {
             opacity: 1;
             transform: scale(1) translate(-50%, -50%);
@@ -385,11 +385,11 @@ export default {
       }
 
       &-button-more-options {
-        left: 4px;        
+        left: 4px;
       }
 
       &-button-trash {
-        right: 7px;        
+        right: 7px;
       }
 
       &-button-move {
@@ -403,27 +403,26 @@ export default {
     }
 
     &-top-menu {
-      align-items: center;     
+      align-items: center;
       border: none;
       display: flex;
-      height: 44px;  
-      justify-content: flex-end;         
+      height: 44px;
+      justify-content: flex-end;
       margin: -9px 64px 9px 0;
-        
-          
+
       &-title {
           color: $block-editor-color-text-medium;
           display: block;
           font-size: 11px;
           font-weight: 700;
           margin: 3px auto 0 0;
-          text-transform: uppercase;          
+          text-transform: uppercase;
       }
 
       &-button {
         align-items: center;
         background: transparent;
-        border: none;        
+        border: none;
         color: $block-editor-color-text-medium-dark;
         cursor: pointer;
         display: flex;
@@ -434,29 +433,29 @@ export default {
         padding: 0;
         position: relative;
         width: 38px;
-       
+
         // hover effect
         &::before {
           content: "";
-          background: $block-editor-color-light-dark; 
+          background: $block-editor-color-light-dark;
           border-radius: 3px;
           display: block;
           left: 50%;
           opacity: 0;
-          position: absolute;         
+          position: absolute;
           height: 34px;
           top: 50%;
           transition: all .15s cubic-bezier(.4,0,.2,1);
           transform: scale(.5) translate(-50%, -50%);
-          transform-origin: left top;           
+          transform-origin: left top;
           width: 34px;
           z-index: -1;
         }
 
         &:hover,
-        &.is-active {    
+        &.is-active {
             color: $block-editor-color-text;
-            
+
           &::before {
             opacity: 1;
             transform: scale(1) translate(-50%, -50%);

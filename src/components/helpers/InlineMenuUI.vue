@@ -189,18 +189,18 @@ export default {
   position: absolute;
   top: 0%;
   transform: scale(1) translateX(-50%) translateY(64px);
-  transform-origin: center left; 
+  transform-origin: center left;
   width: auto;
-  z-index: 10;  
+  z-index: 10;
 
   @keyframes inlineMenuIn {
     0% {
         opacity: 0;
         transform: scale(.9) translateX(-50%) translateY(78px);
-    }  
-   
+    }
+
     100% {
-        opacity: 1;                 
+        opacity: 1;
     }
   }
 
@@ -209,7 +209,7 @@ export default {
     border-left-color: transparent;
     border-right-color: transparent;
     border-top-color: transparent;
-    content: "";   
+    content: "";
     height: 18px;
     left: 50%;
     position: absolute;
@@ -222,7 +222,7 @@ export default {
   &-button {
     align-items: center;
     background: transparent;
-    border: none;   
+    border: none;
     color: $block-editor-color-text-medium-dark;
     cursor: pointer;
     display: flex;
@@ -233,22 +233,21 @@ export default {
     padding: 0;
     position: relative;
     width: 38px;
-   
-      
+
     // hover effect
     &::before {
        content: "";
-       background: $block-editor-color-light-dark; 
+       background: $block-editor-color-light-dark;
        border-radius: 3px;
        display: block;
        left: 50%;
        opacity: 0;
-       position: absolute;         
+       position: absolute;
        height: 34px;
        top: 50%;
        transition: all .15s cubic-bezier(.4,0,.2,1);
        transform: scale(.5) translate(-50%, -50%);
-       transform-origin: left top;           
+       transform-origin: left top;
        width: 34px;
        z-index: -1;
     }
@@ -256,7 +255,7 @@ export default {
     &:hover,
     &.is-active {
       color: $block-editor-color-text;
-        
+
       &::before {
          opacity: 1;
          transform: scale(1) translate(-50%, -50%);
@@ -264,7 +263,7 @@ export default {
     }
   }
 
-  &-buttons { 
+  &-buttons {
     cursor: pointer;
     display: flex;
     height: 43px;

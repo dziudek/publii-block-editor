@@ -190,7 +190,7 @@ export default {
 .publii-block-header {
   outline: none;
   width: 100%;
-    
+
   &:empty {
     &:before {
       content: 'Add heading';

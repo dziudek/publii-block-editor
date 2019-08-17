@@ -15,6 +15,10 @@
       @click="setView('code')"
       class="publii-block-html-preview">
     </div>
+
+    <top-menu
+      ref="top-menu"
+      :config="[]" />
   </div>
 </template>
 
@@ -24,6 +28,7 @@ import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import contentFilter from './content-filter.js';
 import HasPreview from './../../mixins/HasPreview.vue';
+import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Html',
@@ -32,6 +37,9 @@ export default {
     ContentEditableImprovements,
     HasPreview
   ],
+  components: {
+    'top-menu': TopMenuUI
+  },
   data () {
     return {
       config: {
