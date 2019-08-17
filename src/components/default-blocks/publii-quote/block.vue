@@ -20,13 +20,13 @@
           placeholder="Quote author"
           ref="contentAuthor" />
       </div>
-      <blockquote
+      <figure 
         v-if="view === 'preview'"
         class="publii-block-quote"
         ref="block">
-        <p v-html="content.text" />
-        <cite v-html="content.author" />
-      </blockquote>
+          <blockquote v-html="content.text" />        
+          <figcaption v-html="content.author" />       
+      </figure>
     </div>
   </div>
 </template>
@@ -203,30 +203,9 @@ export default {
 
   p {
     margin: 0;
-    outline: none;
-
-    &:empty {
-      &:before {
-        content: "Quote text";
-        opacity: .35;
-      }
-    }
-  }
-
-  cite {
-    display: block;
-    font-size: 12px;
-    margin-top: 5px;
-    outline: none;
-
-    &:empty {
-      &:before {
-        content: "Quote author";
-        opacity: .35;
-      }
-    }
-  }
-
+    outline: none;    
+  }  
+  
   &-form {
     display: none;
     padding: 20px 0;

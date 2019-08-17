@@ -204,8 +204,8 @@
 .editor > .editor-inner > .wrapper > div blockquote::before {
     color: #42a5f5;
     content: "“";
-    font: normal 380%/0.9 Georgia, Times New Roman, Times, Serif;
-    top: 0.53333rem;
+    font: normal 340%/0.9 Georgia, Times New Roman, Times, Serif;
+    top: 0.8rem;
     position: absolute;
     left: 50%;
     -webkit-transform: translate(-50%, 0);
@@ -213,8 +213,9 @@
     transform: translate(-50%, 0);
 }
 
-.editor > .editor-inner > .wrapper > div blockquote > :nth-child(1) {
-    margin-top: 0;
+.editor > .editor-inner > .wrapper > div blockquote + figcaption {
+    font-size: 0.79012em;
+    text-align: center;
 }
 
 .editor > .editor-inner > .wrapper > div ul,
