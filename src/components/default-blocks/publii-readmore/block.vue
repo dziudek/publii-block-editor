@@ -80,9 +80,9 @@ export default {
   width: 100%;
     
   hr {
-    background-color: currentColor; 
-    height: 1px; 
-    border: 0; 
+    background-color: currentColor;
+    height: 1px;
+    border: 0;
   }
 
   &:after {
