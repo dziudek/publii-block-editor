@@ -490,7 +490,8 @@ export default {
       border: 1px solid $block-editor-form-input-border;
       border-radius: $block-editor-form-input-border-radius;
       display: block;
-      font-size: 16px;
+      font-size: inherit;
+      line-height: inherit;
       outline: none;
       padding: 20px;
       width: 100%;
