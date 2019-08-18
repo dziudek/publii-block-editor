@@ -74,10 +74,16 @@ export default {
 <style lang="scss">
 .publii-block-readmore {
   caret-color: transparent;
-  margin: 16px 0;
+  margin: 32px 0;
   outline: none;
   position: relative;
   width: 100%;
+    
+  hr {
+    background-color: currentColor; 
+    height: 1px; 
+    border: 0; 
+  }
 
   &:after {
     background: #FFF;
