@@ -101,23 +101,21 @@ export default {
 
 <style lang="scss">
 .publii-block-embed {
-  background: #eee;
-  border: 1px solid #ccc;
+  background: #f6f9fa;
   color: #ccc;
   display: none;
-  font-size: 16px;
-  line-height: 1.4;
-  padding: 15px 20px;
+  font-size: 0.88889rem;
+  padding: 1.6rem;
   outline: none;
   width: 100%;
 
   textarea {
     background: #fff;
     border: 1px solid #ccc;
-    font-family: monospace;
-    font-size: 16px;
+    font-family: "Bitstream Vera Sans Mono", "Courier 10 Pitch", "Nimbus Mono L", Monaco, "Courier New", Courier, "OCR A Extended", "DejaVu Sans Mono", "Lucida Console", monospace;
+    font-size: 0.88889rem;
     min-height: 150px;
-    padding: 10px 20px;
+    padding: 20px;
     resize: vertical;
     width: 100%;
   }
@@ -127,9 +125,9 @@ export default {
   }
 
   &-preview {
-    background: #f0f0f0;
+    background: #f6f9fa;
     margin: 0;
-    padding: 0 0 56.25% 0;
+    padding: 0 0 56.25%;
     position: relative;
 
     iframe {

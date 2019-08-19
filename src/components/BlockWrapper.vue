@@ -178,7 +178,13 @@ export default {
   z-index: 1;
 
   &[data-block-type="publii-embed"] {
-    margin: 15px auto;
+    margin: 0 auto;
+  }
+    
+  &[data-block-type="publii-header"] {
+    & > div {
+      line-height: 1.3 !important;
+    }
   }
 
   &.is-selected {
