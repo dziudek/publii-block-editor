@@ -24,7 +24,7 @@
 
 .editor > .editor-inner > .wrapper > div a:not(.btn) {
     border-bottom: 3px solid #ffc400;
-    color: #2a2e30; 
+    color: #2a2e30;
     cursor: pointer;
     text-decoration: none !important;
     text-decoration-skip-ink: auto;
@@ -44,7 +44,7 @@
     outline: 2px dotted #42a5f5;
 }
 
-.editor > .editor-inner > .wrapper > div p, 
+.editor > .editor-inner > .wrapper > div p,
 .editor > .editor-inner > .wrapper > div ul,
 .editor > .editor-inner > .wrapper > div ol,
 .editor > .editor-inner > .wrapper > div dl,
@@ -77,98 +77,98 @@
 }
 
 .editor > .editor-inner > .wrapper > div h1 {
-    font-size: 1.80203em;
+    font-size: 1.80203rem;
 }
 
 @media screen and (min-width: 20rem) {
     .editor > .editor-inner > .wrapper > div h1 {
-        font-size: calc(1.80203em + 0.22525 * ((100vw - 20rem) / 80));
+        font-size: calc(1.80203rem + 0.22525 * ((100vw - 20rem) / 80));
     }
 }
 
 @media screen and (min-width: 100rem) {
     .editor > .editor-inner > .wrapper > div h1 {
-        font-size: 2.02729em;
+        font-size: 2.02729rem;
     }
 }
 
 .editor > .editor-inner > .wrapper > div h2 {
-    font-size: 1.42383em;
+    font-size: 1.42383rem;
 }
 
 @media screen and (min-width: 20rem) {
     .editor > .editor-inner > .wrapper > div h2 {
-        font-size: calc(1.42383em + 0.17798 * ((100vw - 20rem) / 80));
+        font-size: calc(1.42383rem + 0.17798 * ((100vw - 20rem) / 80));
     }
 }
 
 @media screen and (min-width: 100rem) {
     .editor > .editor-inner > .wrapper > div h2 {
-        font-size: 1.60181em;
+        font-size: 1.60181rem;
     }
 }
 
 .editor > .editor-inner > .wrapper > div h3 {
-    font-size: 1.26562em;
+    font-size: 1.26562rem;
 }
 
 @media screen and (min-width: 20rem) {
     .editor > .editor-inner > .wrapper > div h3 {
-        font-size: calc(1.26562em + 0.1582 * ((100vw - 20rem) / 80));
+        font-size: calc(1.26562rem + 0.1582 * ((100vw - 20rem) / 80));
     }
 }
 
 @media screen and (min-width: 100rem) {
     .editor > .editor-inner > .wrapper > div h3 {
-        font-size: 1.42383em;
+        font-size: 1.42383rem;
     }
 }
 
 .editor > .editor-inner > .wrapper > div h4 {
-    font-size: 1.125em;
+    font-size: 1.125rem;
 }
 
 @media screen and (min-width: 20rem) {
     .editor > .editor-inner > .wrapper > div h4 {
-        font-size: calc(1.125em + 0.14062 * ((100vw - 20rem) / 80));
+        font-size: calc(1.125rem + 0.14062 * ((100vw - 20rem) / 80));
     }
 }
 
 @media screen and (min-width: 100rem) {
     .editor > .editor-inner > .wrapper > div h4 {
-        font-size: 1.26562em;
+        font-size: 1.26562rem;
     }
 }
 
 .editor > .editor-inner > .wrapper > div h5 {
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 @media screen and (min-width: 20rem) {
     .editor > .editor-inner > .wrapper > div h5 {
-        font-size: calc(1em + 0.125 * ((100vw - 20rem) / 80));
+        font-size: calc(1rem + 0.125 * ((100vw - 20rem) / 80));
     }
 }
 
 @media screen and (min-width: 100rem) {
     .editor > .editor-inner > .wrapper > div h5 {
-        font-size: 1.125em;
+        font-size: 1.125rem;
     }
 }
 
 .editor > .editor-inner > .wrapper > div h6 {
-    font-size: 0.88889em;
+    font-size: 0.88889rem;
 }
 
 @media screen and (min-width: 20rem) {
     .editor > .editor-inner > .wrapper > div h6 {
-        font-size: calc(0.88889em + 0.11111 * ((100vw - 20rem) / 80));
+        font-size: calc(0.88889rem + 0.11111 * ((100vw - 20rem) / 80));
     }
 }
 
 @media screen and (min-width: 100rem) {
     .editor > .editor-inner > .wrapper > div h6 {
-        font-size: 1em;
+        font-size: 1rem;
     }
 }
 
@@ -185,18 +185,18 @@
 }
 
 .editor > .editor-inner > .wrapper > div blockquote {
-    font-size: 1.125em;
+    font-size: 1.125rem;
 }
 
 @media screen and (min-width: 20rem) {
     .editor > .editor-inner > .wrapper > div blockquote {
-        font-size: calc(1.125em + 0.14062 * ((100vw - 20rem) / 80));
+        font-size: calc(1.125rem + 0.14062 * ((100vw - 20rem) / 80));
     }
 }
 
 @media screen and (min-width: 100rem) {
     .editor > .editor-inner > .wrapper > div blockquote {
-        font-size: 1.26562em;
+        font-size: 1.26562rem;
     }
 }
 
@@ -212,7 +212,7 @@
 
 .editor > .editor-inner > .wrapper > div blockquote + figcaption {
     color: #6a7081;
-    font-size: 0.79012em;
+    font-size: 0.79012rem;
     text-align: center;
 }
 
@@ -234,4 +234,22 @@
 .editor > .editor-inner > .wrapper > div ol ol {
     margin-bottom: 0.53333rem;
     margin-top: 0.53333rem;
+}
+
+.editor > .editor-inner > .wrapper > div pre {
+    background-color: #f8f9fa;
+    font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    font-size: 0.88889rem;
+    padding: 1.6rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.editor > .editor-inner > .wrapper > div code {
+    background-color: #f8f9fa;
+    border-radius: 2px;
+    color: #2a2e30;
+    font-size: inherit;
+    font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    padding: 0.26667rem 0.53333rem;
 }

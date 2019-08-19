@@ -87,12 +87,7 @@ export default {
 </script>
 
 <style lang="scss">
-.publii-block-code {
-  background: #f5f5f5;
-  border: 1px solid #eee;
-  font-size: 16px;
-  line-height: 1.4;
-  padding: 15px 20px;
+.publii-block-code { 
   outline: none;
   width: 100%;
 
