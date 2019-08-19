@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style lang="scss">
-.publii-block-code { 
+.publii-block-code {
   outline: none;
   width: 100%;
 

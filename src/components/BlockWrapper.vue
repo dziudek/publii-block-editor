@@ -106,6 +106,10 @@ export default {
     togglePopup () {
       this.uiOpened = !this.uiOpened;
 
+      if (this.uiOpened) {
+        this.$bus.$emit('block-editor-clear-text-selection', this.id);
+      }
+
       if (!this.uiOpened) {
         this.confirmDelete = false;
       }

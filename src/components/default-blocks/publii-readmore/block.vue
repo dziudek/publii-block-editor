@@ -54,7 +54,7 @@ export default {
       }
 
       if (e.code !== 'Tab') {
-        e.returnValue = false; 
+        e.returnValue = false;
       }
     },
     save () {
@@ -78,7 +78,7 @@ export default {
   outline: none;
   position: relative;
   width: 100%;
-  
+
   hr {
     background-color: currentColor;
     height: 1px;

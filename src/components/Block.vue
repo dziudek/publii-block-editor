@@ -23,6 +23,7 @@ export default {
     this.config = Object.assign(this.config, this.inputConfig);
     this.$on('block-save', this.save);
     this.$bus.$on('block-editor-trigger-block-save', this.saveIsNeeded);
+    this.$bus.$on('block-editor-clear-text-selection', this.clearTextSelection);
   },
   methods: {
     focus (cursorPosition = 'end') {
@@ -233,11 +234,18 @@ export default {
       currentBlockIndex--;
 
       return this.editor.content[currentBlockIndex].id;
+    },
+    clearTextSelection (blockID) {
+      if (this.id === blockID) {
+        window.getSelection().empty();
+        this.textIsHighlighted = false;
+      }
     }
   },
   beforeDestroy () {
     this.$off('block-save', this.save);
     this.$bus.$off('block-editor-trigger-block-save', this.saveIsNeeded);
+    this.$bus.$off('block-editor-clear-text-selection', this.clearTextSelection);
   }
 }
 </script>
