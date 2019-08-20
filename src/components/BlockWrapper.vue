@@ -180,7 +180,7 @@ export default {
   &[data-block-type="publii-embed"] {
     margin: 0 auto;
   }
-    
+
   &[data-block-type="publii-header"] {
     & > div {
       line-height: 1.3 !important;

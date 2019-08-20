@@ -304,10 +304,6 @@ export default {
     },
     focus () {
       this.view = 'code';
-
-      setTimeout(() => {
-        this.setCursorAtEndOfElement('contentCaption', false);
-      }, 0);
     },
     handleCaptionKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
