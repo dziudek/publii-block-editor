@@ -37,9 +37,9 @@
         <div class="publii-block-image-uploader-inner">
           <icon
             v-if="!imageUploadInProgress"
-            name="image"
-            height="50"
-            width="100" />
+            name="blank-image"
+            height="48"
+            width="68" />
           <span v-if="!imageUploadInProgress">
             Drop to upload your photo or
           </span>
@@ -440,17 +440,17 @@ export default {
     align-items: center;
     background: $block-editor-color-danger;
     border: none;
-    border-radius: $block-editor-form-input-border-radius;
+    border-radius: 3px;
     color: $block-editor-color-light;
     cursor: pointer;
     display: flex;
-    height: 24px;
+    height: 34px;
     justify-content: center;
     position: absolute;
     right: 20px;
     top: 20px;
     transition: all .25s ease-out;
-    width: 24px;
+    width: 34px;
     z-index: 2;
 
     &:active,
@@ -557,17 +557,6 @@ export default {
           background: $block-editor-color-text-medium-dark;
         }
       }
-    }
-  }
-
-  &.is-wide {
-    & > img {
-      margin: 0 -84px;
-      max-width: calc(100% + 168px);
-    }
-
-    .publii-block-image-delete {
-      right: -64px;
     }
   }
 }

@@ -229,8 +229,12 @@ export default {
     z-index: 10;
   }
 
+  &.contains-wide-image {
+    width: calc(784px + 168px)!important;
+  }
+
   &.contains-full-image {
-    width: calc(100% - 80px)!important;
+    width: calc(100% - 84px)!important;
 
     .publii-block-image-form input {
       margin-left: auto;
