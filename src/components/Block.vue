@@ -36,6 +36,10 @@ export default {
         return;
       }
 
+      if (!this.$refs[focusElement].focus) {
+        return;
+      }
+
       this.$refs[focusElement].focus();
 
       if (cursorPosition === 'none') {
@@ -146,8 +150,10 @@ export default {
         let val = this.$refs[id].value;
 
         setTimeout(() => {
-          this.$refs[id].focus();
-          this.$refs[id].setSelectionRange(val.length, val.length);
+          if (this.$refs[id].focus) {
+            this.$refs[id].focus();
+            this.$refs[id].setSelectionRange(val.length, val.length);
+          }
         }, 0);
       }
     },
@@ -170,7 +176,10 @@ export default {
 
         if (previousBlockID) {
           this.editor.$refs['block-wrapper-' + previousBlockID][0].blockClick();
-          this.editor.$refs['block-' + previousBlockID][0].focus();
+
+          if (this.editor.$refs['block-' + previousBlockID][0].focus) {
+            this.editor.$refs['block-' + previousBlockID][0].focus();
+          }
         }
       }
 

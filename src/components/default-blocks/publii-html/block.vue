@@ -1,14 +1,16 @@
 <template>
   <div>
-    <pre
+    <prism-editor
       :class="{ 'publii-block-html': true, 'is-visible': view === 'code' }"
       ref="block"
       @paste="pastePlainText"
-      @keydown="handleKeyboard"
-      @keyup="handleCaret"
-      @blur="save"
-      contenteditable="true"
-      v-html="content" />
+      @keyup="handleKeyboard"
+      :code="content"
+      :emitEvents="true"
+      v-model="content"
+      language="html">
+    </prism-editor>
+
     <div
       v-if="view === 'preview'"
       v-html="modifiedContent"
@@ -53,7 +55,7 @@ export default {
   },
   computed: {
     modifiedContent () {
-      return contentFilter(this.content);
+      return contentFilter(this.$refs['block'].code);
     }
   },
   beforeCreate () {
@@ -64,8 +66,12 @@ export default {
     this.view = this.content === '' ? 'code' : 'preview';
   },
   methods: {
+    focus () {
+      this.$refs['block'].$el.querySelector('pre').focus();
+    },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === true) {
+        e.preventDefault();
         this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
         e.returnValue = false;
       }
@@ -77,13 +83,13 @@ export default {
         e.returnValue = false;
       }
 
-      if (e.code === 'Backspace' && this.$refs['block'].innerHTML === '') {
+      if (e.code === 'Backspace' && this.$refs['block'].$el.querySelector('pre').innerHTML === '') {
         this.$bus.$emit('block-editor-delete-block', this.id);
         e.returnValue = false;
       }
     },
     save () {
-      this.content = this.$refs['block'].innerHTML;
+      this.content = this.$refs['block'].code;
 
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,
@@ -96,27 +102,45 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../../assets/variables.scss';
+
 .publii-block-html {
-  background: #202020;
-  border: 1px solid #111;
   border-radius: 3px;
   color: #ccc;
   display: none;
   font-size: 16px;
   line-height: 1.4;
-  padding: 15px 20px;
+  padding: 0;
   outline: none;
   width: 100%;
 
-  &:empty {
-    &:before {
-      content: 'Enter HTML code';
-      opacity: .35;
-    }
+  & > pre,
+  & > .prism-editor__line-numbers {
+    display: none;
   }
 
   &.is-visible {
-    display: block;
+    & > pre,
+    & > .prism-editor__line-numbers {
+      display: block;
+    }
+
+    & > pre {
+      background: transparent;
+      border: 1px solid $block-editor-form-input-border;
+
+      &:empty {
+        &:before {
+          content: 'Enter HTML code';
+          opacity: .35;
+        }
+      }
+    }
+
+    code {
+      font-size: 15px!important;
+      padding: 0!important;
+    }
   }
 
   &-preview {
