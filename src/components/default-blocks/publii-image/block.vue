@@ -172,6 +172,7 @@ export default {
     this.content.caption = this.inputContent.caption || '';
     this.view = (this.content.image === '') ? 'code' : 'preview';
     this.initFakeFilePicker();
+    this.setParentCssClasses(this.config.imageAlign);
   },
   methods: {
     dragOver (e) {
@@ -295,15 +296,27 @@ export default {
     },
     alignImage (newValue) {
       this.config.imageAlign = newValue;
-
-      if (newValue === 'full') {
+      this.setParentCssClasses(newValue);
+    },
+    setParentCssClasses (imageMode) {
+      if (imageMode === 'full') {
         this.$parent.addCustomCssClass('contains-full-image');
       } else {
         this.$parent.removeCustomCssClass('contains-full-image');
       }
+
+      if (imageMode === 'wide') {
+        this.$parent.addCustomCssClass('contains-wide-image');
+      } else {
+        this.$parent.removeCustomCssClass('contains-wide-image');
+      }
     },
     focus () {
       this.view = 'code';
+
+      setTimeout(() => {
+        this.setCursorAtEndOfElement('contentCaption', false);
+      }, 0);
     },
     handleCaptionKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
