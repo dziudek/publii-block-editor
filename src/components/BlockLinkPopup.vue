@@ -5,24 +5,24 @@
     <div
       @click.prevent.stop
       class="block-link-popup">
-      <div class="wrapper-ui-inline-menu-link-type">
+      <div class="block-link-popup-link-type">
         <div
-          :class="{ 'wrapper-ui-inline-menu-link-type-item': true, 'is-active': linkType === 'post' }"
+          :class="{ 'block-link-popup-link-type-item': true, 'is-active': linkType === 'post' }"
           @click="setLinkType('post')">
           Post
         </div>
         <div
-          :class="{ 'wrapper-ui-inline-menu-link-type-item': true, 'is-active': linkType === 'tag' }"
+          :class="{ 'block-link-popup-link-type-item': true, 'is-active': linkType === 'tag' }"
           @click="setLinkType('tag')">
           Tag
         </div>
         <div
-          :class="{ 'wrapper-ui-inline-menu-link-type-item': true, 'is-active': linkType === 'author' }"
+          :class="{ 'block-link-popup-link-type-item': true, 'is-active': linkType === 'author' }"
           @click="setLinkType('author')">
           Author
         </div>
         <div
-          :class="{ 'wrapper-ui-inline-menu-link-type-item': true, 'is-active': linkType === 'external' }"
+          :class="{ 'block-link-popup-link-type-item': true, 'is-active': linkType === 'external' }"
           @click="setLinkType('external')">
           External
         </div>
@@ -60,18 +60,18 @@
       <input
         v-if="linkType === 'external'"
         type="text"
-        class="wrapper-ui-inline-menu-link-external-input"
+        class="block-link-popup-link-external-input"
         v-model="link.url"
         placeholder="https://example.com"
         @keyup.enter="save()" />
-      <div class="wrapper-ui-inline-menu-link-switcher">
+      <div class="block-link-popup-link-switcher">
         <switcher
           :is-mini="true"
           v-model="link.targetBlank" />
         Open in new tab
       </div>
 
-      <div class="wrapper-ui-inline-menu-link-switcher">
+      <div class="block-link-popup-link-switcher">
         <switcher
           :is-mini="true"
           v-model="link.nofollow" />
@@ -216,6 +216,67 @@ export default {
 
       .block-link-popup {
         transform: translateY(0);
+      }
+    }
+  }
+
+  &-link {
+    width: 100%;
+
+    &-type {
+      border-radius: $block-editor-form-input-border-radius;
+      display: flex;
+      margin: 3px 0 12px 0;
+
+      &-item {
+        border: 1px solid $block-editor-form-input-border;
+        border-right: none;
+        cursor: pointer;
+        font-size: 12px;
+        padding: 5px;
+        text-align: center;
+        width: 25%;
+
+        &:first-child {
+          border-radius: 20px 0 0 20px;
+        }
+
+        &:last-child {
+          border-radius: 0 20px 20px 0;
+          border-right: 1px solid $block-editor-form-input-border;
+        }
+
+        &.is-active {
+          background: $block-editor-color-primary;
+          border-color: $block-editor-color-primary;
+          color: $block-editor-color-light;
+        }
+      }
+    }
+
+    &-external-input {
+      background: $block-editor-color-light-dark;
+      border: none;
+      border-radius: $block-editor-form-input-border-radius;
+      padding: 8px;
+      margin-bottom: 12px;
+      outline: none;
+      width: 100%;
+    }
+
+    &-switcher {
+      align-items: center;
+      color: $block-editor-color-text-medium;
+      display: flex;
+      font-size: 12px;
+      margin-bottom: 2px;
+
+      .switcher {
+        top: 0;
+      }
+
+      &:last-of-type {
+        margin-bottom: 12px;
       }
     }
   }

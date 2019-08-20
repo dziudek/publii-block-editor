@@ -1,10 +1,12 @@
 <script>
 import EditorIcon from './../elements/EditorIcon.vue';
 import LinkHelpers from './../mixins/LinkHelpers.vue';
+import LinkConfig from './../mixins/LinkConfig.vue';
 
 export default {
   name: 'InlineMenu',
   mixins: [
+    LinkConfig,
     LinkHelpers
   ],
   components: {
@@ -20,16 +22,6 @@ export default {
         code: false,
         mark: false,
         link: false
-      },
-      linkUI: {
-        visible: false,
-        url: '',
-        linkSelectedPost: '',
-        linkSelectedTag: '',
-        linkSelectedAuthor: '',
-        linkType: 'post',
-        linkTargetBlank: false,
-        linkNofollow: false
       }
     };
   },
@@ -51,14 +43,6 @@ export default {
         }
       }, 0);
     },
-    toggleLinkUI () {
-      if (!this.linkUI.visible) {
-        this.$highlighter.highlightSelection('is-highlighted');
-        this.linkUI.visible = true;
-      } else {
-        this.linkUI.visible = false;
-      }
-    },
     showInlineMenu () {
       let sel = document.getSelection();
       let savedSel = this.$rangy.saveSelection();
@@ -71,8 +55,6 @@ export default {
       let inlineMenuLeft = (((oRect.left - wrapperRect.left) + (oRect.width / 2)) + 20) + 'px';
       let inlineMenuTop = (oRect.top - wrapperRect.top - 20) + 'px';
       this.$refs['inline-menu'].setPosition(inlineMenuLeft, inlineMenuTop);
-      this.linkUI.visible = false;
-      this.linkUI.url = '';
       this.$highlighter.removeAllHighlights();
     },
     analyzeSelectedText (selection, rangyData) {
@@ -254,9 +236,6 @@ export default {
       ].join('');
 
       this.$refs['block'].innerHTML = modifiedText;
-    },
-    setLinkType (type) {
-      this.linkUI.linkType = type;
     }
   }
 }

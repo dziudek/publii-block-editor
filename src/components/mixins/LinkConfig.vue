@@ -14,7 +14,17 @@ export default {
       this.save();
     },
     showLinkPopup () {
-      this.$bus.$emit('block-editor-show-link-popup', this.id, this.config.link);
+      if (this.config.link) {
+        this.$bus.$emit('block-editor-show-link-popup', this.id, this.config.link);
+      } else {
+        let linkConfig = {
+          url: '',
+          noFollow: false,
+          targetBlank: false
+        };
+
+        this.$bus.$emit('block-editor-show-link-popup', this.id, linkConfig);
+      }
     },
     removeLink () {
       this.config.link = {
