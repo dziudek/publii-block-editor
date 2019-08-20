@@ -88,11 +88,6 @@ export default {
   },
   methods: {
     handleTextKeyboard (e) {
-      if (e.code === 'Enter' && e.shiftKey === false) {
-        this.$refs['contentAuthor'].focus();
-        e.returnValue = false;
-      }
-
       if (e.code === 'Backspace' && this.$refs['contentText'].value === '' && this.$refs['contentAuthor'].value === '') {
         this.$bus.$emit('block-editor-delete-block', this.id);
         e.returnValue = false;
