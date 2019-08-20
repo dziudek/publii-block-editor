@@ -7,6 +7,7 @@ export default class ShortcutManager {
 
   initDefaultShortcuts () {
     this.shortcuts['/separator'] = 'publii-separator';
+    this.shortcuts['/hr'] = 'publii-separator';
     this.shortcuts['/header'] = 'publii-header';
     this.shortcuts['/h1'] = 'publii-header-1';
     this.shortcuts['/h2'] = 'publii-header-2';
@@ -16,12 +17,15 @@ export default class ShortcutManager {
     this.shortcuts['/h6'] = 'publii-header-6';
     this.shortcuts['/list'] = 'publii-list';
     this.shortcuts['/quote'] = 'publii-quote';
+    this.shortcuts['/blockquote'] = 'publii-quote';
     this.shortcuts['/code'] = 'publii-code';
     this.shortcuts['/readmore'] = 'publii-readmore';
+    this.shortcuts['/more'] = 'publii-readmore';
     this.shortcuts['/html'] = 'publii-html';
     this.shortcuts['/toc'] = 'publii-toc';
     this.shortcuts['/embed'] = 'publii-embed';
     this.shortcuts['/image'] = 'publii-image';
+    this.shortcuts['/img'] = 'publii-image';
   }
 
   initMarkdownDefaultShortcuts () {
