@@ -246,7 +246,7 @@
     width: 100%;
 }
 
-.editor > .editor-inner > .wrapper > div code {
+.editor > .editor-inner > .wrapper > div code:not(.language-markup) {
     background-color: #f6f9fa;
     border-radius: 2px;
     color: #2a2e30;
