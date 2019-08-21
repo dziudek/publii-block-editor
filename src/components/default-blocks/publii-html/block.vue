@@ -115,7 +115,7 @@ export default {
   width: 100%;
 
   & > pre,
-  & > .prism-editor__line-numbers {
+  & > .prism-editor__line-numbers {   
     display: none;
   }
 
@@ -126,7 +126,7 @@ export default {
     }
 
     & > pre {
-      background: transparent;
+      background: #272822 !important;
       border: 1px solid $block-editor-form-input-border;
 
       &:empty {
@@ -138,6 +138,7 @@ export default {
     }
 
     code {
+         background: transparent !important;
       font-size: 15px!important;
       padding: 0!important;
     }
