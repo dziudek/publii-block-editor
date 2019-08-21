@@ -138,7 +138,7 @@ export default {
     }
 
     code {
-         background: transparent !important;
+      background: transparent !important;
       font-size: 15px!important;
       padding: 0!important;
     }

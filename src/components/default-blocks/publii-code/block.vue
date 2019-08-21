@@ -1,14 +1,15 @@
 <template>
   <div>
-    <pre
-      class="publii-block-code"
+    <prism-editor
+      :class="{ 'publii-block-code': true }"
       ref="block"
       @paste="pastePlainText"
-      @keydown="handleKeyboard"
-      @keyup="handleCaret"
-      @blur="save"
-      contenteditable="true"
-      v-html="content" />
+      @keyup="handleKeyboard"
+      :code="content"
+      :emitEvents="true"
+      v-model="content"
+      language="js">
+    </prism-editor>
 
     <top-menu
       ref="top-menu"
@@ -49,15 +50,12 @@ export default {
     this.content = this.inputContent;
   },
   methods: {
+    focus () {
+      this.$refs['block'].$el.querySelector('pre').focus();
+    },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === true) {
-        let newElementName = this.$parent.$parent.extensions.shortcutManager.checkContentForShortcuts(this.$refs['block'].innerHTML);
-        this.$bus.$emit('block-editor-add-block', newElementName, this.id);
-
-        if (newElementName !== 'publii-paragraph') {
-          this.$bus.$emit('block-editor-delete-block', this.id);
-        }
-
+        this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
         e.returnValue = false;
       }
 
@@ -68,13 +66,13 @@ export default {
         e.returnValue = false;
       }
 
-      if (e.code === 'Backspace' && this.$refs['block'].innerHTML === '') {
+      if (e.code === 'Backspace' && this.$refs['block'].code === '') {
         this.$bus.$emit('block-editor-delete-block', this.id);
         e.returnValue = false;
       }
     },
     save () {
-      this.content = this.$refs['block'].innerHTML;
+      this.content = this.$refs['block'].code;
 
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,
@@ -87,6 +85,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../../assets/variables.scss';
+
 .publii-block-code {
   outline: none;
   width: 100%;
@@ -95,6 +95,29 @@ export default {
     &:before {
       content: 'Enter code';
       opacity: .35;
+    }
+  }
+
+  & > .prism-editor__line-numbers {
+    display: none;
+  }
+
+  & > pre {
+    background: #1e2128 !important;
+    border: 1px solid $block-editor-form-input-border;
+    display: block;
+
+    &:empty {
+      &:before {
+        content: 'Enter HTML code';
+        opacity: .35;
+      }
+    }
+
+    code {
+      background: transparent !important;
+      font-size: 15px!important;
+      padding: 0!important;
     }
   }
 }
