@@ -25,19 +25,6 @@
         <icon name="add" />
       </button>
 
-<!--
-      <div
-        v-if="!newBlockUIListVisible"
-        class="publii-block-paragraph-block-selector-tooltip">
-        <span class="publii-block-paragraph-block-selector-tooltip-label1">
-          Add
-        </span>
-        <span class="publii-block-paragraph-block-selector-tooltip-label2">
-          <icon name="tab" /> Tab
-        </span>
-      </div>
--->
-
       <div
         v-if="newBlockUIListVisible"
         :class="{ 'publii-block-paragraph-block-selector-list': true, 'is-visible': true }">

@@ -115,7 +115,7 @@ export default {
   width: 100%;
 
   & > pre,
-  & > .prism-editor__line-numbers {   
+  & > .prism-editor__line-numbers {
     display: none;
   }
 
