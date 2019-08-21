@@ -126,7 +126,7 @@ export default {
     }
 
     & > pre {
-      background: #272822 !important;
+      background: #1e2128 !important;
       border: 1px solid $block-editor-form-input-border;
 
       &:empty {
