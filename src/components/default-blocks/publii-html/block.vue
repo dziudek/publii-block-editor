@@ -8,6 +8,7 @@
       :code="content"
       :emitEvents="true"
       v-model="content"
+      :lineNumbers="true"
       language="html">
     </prism-editor>
 
@@ -127,7 +128,6 @@ export default {
 
     & > pre {
       background: #1e2128 !important;
-      border: 1px solid $block-editor-form-input-border;
 
       &:empty {
         &:before {

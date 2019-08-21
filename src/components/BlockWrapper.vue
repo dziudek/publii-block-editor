@@ -222,6 +222,10 @@ export default {
     & > div {
       display: flex;
       flex-direction: column-reverse;
+
+      .publii-block-code-lang {
+        top: 68px!important;
+      }
     }
   }
 

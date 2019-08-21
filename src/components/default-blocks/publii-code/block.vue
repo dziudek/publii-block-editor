@@ -8,8 +8,15 @@
       :code="content"
       :emitEvents="true"
       v-model="content"
-      language="js">
+      :lineNumbers="true"
+      :language="config.language">
     </prism-editor>
+
+    <div class="publii-block-code-lang">
+      <vue-select
+        :options="availableLanguages"
+        v-model="config.language" />
+    </div>
 
     <top-menu
       ref="top-menu"
@@ -22,6 +29,7 @@ import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
+import vSelect from 'vue-multiselect/dist/vue-multiselect.min.js';
 
 export default {
   name: 'Code',
@@ -30,11 +38,13 @@ export default {
     ContentEditableImprovements
   ],
   components: {
-    'top-menu': TopMenuUI
+    'top-menu': TopMenuUI,
+    'vue-select': vSelect
   },
   data () {
     return {
       config: {
+        language: 'html',
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
           id: this.getAdvancedConfigDefaultValue('id')
@@ -42,6 +52,68 @@ export default {
       },
       content: ''
     };
+  },
+  computed: {
+    availableLanguages () {
+      return [
+        'apacheconf',
+        'aspnet',
+        'bash',
+        'basic',
+        'batch',
+        'c',
+        'cpp',
+        'csharp',
+        'css',
+        'dart',
+        'docker',
+        'elm',
+        'git',
+        'glsl',
+        'go',
+        'graphql',
+        'haml',
+        'handlebars',
+        'haskell',
+        'html',
+        'http',
+        'ini',
+        'java',
+        'javascript',
+        'json',
+        'jsonp',
+        'jsx',
+        'kotlin',
+        'latex',
+        'less',
+        'lisp',
+        'lua',
+        'makefile',
+        'markdown',
+        'matlab',
+        'nasm',
+        'nginx',
+        'objectivec',
+        'pascal',
+        'perl',
+        'php',
+        'pug',
+        'python',
+        'r',
+        'regex',
+        'ruby',
+        'sass',
+        'scss',
+        'scala',
+        'sql',
+        'swift',
+        'twig',
+        'typescript',
+        'vbnet',
+        'visual-basic',
+        'yaml'
+      ]
+    }
   },
   beforeCreate () {
     this.configForm = ConfigForm;
@@ -99,12 +171,11 @@ export default {
   }
 
   & > .prism-editor__line-numbers {
-    display: none;
+    display: block;
   }
 
   & > pre {
     background: #1e2128 !important;
-    border: 1px solid $block-editor-form-input-border;
     display: block;
 
     &:empty {
@@ -118,6 +189,24 @@ export default {
       background: transparent !important;
       font-size: 15px!important;
       padding: 0!important;
+    }
+  }
+
+  &-lang {
+    position: absolute;
+    right: 40px;
+    top: 24px;
+
+    .multiselect__content {
+      margin: 0!important;
+    }
+
+    .multiselect__element {
+      padding: 0!important;
+    }
+
+    .multiselect__option:after {
+      display: none;
     }
   }
 }
