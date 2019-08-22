@@ -4,7 +4,7 @@ const availableConversions = [
     'name': 'Paragraph',
     'type': 'publii-paragraph',
     'convert': function (config, content, editorInstance) {
-      let newContent = editorInstance.extensions.conversionHelpers.stripTags(content);
+      let newContent = editorInstance.extensions.conversionHelpers.stripTags(content).replace(/\n/gmi, '<br>');
       let newConfig = {
         textAlign: 'left',
         advanced: {

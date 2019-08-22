@@ -52,7 +52,7 @@ const availableConversions = [
     'name': 'List',
     'type': 'publii-list',
     'convert': function (config, content, editorInstance) {
-      let newContent = '<li>' + content.replace(/<br \/>/gmi, '<br>').replace(/<br\/>/gmi, '<br>').split('<br>').join('</li><li>') + '</li>';
+      let newContent = '<li>' + content.split('<br>').join('</li><li>') + '</li>';
       let newConfig = {
         listType: 'ul',
         advanced: {
@@ -72,7 +72,8 @@ const availableConversions = [
     'name': 'Code',
     'type': 'publii-code',
     'convert': function (config, content, editorInstance) {
-      let newContent = editorInstance.extensions.conversionHelpers.stripTags(content);
+      // eslint-disable-next-line
+      let newContent = editorInstance.extensions.conversionHelpers.stripTags(content.replace(/<br>/gmi, "\n"));
       let newConfig = {
         language: 'html',
         advanced: {
@@ -92,7 +93,10 @@ const availableConversions = [
     'name': 'HTML',
     'type': 'publii-html',
     'convert': function (config, content, editorInstance) {
-      let newContent = editorInstance.extensions.conversionHelpers.stripTags(content);
+      console.log('C:', content);
+      // eslint-disable-next-line
+      let newContent = editorInstance.extensions.conversionHelpers.stripTags(content.replace(/<br>/gmi, "\n"));
+      console.log('NC:', newContent);
       let newConfig = {
         advanced: {
           cssClasses: config.advanced.cssClasses,
