@@ -31,11 +31,13 @@
 
     <top-menu
       ref="top-menu"
+      :conversions="conversions"
       :config="[]" />
   </div>
 </template>
 
 <script>
+import AvailableConversions from './conversions.js';
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
@@ -68,7 +70,8 @@ export default {
       content: {
         text: '',
         author: ''
-      }
+      },
+      conversions: AvailableConversions
     };
   },
   watch: {

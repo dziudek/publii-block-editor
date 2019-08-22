@@ -15,11 +15,13 @@
 
     <top-menu
       ref="top-menu"
+      :conversions="conversions"
       :config="topMenuConfig" />
   </div>
 </template>
 
 <script>
+import AvailableConversions from './conversions.js';
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
@@ -65,6 +67,7 @@ export default {
         }
       },
       content: '',
+      conversions: AvailableConversions,
       topMenuConfig: [
         {
           activeState: function () { return this.config.headingLevel === 1; },

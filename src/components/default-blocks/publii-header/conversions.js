@@ -1,0 +1,25 @@
+const availableConversions = [
+  {
+    'icon': 'toc',
+    'name': 'Paragraph',
+    'type': 'publii-paragraph',
+    'convert': function (config, content, editorInstance) {
+      let newContent = editorInstance.extensions.conversionHelpers.stripTags(content);
+      let newConfig = {
+        textAlign: config.textAlign,
+        advanced: {
+          style: '',
+          cssClasses: config.advanced.cssClasses,
+          id: config.advanced.id
+        }
+      };
+
+      return {
+        content: newContent,
+        config: newConfig
+      };
+    }
+  }
+];
+
+module.exports = availableConversions;
