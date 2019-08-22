@@ -56,6 +56,7 @@ import PubliiToc from './default-blocks/publii-toc/block.vue';
 import PubliiQuote from './default-blocks/publii-quote/block.vue';
 // extensions
 import ShortcutManager from './extensions/ShortcutManager.js';
+import ConversionHelpers from './extensions/ConversionHelpers.js';
 
 export default {
   name: 'BlockEditor',
@@ -94,7 +95,8 @@ export default {
         lastScroll: 0
       },
       extensions: {
-        shortcutManager: new ShortcutManager()
+        shortcutManager: new ShortcutManager(),
+        conversionHelpers: new ConversionHelpers()
       },
       content: [
         {
@@ -135,6 +137,7 @@ export default {
     this.$bus.$on('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
     this.$bus.$on('block-editor-ui-opened-for-block', this.uiOpenedForBlock);
     this.$bus.$on('block-editor-ui-closed-for-block', this.uiClosedForBlock);
+    this.$bus.$on('block-editor-convert-block', this.convertBlock);
     this.$bus.$on('publii-block-editor-save', this.saveAllBlocks);
     this.$bus.$on('publii-block-editor-load', this.loadAllBlocks);
     this.initGlobals();
@@ -328,6 +331,16 @@ export default {
     },
     setPostID (postID) {
       this.config.postID = postID;
+    },
+    convertBlock (id, blockType, data) {
+      let blockToConvertIndex = this.content.findIndex(block => block.id === id);
+
+      Vue.set(this.content, blockToConvertIndex, {
+        id: id,
+        type: blockType,
+        content: data.content,
+        config: JSON.parse(JSON.stringify(data.config))
+      });
     }
   },
   beforeDestroy () {
@@ -340,6 +353,7 @@ export default {
     this.$bus.$off('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
     this.$bus.$off('block-editor-ui-opened-for-block', this.uiOpenedForBlock);
     this.$bus.$off('block-editor-ui-closed-for-block', this.uiClosedForBlock);
+    this.$bus.$off('block-editor-convert-block', this.convertBlock);
     this.$bus.$off('publii-block-editor-save', this.saveAllBlocks);
     this.$bus.$off('publii-block-editor-load', this.loadAllBlocks);
   }

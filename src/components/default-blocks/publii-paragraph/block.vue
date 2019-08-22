@@ -156,6 +156,7 @@
 
     <top-menu
       ref="top-menu"
+      :conversions="conversions"
       :config="topMenuConfig" />
   </div>
 </template>
@@ -164,6 +165,7 @@
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
+import AvailableConversions from './conversions.js';
 import EditorIcon from './../../elements/EditorIcon.vue';
 import InlineMenu from './../../mixins/InlineMenu.vue';
 import InlineMenuUI from './../../helpers/InlineMenuUI.vue';
@@ -192,6 +194,7 @@ export default {
         }
       },
       content: '',
+      conversions: AvailableConversions,
       showNewBlockUI: false,
       newBlockUIActiveIndex: 0,
       newBlockUIListVisible: false,
