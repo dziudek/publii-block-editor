@@ -17,9 +17,9 @@
         class="wrapper-ui-top-menu-conversion"
         @click="makeConversion(conversion.type, conversion.convert)">
         <icon :name="conversion.icon" />
-        <!--<span class="wrapper-ui-top-menu-conversion-tooltip">
+        <span class="wrapper-ui-top-menu-conversion-tooltip">
            Convert to {{ conversion.name }}
-        </span>-->
+        </span>
       </span>
     </span>
     <button
@@ -67,8 +67,85 @@ export default {
 
 <style lang="scss">
 @import '../../assets/variables.scss';
-/*
+
 .wrapper-ui-top-menu {
+  &-conversions {
+    align-items: center;
+    display: flex;
+  }
+
+  &-conversion {
+    display: inline-flex;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+    width: 32px;
+
+    &-tooltip {
+      background: $color-editor-color-light-medium;
+      border-radius: $block-editor-form-input-border-radius;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      height: auto;
+      left: -80px;
+      opacity: 0;
+      padding: 5px 0;
+      pointer-events: none;
+      position: absolute;
+      top: 30px;
+      width: 180px;
+      z-index: 10;
+
+      &:after {
+        border: 6px solid $color-editor-color-light-medium;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-top-color: transparent;
+        content: "";
+        filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, .08));
+        height: 12px;
+        left: 50%;
+        position: absolute;
+        top: -12px;
+        transform: scale(.5);
+        width: 12px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      .wrapper-ui-top-menu-conversion-tooltip {
+        animation: fadeIn .75s forwards;
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: scale(.5);
+        }
+
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        70% {
+            transform: scale(.9);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+      }
+    }
+  }
+}
+/*
   background: $color-editor-color-light-medium;
   border-radius: $block-editor-form-input-border-radius;
   box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
@@ -83,18 +160,6 @@ export default {
   transform: translateX(-50%);
   width: 64px;
   z-index: 10;
-
-  &.is-small {
-    color: $block-editor-color-text;
-    display: block;
-    height: auto;
-    padding: 5px 10px;
-    width: auto;
-
-    .publii-block-paragraph-block-selector-tooltip-label1 {
-      height: auto;
-    }
-  }
 
   &:after {
     border: 6px solid $color-editor-color-light-medium;
