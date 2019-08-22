@@ -433,7 +433,7 @@ export default {
           display: block;
           font-size: 11px;
           font-weight: 700;
-          margin: 3px auto 0 0;
+          margin: 0 auto 0 0;
           text-transform: uppercase;
       }
 

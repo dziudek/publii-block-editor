@@ -84,8 +84,8 @@ export default {
     & > svg {
         fill: $block-editor-color-text-medium-dark !important;
     }
-      
-       // hover effect
+
+    // hover effect
     &::before {
        content: "";
        background: $block-editor-color-light-dark;
@@ -167,10 +167,14 @@ export default {
             transform: scale(1) translateX(-50%);
         }
       }
-        
+
       &::before {
          opacity: 1;
          transform: scale(1) translate(-50%, -50%);
+      }
+
+      & > svg {
+         fill: $block-editor-color-text !important;
       }
     }
   }
