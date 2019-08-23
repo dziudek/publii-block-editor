@@ -115,12 +115,12 @@ export default {
       justify-content: center;
       height: auto;
       opacity: 0;
-      padding: 5px 0;
+      padding: 5px 8px;
       pointer-events: none;
       position: absolute;
       text-transform: none;
       top: 34px;
-      width: 64px;
+      min-width: 64px;
       z-index: 10;
 
       &:after {
