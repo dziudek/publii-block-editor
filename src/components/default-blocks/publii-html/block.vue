@@ -110,11 +110,8 @@ export default {
 
 .publii-block-html {
   border-radius: 3px;
-  color: #ccc;
-  display: none;
-  font-size: 16px;
-  line-height: 1.4;
-  padding: 0;
+  background: #1e2128;
+  box-shadow: 2px 4px 26px $block-editor-color-shadow;
   outline: none;
   width: 100%;
 
@@ -142,9 +139,12 @@ export default {
 
     code {
       background: transparent !important;
-      font-size: 15px!important;
       padding: 0!important;
     }
+  }
+
+  .prism-editor__line-numbers {
+    background: #1e2128 !important;
   }
 
   &-preview {

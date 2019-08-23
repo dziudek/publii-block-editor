@@ -163,6 +163,9 @@ export default {
 @import '../../../assets/variables.scss';
 
 .publii-block-code {
+  background: #1e2128;
+  border-radius: 3px;
+  box-shadow: 2px 4px 26px $block-editor-color-shadow;
   outline: none;
   width: 100%;
 
@@ -190,7 +193,6 @@ export default {
 
     code {
       background: transparent !important;
-      font-size: 15px!important;
       padding: 0!important;
     }
   }
