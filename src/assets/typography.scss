@@ -77,15 +77,15 @@
 
     blockquote {
         font-family: $font-serif;
-        padding: baseline(14) 2rem baseline(3);
+        padding: baseline(14) 1rem baseline(3);
         position: relative;
         text-align: center;
-        @include fluid-type(font-size, $minScreen, $maxScreen, ms(1), ms(2));
+        @include fluid-type(font-size, $minScreen, $maxScreen, ms(1), ms(3));
 
         &::before {
             color: $block-editor-color-primary-dark;
             content: "“";
-            font: normal 330%/0.9 $font-serif;
+            font: normal 360%/0.9 $font-serif;
             top: baseline(3);
 
             @include centerXY(true, false);
@@ -93,7 +93,7 @@
 
         & + figcaption {
             color: $block-editor-color-text-medium-dark;
-            font-size: ms(-2);
+            font-size: ms(0);
             text-align: center;
         }
     }  
