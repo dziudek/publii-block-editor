@@ -89,13 +89,7 @@
             top: baseline(3);
 
             @include centerXY(true, false);
-        }
-
-        & + figcaption {
-            color: $block-editor-color-text-medium-dark;
-            font-size: ms(0);
-            text-align: center;
-        }
+        }       
     }  
 
     ul,
@@ -134,5 +128,11 @@
         code {            
             color: inherit !important;           
         }
+    }
+    
+    figcaption {
+        color: $block-editor-color-text-medium-dark;
+        font-size: ms(0);
+        text-align: center;
     }
 }

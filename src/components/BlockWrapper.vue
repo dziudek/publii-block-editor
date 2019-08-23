@@ -4,7 +4,7 @@
     ref="block-wrapper"
     :class="{ 'wrapper': true, 'is-selected': isSelected, 'has-ui-opened': uiOpened, [customCssClasses.join(' ')]: true }"
     @click.stop="blockClick"
-    :style="'width: ' + ($parent.config.contentWidth + 84) + 'px;'">
+    :style="'width: ' + ($parent.config.contentWidth + 66) + 'px;'">
     <slot />
 
     <div class="wrapper-ui">
@@ -197,7 +197,7 @@ export default {
   }
 
   & > div {
-    padding: 1rem 0;
+    padding: 1.06667rem 0; // baseline(4) 0;
   }
 
   &.has-ui-opened {
@@ -234,7 +234,7 @@ export default {
   }
 
   &.contains-wide-image {
-    width: calc(784px + 168px)!important;
+    width: calc(786px + 168px)!important;
   }
 
   &.contains-full-image {

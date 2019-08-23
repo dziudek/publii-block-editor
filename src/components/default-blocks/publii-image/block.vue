@@ -430,10 +430,7 @@ export default {
 
   & > figcaption {
     display: block;
-    font-size: 13px;
-    font-style: italic;
-    padding: 10px 0;
-    text-align: center;
+    padding: 0.8rem 0 0;
   }
 
   &-delete {
