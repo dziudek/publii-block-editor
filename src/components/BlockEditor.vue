@@ -363,6 +363,7 @@ export default {
 <style lang="scss">
 @import '../assets/variables.scss';
 @import '../assets/typography.scss';
+@import '../assets/prism-theme.scss';
 
 .editor {
   padding: 0 0 50px 0;

@@ -3,7 +3,6 @@ import PubliiBlockEditor from './PubliiBlockEditor.vue';
 
 // Vendor
 import 'prismjs';
-import 'prismjs/themes/prism-publii.css';
 import VuePrismEditor from 'vue-prism-editor';
 import 'vue-prism-editor/dist/VuePrismEditor.css';
 
