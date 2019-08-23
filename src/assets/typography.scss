@@ -1,160 +1,138 @@
-@charset "UTF-8";
+@import './../vendors/mappy-breakpoints';  
+@import './../vendors/modularscale'; 
+@import './functions.scss';
+@import './variables.scss'; 
+@import './mixins.scss';  
+    
 .editor > .editor-inner > .wrapper > div {
-  color: #2a2e30;
-  -webkit-font-smoothing: antialiased;
-  font-family: -apple-system, BlinkMacSystemFont, Arial, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-weight: 400;
-  line-height: 1.6; }
-  .editor > .editor-inner > .wrapper > div {
-    font-size: 1rem; }
-    @media screen and (min-width: 20rem) {
-      .editor > .editor-inner > .wrapper > div {
-        font-size: calc(1rem + 0.15 * ((100vw - 20rem) / 80)); } }
-    @media screen and (min-width: 100rem) {
-      .editor > .editor-inner > .wrapper > div {
-        font-size: 1.15rem; } }
-  .editor > .editor-inner > .wrapper > div a:not(.btn) {
-    border-bottom: 3px solid #ffc400;
-    color: #2a2e30;
-    cursor: pointer;
-    text-decoration: none !important;
-    text-decoration-skip-ink: auto; }
-  .editor > .editor-inner > .wrapper > div a:not(.btn):hover {
-    background: #FFF8E1;
-    color: #2a2e30; }
-  .editor > .editor-inner > .wrapper > div a:not(.btn):active {
-    color: #2a2e30; }
-  .editor > .editor-inner > .wrapper > div a:not(.btn):focus {
-    color: #2a2e30;
-    outline: 2px dotted #42a5f5; }
-  .editor > .editor-inner > .wrapper > div p,
-  .editor > .editor-inner > .wrapper > div ul,
-  .editor > .editor-inner > .wrapper > div ol,
-  .editor > .editor-inner > .wrapper > div dl,
-  .editor > .editor-inner > .wrapper > div table,
-  .editor > .editor-inner > .wrapper > div hr,
-  .editor > .editor-inner > .wrapper > div blockquote,
-  .editor > .editor-inner > .wrapper > div figure,
-  .editor > .editor-inner > .wrapper > div pre,
-  .editor > .editor-inner > .wrapper > div table,
-  .editor > .editor-inner > .wrapper > div script {
-    margin: 0; }
-  .editor > .editor-inner > .wrapper > div h1,
-  .editor > .editor-inner > .wrapper > div h2,
-  .editor > .editor-inner > .wrapper > div h3,
-  .editor > .editor-inner > .wrapper > div h4,
-  .editor > .editor-inner > .wrapper > div h5,
-  .editor > .editor-inner > .wrapper > div h6 {
-    color: #2a2e30;
-    font-family: -apple-system, BlinkMacSystemFont, Arial, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-weight: 600;
-    letter-spacing: -0.03rem;
-    line-height: 1.3;
-    margin: 0; }
-  .editor > .editor-inner > .wrapper > div h1 {
-    margin: 0; }
-    .editor > .editor-inner > .wrapper > div h1 {
-      font-size: 1.80203rem; }
-      @media screen and (min-width: 20rem) {
-        .editor > .editor-inner > .wrapper > div h1 {
-          font-size: calc(1.80203rem + 0.22525 * ((100vw - 20rem) / 80)); } }
-      @media screen and (min-width: 100rem) {
-        .editor > .editor-inner > .wrapper > div h1 {
-          font-size: 2.02729rem; } }
-  .editor > .editor-inner > .wrapper > div h2 {
-    font-size: 1.42383rem; }
-    @media screen and (min-width: 20rem) {
-      .editor > .editor-inner > .wrapper > div h2 {
-        font-size: calc(1.42383rem + 0.17798 * ((100vw - 20rem) / 80)); } }
-    @media screen and (min-width: 100rem) {
-      .editor > .editor-inner > .wrapper > div h2 {
-        font-size: 1.60181rem; } }
-  .editor > .editor-inner > .wrapper > div h3 {
-    font-size: 1.26562rem; }
-    @media screen and (min-width: 20rem) {
-      .editor > .editor-inner > .wrapper > div h3 {
-        font-size: calc(1.26562rem + 0.1582 * ((100vw - 20rem) / 80)); } }
-    @media screen and (min-width: 100rem) {
-      .editor > .editor-inner > .wrapper > div h3 {
-        font-size: 1.42383rem; } }
-  .editor > .editor-inner > .wrapper > div h4 {
-    font-size: 1.125rem; }
-    @media screen and (min-width: 20rem) {
-      .editor > .editor-inner > .wrapper > div h4 {
-        font-size: calc(1.125rem + 0.14062 * ((100vw - 20rem) / 80)); } }
-    @media screen and (min-width: 100rem) {
-      .editor > .editor-inner > .wrapper > div h4 {
-        font-size: 1.26562rem; } }
-  .editor > .editor-inner > .wrapper > div h5 {
-    font-size: 1rem; }
-    @media screen and (min-width: 20rem) {
-      .editor > .editor-inner > .wrapper > div h5 {
-        font-size: calc(1rem + 0.125 * ((100vw - 20rem) / 80)); } }
-    @media screen and (min-width: 100rem) {
-      .editor > .editor-inner > .wrapper > div h5 {
-        font-size: 1.125rem; } }
-  .editor > .editor-inner > .wrapper > div h6 {
-    font-size: 0.88889rem; }
-    @media screen and (min-width: 20rem) {
-      .editor > .editor-inner > .wrapper > div h6 {
-        font-size: calc(0.88889rem + 0.11111 * ((100vw - 20rem) / 80)); } }
-    @media screen and (min-width: 100rem) {
-      .editor > .editor-inner > .wrapper > div h6 {
-        font-size: 1rem; } }
-  .editor > .editor-inner > .wrapper > div b,
-  .editor > .editor-inner > .wrapper > div strong {
-    font-weight: 600; }
-  .editor > .editor-inner > .wrapper > div blockquote {
-    font-family: Georgia, Times New Roman, Times, Serif;
-    padding: 3.73333rem 2rem 0.8rem;
-    position: relative;
-    text-align: center; }
-    .editor > .editor-inner > .wrapper > div blockquote {
-      font-size: 1.125rem; }
-      @media screen and (min-width: 20rem) {
-        .editor > .editor-inner > .wrapper > div blockquote {
-          font-size: calc(1.125rem + 0.14062 * ((100vw - 20rem) / 80)); } }
-      @media screen and (min-width: 100rem) {
-        .editor > .editor-inner > .wrapper > div blockquote {
-          font-size: 1.26562rem; } }
-    .editor > .editor-inner > .wrapper > div blockquote::before {
-      color: #42a5f5;
-      content: "“";
-      font: normal 330%/0.9 Georgia, Times New Roman, Times, Serif;
-      top: 0.8rem;
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%, 0); }
-    .editor > .editor-inner > .wrapper > div blockquote + figcaption {
-      color: #6a7081;
-      font-size: 0.79012rem;
-      text-align: center; }
-  .editor > .editor-inner > .wrapper > div ul,
-  .editor > .editor-inner > .wrapper > div ol {
-    margin-left: 2rem;
-    padding: 0; }
-    .editor > .editor-inner > .wrapper > div ul > li,
-    .editor > .editor-inner > .wrapper > div ol > li {
-      list-style: inherit;
-      padding-left: 0.53333rem; }
-    .editor > .editor-inner > .wrapper > div ul ul,
-    .editor > .editor-inner > .wrapper > div ul ol,
-    .editor > .editor-inner > .wrapper > div ol ul,
-    .editor > .editor-inner > .wrapper > div ol ol {
-      margin-bottom: 0.53333rem;
-      margin-top: 0.53333rem; }
-  .editor > .editor-inner > .wrapper > div code {
-    background-color: #ffeeee;
-    border-radius: 2px;
-    color: #c7403e;
-    font-size: 0.88889rem;
-    font-family: Menlo, Monaco, Consolas, Courier New, monospace;
-    padding: 0.26667rem 0.53333rem; }
-  .editor > .editor-inner > .wrapper > div pre {
-    font-size: 0.88889rem;
-    padding: 1.6rem;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    width: 100%; }
-    .editor > .editor-inner > .wrapper > div pre code {
-      color: inherit !important; }
+    color: $block-editor-color-dark;
+    -webkit-font-smoothing: antialiased;
+    font-family: $font-base;
+    font-weight: $font-weight-normal;
+    line-height: $line-height;
+    @include fluid-type(font-size, $minScreen, $maxScreen, map-get($font, min), map-get($font, max));
+
+    a:not(.btn) {
+        @include links ($block-editor-color-dark, $block-editor-color-dark, $block-editor-color-dark, $block-editor-color-dark);
+    }
+
+    p,
+    ul,
+    ol,
+    dl,
+    table,
+    hr,
+    blockquote,
+    figure,
+    pre,
+    table,
+    script {
+        margin: 0;
+    }
+
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: $block-editor-color-dark;
+        font-family: $font-base;
+        font-weight: $font-weight-bold;
+        letter-spacing: -0.03rem;
+        line-height: 1.3;
+        margin: 0;
+    }
+
+    h1 {
+        @include fluid-type(font-size, $minScreen, $maxScreen, map-get($h1, min), map-get($h1, max));
+        margin: 0;
+    }
+
+    h2 {
+        @include fluid-type(font-size, $minScreen, $maxScreen, map-get($h2, min), map-get($h2, max));
+    }
+
+    h3 {
+        @include fluid-type(font-size, $minScreen, $maxScreen, map-get($h3, min), map-get($h3, max));
+    }
+
+    h4 {
+        @include fluid-type(font-size, $minScreen, $maxScreen, map-get($h4, min), map-get($h4, max));
+    }
+
+    h5 {
+        @include fluid-type(font-size, $minScreen, $maxScreen, map-get($h5, min), map-get($h5, max));
+    }
+
+    h6 {
+        @include fluid-type(font-size, $minScreen, $maxScreen, map-get($h6, min), map-get($h6, max));
+    }
+
+    b,
+    strong {
+        font-weight: $font-weight-bold;
+    }
+
+    blockquote {
+        font-family: $font-serif;
+        padding: baseline(14) 2rem baseline(3);
+        position: relative;
+        text-align: center;
+        @include fluid-type(font-size, $minScreen, $maxScreen, ms(1), ms(2));
+
+        &::before {
+            color: $block-editor-color-primary-dark;
+            content: "“";
+            font: normal 330%/0.9 $font-serif;
+            top: baseline(3);
+
+            @include centerXY(true, false);
+        }
+
+        & + figcaption {
+            color: $block-editor-color-text-medium-dark;
+            font-size: ms(-2);
+            text-align: center;
+        }
+    }  
+
+    ul,
+    ol {
+        margin-left: 2rem;
+        padding: 0;
+
+        & > li {
+            list-style: inherit;
+            padding-left: baseline(2);
+        }
+
+        ul,
+        ol {
+            margin-bottom: baseline(2);
+            margin-top: baseline(2);
+        }
+    }
+
+    code {
+        background-color: #ffeeee;
+        border-radius: 2px;
+        color: #c7403e;
+        font-size: ms(-1); 
+        font-family: $font-monospace;
+        padding: baseline(1) baseline(2);
+    }
+
+    pre { 
+        font-size: ms(-1); 
+        padding: baseline(6);
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        width: 100%;
+
+        code {            
+            color: inherit !important;           
+        }
+    }
+}

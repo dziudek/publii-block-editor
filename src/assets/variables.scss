@@ -1,13 +1,84 @@
 $block-editor-color-primary: #5da4ef;
 $block-editor-color-danger: #ef5350;
+$block-editor-color-yellow-dark: #ffc400;
+$block-editor-color-yellow-light: #FFF8E1;
 $block-editor-color-primary-dark: #4F94DD;
 $block-editor-color-gradient-end: #e9f5ff;
 $block-editor-color-shadow: rgba(#3d464e, .25);
-$block-editor-color-light: #FFF;
+$block-editor-color-dark: #2a2e30;
+$block-editor-color-light: #ffffff;
 $color-editor-color-light-medium: #F6F7F8;
 $block-editor-color-light-dark: #EDEEF1; 
 $block-editor-color-text: #3d464e;
 $block-editor-color-text-medium-dark: #6a7081;
-$block-editor-color-text-medium: #8E929D;
-$block-editor-form-input-border: #DDD;
-$block-editor-form-input-border-radius: 4px;
+$block-editor-color-text-medium: #8e929d;
+$block-editor-form-input-border: #cbcdd4;
+$block-editor-form-input-border-radius: 4px; 
+
+
+// Breakpoints
+$breakpoints: ( 
+	sm: 600px,
+	md: 900px,
+	lg: 1200px,
+	xl: 1600px 	
+); 
+
+$page-width: 720; 
+// Font families 
+$font-base: -apple-system, BlinkMacSystemFont, Arial, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-serif: Georgia, Times New Roman, Times, Serif;
+$font-monospace: Menlo, Monaco, Consolas, Courier New, monospace;
+
+// Font weights 
+$font-weight-normal: 400;
+$font-weight-semibold: 500;
+$font-weight-bold: 600;
+
+// Modular scale
+
+$modularscale: (
+  base: 1rem,
+  ratio: 1.125 //$major-second 
+); 
+
+// Min and Max screen width
+$minScreen: 49rem;
+$maxScreen: 100rem; 
+
+
+// Baseline
+$line-height: 1.6;
+$baseline: 1.6rem / 6; 
+
+
+// Font size map
+$font: ( 
+	min: 1rem,
+	max: 1.15rem 
+);
+
+$h1: ( 
+	min: (ms(5)), 
+	max: (ms(6))
+); 
+$h2: ( 
+	min: (ms(3)),
+	max: (ms(4))
+);
+$h3: ( 
+	min: (ms(2)),
+	max: (ms(3))
+);
+$h4: ( 
+	min: (ms(1)),
+	max: (ms(2))
+);
+$h5: ( 
+	min: (ms(0)),
+	max: (ms(1))
+);
+$h6: ( 
+	min: (ms(-1)),
+	max: (ms(0)) 
+);
