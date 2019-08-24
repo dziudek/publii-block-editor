@@ -1,7 +1,8 @@
 <template>
   <div
     class="wrapper-ui-top-menu"
-    v-if="$parent.$parent.uiOpened && !$parent.textIsHighlighted">
+    v-if="isVisible"
+    @click="resetDeleteConfirmation">
     <span
       v-if="!conversions.length"
       class="wrapper-ui-top-menu-title">
@@ -15,7 +16,7 @@
         v-for="(conversion, index) of conversions"
         :key="'conversion-' + index"
         class="wrapper-ui-top-menu-conversion"
-        @click="makeConversion(conversion.type, conversion.convert)">
+        @click="makeConversion(conversion.type, conversion.convert); resetDeleteConfirmation();">
         <icon :name="conversion.icon" />
         <span class="wrapper-ui-top-menu-conversion-tooltip">
           {{ conversion.name }}
@@ -27,8 +28,29 @@
       :key="'top-menu-button-' + index"
       :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': button.activeState.bind($parent)() }"
       tabindex="-1"
-      @click.stop="button.onClick.bind($parent)()">
+      @click.stop="button.onClick.bind($parent)(); resetDeleteConfirmation();">
       <icon :name="button.icon" />
+    </button>
+    <button
+      v-if="!confirmDelete"
+      class="wrapper-ui-top-menu-button"
+      tabindex="-1"
+      @click.stop="deleteBlock">
+      <icon name="trash" />
+    </button>
+    <button
+      v-if="confirmDelete"
+      class="wrapper-ui-top-menu-button top-menu-button-trash"
+      tabindex="-1"
+      @click.stop="deleteBlock">
+      <icon name="open-trash" />
+    </button>
+    <button
+      v-if="$parent.$parent.blockType !== 'publii-readmore'"
+      class="wrapper-ui-top-menu-button"
+      tabindex="-1"
+      @click.stop="showAdvancedConfig(); resetDeleteConfirmation();">
+      <icon name="gear" />
     </button>
   </div>
 </template>
@@ -54,12 +76,40 @@ export default {
   computed: {
     filteredConfig () {
       return this.config.filter(button => typeof button.isVisible === 'undefined' || button.isVisible());
+    },
+    isVisible () {
+      return this.$parent.$parent.uiOpened && !this.$parent.textIsHighlighted;
     }
+  },
+  watch: {
+    isVisible (newValue) {
+      if (newValue) {
+        this.confirmDelete = false;
+      }
+    }
+  },
+  data () {
+    return {
+      confirmDelete: false
+    };
   },
   methods: {
     makeConversion (outputType, convertCallback) {
       let transformedData = convertCallback(this.$parent.config, this.$parent.content, this.$parent.editor);
       this.$bus.$emit('block-editor-convert-block', this.$parent.id, outputType, transformedData);
+    },
+    deleteBlock () {
+      if (!this.confirmDelete) {
+        this.confirmDelete = true;
+      } else {
+        this.$bus.$emit('block-editor-delete-block', this.$parent.id);
+      }
+    },
+    showAdvancedConfig () {
+      this.$bus.$emit('block-editor-trigger-advanced-config', this.$parent.id);
+    },
+    resetDeleteConfirmation () {
+      this.confirmDelete = false;
     }
   }
 }
@@ -177,6 +227,10 @@ export default {
          fill: $block-editor-color-text !important;
       }
     }
+  }
+
+  .top-menu-button-trash {
+    color: $block-editor-color-danger;
   }
 }
 </style>

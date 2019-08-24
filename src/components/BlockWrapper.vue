@@ -8,7 +8,7 @@
 
     <div class="wrapper-ui">
       <div
-        :class="{ 'wrapper-ui-show-options': true, 'is-confirming-delete': confirmDelete }"
+        :class="{ 'wrapper-ui-show-options': true }"
         @click.stop="togglePopup">
           <button
             :class="{ 'wrapper-ui-show-options-button': true, 'is-visible': isSelected && !uiOpened }">
@@ -19,27 +19,7 @@
 
           <div
             v-if="uiOpened"
-            :class="{ 'wrapper-ui-options': true, 'is-visible': true, 'is-narrow': blockType === 'publii-readmore' }">
-            <button
-              :class="{ 'wrapper-ui-options-button-trash': true }"
-              tabindex="-1"
-              @click.stop="deleteBlock">
-              <icon name="trash" />
-            </button>
-              <button
-              v-if="confirmDelete"
-              :class="{ 'wrapper-ui-options-button-trash': true }"
-              tabindex="-1"
-              @click.stop="deleteBlock">
-              <icon name="open-trash" />
-            </button>
-            <button
-              v-if="blockType !== 'publii-readmore'"
-              :class="{ 'wrapper-ui-options-button-more-options': true }"
-              tabindex="-1"
-              @click.stop="showAdvancedConfig">
-              <icon name="gear" />
-            </button>
+            :class="{ 'wrapper-ui-options': true, 'is-visible': true }">
             <button
               class="wrapper-ui-options-button-move"
               tabindex="-1"
@@ -74,8 +54,7 @@ export default {
     return {
       customCssClasses: [],
       isSelected: false,
-      uiOpened: false,
-      confirmDelete: false
+      uiOpened: false
     };
   },
   watch: {
@@ -94,7 +73,6 @@ export default {
     blockClick () {
       this.$bus.$emit('block-editor-deselect-blocks', this.id);
       this.uiOpened = false;
-      this.confirmDelete = false;
       this.setSelectionState(true);
     },
     deselectBlock (blockID) {
@@ -108,10 +86,6 @@ export default {
       if (this.uiOpened) {
         this.$bus.$emit('block-editor-clear-text-selection', this.id);
       }
-
-      if (!this.uiOpened) {
-        this.confirmDelete = false;
-      }
     },
     setSelectionState (newState) {
       if (this.isSelected && newState === false) {
@@ -122,7 +96,6 @@ export default {
 
       if (!this.isSelected) {
         this.uiOpened = false;
-        this.confirmDelete = false;
       }
 
       if (newState) {
@@ -146,16 +119,6 @@ export default {
     moveDown () {
       let startBlockTop = this.$refs['block-wrapper'].getBoundingClientRect().top;
       this.$bus.$emit('block-editor-move-block-down', this.id, startBlockTop);
-    },
-    deleteBlock () {
-      if (!this.confirmDelete) {
-        this.confirmDelete = true;
-      } else {
-        this.$bus.$emit('block-editor-delete-block', this.id);
-      }
-    },
-    showAdvancedConfig () {
-      this.$bus.$emit('block-editor-trigger-advanced-config', this.id);
     }
   },
   beforeDestroy () {
@@ -263,7 +226,7 @@ export default {
     .wrapper-ui-show-options {
       height: 44px;
       transition: all .25s ease-out;
-      width: 150px;
+      width: 50px;
 
       &-button {
         background: none;
@@ -321,18 +284,6 @@ export default {
           }
         }
       }
-
-      &.is-confirming-delete {
-        .wrapper-ui-options-button-trash {
-          color: $block-editor-color-light;
-
-          &::before {
-             background: $block-editor-color-danger;
-             opacity: 1;
-             transform: scale(1) translate(-50%, -50%);
-          }
-        }
-      }
     }
 
     &-options {
@@ -340,11 +291,6 @@ export default {
       position: absolute;
       right: 64px;
       top: 47px;
-      width: 86px;
-
-      &.is-narrow {
-        width: 48px;
-      }
 
       &.is-visible {
         opacity: 1;
@@ -355,9 +301,7 @@ export default {
         display: flex;
       }
 
-      &-button-move,
-      &-button-more-options,
-      &-button-trash {
+      &-button-move {
         align-items: center;
         background: transparent;
         border: none;
@@ -403,18 +347,6 @@ export default {
         }
       }
 
-      &-button-trash.is-active{
-        color: $block-editor-color-danger;
-      }
-
-      &-button-more-options {
-        left: 4px;
-      }
-
-      &-button-trash {
-        right: 7px;
-      }
-
       &-button-move {
         right: -60px;
         top: -2px;
@@ -431,7 +363,7 @@ export default {
       display: flex;
       height: 44px;
       justify-content: flex-end;
-      margin: -9px 64px 9px 0;
+      margin: -9px 0 9px 0;
 
       &-title {
           color: $block-editor-color-text-medium;
