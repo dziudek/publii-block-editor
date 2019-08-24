@@ -128,10 +128,11 @@ export default {
 .block-advanced-config {
   background: $block-editor-color-light;
   box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
-  border-radius: $block-editor-form-input-border-radius;
+  border-radius: 6px;
+  box-shadow: 0 0 32px $block-editor-color-shadow;
   padding: 20px;
-  transform: translateY(30px);
-  transition: all .3s ease-out;
+  transform: scale(.5);
+  transition: all .24s cubic-bezier(0, 0, 0.25, 0.99);
   width: 580px;
 
   &-overlay {
@@ -154,7 +155,7 @@ export default {
       pointer-events: auto;
 
       .block-advanced-config {
-        transform: translateY(0);
+        transform: scale(1);
       }
     }
   }

@@ -230,7 +230,7 @@ export default {
       flex-direction: column-reverse;
 
       .publii-block-code-lang {
-        top: 68px!important;
+          top: calc(#{baseline(6)} + 44px)!important;
       }
     }
   }

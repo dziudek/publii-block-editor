@@ -240,13 +240,13 @@ export default {
             }
 
             &__content-wrapper {
-                 background: #3b3f48;
+                 background: #30343c;
                  border: none;
                  color: $block-editor-color-light-dark;
             }
 
             &__option {
-                padding: 7px;
+                padding: 7px 10px;
                 min-height: 30px;
 
                 &--highlight {
@@ -261,6 +261,7 @@ export default {
 
             &__input {
                 background: none !important;
+                color: $block-editor-color-light;
 
                 &::placeholder {
                      color: $block-editor-color-light-dark;
