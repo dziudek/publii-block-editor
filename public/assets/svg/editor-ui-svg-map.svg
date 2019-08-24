@@ -105,6 +105,12 @@
     <symbol id="align-center" viewBox="0 0 14 12">
         <path d="M0,1A1,1,0,0,1,1,0H13a1,1,0,0,1,0,2H1A1,1,0,0,1,0,1ZM4,5A1,1,0,0,0,4,7h6a1,1,0,0,0,0-2Zm9,5H1a1,1,0,0,0,0,2H13a1,1,0,0,0,0-2Z" />
     </symbol>
+    
+    <!-- Inline editor: paragraph -->
+
+    <symbol id="paragraph" viewBox="0 0 14 14">
+        <path d="M13,0H4.85C1.88.44-.29,2.92,0,5.54A5.35,5.35,0,0,0,4.86,10H5v3a1,1,0,1,0,2,0V2H9V13a1,1,0,0,0,2,0V2h2a1,1,0,0,0,0-2ZM2,5.3C1.82,3.78,3.17,2.33,5,2V8A3.38,3.38,0,0,1,2,5.3Z"/>
+    </symbol>
 
 
     <!-- Inline editor: headings H1-H6 -->

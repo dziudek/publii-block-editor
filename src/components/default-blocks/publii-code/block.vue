@@ -160,11 +160,11 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../../vendors/mappy-breakpoints';  
-@import '../../../vendors/modularscale'; 
+@import '../../../vendors/mappy-breakpoints';
+@import '../../../vendors/modularscale';
 @import '../../../assets/functions.scss';
 @import '../../../assets/variables.scss';
-@import '../../../assets/mixins.scss';  
+@import '../../../assets/mixins.scss';
 
 .publii-block-code {
     background: $block-editor-color-code-bg;
@@ -221,27 +221,28 @@ export default {
 
     & + .publii-block-code-lang {
 
-        .multiselect {            
+        .multiselect {
 
             &__tags {
                 background: #3b3f48;
-                border: none;               
-            }           
+                border: none;
+            }
 
             &__single {
                 background: inherit;
                 color: $block-editor-color-light-dark;
             }
 
-            &__select {                
+            &__select {
                 &::before {
                     border-color: $block-editor-color-text-medium transparent transparent;
                 }
             }
-            
+
             &__content-wrapper {
                  background: #3b3f48;
-                 border: none;     color: $block-editor-color-light-dark;
+                 border: none;
+                 color: $block-editor-color-light-dark;
             }
 
             &__option {
@@ -260,7 +261,7 @@ export default {
 
             &__input {
                 background: none !important;
-                
+
                 &::placeholder {
                      color: $block-editor-color-light-dark;
                 }

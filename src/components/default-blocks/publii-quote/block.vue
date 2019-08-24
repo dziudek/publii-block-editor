@@ -207,7 +207,7 @@ export default {
 .publii-block-quote {
     outline: none;
 
-  p {   
+  p {
     outline: none;
   }
 

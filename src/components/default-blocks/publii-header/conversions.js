@@ -1,6 +1,6 @@
 const availableConversions = [
   {
-    'icon': 'toc',
+    'icon': 'paragraph',
     'name': 'Paragraph',
     'type': 'publii-paragraph',
     'convert': function (config, content, editorInstance) {

@@ -72,13 +72,13 @@ export default {
 </script>
 
 <style lang="scss">
-.publii-block-readmore {
-@import '../../../vendors/mappy-breakpoints';  
-@import '../../../vendors/modularscale'; 
+@import '../../../vendors/mappy-breakpoints';
+@import '../../../vendors/modularscale';
 @import '../../../assets/functions.scss';
 @import '../../../assets/variables.scss';
-@import '../../../assets/mixins.scss';  
-    
+@import '../../../assets/mixins.scss';
+
+.publii-block-readmore {
   caret-color: transparent;
   margin: baseline(7) 0;
   outline: none;

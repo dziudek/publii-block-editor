@@ -413,13 +413,13 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../../vendors/mappy-breakpoints';  
-@import '../../../vendors/modularscale'; 
+@import '../../../vendors/mappy-breakpoints';
+@import '../../../vendors/modularscale';
 @import '../../../assets/functions.scss';
 @import '../../../assets/variables.scss';
-@import '../../../assets/mixins.scss';  
+@import '../../../assets/mixins.scss';
 
-.publii-block-image { 
+.publii-block-image {
   outline: none;
   position: relative;
 

@@ -60,6 +60,7 @@ export default {
         case 'align-left': return 14;
         case 'align-right': return 14;
         case 'align-center': return 14;
+        case 'paragraph': return 14;
         case 'h1': return 16;
         case 'h2': return 19;
         case 'h3': return 20;
@@ -121,6 +122,7 @@ export default {
         case 'align-left': return 12;
         case 'align-right': return 12;
         case 'align-center': return 12;
+        case 'paragraph': return 14;
         case 'h1': return 12;
         case 'h2': return 12;
         case 'h3': return 12;
