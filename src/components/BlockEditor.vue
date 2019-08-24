@@ -24,7 +24,6 @@
       </block-wrapper>
       <div
         class="editor-inner-trigger"
-        :style="'width: ' + config.contentWidth + 'px;'"
         @click="addNewParagraphAtEnd"></div>
     </div>
 
@@ -84,7 +83,6 @@ export default {
   data () {
     return {
       config: {
-        contentWidth: 720,
         postID: ''
       },
       state: {

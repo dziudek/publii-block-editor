@@ -3,8 +3,7 @@
     :data-block-type="blockType"
     ref="block-wrapper"
     :class="{ 'wrapper': true, 'is-selected': isSelected, 'has-ui-opened': uiOpened, [customCssClasses.join(' ')]: true }"
-    @click.stop="blockClick"
-    :style="'width: ' + ($parent.config.contentWidth + 66) + 'px;'">
+    @click.stop="blockClick">
     <slot />
 
     <div class="wrapper-ui">
