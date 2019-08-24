@@ -166,7 +166,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../vendors/mappy-breakpoints';  
+@import '../vendors/modularscale'; 
+@import '../assets/functions.scss';
 @import '../assets/variables.scss';
+@import '../assets/mixins.scss';  
+
 
 .wrapper {
   border: 1px solid transparent;
@@ -197,7 +202,7 @@ export default {
   }
 
   & > div {
-    padding: 1.06667rem 0; // baseline(4) 0;
+    padding: baseline(4) 0;
   }
 
   &.has-ui-opened {

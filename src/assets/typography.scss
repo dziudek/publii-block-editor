@@ -86,7 +86,7 @@
             color: $block-editor-color-primary-dark;
             content: "“";
             font: normal 360%/0.9 $font-serif;
-            top: baseline(3);
+            top: baseline(1);
 
             @include centerXY(true, false);
         }       
