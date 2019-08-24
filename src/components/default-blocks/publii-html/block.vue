@@ -185,7 +185,7 @@ export default {
 
     publii-iframe {
       &:after {
-        content: "Iframe is loaded only in edit mode.";
+        content: "The iframe is loaded only in edit mode.";
       }
     }
   }
