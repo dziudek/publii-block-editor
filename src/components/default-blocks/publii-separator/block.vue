@@ -97,15 +97,21 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../../vendors/mappy-breakpoints';  
+@import '../../../vendors/modularscale'; 
+@import '../../../assets/functions.scss';
+@import '../../../assets/variables.scss';
+@import '../../../assets/mixins.scss';  
+    
 .publii-block-separator {
   caret-color: transparent;
-  margin: 8px 0;
+  margin: baseline(2) 0;
   outline: none;
   width: 100%;
 
   hr {
     border: none;
-    height: 18px;
+    height: baseline(5);
     line-height: 0;
     margin: 0;
     position: relative;
@@ -115,7 +121,7 @@ export default {
 
       &::after {
           border-bottom: 1px solid;
-          bottom: 8px;
+          bottom: baseline(2);
           content: "";
           height: 1px;
           left: 0;
