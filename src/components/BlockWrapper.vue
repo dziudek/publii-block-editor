@@ -249,7 +249,7 @@ export default {
     .publii-block-image-form input {
       margin-left: auto;
       margin-right: auto;
-      max-width: $editor-width;
+        max-width: calc(#{$editor-width} + 84px);
     }
   }
 
