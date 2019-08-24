@@ -171,7 +171,7 @@ export default {
         align-content: center;
         align-items: center;
         background: $color-editor-color-light-medium;
-        content: "This JavaScript code will be evaluated in the preview";
+        content: "JavaScript code is evaluated only in edit mode.";
         display: flex;
         font-size: ms(-1);
         height: 100%;
@@ -185,7 +185,7 @@ export default {
 
     publii-iframe {
       &:after {
-        content: "This iframe will be loaded in the preview";
+        content: "Iframe is loaded only in edit mode.";
       }
     }
   }
