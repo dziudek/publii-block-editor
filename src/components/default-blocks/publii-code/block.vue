@@ -204,7 +204,7 @@ export default {
     &-lang {
         position: absolute;
         right: 40px;
-        top: 24px;
+        top: baseline(6);
 
         .multiselect__content {
             margin: 0 !important;
