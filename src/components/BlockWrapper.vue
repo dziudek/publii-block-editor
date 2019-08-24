@@ -174,11 +174,13 @@ export default {
 
 .wrapper {
   border: 1px solid transparent;
+  box-sizing: content-box;
   margin: 0 auto;
   opacity: .33;
   padding: 0 32px;
   position: relative;
   transition: width .25s ease-out, opacity .35s ease-out;
+  width: $editor-width;
   z-index: 1;
 
   &[data-block-type="publii-embed"] {
@@ -238,16 +240,16 @@ export default {
   }
 
   &.contains-wide-image {
-    width: calc(786px + 168px)!important;
+      width: calc(#{$editor-width} + 168px)!important;
   }
 
   &.contains-full-image {
-    width: calc(100% - 84px)!important;
+    width: calc(100% - 168px)!important;
 
     .publii-block-image-form input {
       margin-left: auto;
       margin-right: auto;
-      max-width: 720px;
+      max-width: $editor-width;
     }
   }
 
