@@ -99,43 +99,53 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" > 
+@import '../../../vendors/mappy-breakpoints';  
+@import '../../../vendors/modularscale'; 
+@import '../../../assets/functions.scss';
+@import '../../../assets/variables.scss';
+@import '../../../assets/mixins.scss';  
+
 .publii-block-embed {
-  background: #f6f9fa;
-  color: #ccc;
-  display: none;
-  font-size: 0.88889rem;
-  padding: 1.6rem;
-  outline: none;
-  width: 100%;
-
-  textarea {
-    background: #fff;
-    border: 1px solid #ccc;
-    font-family: "Bitstream Vera Sans Mono", "Courier 10 Pitch", "Nimbus Mono L", Monaco, "Courier New", Courier, "OCR A Extended", "DejaVu Sans Mono", "Lucida Console", monospace;
-    font-size: 0.88889rem;
-    min-height: 150px;
-    padding: 20px;
-    resize: vertical;
+    background: $color-editor-color-light-medium;
+    border-radius: $block-editor-form-input-border-radius;
+    color: $block-editor-form-input-border;
+    display: none;
+    font-size: ms(-1);
+    padding: baseline(6);
+    outline: none;
     width: 100%;
-  }
 
-  &.is-visible {
-    display: block;
-  }
-
-  &-preview {
-    background: #f6f9fa;
-    margin: 0;
-    padding: 0 0 56.25%;
-    position: relative;
-
-    iframe {
-      height: 100%;
-      pointer-events: none;
-      position: absolute;
-      width: 100%;
+    textarea {
+        background: $block-editor-color-light;
+        border: 1px solid $block-editor-form-input-border;
+        border-radius: $block-editor-form-input-border-radius;
+        font-family: $font-monospace;
+        font-size: ms(-1);
+        min-height: 180px;
+        padding: 20px;
+        resize: vertical;
+        width: 100%;
     }
-  }
+
+    &.is-visible {
+        display: block;
+    }
+
+    &-preview {
+        background: $color-editor-color-light-medium;
+        margin: 0;
+        padding: 0 0 56.25%;
+        position: relative;
+
+        iframe {
+            height: 100%;
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+        }
+    }
 }
-</style>
+
+</style >
+

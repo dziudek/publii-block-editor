@@ -106,11 +106,15 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../../vendors/mappy-breakpoints';  
+@import '../../../vendors/modularscale'; 
+@import '../../../assets/functions.scss';
 @import '../../../assets/variables.scss';
+@import '../../../assets/mixins.scss';  
 
 .publii-block-html {
-  border-radius: 3px;
-  background: #1e2128;
+  border-radius: $block-editor-form-input-border-radius;
+  background: $block-editor-color-code-bg;
   box-shadow: 2px 4px 26px $block-editor-color-shadow;
   outline: none;
   width: 100%;
@@ -127,7 +131,7 @@ export default {
     }
 
     & > pre {
-      background: #1e2128 !important;
+      background: $block-editor-color-code-bg !important;
 
       &:empty {
         &:before {
@@ -144,30 +148,32 @@ export default {
   }
 
   .prism-editor__line-numbers {
-    background: #1e2128 !important;
+    background: $block-editor-color-code-bg !important;
   }
 
-  &-preview {
-    padding: 15px 0;
+  &-preview {     
 
     publii-script,
     publii-iframe {
-      background: #f5f5f5;
-      border: 1px solid #eee;
-      color: #888;
+      background: $color-editor-color-light-medium;
+      border-left: 4px solid $block-editor-color-primary-dark;
+      border-radius: $block-editor-form-input-border-radius;
+      color: $block-editor-color-text-medium;
       display: block;
-      height: 48px;
+      height: baseline(12);
+      margin-bottom: baseline(2);
       overflow: hidden;
-      padding: 15px;
+      padding: baseline(4);
       position: relative;
       width: 100%;
 
       &:after {
         align-content: center;
         align-items: center;
-        background: #f5f5f5;
+        background: $color-editor-color-light-medium;
         content: "This JavaScript code will be evaluated in the preview";
         display: flex;
+        font-size: ms(-1);
         height: 100%;
         justify-content: center;
         left: 0;

@@ -207,8 +207,7 @@ export default {
 .publii-block-quote {
     outline: none;
 
-  p {
-    margin: 0;
+  p {   
     outline: none;
   }
 
@@ -237,7 +236,7 @@ export default {
     }
 
     textarea {
-      min-height: 150px;
+      min-height: 180px;
       margin-bottom: 16px;
       resize: vertical;
     }

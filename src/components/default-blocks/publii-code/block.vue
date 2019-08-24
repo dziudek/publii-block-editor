@@ -160,59 +160,113 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../../vendors/mappy-breakpoints';  
+@import '../../../vendors/modularscale'; 
+@import '../../../assets/functions.scss';
 @import '../../../assets/variables.scss';
+@import '../../../assets/mixins.scss';  
 
 .publii-block-code {
-  background: #1e2128;
-  border-radius: 3px;
-  box-shadow: 2px 4px 26px $block-editor-color-shadow;
-  outline: none;
-  width: 100%;
-
-  &:empty {
-    &:before {
-      content: 'Enter code';
-      opacity: .35;
-    }
-  }
-
-  & > .prism-editor__line-numbers {
-    display: block;
-  }
-
-  & > pre {
-    background: #1e2128 !important;
-    display: block;
+    background: $block-editor-color-code-bg;
+    border-radius: $block-editor-form-input-border-radius;
+    box-shadow: 2px 4px 26px $block-editor-color-shadow;
+    outline: none;
+    width: 100%;
 
     &:empty {
-      &:before {
-        content: 'Enter HTML code';
-        opacity: .35;
-      }
+        &:before {
+            content: 'Enter code';
+            opacity: .35;
+        }
     }
 
-    code {
-      background: transparent !important;
-      padding: 0!important;
-    }
-  }
-
-  &-lang {
-    position: absolute;
-    right: 40px;
-    top: 24px;
-
-    .multiselect__content {
-      margin: 0!important;
+    & > .prism-editor__line-numbers {
+        display: block;
     }
 
-    .multiselect__element {
-      padding: 0!important;
+    & > pre {
+        background: $block-editor-color-code-bg !important;
+        display: block;
+
+        &:empty {
+            &:before {
+                content: 'Enter HTML code';
+                opacity: .35;
+            }
+        }
+
+        code {
+            background: transparent !important;
+            padding: 0 !important;
+        }
     }
 
-    .multiselect__option:after {
-      display: none;
+    &-lang {
+        position: absolute;
+        right: 40px;
+        top: 24px;
+
+        .multiselect__content {
+            margin: 0 !important;
+        }
+
+        .multiselect__element {
+            padding: 0 !important;
+        }
+
+        .multiselect__option:after {
+            display: none;
+        }
     }
-  }
+
+    & + .publii-block-code-lang {
+
+        .multiselect {            
+
+            &__tags {
+                background: #3b3f48;
+                border: none;               
+            }           
+
+            &__single {
+                background: inherit;
+                color: $block-editor-color-light-dark;
+            }
+
+            &__select {                
+                &::before {
+                    border-color: $block-editor-color-text-medium transparent transparent;
+                }
+            }
+            
+            &__content-wrapper {
+                 background: #3b3f48;
+                 border: none;     color: $block-editor-color-light-dark;
+            }
+
+            &__option {
+                padding: 7px;
+                min-height: 30px;
+
+                &--highlight {
+                    background: $block-editor-color-primary;
+                }
+
+                &.multiselect__option--selected {
+                    background: $block-editor-color-primary;
+                    color: $block-editor-color-light;
+                }
+            }
+
+            &__input {
+                background: none !important;
+                
+                &::placeholder {
+                     color: $block-editor-color-light-dark;
+                }
+            }
+        }
+    }
 }
+
 </style>

@@ -1,19 +1,20 @@
 $block-editor-color-primary: #5da4ef;
+$block-editor-color-primary-dark: #4F94DD;
 $block-editor-color-danger: #ef5350;
 $block-editor-color-yellow-dark: #ffc400;
 $block-editor-color-yellow-light: #FFF8E1;
-$block-editor-color-primary-dark: #4F94DD;
 $block-editor-color-gradient-end: #e9f5ff;
 $block-editor-color-shadow: rgba(#3d464e, .25);
+$block-editor-color-code-bg: #1e2128;
 $block-editor-color-dark: #2a2e30;
 $block-editor-color-light: #ffffff;
-$color-editor-color-light-medium: #F6F7F8;
+$color-editor-color-light-medium: #F5F7F9;
 $block-editor-color-light-dark: #EDEEF1; 
 $block-editor-color-text: #3d464e;
 $block-editor-color-text-medium-dark: #6a7081;
 $block-editor-color-text-medium: #8e929d;
 $block-editor-form-input-border: #cbcdd4;
-$block-editor-form-input-border-radius: 4px; 
+$block-editor-form-input-border-radius: 3px; 
 
 
 // Breakpoints
@@ -33,12 +34,12 @@ $font-monospace: Menlo, Monaco, Consolas, Courier New, monospace;
 // Font weights 
 $font-weight-normal: 400;
 $font-weight-semibold: 500;
-$font-weight-bold: 600;
+$font-weight-bold: 700;
 
 // Modular scale
 
 $modularscale: (
-  base: 1rem,
+  base: 1em,
   ratio: 1.125 //$major-second 
 ); 
 

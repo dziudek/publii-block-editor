@@ -413,10 +413,13 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../../vendors/mappy-breakpoints';  
+@import '../../../vendors/modularscale'; 
+@import '../../../assets/functions.scss';
 @import '../../../assets/variables.scss';
+@import '../../../assets/mixins.scss';  
 
-.publii-block-image {
-  margin: 20px 0 0 0;
+.publii-block-image { 
   outline: none;
   position: relative;
 
@@ -430,14 +433,14 @@ export default {
 
   & > figcaption {
     display: block;
-    padding: 0.8rem 0 0;
+    padding: baseline(3) 0 0;
   }
 
   &-delete {
     align-items: center;
     background: $block-editor-color-danger;
     border: none;
-    border-radius: 3px;
+    border-radius: $block-editor-form-input-border-radius;
     color: $block-editor-color-light;
     cursor: pointer;
     display: flex;
@@ -460,7 +463,7 @@ export default {
 
   &-form {
     display: none;
-    padding: 20px 0;
+    padding: baseline(5) 0;
 
     &.is-visible {
       display: block;
@@ -475,7 +478,7 @@ export default {
       font-size: inherit;
       line-height: inherit;
       outline: none;
-      padding: 20px;
+      padding: baseline(5);
       width: 100%;
     }
 

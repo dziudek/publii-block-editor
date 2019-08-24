@@ -73,8 +73,14 @@ export default {
 
 <style lang="scss">
 .publii-block-readmore {
+@import '../../../vendors/mappy-breakpoints';  
+@import '../../../vendors/modularscale'; 
+@import '../../../assets/functions.scss';
+@import '../../../assets/variables.scss';
+@import '../../../assets/mixins.scss';  
+    
   caret-color: transparent;
-  margin: 32px 0;
+  margin: baseline(7) 0;
   outline: none;
   position: relative;
   width: 100%;
@@ -86,12 +92,12 @@ export default {
   }
 
   &:after {
-    background: #FFF;
+    background: $block-editor-color-light;
     border: 1px solid;
-    border-radius: 3px;
+    border-radius: $block-editor-form-input-border-radius;
     content: "Read More";
     display: inline-block;
-    font-size: 12px;
+    font-size: ms(-3);
     left: 50%;
     padding: 6px 16px;
     position: absolute;
