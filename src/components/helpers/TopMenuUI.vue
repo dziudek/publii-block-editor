@@ -32,6 +32,13 @@
       <icon :name="button.icon" />
     </button>
     <button
+      v-if="$parent.$parent.blockType !== 'publii-readmore'"
+      class="wrapper-ui-top-menu-button"
+      tabindex="-1"
+      @click.stop="showAdvancedConfig(); resetDeleteConfirmation();">
+      <icon name="gear" />
+    </button>
+    <button
       v-if="!confirmDelete"
       class="wrapper-ui-top-menu-button"
       tabindex="-1"
@@ -40,17 +47,10 @@
     </button>
     <button
       v-if="confirmDelete"
-      class="wrapper-ui-top-menu-button top-menu-button-trash"
+      class="wrapper-ui-top-menu-button top-menu-button-trash is-active"
       tabindex="-1"
       @click.stop="deleteBlock">
       <icon name="open-trash" />
-    </button>
-    <button
-      v-if="$parent.$parent.blockType !== 'publii-readmore'"
-      class="wrapper-ui-top-menu-button"
-      tabindex="-1"
-      @click.stop="showAdvancedConfig(); resetDeleteConfirmation();">
-      <icon name="gear" />
     </button>
   </div>
 </template>

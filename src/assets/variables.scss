@@ -1,5 +1,5 @@
-$block-editor-color-primary: #5da4ef;
-$block-editor-color-primary-dark: #4F94DD;
+$block-editor-color-primary: #42a5f5;
+$block-editor-color-primary-dark: #2a99f4;
 $block-editor-color-danger: #ef5350;
 $block-editor-color-yellow-dark: #ffc400;
 $block-editor-color-yellow-light: #FFF8E1;
@@ -82,6 +82,6 @@ $h5: (
 	max: (ms(1))
 );
 $h6: ( 
-	min: (ms(-1)),
+	min: (ms(0)),
 	max: (ms(0)) 
 );

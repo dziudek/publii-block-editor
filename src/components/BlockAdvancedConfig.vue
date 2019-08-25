@@ -51,7 +51,7 @@
         <button @click="save()">
           Save
         </button>
-        <button @click="hide()">
+        <button @click="hide()" class="outline">
           Cancel
         </button>
       </div>
@@ -127,17 +127,16 @@ export default {
 
 .block-advanced-config {
   background: $block-editor-color-light;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
   border-radius: 6px;
   box-shadow: 0 0 32px $block-editor-color-shadow;
-  padding: 20px;
+  padding: 2rem;
   transform: scale(.5);
   transition: all .24s cubic-bezier(0, 0, 0.25, 0.99);
   width: 580px;
 
   &-overlay {
     align-items: center;
-    background: rgba(255, 255, 255, .9);
+    background: rgba($block-editor-color-code-bg, .3);
     display: flex;
     height: 100%;
     justify-content: center;
@@ -161,7 +160,7 @@ export default {
   }
 
   &-field {
-    margin: 0 0 10px 0;
+    margin: 0 0 16px 0;
 
     &-help {
       align-items: center;
@@ -171,7 +170,7 @@ export default {
       cursor: help;
       display: inline-flex;
       font-size: 10px;
-      font-weight: bold;
+      font-weight: $font-weight-bold;
       height: 14px;
       justify-content: center;
       position: relative;
@@ -183,20 +182,64 @@ export default {
       color: $block-editor-color-text;
       display: block;
       font-size: 14px;
-      padding-bottom: 5px;
+      padding-bottom: 8px;
     }
 
-    input {
+    input,
+    select {
       border: 1px solid $block-editor-form-input-border;
       border-radius: $block-editor-form-input-border-radius;
       color: $block-editor-color-text;
+      display: block;
       font-size: 16px;
-      padding: 8px 12px;
+      padding: 14px;
       width: 100%;
 
       &[disabled] {
         opacity: .5;
         pointer-events: none;
+      }
+    }
+
+    select {
+      appearance: none;
+      background-color: #fff;
+      max-width: 100%;
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  &-buttons {    
+      margin: 2rem -2rem -2rem;
+
+    button {
+      background: $block-editor-color-primary;
+      border: none;
+      box-shadow: none;
+      border-bottom-left-radius: $block-editor-form-input-border-radius;
+      border-top: 1px solid $block-editor-color-primary;
+      color: $block-editor-color-light;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: $font-weight-semibold;
+      line-height: 1;      
+      width: 50%;
+      padding: 18px;
+      transition: all .25s ease-out;
+
+      &:hover {
+        background: $block-editor-color-primary-dark;
+      }
+
+      &.outline {
+        background: transparent;
+        border-top: 1px solid #ddd;
+        color: $block-editor-color-text-medium-dark;
+
+        &:hover {
+          background: $color-editor-color-light-medium;
+        }
       }
     }
   }
