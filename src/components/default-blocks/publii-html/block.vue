@@ -106,7 +106,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../../vendors/mappy-breakpoints';
 @import '../../../vendors/modularscale';
 @import '../../../assets/functions.scss';
 @import '../../../assets/variables.scss';
