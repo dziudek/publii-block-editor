@@ -66,14 +66,12 @@
         @keyup.enter="save()" />
       <div class="block-link-popup-link-switcher">
         <switcher
-          :is-mini="true"
           v-model="link.targetBlank" />
         Open in new tab
       </div>
 
       <div class="block-link-popup-link-switcher">
         <switcher
-          :is-mini="true"
           v-model="link.nofollow" />
         Add rel="nofollow" attribute
       </div>
@@ -82,7 +80,7 @@
         <button @click="save()">
           Save
         </button>
-        <button @click="hide()">
+        <button @click="hide()" class="outline">
           Cancel
         </button>
       </div>
@@ -188,16 +186,16 @@ export default {
 
 .block-link-popup {
   background: $block-editor-color-light;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
-  border-radius: $block-editor-form-input-border-radius;
-  padding: 20px;
-  transform: translateY(30px);
-  transition: all .3s ease-out;
-  width: 320px;
+  border-radius: 6px;
+  box-shadow: 0 0 32px $block-editor-color-shadow;
+  padding: 2rem;
+  transform: scale(.5);
+  transition: all .24s cubic-bezier(0, 0, 0.25, 0.99);
+  width: 580px;
 
   &-overlay {
     align-items: center;
-    background: rgba(255, 255, 255, .9);
+    background: rgba($block-editor-color-code-bg, .3);
     display: flex;
     height: 100%;
     justify-content: center;
@@ -215,7 +213,7 @@ export default {
       pointer-events: auto;
 
       .block-link-popup {
-        transform: translateY(0);
+        transform: scale(1);
       }
     }
   }
@@ -226,50 +224,50 @@ export default {
     &-type {
       border-radius: $block-editor-form-input-border-radius;
       display: flex;
+      justify-content: space-between;
       margin: 3px 0 12px 0;
 
       &-item {
-        border: 1px solid $block-editor-form-input-border;
-        border-right: none;
+        background: $color-editor-color-light-medium;
+        border-radius: $block-editor-form-input-border-radius;
         cursor: pointer;
         font-size: 12px;
-        padding: 5px;
+        font-weight: 600;
+        padding: 12px;
         text-align: center;
-        width: 25%;
+        text-transform: uppercase;
+        transition: all .24s ease-out;
+        user-select: none;
+        width: 24%;
 
-        &:first-child {
-          border-radius: 20px 0 0 20px;
-        }
-
-        &:last-child {
-          border-radius: 0 20px 20px 0;
-          border-right: 1px solid $block-editor-form-input-border;
+        &:hover {
+           background: $block-editor-color-light-dark;
         }
 
         &.is-active {
-          background: $block-editor-color-primary;
-          border-color: $block-editor-color-primary;
-          color: $block-editor-color-light;
+          background: $block-editor-color-gradient-end;
+          font-weight: $font-weight-bold;
+          color: $block-editor-color-primary;
         }
       }
     }
 
     &-external-input {
-      background: $block-editor-color-light-dark;
-      border: none;
+      border: 1px solid $block-editor-form-input-border;
       border-radius: $block-editor-form-input-border-radius;
-      padding: 8px;
-      margin-bottom: 12px;
-      outline: none;
+      color: $block-editor-color-text;
+      display: block;
+      font-size: 16px;
+      margin: 32px 0 24px;
+      padding: 14px;
       width: 100%;
     }
 
     &-switcher {
       align-items: center;
-      color: $block-editor-color-text-medium;
+      color: $block-editor-color-dark;
       display: flex;
-      font-size: 12px;
-      margin-bottom: 2px;
+      margin-bottom: 12px;
 
       .switcher {
         top: 0;
@@ -277,6 +275,45 @@ export default {
 
       &:last-of-type {
         margin-bottom: 12px;
+      }
+    }
+  }
+
+  .multiselect {
+    margin: 32px 0 24px;
+  }
+
+  &-buttons {
+    margin: 3rem -2rem -2rem;
+
+    button {
+      background: $block-editor-color-primary;
+      border: none;
+      box-shadow: none;
+      border-bottom-left-radius: 6px;
+      border-top: 1px solid $block-editor-color-primary;
+      color: $block-editor-color-light;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: $font-weight-semibold;
+      line-height: 1;
+      width: 50%;
+      padding: 18px;
+      transition: all .25s ease-out;
+
+      &:hover {
+        background: $block-editor-color-primary-dark;
+      }
+
+      &.outline {
+        background: transparent;
+        border-bottom-right-radius: 6px;
+        border-top: 1px solid #ddd;
+        color: $block-editor-color-text-medium-dark;
+
+        &:hover {
+          background: $color-editor-color-light-medium;
+        }
       }
     }
   }

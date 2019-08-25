@@ -203,27 +203,26 @@ export default {
 
     select {
       appearance: none;
-      background-color: #fff;
+      background-color: $block-editor-color-light;
       max-width: 100%;
       margin: 0;
-      width: 100%;
     }
   }
 
-  &-buttons {    
-      margin: 2rem -2rem -2rem;
+  &-buttons {
+      margin: 3rem -2rem -2rem;
 
     button {
       background: $block-editor-color-primary;
       border: none;
       box-shadow: none;
-      border-bottom-left-radius: $block-editor-form-input-border-radius;
+      border-bottom-left-radius: 6px;
       border-top: 1px solid $block-editor-color-primary;
       color: $block-editor-color-light;
       cursor: pointer;
       font-size: 15px;
       font-weight: $font-weight-semibold;
-      line-height: 1;      
+      line-height: 1;
       width: 50%;
       padding: 18px;
       transition: all .25s ease-out;
@@ -234,6 +233,7 @@ export default {
 
       &.outline {
         background: transparent;
+        border-bottom-right-radius: 6px;
         border-top: 1px solid #ddd;
         color: $block-editor-color-text-medium-dark;
 

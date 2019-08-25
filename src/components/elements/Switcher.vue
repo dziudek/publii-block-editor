@@ -121,31 +121,5 @@ export default {
     opacity: .5;
     pointer-events: none;
   }
-
-  &.is-mini {
-    background: lighten($block-editor-color-text, 35%);
-    border-radius: 5px;
-    height: 10px;
-    margin-right: .5rem;
-    width: 18px;
-
-    &:after {
-      background: $block-editor-color-light;
-      border-radius: 50%;
-      height: 6px;
-      left: 2px;
-      top: 2px;
-      width: 6px;
-    }
-
-    &.is-checked {
-      background: $block-editor-color-primary;
-
-      &:after {
-        background: $block-editor-color-light;
-        left: 10px;
-      }
-    }
-  }
 }
 </style>
