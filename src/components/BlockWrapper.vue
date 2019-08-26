@@ -35,6 +35,15 @@
           </div>
       </div>
     </div>
+
+    <div class="wrapper-ui-add-below">
+      <button
+        class="wrapper-ui-add-below-button"
+        @click.stop="addBlockBelow"
+        tabindex="-1">
+        <icon name="add" />
+      </button>
+    </div>
   </div>
 </template>
 
@@ -119,6 +128,9 @@ export default {
     moveDown () {
       let startBlockTop = this.$refs['block-wrapper'].getBoundingClientRect().top;
       this.$bus.$emit('block-editor-move-block-down', this.id, startBlockTop);
+    },
+    addBlockBelow () {
+      this.$bus.$emit('block-editor-add-block-below', this.id);
     }
   },
   beforeDestroy () {
@@ -221,6 +233,53 @@ export default {
     right: -50px;
     top: -41px;
     z-index: 1;
+
+    &-add-below {
+      bottom: 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      left: 32px;
+      opacity: 0;
+      padding: 0 !important;
+      position: absolute;
+      transition: opacity .25s ease-out;
+      width: calc(100% - 64px);
+
+      &-button {
+        animation: fadeInAddButton .25s ease-out forwards;
+        background: transparent;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        height: 24px;
+        outline: none;
+        position: relative;
+        top: 5px;
+        width: 34px;
+
+        @keyframes fadeInAddButton {
+          0% {
+            opacity: 0;
+            transform: scale(.5) ;
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        & > svg {
+          fill: $block-editor-color-primary-dark !important;
+          vertical-align:text-bottom;
+          transition: all .25s ease-out;
+        }
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
 
     .wrapper-ui-show-options {
       height: 44px;
