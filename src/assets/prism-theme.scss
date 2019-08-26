@@ -122,4 +122,16 @@
     .token.entity {
         cursor: help;
     }
+
+    .prism-editor-wrapper {
+        max-height: 515px;
+    }
+}
+
+@media (max-height: 700px) {
+    .editor > .editor-inner { 
+        .prism-editor-wrapper {
+            max-height: 395px;
+        }
+    }
 }
