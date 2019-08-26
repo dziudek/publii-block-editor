@@ -364,6 +364,7 @@ export default {
 @import '../assets/prism-theme.scss';
 
 .editor {
+  min-height: calc(100vh - 50px);
   padding: 0 0 50px 0;
   position: relative;
   width: 100%;
@@ -378,6 +379,7 @@ export default {
       position: absolute;
       top: 0;
       transform: translateX(-50%);
+      width: $editor-width;
       z-index: 0;
     }
   }
