@@ -221,10 +221,13 @@ export default {
     & + .publii-block-code-lang {
 
         .multiselect {
-
+  font-size: 13px;
             &__tags {
                 background: #3b3f48;
                 border: none;
+                 height: 32px;
+        min-height: 100%;
+        padding: 6px 40px 6px 14px;
             }
 
             &__single {
@@ -233,6 +236,7 @@ export default {
             }
 
             &__select {
+                height: 28px;
                 &::before {
                     border-color: $block-editor-color-text-medium transparent transparent;
                 }
@@ -245,7 +249,7 @@ export default {
             }
 
             &__option {
-                padding: 7px 10px;
+                padding: 7px 14px;
                 min-height: 30px;
 
                 &--highlight {
@@ -261,6 +265,7 @@ export default {
             &__input {
                 background: none !important;
                 color: $block-editor-color-light;
+                font-size: 13px;
 
                 &::placeholder {
                      color: $block-editor-color-light-dark;
