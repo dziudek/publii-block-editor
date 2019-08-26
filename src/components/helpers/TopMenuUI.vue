@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     makeConversion (outputType, convertCallback) {
-      let transformedData = convertCallback(this.$parent.config, this.$parent.content, this.$parent.editor);
+      let transformedData = convertCallback(this.$parent.config, this.$parent.content, this.$parent.editor, this.$parent.$refs['block']);
       this.$bus.$emit('block-editor-convert-block', this.$parent.id, outputType, transformedData);
     },
     deleteBlock () {

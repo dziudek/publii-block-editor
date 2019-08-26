@@ -11,11 +11,13 @@
 
     <top-menu
       ref="top-menu"
+      :conversions="conversions"
       :config="topMenuConfig" />
   </div>
 </template>
 
 <script>
+import AvailableConversions from './conversions.js';
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
@@ -54,7 +56,8 @@ export default {
           onClick: function () { this.setType('dot'); },
           icon: 'dot'
         }
-      ]
+      ],
+      conversions: AvailableConversions
     };
   },
   beforeCreate () {

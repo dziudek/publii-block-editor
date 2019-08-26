@@ -20,6 +20,25 @@ const availableConversions = [
         config: newConfig
       };
     }
+  },
+  {
+    'icon': 'html',
+    'name': 'HTML',
+    'type': 'publii-html',
+    'convert': function (config, content, editorInstance, rawBlock) {
+      let newContent = rawBlock.outerHTML.replace(/<h([0-9]{1,1}).*?>/gmi, '<h$1>');
+      let newConfig = {
+        advanced: {
+          cssClasses: config.advanced.cssClasses,
+          id: config.advanced.id
+        }
+      };
+
+      return {
+        content: newContent,
+        config: newConfig
+      };
+    }
   }
 ];
 

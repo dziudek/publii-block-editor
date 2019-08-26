@@ -93,11 +93,8 @@ const availableConversions = [
     'icon': 'html',
     'name': 'HTML',
     'type': 'publii-html',
-    'convert': function (config, content, editorInstance) {
-      console.log('C:', content);
-      // eslint-disable-next-line
-      let newContent = editorInstance.extensions.conversionHelpers.stripTags(content.replace(/<br>/gmi, "\n"));
-      console.log('NC:', newContent);
+    'convert': function (config, content, editorInstance, rawBlock) {
+      let newContent = rawBlock.outerHTML.replace(/<p.*?>/gmi, '<p>');
       let newConfig = {
         advanced: {
           cssClasses: config.advanced.cssClasses,
