@@ -60,16 +60,6 @@ export default {
           activeState: function () { return this.config.listType === 'ol'; },
           onClick: function () { this.setListType('ol'); },
           icon: 'ordered-list'
-        },
-        {
-          activeState: function () { return false; },
-          onClick: function () { return this.indentList(); },
-          icon: 'nesting'
-        },
-        {
-          activeState: function () { return false; },
-          onClick: function () { return this.outdentList(); },
-          icon: 'flattening'
         }
       ]
     };
@@ -114,21 +104,6 @@ export default {
     setListType (type) {
       this.save();
       this.config.listType = type;
-    },
-    indentList () {
-      document.execCommand('indent', false, null);
-
-      setTimeout(() => {
-        if (
-          this.$refs['block'].innerHTML.indexOf('<ul><ul>') > -1 ||
-          this.$refs['block'].innerHTML.indexOf('<ol><ol>') > -1
-        ) {
-          document.execCommand('undo', false, null);
-        }
-      }, 0);
-    },
-    outdentList () {
-      document.execCommand('outdent', false, null);
     },
     save () {
       this.content = this.$refs['block'].innerHTML;

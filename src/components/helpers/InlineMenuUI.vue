@@ -46,6 +46,18 @@
         @click.stop="$parent.doInlineOperation('mark');">
         <icon name="marker" />
       </button>
+      <button
+        v-if="$parent.$parent.blockType === 'publii-list'"
+        :class="{ 'wrapper-ui-inline-menu-button': true }"
+        @click.stop="$parent.doInlineOperation('indent');">
+        <icon name="nesting" />
+      </button>
+      <button
+        v-if="$parent.$parent.blockType === 'publii-list'"
+        :class="{ 'wrapper-ui-inline-menu-button': true }"
+        @click.stop="$parent.doInlineOperation('outdent');">
+        <icon name="flattening" />
+      </button>
     </div>
   </div>
 </template>

@@ -123,6 +123,8 @@ export default {
         case 'mark': this.execCommand('mark', savedSel); break;
         case 'link': this.addLink(); break;
         case 'unlink': this.removeLink(savedSel); break;
+        case 'indent': this.indentList(); break;
+        case 'outdent': this.outdentList(); break;
       }
 
       this.analyzeSelectedText(sel, savedSel);
@@ -164,6 +166,21 @@ export default {
           this.wrapElementIntoRangy(selection.baseNode, startID, endID);
         }
       }
+    },
+    indentList () {
+      document.execCommand('indent', false, null);
+
+      setTimeout(() => {
+        if (
+          this.$refs['block'].innerHTML.indexOf('<ul><ul>') > -1 ||
+          this.$refs['block'].innerHTML.indexOf('<ol><ol>') > -1
+        ) {
+          document.execCommand('undo', false, null);
+        }
+      }, 0);
+    },
+    outdentList () {
+      document.execCommand('outdent', false, null);
     },
     addLink () {
       let selection = document.querySelector('.is-highlighted');
