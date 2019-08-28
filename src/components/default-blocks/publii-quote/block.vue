@@ -4,13 +4,14 @@
       <div
         :class="{ 'publii-block-quote-form': true, 'is-visible': view === 'code' }"
         ref="block">
-        <textarea
+        <div
+          class="publii-block-quote-text"
           @keyup="getFocusFromTab($event); handleCaretText($event)"
           @keydown="handleTextKeyboard"
           @blur="save"
           ref="contentText"
-          placeholder="Quote text"
-          v-model="content.text"></textarea>
+          contenteditable="true"
+          v-html="content.text"></div>
         <input
           type="text"
           @keyup="handleCaretAuthor($event)"
@@ -77,7 +78,7 @@ export default {
   watch: {
     'view': function (newValue, oldValue) {
       if (oldValue === 'code' && newValue === 'preview') {
-        this.setCursorAtEndOfElement('contentText', false);
+        this.setCursorAtEndOfElement('contentText', true);
       }
     }
   },
@@ -177,7 +178,6 @@ export default {
 
       if (
         !this.content.text &&
-        !this.content.author &&
         newView === 'preview'
       ) {
         this.view = 'code';
@@ -188,7 +188,7 @@ export default {
       }
     },
     save () {
-      this.content.text = this.$refs['contentText'].value;
+      this.content.text = this.$refs['contentText'].innerHTML;
       this.content.author = this.$refs['contentAuthor'].value;
 
       this.$bus.$emit('block-editor-save-block', {
@@ -219,8 +219,7 @@ export default {
       display: block;
     }
 
-    input,
-    textarea {
+    input {
       border: 1px solid $block-editor-form-input-border;
       border-radius: $block-editor-form-input-border-radius;
       display: block;
@@ -234,11 +233,23 @@ export default {
     input {
       padding: 10px 20px;
     }
+  }
 
-    textarea {
-      min-height: 180px;
-      margin-bottom: 16px;
-      resize: vertical;
+  &-text {
+    border: 1px solid $block-editor-form-input-border;
+    border-radius: $block-editor-form-input-border-radius;
+    font-size: inherit;
+    line-height: inherit;
+    margin-bottom: 16px;
+    outline: none;
+    padding: 20px;
+    width: 100%;
+
+    &:empty {
+      &:before {
+        content: 'Quote text';
+        opacity: .6;
+      }
     }
   }
 }
