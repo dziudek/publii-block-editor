@@ -14,6 +14,7 @@ export default {
   },
   data () {
     return {
+      inlineMenuContainer: 'block',
       selectedTextContains: {
         bold: false,
         italic: false,
@@ -51,7 +52,7 @@ export default {
       this.$rangy.removeMarkers(savedSel);
       let oRange = sel.getRangeAt(0);
       let oRect = oRange.getBoundingClientRect();
-      let wrapperRect = this.$refs['block'].getBoundingClientRect();
+      let wrapperRect = this.$refs[this.inlineMenuContainer].getBoundingClientRect();
       let inlineMenuLeft = (((oRect.left - wrapperRect.left) + (oRect.width / 2)) + 20) + 'px';
       let inlineMenuTop = (oRect.top - wrapperRect.top - 20) + 'px';
       this.$refs['inline-menu'].setPosition(inlineMenuLeft, inlineMenuTop);
@@ -93,7 +94,7 @@ export default {
 
       let startID = rangyData.rangeInfos[0].startMarkerId;
       let endID = rangyData.rangeInfos[0].endMarkerId;
-      let sourceCode = this.$refs['block'].innerHTML;
+      let sourceCode = this.$refs[this.inlineMenuContainer].innerHTML;
       let partToAnalyze = sourceCode.split(startID)[1];
       partToAnalyze = partToAnalyze.split(endID)[0];
       let results = {};
@@ -102,7 +103,7 @@ export default {
         results[tagNames[i]] = partToAnalyze.indexOf('<' + tagNames[i]) > -1;
 
         if (results[tagNames[i]] === false) {
-          if (this.$refs['block'].querySelector('#' + startID).parentNode.tagName === tagNames[i].toUpperCase()) {
+          if (this.$refs[this.inlineMenuContainer].querySelector('#' + startID).parentNode.tagName === tagNames[i].toUpperCase()) {
             results[tagNames[i]] = true;
           }
         }
@@ -172,8 +173,8 @@ export default {
 
       setTimeout(() => {
         if (
-          this.$refs['block'].innerHTML.indexOf('<ul><ul>') > -1 ||
-          this.$refs['block'].innerHTML.indexOf('<ol><ol>') > -1
+          this.$refs[this.inlineMenuContainer].innerHTML.indexOf('<ul><ul>') > -1 ||
+          this.$refs[this.inlineMenuContainer].innerHTML.indexOf('<ol><ol>') > -1
         ) {
           document.execCommand('undo', false, null);
         }
@@ -209,7 +210,7 @@ export default {
       this.selectedTextContains['link'] = false;
     },
     checkTagPosition (tag, startID, endID) {
-      let codeToAnalyze = this.$refs['block'].innerHTML.split(startID)[1];
+      let codeToAnalyze = this.$refs[this.inlineMenuContainer].innerHTML.split(startID)[1];
       codeToAnalyze = codeToAnalyze.split(endID)[0];
 
       if (codeToAnalyze.indexOf('<' + tag) > -1) {
@@ -240,7 +241,7 @@ export default {
       element.parentNode.insertBefore(spanEnd, element.nextSibling);
 
       let rawText = element.innerText.replace(/&nbsp;/gmi, '');
-      let textToModify = this.$refs['block'].innerHTML;
+      let textToModify = this.$refs[this.inlineMenuContainer].innerHTML;
       textToModify = textToModify.split('<span id="' + startID + '"></span>');
       textToModify[1] = textToModify[1].split('<span id="' + endID + '"></span>');
 
@@ -252,7 +253,7 @@ export default {
         textToModify[1][1]
       ].join('');
 
-      this.$refs['block'].innerHTML = modifiedText;
+      this.$refs[this.inlineMenuContainer].innerHTML = modifiedText;
     }
   }
 }

@@ -9,6 +9,8 @@
           @keyup="getFocusFromTab($event); handleCaretText($event)"
           @keydown="handleTextKeyboard"
           @blur="save"
+          @paste="pastePlainText"
+          @mouseup="handleMouseUp"
           ref="contentText"
           contenteditable="true"
           v-html="content.text"></div>
@@ -30,6 +32,8 @@
       </figure>
     </div>
 
+    <inline-menu ref="inline-menu" />
+
     <top-menu
       ref="top-menu"
       :conversions="conversions"
@@ -43,6 +47,8 @@ import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import HasPreview from './../../mixins/HasPreview.vue';
+import InlineMenu from './../../mixins/InlineMenu.vue';
+import InlineMenuUI from './../../helpers/InlineMenuUI.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
@@ -50,9 +56,11 @@ export default {
   mixins: [
     Block,
     ContentEditableImprovements,
-    HasPreview
+    HasPreview,
+    InlineMenu
   ],
   components: {
+    'inline-menu': InlineMenuUI,
     'top-menu': TopMenuUI
   },
   data () {
@@ -72,7 +80,8 @@ export default {
         text: '',
         author: ''
       },
-      conversions: AvailableConversions
+      conversions: AvailableConversions,
+      inlineMenuContainer: 'contentText'
     };
   },
   watch: {
