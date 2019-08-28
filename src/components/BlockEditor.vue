@@ -131,7 +131,6 @@ export default {
     this.$bus.$on('block-editor-save-block', this.saveBlock);
     this.$bus.$on('block-editor-delete-block', this.deleteBlock);
     this.$bus.$on('block-editor-add-block', this.addNewBlock);
-    this.$bus.$on('block-editor-add-block-below', this.addBlockBelow);
     this.$bus.$on('block-editor-merge-paragraphs', this.mergeParagraphs);
     this.$bus.$on('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
     this.$bus.$on('block-editor-ui-opened-for-block', this.uiOpenedForBlock);
@@ -251,9 +250,6 @@ export default {
         }
       }, 0);
     },
-    addBlockBelow (blockID) {
-      this.addNewBlock('publii-paragraph', blockID);
-    },
     addNewParagraphAtEnd () {
       let lastContentBlockIndex = this.content.length - 1;
       let lastContentBlock = this.content[lastContentBlockIndex];
@@ -351,7 +347,6 @@ export default {
     this.$bus.$off('block-editor-save-block', this.saveBlock);
     this.$bus.$off('block-editor-delete-block', this.deleteBlock);
     this.$bus.$off('block-editor-add-block', this.addNewBlock);
-    this.$bus.$off('block-editor-add-block-below', this.addBlockBelow);
     this.$bus.$off('block-editor-merge-paragraphs', this.mergeParagraphs);
     this.$bus.$off('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
     this.$bus.$off('block-editor-ui-opened-for-block', this.uiOpenedForBlock);
