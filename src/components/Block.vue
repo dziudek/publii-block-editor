@@ -1,6 +1,5 @@
 <script>
 import AdvancedConfig from './mixins/AdvancedConfig.vue';
-import pasteRichText from './helpers/pasteRichText.js';
 
 export default {
   name: 'Block',
@@ -219,12 +218,6 @@ export default {
       let text = (e.originalEvent || e).clipboardData.getData('text/plain');
       // eslint-disable-next-line
       text = text.replace(/\n/gmi, '<br>');
-      document.execCommand('insertHTML', false, text);
-    },
-    pasteRichText (e) {
-      e.preventDefault();
-      let text = (e.originalEvent || e).clipboardData.getData('text/html');
-      text = pasteRichText(text);
       document.execCommand('insertHTML', false, text);
     },
     saveIsNeeded (id) {
