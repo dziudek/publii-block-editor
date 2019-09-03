@@ -85,6 +85,10 @@ export default {
 
       if (this.uiOpened) {
         this.$bus.$emit('block-editor-clear-text-selection', this.id);
+
+        if (this.blockType === 'publii-paragraph') {
+          this.$bus.$emit('block-editor-close-new-block-ui', this.id);
+        }
       }
     },
     setSelectionState (newState) {

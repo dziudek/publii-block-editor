@@ -232,6 +232,7 @@ export default {
   mounted () {
     this.content = this.inputContent;
     this.$bus.$on('block-editor-deselect-blocks', this.deselectBlock);
+    this.$bus.$on('block-editor-close-new-block-ui', this.hideNewBlockUI);
   },
   methods: {
     refresh () {
@@ -415,6 +416,7 @@ export default {
   },
   beforeDestroy () {
     this.$bus.$off('block-editor-deselect-blocks', this.deselectBlock);
+    this.$bus.$off('block-editor-close-new-block-ui', this.hideNewBlockUI);
   }
 }
 </script>
