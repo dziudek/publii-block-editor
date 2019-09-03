@@ -313,7 +313,9 @@ export default {
       this.view = 'code';
 
       setTimeout(() => {
-        this.setCursorAtEndOfElement('contentCaption', false);
+        if (!this.$parent.isSelected) {
+          this.setCursorAtEndOfElement('contentCaption', false);
+        }
       }, 0);
     },
     handleCaptionKeyboard (e) {
