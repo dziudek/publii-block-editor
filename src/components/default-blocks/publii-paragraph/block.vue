@@ -1,7 +1,7 @@
 <template>
   <div>
     <p
-      class="publii-block-paragraph"
+      :class="{ 'publii-block-paragraph': true, [config.advanced.style]: true }"
       :style="'text-align: ' + config.textAlign + ';'"
       ref="block"
       slot="block"
