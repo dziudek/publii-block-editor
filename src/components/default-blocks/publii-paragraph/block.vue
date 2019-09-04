@@ -406,7 +406,7 @@ export default {
     },
     addNewBlock (blockType) {
       this.$bus.$emit('block-editor-add-block', blockType, this.id);
-      this.$bus.$emit('block-editor-delete-block', this.id);
+      this.$bus.$emit('block-editor-delete-block', this.id, false);
       this.toggleNewBlockUI();
     },
     hideNewBlockUI (blockID) {

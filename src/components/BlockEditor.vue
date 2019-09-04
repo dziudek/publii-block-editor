@@ -190,12 +190,12 @@ export default {
         this.content[blockIndex].config = blockData.config;
       }
     },
-    deleteBlock (blockID) {
+    deleteBlock (blockID, addFocusToPreviousBlock = true) {
       let blockIndex = this.content.findIndex(el => el.id === blockID);
       this.content.splice(blockIndex, 1);
       this.state.selectedBlockID = false;
 
-      if (blockIndex > 0) {
+      if (blockIndex > 0 && addFocusToPreviousBlock) {
         this.$refs['block-' + this.content[blockIndex - 1].id][0].focus();
       }
 
@@ -248,7 +248,7 @@ export default {
             this.$refs['block-' + newBlockID][0].focus('start');
           }
         }
-      }, 0);
+      }, 50);
     },
     addNewParagraphAtEnd () {
       let lastContentBlockIndex = this.content.length - 1;
