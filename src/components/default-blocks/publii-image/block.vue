@@ -180,7 +180,7 @@ export default {
       this.isHovered = false;
     },
     drop (e) {
-      if (this.isInsidePublii) {
+      if (this.$ipcRenderer) {
         let files = e.dataTransfer.files;
         let siteName = window.app.$store.state.currentSite.config.name;
         this.imageUploadInProgress = true;
@@ -188,15 +188,13 @@ export default {
         if (!files[0] || !files[0].path) {
           this.imageUploadInProgress = false;
         } else {
-          const { ipcRenderer } = require('electron');
-
-          ipcRenderer.send('app-image-upload', {
+          this.$ipcRenderer.send('app-image-upload', {
             'id': this.editor.config.postID,
             'site': siteName,
             'path': files[0].path
           });
 
-          ipcRenderer.once('app-image-uploaded', (event, data) => {
+          this.$ipcRenderer.once('app-image-uploaded', (event, data) => {
             if (data.baseImage && data.baseImage.size && data.baseImage.size.length >= 2) {
               this.content.imageWidth = data.baseImage.size[0];
               this.content.imageHeight = data.baseImage.size[1];
@@ -216,11 +214,10 @@ export default {
       this.isHovered = false;
     },
     initFakeFilePicker () {
-      if (!this.isInsidePublii) {
+      if (!this.$ipcRenderer) {
         return;
       }
 
-      const { ipcRenderer } = require('electron');
       let imageUploader = document.getElementById('post-editor-fake-image-uploader');
 
       imageUploader.addEventListener('change', () => {
@@ -245,7 +242,7 @@ export default {
 
           this.imageUploadInProgress = true;
           // eslint-disable-next-line
-          ipcRenderer.send('app-image-upload', {
+          this.$ipcRenderer.send('app-image-upload', {
             id: this.postID,
             site: window.app.$store.state.currentSite.config.name,
             path: filePath,
@@ -253,7 +250,7 @@ export default {
           });
 
           // eslint-disable-next-line
-          ipcRenderer.once('app-image-uploaded', (event, data) => {
+          this.$ipcRenderer.once('app-image-uploaded', (event, data) => {
             this.content.imageWidth = data.baseImage.size[0];
             this.content.imageHeight = data.baseImage.size[1];
             this.content.image = data.baseImage.url;

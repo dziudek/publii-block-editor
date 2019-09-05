@@ -1,5 +1,12 @@
 <template>
   <div id="publii-block-editor">
+    <div
+      id="post-title"
+      ref="post-title"
+      class="post-editor-form-title"
+      contenteditable="true"
+      @keyup="updateTitle"></div>
+
     <block-editor ref="block-editor" />
   </div>
 </template>
@@ -29,11 +36,6 @@ export default {
   components: {
     BlockEditor
   },
-  computed: {
-    isInsidePublii () {
-      return !!window.process;
-    }
-  },
   mounted () {
     window.publiiBlockEditorInstance = this;
 
@@ -46,18 +48,63 @@ export default {
       tagNames: ['span', 'a']
     }));
 
-    if (this.isInsidePublii) {
-      const { ipcRenderer } = require('electron');
-      ipcRenderer.on('set-post-id', this.setPostID);
+    if (this.$ipcRenderer) {
+      this.$ipcRenderer.on('set-post-id', this.setPostID);
     }
-
-    console.log('INSIDE OR NOT:', this.isInsidePublii);
   },
   methods: {
     setPostID (postID) {
       console.log('POST ID SET TO:', postID);
       this.$refs['block-editor'].setPostID(postID);
+    },
+    updateTitle () {
+      let title = this.$refs['post-title'].innerText.replace(/\n/gmi, ' ');
+
+      if (this.$ipcRenderer) {
+        this.$ipcRenderer.sendToHost('editor-title-updated', title);
+        console.log('TITLE UPDATED:', title);
+      }
     }
   }
 }
 </script>
+
+<style>
+#post-title {
+  border: none;
+  box-shadow: none;
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, Arial, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 35px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 10% 26px;
+  outline: none;
+  padding: 0;
+  text-align: center;
+  width: 80%;
+}
+
+#post-title:empty {
+  color: rgba(29, 42, 56, .5);
+}
+
+#post-title:empty:before {
+  content: "Add post title"
+}
+
+@media (max-width: 1400px) {
+  #post-title {
+    font-size: 28px;
+    margin: 0 0 26px;
+  }
+}
+
+@media (max-width: 1600px) {
+  #post-title {
+    font-size: 28px;
+    margin: 0 0 26px;
+    width: 100%;
+  }
+}
+</style>

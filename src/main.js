@@ -70,6 +70,11 @@ Vue.config.productionTip = false;
 // Global components
 Vue.component('prism-editor', VuePrismEditor);
 
+if (window.process) {
+  const { ipcRenderer } = require('electron');
+  Vue.prototype.$ipcRenderer = ipcRenderer;
+}
+
 new Vue({
   render: h => h(PubliiBlockEditor)
 }).$mount('#app');
