@@ -71,7 +71,7 @@ Vue.config.productionTip = false;
 Vue.component('prism-editor', VuePrismEditor);
 
 if (window.process) {
-  const { ipcRenderer } = require('electron');
+  const { ipcRenderer } = window.require('electron');
   Vue.prototype.$ipcRenderer = ipcRenderer;
 }
 
