@@ -29,6 +29,11 @@ export default {
   components: {
     BlockEditor
   },
+  computed: {
+    isInsidePublii () {
+      return !!window.process;
+    }
+  },
   mounted () {
     window.publiiBlockEditorInstance = this;
 
@@ -40,9 +45,15 @@ export default {
       ignoreWhiteSpace: true,
       tagNames: ['span', 'a']
     }));
+
+    if (this.isInsidePublii) {
+      const { ipcRenderer } = require('electron');
+      ipcRenderer.on('set-post-id', this.setPostID);
+    }
   },
   methods: {
     setPostID (postID) {
+      console.log('POST ID SET TO:', postID);
       this.$refs['block-editor'].setPostID(postID);
     }
   }

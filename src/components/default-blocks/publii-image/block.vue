@@ -158,7 +158,7 @@ export default {
   },
   computed: {
     isInsidePublii () {
-      return !!document.getElementById('post-editor-fake-image-uploader');
+      return !!window.process;
     }
   },
   beforeCreate () {
