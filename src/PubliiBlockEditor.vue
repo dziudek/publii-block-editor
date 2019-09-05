@@ -50,12 +50,23 @@ export default {
 
     if (this.$ipcRenderer) {
       this.$ipcRenderer.on('set-post-id', this.setPostID);
+      this.$ipcRenderer.on('set-post-text', this.setPostText);
+      this.$ipcRenderer.on('set-post-title', this.setPostTitle);
     }
   },
   methods: {
     setPostID (event, postID) {
-      console.log('POST ID SET TO:', postID);
       this.$refs['block-editor'].setPostID(postID);
+    },
+    setPostText (event, postText) {
+      document.getElementById('post-editor').value = postText;
+
+      setTimeout(() => {
+        this.$bus.$emit('publii-block-editor-load');
+      }, 0);
+    },
+    setPostTitle (event, postTitle) {
+      this.$refs['post-title'].innerText = postTitle;
     },
     updateTitle () {
       let title = this.$refs['post-title'].innerText.replace(/\n/gmi, ' ');
