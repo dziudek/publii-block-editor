@@ -50,6 +50,8 @@ export default {
       const { ipcRenderer } = require('electron');
       ipcRenderer.on('set-post-id', this.setPostID);
     }
+
+    alert('INSIDE OR NOT:', this.isInsidePublii);
   },
   methods: {
     setPostID (postID) {
