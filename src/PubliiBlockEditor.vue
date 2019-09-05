@@ -53,7 +53,7 @@ export default {
     }
   },
   methods: {
-    setPostID (postID) {
+    setPostID (event, postID) {
       console.log('POST ID SET TO:', postID);
       this.$refs['block-editor'].setPostID(postID);
     },
@@ -62,7 +62,6 @@ export default {
 
       if (this.$ipcRenderer) {
         this.$ipcRenderer.sendToHost('editor-title-updated', title);
-        console.log('TITLE UPDATED:', title);
       }
     }
   }
