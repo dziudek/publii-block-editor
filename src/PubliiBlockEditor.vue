@@ -8,6 +8,7 @@
       @keyup="updateTitle"></div>
 
     <block-editor ref="block-editor" />
+    <textarea id="post-editor"></textarea>
   </div>
 </template>
 
@@ -52,6 +53,7 @@ export default {
       this.$ipcRenderer.on('set-post-id', this.setPostID);
       this.$ipcRenderer.on('set-post-text', this.setPostText);
       this.$ipcRenderer.on('set-post-title', this.setPostTitle);
+      this.$ipcRenderer.on('post-save', this.postSave);
     }
   },
   methods: {
@@ -74,6 +76,15 @@ export default {
       if (this.$ipcRenderer) {
         this.$ipcRenderer.sendToHost('editor-title-updated', title);
       }
+    },
+    postSave () {
+      this.$bus.$emit('publii-block-editor-save');
+
+      setTimeout(() => {
+        if (this.$ipcRenderer) {
+          this.$ipcRenderer.sendToHost('editor-post-saved', document.querySelector('#post-editor').value);
+        }
+      }, 500);
     }
   }
 }
@@ -93,6 +104,10 @@ export default {
   padding: 0;
   text-align: center;
   width: 80%;
+}
+
+#post-editor {
+  display: none;
 }
 
 #post-title:empty {
