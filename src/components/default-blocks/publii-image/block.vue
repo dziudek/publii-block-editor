@@ -242,6 +242,9 @@ export default {
             return;
           }
 
+          console.log('IMAGE UPLOADER FILES:', imageUploader.files);
+          console.log('FILE PATH', filePath);
+
           this.imageUploadInProgress = true;
           // eslint-disable-next-line
           this.$ipcRenderer.send('app-image-upload', {
