@@ -188,6 +188,8 @@ export default {
         if (!files[0] || !files[0].path) {
           this.imageUploadInProgress = false;
         } else {
+          console.log(files[0].path);
+
           this.$ipcRenderer.send('app-image-upload', {
             'id': this.editor.config.postID,
             'site': siteName,
