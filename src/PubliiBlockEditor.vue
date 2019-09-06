@@ -54,6 +54,7 @@ export default {
       this.$ipcRenderer.on('set-post-text', this.setPostText);
       this.$ipcRenderer.on('set-post-title', this.setPostTitle);
       this.$ipcRenderer.on('post-save', this.postSave);
+      this.$ipcRenderer.on('set-site-name', this.setSiteName);
     }
   },
   methods: {
@@ -85,6 +86,9 @@ export default {
           this.$ipcRenderer.sendToHost('editor-post-saved', document.querySelector('#post-editor').value);
         }
       }, 500);
+    },
+    setSiteName (siteName) {
+      window.publiiSiteName = siteName;
     }
   }
 }

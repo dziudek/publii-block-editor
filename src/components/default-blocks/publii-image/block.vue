@@ -182,7 +182,7 @@ export default {
     drop (e) {
       if (this.$ipcRenderer) {
         let files = e.dataTransfer.files;
-        let siteName = window.app.$store.state.currentSite.config.name;
+        let siteName = window.publiiSiteName;
         this.imageUploadInProgress = true;
 
         if (!files[0] || !files[0].path) {
@@ -244,7 +244,7 @@ export default {
           // eslint-disable-next-line
           this.$ipcRenderer.send('app-image-upload', {
             id: this.postID,
-            site: window.app.$store.state.currentSite.config.name,
+            site: window.publiiSiteName,
             path: filePath,
             imageType: 'contentImages'
           });

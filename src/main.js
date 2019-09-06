@@ -75,6 +75,8 @@ if (window.process) {
   Vue.prototype.$ipcRenderer = ipcRenderer;
 }
 
+window.publiiSiteName = '';
+
 new Vue({
   render: h => h(PubliiBlockEditor)
 }).$mount('#app');
