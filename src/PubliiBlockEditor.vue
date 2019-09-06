@@ -87,7 +87,7 @@ export default {
         }
       }, 500);
     },
-    setSiteName (siteName) {
+    setSiteName (event, siteName) {
       window.publiiSiteName = siteName;
     }
   }

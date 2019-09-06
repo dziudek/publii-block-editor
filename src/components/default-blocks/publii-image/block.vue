@@ -188,8 +188,6 @@ export default {
         if (!files[0] || !files[0].path) {
           this.imageUploadInProgress = false;
         } else {
-          console.log('FILES:', files);
-
           this.$ipcRenderer.send('app-image-upload', {
             'id': this.editor.config.postID,
             'site': siteName,
@@ -241,9 +239,6 @@ export default {
           if (!filePath) {
             return;
           }
-
-          console.log('IMAGE UPLOADER FILES:', imageUploader.files);
-          console.log('FILE PATH', filePath);
 
           this.imageUploadInProgress = true;
           // eslint-disable-next-line
