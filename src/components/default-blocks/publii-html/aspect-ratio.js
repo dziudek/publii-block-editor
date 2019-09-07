@@ -62,7 +62,9 @@ function addAspectRatio (code) {
       outputAttrs.push('src="' + src + '"')
     }
 
-    return `<div class="webview-wrapper ${wrapperClass}"><iframe ${outputAttrs.join(' ')}></iframe></div>`;
+    outputAttrs.push('sandbox="allow-scripts"');
+
+    return `<div class="embed-wrapper ${wrapperClass}"><iframe ${outputAttrs.join(' ')}></iframe></div>`;
   });
 }
 

@@ -153,8 +153,7 @@ export default {
   }
 
   &-preview {
-    publii-script,
-    publii-iframe {
+    publii-script {
       background: $color-editor-color-light-medium;
       border-left: 4px solid $block-editor-color-primary-dark;
       border-radius: $block-editor-form-input-border-radius;
@@ -171,7 +170,7 @@ export default {
         align-content: center;
         align-items: center;
         background: $color-editor-color-light-medium;
-        content: "JavaScript code is evaluated only in edit mode.";
+        content: "JavaScript code is evaluated only in the preview.";
         display: flex;
         font-size: ms(-1);
         height: 100%;
@@ -193,7 +192,7 @@ export default {
       position: relative;
       width: 100%;
 
-      webview {
+      iframe {
         background: $color-editor-color-light-medium;
         border-radius: 5px;
         height: 100%;
