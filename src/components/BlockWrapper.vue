@@ -114,7 +114,7 @@ export default {
       this.uiOpened = false;
       this.setSelectionState(true);
 
-      if (e.detail === 2 && e.offsetX <= 30) {
+      if (e.detail === 2 && e.layerX <= 30) {
         this.togglePopup();
       }
     },
