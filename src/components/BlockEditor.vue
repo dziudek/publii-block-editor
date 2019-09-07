@@ -5,6 +5,19 @@
     ref="editor-main"
     @click="$bus.$emit('block-editor-deselect-blocks')">
     <div
+      :class="{ 'bulk-operations-bar': true, 'is-visible': showBulkOperationsBar }">
+      <button
+        v-if="!bulkOperationsMode"
+        @click="startBulkOperations">
+        Start bulk operations
+      </button>
+      <button
+        v-if="bulkOperationsMode"
+        @click="endBulkOperations">
+        End bulk operations
+      </button>
+    </div>
+    <div
       v-if="state.externalComponentsLoaded"
       class="editor-inner">
       <block-wrapper
@@ -85,12 +98,16 @@ export default {
       config: {
         postID: ''
       },
+      bulkOperationsMode: false,
+      showBulkOperationsBar: false,
       state: {
         selectedBlockID: false,
         externalComponentsLoaded: false
       },
       internal: {
-        lastScroll: 0
+        lastScroll: 0,
+        firstBlockID: 0,
+        lastBlockID: 0
       },
       extensions: {
         shortcutManager: new ShortcutManager(),
@@ -110,6 +127,12 @@ export default {
     content: {
       handler (newState) {
         this.$bus.$emit('block-editor-content-updated');
+
+        if (this.content.length) {
+          let lastIndex = this.content.length - 1;
+          this.internal.firstBlockID = this.content[0].id;
+          this.internal.lastBlockID = this.content[lastIndex].id;
+        }
       },
       deep: true
     }
@@ -130,6 +153,7 @@ export default {
     this.$bus.$on('block-editor-move-block-down', this.moveBlockDown);
     this.$bus.$on('block-editor-save-block', this.saveBlock);
     this.$bus.$on('block-editor-delete-block', this.deleteBlock);
+    this.$bus.$on('block-editor-duplicate-block', this.duplicateBlock);
     this.$bus.$on('block-editor-add-block', this.addNewBlock);
     this.$bus.$on('block-editor-merge-paragraphs', this.mergeParagraphs);
     this.$bus.$on('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
@@ -204,6 +228,12 @@ export default {
       }
 
       this.$refs['editor-main'].setAttribute('data-ui-opened-block', '');
+    },
+    duplicateBlock (blockID) {
+      let blockIndex = this.content.findIndex(el => el.id === blockID);
+      let blockCopy = JSON.parse(JSON.stringify(this.content[blockIndex]));
+      blockCopy.id = +new Date();
+      this.content.splice(blockIndex, 0, blockCopy);
     },
     addNewBlock (blockType, afterBlockID = false, content = '') {
       let blockIndex = this.content.findIndex(el => el.id === afterBlockID);
@@ -307,9 +337,14 @@ export default {
     },
     uiClosedForBlock (blockID) {
       this.$refs['editor-main'].setAttribute('data-ui-opened-block', '');
+
+      if (!this.bulkOperationsMode) {
+        this.showBulkOperationsBar = false;
+      }
     },
     uiOpenedForBlock (blockID) {
       this.$refs['editor-main'].setAttribute('data-ui-opened-block', blockID);
+      this.showBulkOperationsBar = true;
     },
     loadAllBlocks () {
       let inputField = document.querySelector('#post-editor');
@@ -339,6 +374,13 @@ export default {
         content: data.content,
         config: JSON.parse(JSON.stringify(data.config))
       });
+    },
+    startBulkOperations () {
+      this.bulkOperationsMode = true;
+    },
+    endBulkOperations () {
+      this.bulkOperationsMode = false;
+      this.showBulkOperationsBar = false;
     }
   },
   beforeDestroy () {
@@ -346,6 +388,7 @@ export default {
     this.$bus.$off('block-editor-move-block-down', this.moveBlockDown);
     this.$bus.$off('block-editor-save-block', this.saveBlock);
     this.$bus.$off('block-editor-delete-block', this.deleteBlock);
+    this.$bus.$off('block-editor-duplicate-block', this.duplicateBlock);
     this.$bus.$off('block-editor-add-block', this.addNewBlock);
     this.$bus.$off('block-editor-merge-paragraphs', this.mergeParagraphs);
     this.$bus.$off('block-editor-shortcut-manager-add-shortcut', this.extensions.shortcutManager.add);
@@ -395,6 +438,25 @@ export default {
   .block-editor-ui-fade-enter,
   .block-editor-ui-fade-leave-to {
     opacity: 0;
+  }
+
+  // Bulk operations bar
+  .bulk-operations-bar {
+    align-items: center;
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    opacity: 0;
+    top: -100px;
+    transition: all .25s ease-out;
+    width: 100%;
+
+    &.is-visible {
+      opacity: 1;
+      top: 0;
+    }
   }
 }
 </style>

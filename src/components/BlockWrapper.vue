@@ -2,9 +2,41 @@
   <div
     :data-block-type="blockType"
     ref="block-wrapper"
-    :class="{ 'wrapper': true, 'is-selected': isSelected, 'has-ui-opened': uiOpened, [customCssClasses.join(' ')]: true }"
+    :class="{ 'wrapper': true, 'is-selected': isSelected, 'show-bulk-operations': $parent.bulkOperationsMode, 'has-ui-opened': uiOpened, [customCssClasses.join(' ')]: true }"
     @click.stop="blockClick">
     <slot />
+
+    <div
+      v-if="$parent.bulkOperationsMode"
+      class="wrapper-ui-bulk">
+      <button
+        class="wrapper-ui-bulk-delete"
+        tabindex="-1"
+        @click.stop="deleteBlock">
+        <icon name="trash" />
+      </button>
+      <button
+        class="wrapper-ui-bulk-duplicate"
+        tabindex="-1"
+        :disabled="blockType === 'publii-readmore'"
+        @click.stop="duplicateBlock">
+        <icon name="table" />
+      </button>
+      <button
+        class="wrapper-ui-bulk-move"
+        tabindex="-1"
+        :disabled="$parent.internal.firstBlockID === id"
+        @click.stop="moveUp">
+        <icon name="up" />
+      </button>
+      <button
+        class="wrapper-ui-bulk-move"
+        tabindex="-1"
+        :disabled="$parent.internal.lastBlockID === id"
+        @click.stop="moveDown">
+        <icon name="down" />
+      </button>
+    </div>
 
     <div class="wrapper-ui">
       <div
@@ -23,12 +55,14 @@
             <button
               class="wrapper-ui-options-button-move"
               tabindex="-1"
+              :disabled="$parent.internal.firstBlockID === id"
               @click.stop="moveUp">
               <icon name="up" />
             </button>
             <button
               class="wrapper-ui-options-button-move"
               tabindex="-1"
+              :disabled="$parent.internal.lastBlockID === id"
               @click.stop="moveDown">
               <icon name="down" />
             </button>
@@ -63,6 +97,11 @@ export default {
         this.$bus.$emit('block-editor-ui-opened-for-block', this.id);
       } else {
         this.$bus.$emit('block-editor-ui-closed-for-block', this.id);
+      }
+    },
+    '$parent.bulkOperationsMode': function (newState) {
+      if (newState) {
+        this.uiOpened = false;
       }
     }
   },
@@ -123,6 +162,12 @@ export default {
     moveDown () {
       let startBlockTop = this.$refs['block-wrapper'].getBoundingClientRect().top;
       this.$bus.$emit('block-editor-move-block-down', this.id, startBlockTop);
+    },
+    deleteBlock () {
+      this.$bus.$emit('block-editor-delete-block', this.id);
+    },
+    duplicateBlock () {
+      this.$bus.$emit('block-editor-duplicate-block', this.id);
     }
   },
   beforeDestroy () {
@@ -163,6 +208,20 @@ export default {
 
     .wrapper-ui {
       opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  &.show-bulk-operations {
+    div {
+      pointer-events: none;
+    }
+
+    .wrapper-ui {
+      display: none;
+    }
+
+    .wrapper-ui-bulk {
       pointer-events: auto;
     }
   }
@@ -420,6 +479,37 @@ export default {
           }
         }
       }
+    }
+  }
+
+  &-ui-bulk {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    &-move,
+    &-delete,
+    &-duplicate {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &-move {
+      right: -90px;
+
+      & + .wrapper-ui-bulk-move {
+        right: -60px;
+      }
+    }
+
+    &-delete {
+      left: -90px;
+    }
+
+    &-duplicate {
+      left: -60px;
     }
   }
 }
