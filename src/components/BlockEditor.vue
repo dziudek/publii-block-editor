@@ -5,15 +5,16 @@
     ref="editor-main"
     @click="$bus.$emit('block-editor-deselect-blocks')">
     <div
+      @click.stop
       :class="{ 'bulk-operations-bar': true, 'is-visible': showBulkOperationsBar }">
       <button
         v-if="!bulkOperationsMode"
-        @click="startBulkOperations">
+        @click.stop="startBulkOperations">
         Start bulk operations
       </button>
       <button
         v-if="bulkOperationsMode"
-        @click="endBulkOperations">
+        @click.stop="endBulkOperations">
         End bulk operations
       </button>
     </div>
@@ -443,19 +444,20 @@ export default {
   // Bulk operations bar
   .bulk-operations-bar {
     align-items: center;
+    bottom: -100px;
     display: flex;
     height: 100px;
     justify-content: center;
     left: 0;
     position: fixed;
     opacity: 0;
-    top: -100px;
     transition: all .25s ease-out;
     width: 100%;
+    z-index: 1000;
 
     &.is-visible {
+      bottom: 0;
       opacity: 1;
-      top: 0;
     }
   }
 }
