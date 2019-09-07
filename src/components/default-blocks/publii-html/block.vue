@@ -32,6 +32,7 @@ import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import contentFilter from './content-filter.js';
+import addAspectRatio from './aspect-ratio.js';
 import HasPreview from './../../mixins/HasPreview.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
@@ -59,7 +60,8 @@ export default {
   },
   computed: {
     modifiedContent () {
-      return contentFilter(this.$refs['block'].code);
+      let codeWithAspectRatio = addAspectRatio(this.$refs['block'].code);
+      return contentFilter(codeWithAspectRatio);
     }
   },
   beforeCreate () {
@@ -151,7 +153,6 @@ export default {
   }
 
   &-preview {
-
     publii-script,
     publii-iframe {
       background: $color-editor-color-light-medium;
@@ -182,10 +183,53 @@ export default {
       }
     }
 
-    publii-iframe {
-      &:after {
-        content: "The iframe is loaded only in edit mode.";
+    .aspect-ratio-21-9,
+    .aspect-ratio-18-9,
+    .aspect-ratio-16-9,
+    .aspect-ratio-4-3,
+    .aspect-ratio-1-1,
+    .aspect-ratio-9-6,
+    .aspect-ratio-1-2 {
+      position: relative;
+      width: 100%;
+
+      webview {
+        background: $color-editor-color-light-medium;
+        border-radius: 5px;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
       }
+    }
+
+    .aspect-ratio-21-9 {
+      padding-bottom: 42.857143%;
+    }
+
+    .aspect-ratio-18-9 {
+      padding-bottom: 50%;
+    }
+
+    .aspect-ratio-16-9 {
+      padding-bottom: 56.25%;
+    }
+
+    .aspect-ratio-4-3 {
+      padding-bottom: 75%;
+    }
+
+    .aspect-ratio-1-1 {
+      padding-bottom: 100%;
+    }
+
+    .aspect-ratio-9-6 {
+      padding-bottom: 66.666666%;
+    }
+
+    .aspect-ratio-1-2 {
+      padding-bottom: 200%;
     }
   }
 }
