@@ -1,6 +1,7 @@
 <template>
   <div
     :data-block-type="blockType"
+    @dblclick.stop="togglePopup"
     ref="block-wrapper"
     :class="{ 'wrapper': true, 'is-selected': isSelected, 'show-bulk-operations': $parent.bulkOperationsMode, 'has-ui-opened': uiOpened, [customCssClasses.join(' ')]: true }"
     @click.stop="blockClick">
