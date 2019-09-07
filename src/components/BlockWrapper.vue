@@ -1,7 +1,6 @@
 <template>
   <div
     :data-block-type="blockType"
-    @dblclick.stop="togglePopup"
     ref="block-wrapper"
     :class="{ 'wrapper': true, 'is-selected': isSelected, 'show-bulk-operations': $parent.bulkOperationsMode, 'has-ui-opened': uiOpened, [customCssClasses.join(' ')]: true }"
     @click.stop="blockClick">
@@ -110,10 +109,14 @@ export default {
     this.$bus.$on('block-editor-deselect-blocks', this.deselectBlock);
   },
   methods: {
-    blockClick () {
+    blockClick (e) {
       this.$bus.$emit('block-editor-deselect-blocks', this.id);
       this.uiOpened = false;
       this.setSelectionState(true);
+
+      if (e.detail === 2 && e.offsetX <= 30) {
+        this.togglePopup();
+      }
     },
     deselectBlock (blockID) {
       if (blockID !== this.id) {
