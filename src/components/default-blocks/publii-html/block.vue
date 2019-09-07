@@ -194,6 +194,7 @@ export default {
 
       iframe {
         background: $color-editor-color-light-medium;
+        border: 1px solid $block-editor-color-light-dark;
         border-radius: 5px;
         height: 100%;
         left: 0;
