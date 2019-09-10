@@ -8,7 +8,6 @@
           class="publii-block-quote-text"
           @keyup="getFocusFromTab($event); handleCaretText($event)"
           @keydown="handleTextKeyboard"
-          @blur="save"
           @paste="pastePlainText"
           @mouseup="handleMouseUp"
           ref="contentText"
@@ -18,7 +17,6 @@
           type="text"
           @keyup="handleCaretAuthor($event)"
           @keydown="handleAuthorKeyboard"
-          @blur="save"
           v-model="content.author"
           placeholder="Quote author"
           ref="contentAuthor" />

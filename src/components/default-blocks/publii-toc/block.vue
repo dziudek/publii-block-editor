@@ -8,7 +8,6 @@
         ref="title"
         @keydown="handleKeyboard"
         @keyup="handleCaret($event, 'title')"
-        @blur="save"
         contenteditable="true" v-html="content.title"></h2>
       <ol
         class="publii-block-toc"

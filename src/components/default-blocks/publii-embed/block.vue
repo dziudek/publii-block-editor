@@ -6,7 +6,6 @@
       <textarea
         @keydown="handleKeyboard"
         @keyup="handleCaret"
-        @blur="save"
         ref="code"
         placeholder="Enter URL or embed code..."
         v-model="content"></textarea>

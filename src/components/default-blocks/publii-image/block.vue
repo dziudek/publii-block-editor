@@ -58,7 +58,6 @@
         type="text"
         @keydown="handleCaptionKeyboard"
         @keyup="handleCaretCaption"
-        @blur="save"
         v-model="content.caption"
         placeholder="Enter a caption"
         ref="contentCaption" />
@@ -66,7 +65,6 @@
         type="text"
         @keydown="handleAltKeyboard"
         @keyup="handleCaretAlt"
-        @blur="save"
         v-model="content.alt"
         placeholder="Enter alt text"
         ref="contentAlt" />

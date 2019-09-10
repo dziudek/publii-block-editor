@@ -6,7 +6,6 @@
       @keyup="getFocusFromTab($event); handleCaret($event)"
       @keydown="handleKeyboard"
       @paste="pastePlainText"
-      @blur="save"
       ref="block"
       :style="'text-align: ' + config.textAlign + ';'"
       :class="{ 'publii-block-header': true, 'is-link': config.link.url !== '' }"
