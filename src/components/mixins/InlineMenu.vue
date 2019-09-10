@@ -53,10 +53,27 @@ export default {
       let oRange = sel.getRangeAt(0);
       let oRect = oRange.getBoundingClientRect();
       let wrapperRect = this.$refs[this.inlineMenuContainer].getBoundingClientRect();
-      let inlineMenuLeft = (((oRect.left - wrapperRect.left) + (oRect.width / 2)) + 20) + 'px';
-      let inlineMenuTop = (oRect.top - wrapperRect.top - 20) + 'px';
+      let inlineMenuOffsets = this.getInlineMenuOffsets();
+      let inlineMenuLeft = (((oRect.left - wrapperRect.left) + (oRect.width / 2)) + inlineMenuOffsets.x) + 'px';
+      let inlineMenuTop = (oRect.top - wrapperRect.top + inlineMenuOffsets.y) + 'px';
       this.$refs['inline-menu'].setPosition(inlineMenuLeft, inlineMenuTop);
       this.$highlighter.removeAllHighlights();
+    },
+    getInlineMenuOffsets () {
+      let x = 30;
+      let y = -20;
+
+      console.log('BT:', this.$parent.blockType);
+
+      if (this.$parent.blockType === 'publii-quote') {
+        y = -10;
+      }
+
+      if (this.$parent.blockType === 'publii-list') {
+        x = 65;
+      }
+
+      return { x, y };
     },
     analyzeSelectedText (selection, rangyData) {
       if (!selection || !selection.anchorNode || !selection.focusNode) {
