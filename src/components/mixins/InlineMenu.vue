@@ -63,8 +63,6 @@ export default {
       let x = 30;
       let y = -20;
 
-      console.log('BT:', this.$parent.blockType);
-
       if (this.$parent.blockType === 'publii-quote') {
         y = -10;
       }
