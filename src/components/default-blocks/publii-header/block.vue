@@ -5,6 +5,7 @@
       contenteditable="true"
       @keyup="getFocusFromTab($event); handleCaret($event)"
       @keydown="handleKeyboard"
+      @focus="updateCurrentBlockID"
       @paste="pastePlainText"
       ref="block"
       :style="'text-align: ' + config.textAlign + ';'"

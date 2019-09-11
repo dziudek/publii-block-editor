@@ -5,6 +5,7 @@
       ref="block"
       @paste="pastePlainText"
       @keyup="handleKeyboard"
+      @focus="updateCurrentBlockID"
       :code="content"
       :emitEvents="true"
       v-model="content"

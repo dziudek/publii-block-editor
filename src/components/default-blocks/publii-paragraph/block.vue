@@ -5,7 +5,7 @@
       :style="'text-align: ' + config.textAlign + ';'"
       ref="block"
       slot="block"
-      @focus="handleEditFocus"
+      @focus="handleEditFocus();updateCurrentBlockID();"
       @blur="handleEditBlur"
       @keyup="getFocusFromTab($event); handleKeyUp($event); handleCaret($event)"
       @paste="pastePlainText"

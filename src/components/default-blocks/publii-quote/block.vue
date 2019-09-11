@@ -6,6 +6,7 @@
         ref="block">
         <div
           class="publii-block-quote-text"
+          @focus="updateCurrentBlockID"
           @keyup="getFocusFromTab($event); handleCaretText($event)"
           @keydown="handleTextKeyboard"
           @paste="pastePlainText"
@@ -15,6 +16,7 @@
           v-html="content.text"></div>
         <input
           type="text"
+          @focus="updateCurrentBlockID"
           @keyup="handleCaretAuthor($event)"
           @keydown="handleAuthorKeyboard"
           v-model="content.author"

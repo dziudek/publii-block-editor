@@ -4,6 +4,7 @@
       :is="config.listType"
       contenteditable="true"
       @keyup="getFocusFromTab($event); handleCaret($event)"
+      @focus="updateCurrentBlockID"
       @paste="pastePlainText"
       @keydown="handleKeyboard"
       @mouseup="handleMouseUp"

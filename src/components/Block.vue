@@ -251,6 +251,9 @@ export default {
         window.getSelection().empty();
         this.textIsHighlighted = false;
       }
+    },
+    updateCurrentBlockID () {
+      this.$bus.$emit('publii-block-editor-update-current-block-id', this.id);
     }
   },
   beforeDestroy () {

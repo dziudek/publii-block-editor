@@ -5,6 +5,7 @@
       contenteditable="true"
       @keyup="getFocusFromTab($event); handleCaret($event)"
       @paste="pastePlainText"
+      @click="updateCurrentBlockID"
       ref="block">
       <hr />
     </div>

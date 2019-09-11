@@ -56,6 +56,7 @@
 
       <input
         type="text"
+        @focus="updateCurrentBlockID"
         @keydown="handleCaptionKeyboard"
         @keyup="handleCaretCaption"
         v-model="content.caption"
@@ -63,6 +64,7 @@
         ref="contentCaption" />
       <input
         type="text"
+        @focus="updateCurrentBlockID"
         @keydown="handleAltKeyboard"
         @keyup="handleCaretAlt"
         v-model="content.alt"

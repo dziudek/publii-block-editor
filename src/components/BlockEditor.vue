@@ -108,7 +108,8 @@ export default {
       internal: {
         lastScroll: 0,
         firstBlockID: 0,
-        lastBlockID: 0
+        lastBlockID: 0,
+        currentBlockID: 0
       },
       extensions: {
         shortcutManager: new ShortcutManager(),
@@ -163,6 +164,7 @@ export default {
     this.$bus.$on('block-editor-convert-block', this.convertBlock);
     this.$bus.$on('publii-block-editor-save', this.saveAllBlocks);
     this.$bus.$on('publii-block-editor-load', this.loadAllBlocks);
+    this.$bus.$on('publii-block-editor-update-current-block-id', this.updateCurrentBlockID);
     this.initGlobals();
   },
   methods: {
@@ -382,6 +384,15 @@ export default {
     endBulkOperations () {
       this.bulkOperationsMode = false;
       this.showBulkOperationsBar = false;
+    },
+    updateCurrentBlockID (blockID) {
+      if (this.internal.currentBlockID !== blockID) {
+        if (this.$refs['block-' + this.internal.currentBlockID]) {
+          this.$refs['block-' + this.internal.currentBlockID][0].save();
+        }
+
+        this.internal.currentBlockID = blockID;
+      }
     }
   },
   beforeDestroy () {
@@ -398,6 +409,7 @@ export default {
     this.$bus.$off('block-editor-convert-block', this.convertBlock);
     this.$bus.$off('publii-block-editor-save', this.saveAllBlocks);
     this.$bus.$off('publii-block-editor-load', this.loadAllBlocks);
+    this.$bus.$off('publii-block-editor-update-current-block-id', this.updateCurrentBlockID);
   }
 }
 </script>

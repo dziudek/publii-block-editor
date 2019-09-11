@@ -6,6 +6,7 @@
       <h2
         class="publii-block-toc-title"
         ref="title"
+        @focus="updateCurrentBlockID"
         @keydown="handleKeyboard"
         @keyup="handleCaret($event, 'title')"
         contenteditable="true" v-html="content.title"></h2>

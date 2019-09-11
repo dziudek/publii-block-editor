@@ -4,6 +4,7 @@
       :class="{ 'publii-block-code': true }"
       ref="block"
       @paste="pastePlainText"
+      @focus="updateCurrentBlockID"
       @keyup="handleKeyboard"
       :code="content"
       :emitEvents="true"
