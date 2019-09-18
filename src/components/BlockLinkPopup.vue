@@ -195,7 +195,7 @@ export default {
 
   &-overlay {
     align-items: center;
-    background: rgba($block-editor-color-code-bg, .3);
+    background: rgba($block-editor-color-light, .85);
     display: flex;
     height: 100%;
     justify-content: center;
@@ -222,30 +222,28 @@ export default {
     width: 100%;
 
     &-type {
-      border-radius: $block-editor-form-input-border-radius;
       display: flex;
       justify-content: space-between;
-      margin: 3px 0 12px 0;
+      margin: -20px 0 3rem;
 
       &-item {
-        background: $color-editor-color-light-medium;
-        border-radius: $block-editor-form-input-border-radius;
+        border-bottom: 2px solid $block-editor-color-light-dark;
+        color: $block-editor-color-text;
         cursor: pointer;
-        font-size: 12px;
-        font-weight: 600;
-        padding: 12px;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 12px 12px 20px;
         text-align: center;
-        text-transform: uppercase;
         transition: all .24s ease-out;
         user-select: none;
-        width: 24%;
+        width: 25%;
 
         &:hover {
-           background: $block-editor-color-light-dark;
+           border-bottom-color: $block-editor-color-primary;
         }
 
         &.is-active {
-          background: $block-editor-color-gradient-end;
+          border-bottom-color: $block-editor-color-primary;
           font-weight: $font-weight-bold;
           color: $block-editor-color-primary;
         }

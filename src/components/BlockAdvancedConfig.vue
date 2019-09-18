@@ -136,7 +136,7 @@ export default {
 
   &-overlay {
     align-items: center;
-    background: rgba($block-editor-color-code-bg, .3);
+    background: rgba($block-editor-color-light, .85);
     display: flex;
     height: 100%;
     justify-content: center;
