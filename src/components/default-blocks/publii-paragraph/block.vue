@@ -127,22 +127,10 @@
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 8 : 7) }"
-          @click.stop="addNewBlock('publii-embed');">
-          <icon name="video" />
-          <div
-            v-if="newBlockUIActiveIndex === (!editor.hasReadMore ? 8 : 7)"
-            class="publii-block-paragraph-block-selector-tooltip is-small">
-            <span class="publii-block-paragraph-block-selector-tooltip-label1">
-              Video
-            </span>
-          </div>
-        </button>
-        <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 9 : 8) }"
           @click.stop="addNewBlock('publii-toc');">
           <icon name="toc" />
           <div
-            v-if="newBlockUIActiveIndex === (!editor.hasReadMore ? 9 : 8)"
+            v-if="newBlockUIActiveIndex === (!editor.hasReadMore ? 8 : 7)"
             class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               TOC
