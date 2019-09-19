@@ -387,8 +387,10 @@ export default {
     },
     updateCurrentBlockID (blockID) {
       if (this.internal.currentBlockID !== blockID) {
-        if (this.$refs['block-' + this.internal.currentBlockID]) {
-          this.$refs['block-' + this.internal.currentBlockID][0].save();
+        let id = this.internal.currentBlockID;
+
+        if (this.$refs['block-' + id] && this.$refs['block-' + id][0]) {
+          this.$refs['block-' + id][0].save();
         }
 
         this.internal.currentBlockID = blockID;
