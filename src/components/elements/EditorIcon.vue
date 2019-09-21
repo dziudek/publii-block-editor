@@ -87,6 +87,8 @@ export default {
         case 'trash': return 11;
         case 'open-trash': return 12;
         case 'gear': return 13;
+        case 'duplicate': return 14;
+        case 'edit-mode': return 19;
       }
 
       return '16';
@@ -149,6 +151,8 @@ export default {
         case 'trash': return 12;
         case 'open-trash': return 14;
         case 'gear': return 13;
+        case 'duplicate': return 14;
+        case 'edit-mode': return 19;
       }
 
       return '16';

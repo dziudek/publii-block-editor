@@ -10,12 +10,14 @@
       <button
         v-if="!bulkOperationsMode"
         @click.stop="startBulkOperations">
-        Start bulk operations
+        <icon name="trash" />
+        Edit mode
       </button>
       <button
         v-if="bulkOperationsMode"
         @click.stop="endBulkOperations">
-        End bulk operations
+        <icon name="edit-mode" />
+        Leave edit mode
       </button>
     </div>
     <div
@@ -472,6 +474,26 @@ export default {
     &.is-visible {
       bottom: 0;
       opacity: 1;
+    }
+
+    & > button {
+      background: $block-editor-color-primary;
+      border: none;
+      border-radius: 3px;
+      box-shadow: none;
+      color: $block-editor-color-light;
+      display: inline-block;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 13px 26px;
+      position: relative;
+      transition: all .25s ease-out;
+      user-select: none;
+      white-space: nowrap;
+
+      &:hover {
+         background: $block-editor-color-primary-dark;
+      }
     }
   }
 }

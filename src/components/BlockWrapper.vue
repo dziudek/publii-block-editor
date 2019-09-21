@@ -20,7 +20,7 @@
         tabindex="-1"
         :disabled="blockType === 'publii-readmore'"
         @click.stop="duplicateBlock">
-        <icon name="table" />
+        <icon name="duplicate" />
       </button>
       <button
         class="wrapper-ui-bulk-move"
@@ -217,6 +217,9 @@ export default {
   }
 
   &.show-bulk-operations {
+      margin-top: baseline(8);
+      transition: all .25s ease-out;
+
     div {
       pointer-events: none;
     }
@@ -277,7 +280,7 @@ export default {
     .publii-block-image-form input {
       margin-left: auto;
       margin-right: auto;
-        max-width: calc(#{$editor-width} + 84px);
+      max-width: calc(#{$editor-width} + 84px);
     }
   }
 
@@ -487,18 +490,58 @@ export default {
   }
 
   &-ui-bulk {
+    border-right: 3px solid $block-editor-color-primary;
+    border-radius: 6px 0 0 6px;
+    box-shadow: 0 0 16px $block-editor-color-shadow;
     height: 100%;
+    left: 0;
     position: absolute;
     top: 0;
-    width: 100%;
+    width: calc(#{$editor-width} + 4rem);
 
     &-move,
     &-delete,
     &-duplicate {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-    }
+        background: transparent;
+        border: none;
+        color: $block-editor-color-text-medium-dark;
+        cursor: pointer;
+        margin: 0;
+        outline: none;
+        padding: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 38px;
+
+        // hover effect
+        &::before {
+          content: "";
+          background: $block-editor-color-light-dark;
+          border-radius: 3px;
+          display: block;
+          left: 50%;
+          opacity: 0;
+          position: absolute;
+          height: 34px;
+          top: 50%;
+          transition: all .15s cubic-bezier(.4,0,.2,1);
+          transform: scale(.5) translate(-50%, -50%);
+          transform-origin: left top;
+          width: 34px;
+          z-index: -1;
+        }
+
+        &:hover,
+        &.is-active {
+            color: $block-editor-color-text;
+
+          &::before {
+            opacity: 1;
+            transform: scale(1) translate(-50%, -50%);
+          }
+        }
+      }
 
     &-move {
       right: -90px;
