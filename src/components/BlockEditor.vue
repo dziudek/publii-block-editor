@@ -57,6 +57,7 @@ import BlockLinkPopup from './BlockLinkPopup.vue';
 import BlockWrapper from './BlockWrapper.vue';
 import ContentEditableImprovements from './helpers/ContentEditableImprovements.vue';
 import { compileToFunctions } from 'vue-template-compiler';
+import Icon from './elements/EditorIcon.vue';
 // default blocks
 import PubliiCode from './default-blocks/publii-code/block.vue';
 import PubliiEmbed from './default-blocks/publii-embed/block.vue';
@@ -79,6 +80,7 @@ export default {
     'block-advanced-config': BlockAdvancedConfig,
     'block-link-popup': BlockLinkPopup,
     'block-wrapper': BlockWrapper,
+    'icon': Icon,
     'publii-code': PubliiCode,
     'publii-embed': PubliiEmbed,
     'publii-header': PubliiHeader,
