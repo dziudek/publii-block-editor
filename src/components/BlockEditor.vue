@@ -138,8 +138,10 @@ export default {
 
         if (!this.internal.firstChangeDone && this.internal.editorIsLoaded) {
           this.internal.firstChangeDone = true;
+          console.log('CHANGES DETECTED')
 
           if (this.$parent.$ipcRenderer) {
+            console.log('SEND TO HOST');
             this.$parent.$ipcRenderer.sendToHost('editor-content-updated');
           }
         }
