@@ -426,7 +426,7 @@ export default {
 @import '../assets/prism-theme.scss';
 
 .editor {
-  min-height: calc(100vh - 50px);
+  min-height: 100%;
   padding: 0 0 50px 0;
   position: relative;
   width: 100%;
