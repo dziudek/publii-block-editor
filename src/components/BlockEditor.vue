@@ -10,7 +10,7 @@
       <button
         v-if="!bulkOperationsMode"
         @click.stop="startBulkOperations">
-        <icon name="trash" />
+        <icon name="edit-mode" />
         Edit mode
       </button>
       <button
@@ -437,8 +437,8 @@ export default {
     &-trigger {
       height: 100%;
       left: 50%;
-      min-height: 100vh;
-      position: absolute;
+      min-height: 200px;
+      position: relative;
       top: 0;
       transform: translateX(-50%);
       width: $editor-width;
@@ -495,6 +495,11 @@ export default {
 
       &:hover {
          background: $block-editor-color-primary-dark;
+      }
+
+      & > svg {
+         margin-right: 8px;
+         vertical-align: middle;
       }
     }
   }
