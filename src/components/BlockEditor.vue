@@ -8,6 +8,13 @@
       @click.stop
       :class="{ 'bulk-operations-bar': true, 'is-visible': showBulkOperationsBar }">
       <button
+        v-if="bulkOperationsMode"
+        :disabled="bulkOperationsLog.length === 0"
+        @click.stop="undoBulkOperation">
+        <icon name="dot" />
+        Undo
+      </button>
+      <button
         v-if="!bulkOperationsMode"
         @click.stop="startBulkOperations">
         <icon name="edit-mode" />
@@ -18,6 +25,12 @@
         @click.stop="endBulkOperations">
         <icon name="edit-mode" />
         Leave edit mode
+      </button>
+      <button
+        v-if="bulkOperationsMode"
+        @click.stop="cancelBulkOperations">
+        <icon name="enter" />
+        Cancel
       </button>
     </div>
     <div
@@ -105,6 +118,8 @@ export default {
       },
       bulkOperationsMode: false,
       showBulkOperationsBar: false,
+      bulkContentBackup: '',
+      bulkOperationsLog: [],
       state: {
         selectedBlockID: false,
         externalComponentsLoaded: false
@@ -202,6 +217,13 @@ export default {
         Vue.set(this.content, blockIndex - 1, tempBlock);
       }
 
+      if (this.bulkOperationsMode && startBlockTop !== false) {
+        this.bulkOperationsLog.push({
+          type: 'move-up',
+          blockID: blockID
+        });
+      }
+
       this.scrollWindow(blockID, startBlockTop);
     },
     moveBlockDown (blockID, startBlockTop) {
@@ -211,6 +233,13 @@ export default {
         let tempBlock = JSON.parse(JSON.stringify(this.content[blockIndex]));
         Vue.set(this.content, blockIndex, this.content[blockIndex + 1]);
         Vue.set(this.content, blockIndex + 1, tempBlock);
+      }
+
+      if (this.bulkOperationsMode && startBlockTop !== false) {
+        this.bulkOperationsLog.push({
+          type: 'move-down',
+          blockID: blockID
+        });
       }
 
       this.scrollWindow(blockID, startBlockTop);
@@ -235,26 +264,49 @@ export default {
         this.content[blockIndex].config = blockData.config;
       }
     },
-    deleteBlock (blockID, addFocusToPreviousBlock = true) {
+    deleteBlock (blockID, addFocusToPreviousBlock = true, undoBulkOperation = false) {
       let blockIndex = this.content.findIndex(el => el.id === blockID);
       this.content.splice(blockIndex, 1);
       this.state.selectedBlockID = false;
 
-      if (blockIndex > 0 && addFocusToPreviousBlock) {
-        this.$refs['block-' + this.content[blockIndex - 1].id][0].focus();
-      }
+      if (!undoBulkOperation) {
+        if (blockIndex > 0 && addFocusToPreviousBlock) {
+          this.$refs['block-' + this.content[blockIndex - 1].id][0].focus();
+        }
 
-      if (!this.content.length) {
-        this.addNewBlock('publii-paragraph', false);
-      }
+        if (!this.content.length) {
+          this.addNewBlock('publii-paragraph', false);
+        }
 
-      this.$refs['editor-main'].setAttribute('data-ui-opened-block', '');
+        if (this.bulkOperationsMode) {
+          let previousBlockID = 0;
+
+          if (this.content[blockIndex - 1]) {
+            previousBlockID = this.content[blockIndex - 1].id;
+          }
+
+          this.bulkOperationsLog.push({
+            type: 'delete',
+            blockID: blockID,
+            prevBlockID: previousBlockID
+          });
+        }
+
+        this.$refs['editor-main'].setAttribute('data-ui-opened-block', '');
+      }
     },
     duplicateBlock (blockID) {
       let blockIndex = this.content.findIndex(el => el.id === blockID);
       let blockCopy = JSON.parse(JSON.stringify(this.content[blockIndex]));
       blockCopy.id = +new Date();
       this.content.splice(blockIndex, 0, blockCopy);
+
+      if (this.bulkOperationsMode) {
+        this.bulkOperationsLog.push({
+          type: 'duplicate',
+          blockID: blockCopy.id
+        });
+      }
     },
     addNewBlock (blockType, afterBlockID = false, content = '') {
       let blockIndex = this.content.findIndex(el => el.id === afterBlockID);
@@ -398,10 +450,34 @@ export default {
     },
     startBulkOperations () {
       this.bulkOperationsMode = true;
+      this.bulkContentBackup = JSON.stringify(this.content);
     },
     endBulkOperations () {
       this.bulkOperationsMode = false;
       this.showBulkOperationsBar = false;
+      this.bulkOperationsLog = [];
+    },
+    undoBulkOperation () {
+      let lastOperation = this.bulkOperationsLog.pop();
+
+      if (lastOperation.type === 'move-up') {
+        this.moveBlockDown(lastOperation.blockID, false);
+      } else if (lastOperation.type === 'move-down') {
+        this.moveBlockUp(lastOperation.blockID, false);
+      } else if (lastOperation.type === 'delete') {
+        let restoredCopy = JSON.parse(this.bulkContentBackup);
+        let blockIndex = restoredCopy.findIndex(el => el.id === lastOperation.blockID);
+        let blockObject = JSON.parse(JSON.stringify(restoredCopy[blockIndex]));
+        let previousBlockIndex = this.content.findIndex(el => el.id === lastOperation.prevBlockID);
+        this.content.splice(previousBlockIndex + 1, 0, blockObject);
+      } else if (lastOperation.type === 'duplicate') {
+        this.deleteBlock(lastOperation.blockID, false, true);
+      }
+    },
+    cancelBulkOperations () {
+      this.content = JSON.parse(this.bulkContentBackup);
+      this.bulkContentBackup = '';
+      this.endBulkOperations();
     },
     updateCurrentBlockID (blockID) {
       if (this.internal.currentBlockID !== blockID) {
