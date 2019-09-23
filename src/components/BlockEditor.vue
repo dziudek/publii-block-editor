@@ -113,7 +113,8 @@ export default {
         lastScroll: 0,
         firstBlockID: 0,
         lastBlockID: 0,
-        currentBlockID: 0
+        currentBlockID: 0,
+        firstChangeDone: false
       },
       extensions: {
         shortcutManager: new ShortcutManager(),
@@ -133,6 +134,14 @@ export default {
     content: {
       handler (newState) {
         this.$bus.$emit('block-editor-content-updated');
+
+        if (!this.internal.firstChangeDone) {
+          this.internal.firstChangeDone = true;
+
+          if (this.$parent.$ipcRenderer) {
+            this.$parent.$ipcRenderer.sendToHost('editor-content-updated');
+          }
+        }
 
         if (this.content.length) {
           let lastIndex = this.content.length - 1;
