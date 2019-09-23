@@ -114,7 +114,8 @@ export default {
         firstBlockID: 0,
         lastBlockID: 0,
         currentBlockID: 0,
-        firstChangeDone: false
+        firstChangeDone: false,
+        editorIsLoaded: false
       },
       extensions: {
         shortcutManager: new ShortcutManager(),
@@ -135,12 +136,10 @@ export default {
       handler (newState) {
         this.$bus.$emit('block-editor-content-updated');
 
-        if (!this.internal.firstChangeDone) {
+        if (!this.internal.firstChangeDone && this.internal.editorIsLoaded) {
           this.internal.firstChangeDone = true;
-          console.log('FIRST CHANGE DONE')
 
           if (this.$parent.$ipcRenderer) {
-            console.log('SENT TO HOST EVENT');
             this.$parent.$ipcRenderer.sendToHost('editor-content-updated');
           }
         }
@@ -181,6 +180,10 @@ export default {
     this.$bus.$on('publii-block-editor-load', this.loadAllBlocks);
     this.$bus.$on('publii-block-editor-update-current-block-id', this.updateCurrentBlockID);
     this.initGlobals();
+
+    setTimeout(() => {
+      this.internal.editorIsLoaded = true;
+    }, 1500);
   },
   methods: {
     initGlobals () {
