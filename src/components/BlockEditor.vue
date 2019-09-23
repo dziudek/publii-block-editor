@@ -137,8 +137,10 @@ export default {
 
         if (!this.internal.firstChangeDone) {
           this.internal.firstChangeDone = true;
+          console.log('FIRST CHANGE DONE')
 
           if (this.$parent.$ipcRenderer) {
+            console.log('SENT TO HOST EVENT');
             this.$parent.$ipcRenderer.sendToHost('editor-content-updated');
           }
         }
