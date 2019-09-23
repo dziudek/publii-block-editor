@@ -437,7 +437,7 @@ export default {
     &-trigger {
       height: 100%;
       left: 50%;
-      min-height: 200px;
+      min-height: 100px;
       position: relative;
       top: 0;
       transform: translateX(-50%);
