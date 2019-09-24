@@ -115,7 +115,7 @@ export default {
 }
 
 #post-title:empty {
-  color: #c2c3c5;
+  color: #C2C3C5;
 }
 
 #post-title:empty:before {
