@@ -115,7 +115,7 @@ export default {
 }
 
 #post-title:empty {
-  color: #c2c3c5;
+  color: rgba(29, 42, 56, .5);
 }
 
 #post-title:empty:before {
