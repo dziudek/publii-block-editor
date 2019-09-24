@@ -18,13 +18,13 @@
         v-if="!bulkOperationsMode"
         @click.stop="startBulkOperations">
         <icon name="edit-mode" />
-        Edit mode
+        Batch operations
       </button>
       <button
         v-if="bulkOperationsMode"
         @click.stop="endBulkOperations">
         <icon name="edit-mode" />
-        Leave edit mode
+        Close
       </button>
       <button
         v-if="bulkOperationsMode"
@@ -569,11 +569,11 @@ export default {
     }
 
     & > button {
-      background: $block-editor-color-primary;
+      background: transparent;
+      box-shadow: inset 0 0 0 2px #ddd;
       border: none;
       border-radius: 3px;
-      box-shadow: none;
-      color: $block-editor-color-light;
+      color: $block-editor-color-text;
       display: inline-block;
       font-size: 15px;
       font-weight: 500;
@@ -584,7 +584,7 @@ export default {
       white-space: nowrap;
 
       &:hover {
-         background: $block-editor-color-primary-dark;
+         box-shadow: inset 0 0 0 2px #aaa;
       }
 
       & > svg {
