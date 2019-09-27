@@ -6,55 +6,57 @@
     :key="'inline-menu-' + $parent.id">
     <div class="wrapper-ui-inline-menu-buttons">
       <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.bold }"
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedText.features.bold }"
         @click.stop="$parent.doInlineOperation('strong');">
         <icon name="bold" />
       </button>
       <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.italic }"
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedText.features.italic }"
         @click.stop="$parent.doInlineOperation('em');">
         <icon name="italic" />
       </button>
       <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.underline }"
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedText.features.underline }"
         @click.stop="$parent.doInlineOperation('u');">
         <icon name="underline" />
       </button>
       <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.strikethrough }"
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedText.features.strikethrough }"
         @click.stop="$parent.doInlineOperation('s');">
         <icon name="strikethrough" />
       </button>
       <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.link }"
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedText.features.link }"
         @click.stop="$parent.showLinkPopup();">
         <icon name="link" />
       </button>
       <button
-        v-if="$parent.selectedTextContains.link"
+        v-if="$parent.selectedText.features.link"
         :class="{ 'wrapper-ui-inline-menu-button': true }"
         @click.stop="$parent.doInlineOperation('unlink');">
         <icon name="unlink" />
       </button>
       <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.code }"
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedText.features.code }"
         @click.stop="$parent.doInlineOperation('code');">
         <icon name="code" />
       </button>
       <button
-        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedTextContains.mark }"
+        :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedText.features.mark }"
         @click.stop="$parent.doInlineOperation('mark');">
         <icon name="marker" />
       </button>
       <button
         v-if="$parent.$parent.blockType === 'publii-list'"
         :class="{ 'wrapper-ui-inline-menu-button': true }"
+        :disabled="!$parent.selectedText.features.indent"
         @click.stop="$parent.doInlineOperation('indent');">
         <icon name="nesting" />
       </button>
       <button
         v-if="$parent.$parent.blockType === 'publii-list'"
         :class="{ 'wrapper-ui-inline-menu-button': true }"
+        :disabled="!$parent.selectedText.features.outdent"
         @click.stop="$parent.doInlineOperation('outdent');">
         <icon name="flattening" />
       </button>
@@ -163,6 +165,11 @@ export default {
     padding: 0;
     position: relative;
     width: 38px;
+
+    &[disabled] {
+      opacity: .3;
+      pointer-events: none;
+    }
 
     // hover effect
     &::before {

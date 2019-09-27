@@ -2,6 +2,7 @@
 import EditorIcon from './../elements/EditorIcon.vue';
 import LinkHelpers from './../mixins/LinkHelpers.vue';
 import LinkConfig from './../mixins/LinkConfig.vue';
+import SelectedText from './../utils/SelectedText.js';
 
 export default {
   name: 'InlineMenu',
@@ -15,14 +16,8 @@ export default {
   data () {
     return {
       inlineMenuContainer: 'block',
-      selectedTextContains: {
-        bold: false,
-        italic: false,
-        strikethrough: false,
-        underline: false,
-        code: false,
-        mark: false,
-        link: false
+      selectedText: {
+        features: {}
       }
     };
   },
@@ -47,7 +42,8 @@ export default {
     showInlineMenu () {
       let sel = document.getSelection();
       let savedSel = this.$rangy.saveSelection();
-      this.analyzeSelectedText(sel, savedSel);
+      this.selectedText = new SelectedText(sel, savedSel, this.$refs[this.inlineMenuContainer]);
+      this.selectedText.analyzeSelectedText();
       this.$rangy.restoreSelection(savedSel);
       this.$rangy.removeMarkers(savedSel);
       let oRange = sel.getRangeAt(0);
@@ -73,59 +69,6 @@ export default {
 
       return { x, y };
     },
-    analyzeSelectedText (selection, rangyData) {
-      if (!selection || !selection.anchorNode || !selection.focusNode) {
-        return;
-      }
-
-      let tags = [
-        'bold',
-        'italic',
-        'underline',
-        'strikethrough'
-      ];
-
-      for (let i = 0; i < tags.length; i++) {
-        this.selectedTextContains[tags[i]] = document.queryCommandState(tags[i]);
-      }
-
-      let specialTags = {
-        'code': 'code',
-        'mark': 'mark',
-        'a': 'link'
-      };
-
-      let specialTagNames = Object.keys(specialTags);
-      let selectedTextResults = this.findTagInSelection(specialTagNames, rangyData);
-
-      for (let i = 0; i < specialTagNames.length; i++) {
-        this.selectedTextContains[specialTags[specialTagNames[i]]] = selectedTextResults[specialTagNames[i]];
-      }
-    },
-    findTagInSelection (tagNames, rangyData) {
-      if (!rangyData || rangyData.rangeInfos[0].collapsed) {
-        return false;
-      }
-
-      let startID = rangyData.rangeInfos[0].startMarkerId;
-      let endID = rangyData.rangeInfos[0].endMarkerId;
-      let sourceCode = this.$refs[this.inlineMenuContainer].innerHTML;
-      let partToAnalyze = sourceCode.split(startID)[1];
-      partToAnalyze = partToAnalyze.split(endID)[0];
-      let results = {};
-
-      for (let i = 0; i < tagNames.length; i++) {
-        results[tagNames[i]] = partToAnalyze.indexOf('<' + tagNames[i]) > -1;
-
-        if (results[tagNames[i]] === false) {
-          if (this.$refs[this.inlineMenuContainer].querySelector('#' + startID).parentNode.tagName === tagNames[i].toUpperCase()) {
-            results[tagNames[i]] = true;
-          }
-        }
-      }
-
-      return results;
-    },
     doInlineOperation (operationType) {
       let sel = document.getSelection();
       let savedSel = this.$rangy.saveSelection();
@@ -143,7 +86,8 @@ export default {
         case 'outdent': this.outdentList(); break;
       }
 
-      this.analyzeSelectedText(sel, savedSel);
+      this.selectedText = new SelectedText(sel, savedSel, this.$refs[this.inlineMenuContainer]);
+      this.selectedText.analyzeSelectedText();
       this.$rangy.restoreSelection(savedSel);
       this.$rangy.removeMarkers(savedSel);
     },
@@ -161,7 +105,7 @@ export default {
         ];
 
         document.execCommand('insertHTML', false, html.join(''));
-        this.selectedTextContains[tagToUse] = false;
+        this.selectedTextFeatures[tagToUse] = false;
       } else {
         let wrapperTag = document.getElementById(startID).parentNode.tagName;
         let tagPosition = this.checkTagPosition(tagToUse, startID, endID);
@@ -176,7 +120,7 @@ export default {
           ];
 
           document.execCommand('insertHTML', false, html.join(''));
-          this.selectedTextContains[tagToUse] = true;
+          this.selectedTextFeatures[tagToUse] = true;
         } else {
           let selection = document.getSelection();
           this.wrapElementIntoRangy(selection.baseNode, startID, endID);
@@ -185,15 +129,6 @@ export default {
     },
     indentList () {
       document.execCommand('indent', false, null);
-
-      setTimeout(() => {
-        if (
-          this.$refs[this.inlineMenuContainer].innerHTML.indexOf('<ul><ul>') > -1 ||
-          this.$refs[this.inlineMenuContainer].innerHTML.indexOf('<ol><ol>') > -1
-        ) {
-          document.execCommand('undo', false, null);
-        }
-      }, 0);
     },
     outdentList () {
       document.execCommand('outdent', false, null);
@@ -210,7 +145,7 @@ export default {
       }
 
       selection.outerHTML = '<a href="' + this.linkUI.url + '">' + selection.innerHTML + '</a>';
-      this.selectedTextContains['link'] = true;
+      this.selectedTextFeatures['link'] = true;
     },
     removeLink (rangyData) {
       let startID = rangyData.rangeInfos[0].startMarkerId;
@@ -222,7 +157,7 @@ export default {
       ];
 
       document.execCommand('insertHTML', false, html.join(''));
-      this.selectedTextContains['link'] = false;
+      this.selectedTextFeatures['link'] = false;
     },
     checkTagPosition (tag, startID, endID) {
       let codeToAnalyze = this.$refs[this.inlineMenuContainer].innerHTML.split(startID)[1];
