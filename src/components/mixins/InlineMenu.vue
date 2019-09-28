@@ -3,6 +3,7 @@ import EditorIcon from './../elements/EditorIcon.vue';
 import LinkHelpers from './../mixins/LinkHelpers.vue';
 import LinkConfig from './../mixins/LinkConfig.vue';
 import SelectedText from './../utils/SelectedText.js';
+import Vue from 'vue';
 
 export default {
   name: 'InlineMenu',
@@ -42,7 +43,7 @@ export default {
     showInlineMenu () {
       let sel = document.getSelection();
       // let savedSel = this.$rangy.saveSelection();
-      this.selectedText = new SelectedText(sel, this.$refs[this.inlineMenuContainer]);
+      this.selectedText = new SelectedText(this.$refs[this.inlineMenuContainer]);
       this.selectedText.analyzeSelectedText();
       // this.$rangy.restoreSelection(savedSel);
       // this.$rangy.removeMarkers(savedSel);
@@ -89,7 +90,7 @@ export default {
       return { x, y };
     },
     doInlineOperation (operationType) {
-      let sel = document.getSelection();
+      // let sel = document.getSelection();
       // let savedSel = this.$rangy.saveSelection();
 
       switch (operationType) {
@@ -105,7 +106,7 @@ export default {
         case 'outdent': this.outdentList(); break;
       }
 
-      this.selectedText = new SelectedText(sel, this.$refs[this.inlineMenuContainer], this.$parent.blockType);
+      this.selectedText = new SelectedText(this.$refs[this.inlineMenuContainer], this.$parent.blockType);
       this.selectedText.analyzeSelectedText();
       // this.$rangy.restoreSelection(savedSel);
       // this.$rangy.removeMarkers(savedSel);
@@ -113,6 +114,9 @@ export default {
     execCommand (tagToUse) {
       if (this.selectedText.containedTags[tagToUse]) {
         this.selectedText.removeStyle(tagToUse);
+        setTimeout(() => {
+          Vue.set(this.selectedText.containedTags, tagToUse, false);
+        }, 0);
       } else {
         let range = window.getSelection().getRangeAt(0);
         let newTag = document.createElement(tagToUse);
@@ -122,11 +126,15 @@ export default {
     },
     indentList () {
       document.execCommand('indent', false, null);
-      setTimeout(() => { this.updateInlineMenuPosition(); }, 100);
+      setTimeout(() => {
+        this.updateInlineMenuPosition();
+      }, 100);
     },
     outdentList () {
       document.execCommand('outdent', false, null);
-      setTimeout(() => { this.updateInlineMenuPosition(); }, 100);
+      setTimeout(() => {
+        this.updateInlineMenuPosition();
+      }, 100);
     },
 
     /*

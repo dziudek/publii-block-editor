@@ -1,9 +1,8 @@
 import Vue from 'vue';
 
 export default class SelectedText {
-  constructor (selection, inlineMenuContainer, blockType) {
+  constructor (inlineMenuContainer, blockType) {
     this.blockType = blockType;
-    this.selection = selection;
     this.inlineMenuContainer = inlineMenuContainer;
 
     this.containedTags = {
@@ -29,16 +28,17 @@ export default class SelectedText {
     ];
   }
 
-  isProperTextSelection () {
-    return !this.selection || !this.selection.anchorNode || !this.selection.focusNode;
+  isInvalidTextSelection () {
+    let selection = document.getSelection();
+    return !selection || !selection.anchorNode || !selection.focusNode;
   }
 
   analyzeSelectedText () {
-    if (this.isProperTextSelection()) {
+    if (this.isInvalidTextSelection()) {
       return;
     }
 
-    let range = this.selection.getRangeAt(0);
+    let range = document.getSelection().getRangeAt(0);
     let commonAncestor = range.commonAncestorContainer;
     let tempElement = document.createElement('div');
     tempElement.appendChild(range.cloneContents());
@@ -71,7 +71,7 @@ export default class SelectedText {
   }
 
   removeStyle (tag) {
-    let range = this.selection.getRangeAt(0);
+    let range = document.getSelection().getRangeAt(0);
     let elementToWrap = null;
 
     if (range.startContainer.nodeType === 1 && range.startContainer.tagName === tag.toUpperCase()) {
@@ -119,24 +119,22 @@ export default class SelectedText {
           range.setStartBefore(firstNode);
           range.setEndAfter(lastNode);
         }, 0);
-
-        Vue.set(this.containedTags, tag, false);
       }, 0);
     }
   }
 
   checkIfElementCanBeNested () {
-    let baseItem = this.selection.baseNode;
+    let baseItem = document.getSelection().baseNode;
     let parentList;
     let listItem;
 
-    if (this.selection.baseNode.nodeType === 3) {
-      baseItem = this.selection.baseNode.parentNode;
+    if (document.getSelection().baseNode.nodeType === 3) {
+      baseItem = document.getSelection().baseNode.parentNode;
     }
 
     parentList = baseItem.closest('ul,ol');
 
-    if (this.selection.baseNode.tagName === 'LI') {
+    if (document.getSelection().baseNode.tagName === 'LI') {
       listItem = baseItem;
     } else {
       listItem = baseItem.closest('li');
@@ -150,11 +148,11 @@ export default class SelectedText {
   }
 
   checkIfElementCanBeFlattened () {
-    let baseItem = this.selection.baseNode;
+    let baseItem = document.getSelection().baseNode;
     let parentList;
 
-    if (this.selection.baseNode.nodeType === 3) {
-      baseItem = this.selection.baseNode.parentNode;
+    if (document.getSelection().baseNode.nodeType === 3) {
+      baseItem = document.getSelection().baseNode.parentNode;
     }
 
     parentList = baseItem.closest('ul,ol');
