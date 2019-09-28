@@ -39,10 +39,15 @@ export default class SelectedText {
     }
 
     let range = this.selection.getRangeAt(0);
+    let commonAncestor = range.commonAncestorContainer;
     let tempElement = document.createElement('div');
     tempElement.appendChild(range.cloneContents());
     let featuresToCheck = Object.keys(this.tagsToCheck);
     let htmlToCheck = tempElement.innerHTML;
+
+    if (commonAncestor.nodeType === 3) {
+      commonAncestor = commonAncestor.parentNode;
+    }
 
     for (let i = 0; i < featuresToCheck.length; i++) {
       let tag = this.tagsToCheck[featuresToCheck[i]];
@@ -50,6 +55,11 @@ export default class SelectedText {
       if (htmlToCheck.indexOf('<' + tag + ' ') > -1 || htmlToCheck.indexOf('</' + tag + '>') > -1) {
         Vue.set(this.features, featuresToCheck[i], true);
       } else {
+        if (commonAncestor.tagName === tag.toUpperCase() || commonAncestor.closest(tag) !== null) {
+          Vue.set(this.features, featuresToCheck[i], true);
+          return;
+        }
+
         Vue.set(this.features, featuresToCheck[i], false);
       }
     }
@@ -64,6 +74,23 @@ export default class SelectedText {
 
   removeStyle (tag) {
     // let range = this.selection.getRangeAt(0);
+    // console.log('CAC:', range.commonAncestorContainer);
+
+    /*
+    let tempElement = document.createElement('div');
+    tempElement.appendChild(range.cloneContents());
+    tempElement.innerHTML = tempElement.innerHTML.replace(new RegExp('</' + tag + '>', 'gmi'), '');
+    tempElement.innerHTML = tempElement.innerHTML.replace(new RegExp('<' + tag + '.*?>', 'gmi'), '');
+    console.log(tempElement.childNodes);
+    range.deleteContents();
+
+    for (let i = tempElement.childNodes.length - 1; i > 0; i--) {
+      console.log(i, tempElement.childNodes[i]);
+      range.insertNode(tempElement.childNodes[i]);
+    }
+
+    // tempElement.remove();
+    */
   }
 
   checkIfElementCanBeNested () {
