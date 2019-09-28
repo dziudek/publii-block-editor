@@ -52,7 +52,7 @@ export default {
       let wrapperRect = this.$refs[this.inlineMenuContainer].getBoundingClientRect();
       let inlineMenuOffsets = this.getInlineMenuOffsets();
       let inlineMenuLeft = (((oRect.left - wrapperRect.left) + (oRect.width / 2)) + inlineMenuOffsets.x) + 'px';
-      let inlineMenuTop = (oRect.top - wrapperRect.top + inlineMenuOffsets.y) + 'px';
+      let inlineMenuTop = ((oRect.top - wrapperRect.top) + oRect.height + inlineMenuOffsets.y) + 'px';
       this.$refs['inline-menu'].setPosition(inlineMenuLeft, inlineMenuTop);
       this.$highlighter.removeAllHighlights();
     },
@@ -69,7 +69,7 @@ export default {
       let wrapperRect = this.$refs[this.inlineMenuContainer].getBoundingClientRect();
       let inlineMenuOffsets = this.getInlineMenuOffsets();
       let inlineMenuLeft = (((oRect.left - wrapperRect.left) + (oRect.width / 2)) + inlineMenuOffsets.x) + 'px';
-      let inlineMenuTop = (oRect.top - wrapperRect.top + inlineMenuOffsets.y) + 'px';
+      let inlineMenuTop = ((oRect.top - wrapperRect.top) + oRect.height + inlineMenuOffsets.y) + 'px';
       this.$refs['inline-menu'].setPosition(inlineMenuLeft, inlineMenuTop);
     },
     closeInlineMenu () {
@@ -77,10 +77,10 @@ export default {
     },
     getInlineMenuOffsets () {
       let x = 30;
-      let y = -20;
+      let y = -50;
 
       if (this.$parent.blockType === 'publii-quote') {
-        y = -10;
+        y = -40;
       }
 
       if (this.$parent.blockType === 'publii-list') {
