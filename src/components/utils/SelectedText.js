@@ -12,9 +12,13 @@ export default class SelectedText {
       s: false,
       code: false,
       mark: false,
-      a: false,
+      a: false
+    };
+
+    this.allowedOperations = {
       indent: true,
-      outdent: true
+      outdent: true,
+      clearFormatting: false
     };
 
     this.tagsToCheck = [
@@ -65,8 +69,8 @@ export default class SelectedText {
     tempElement.remove();
 
     if (this.blockType === 'publii-list') {
-      Vue.set(this.containedTags, 'indent', this.checkIfElementCanBeNested());
-      Vue.set(this.containedTags, 'outdent', this.checkIfElementCanBeFlattened());
+      Vue.set(this.allowedOperations, 'indent', this.checkIfElementCanBeNested());
+      Vue.set(this.allowedOperations, 'outdent', this.checkIfElementCanBeFlattened());
     }
   }
 

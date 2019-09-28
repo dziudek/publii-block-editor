@@ -18,7 +18,8 @@ export default {
     return {
       inlineMenuContainer: 'block',
       selectedText: {
-        containedTags: {}
+        containedTags: {},
+        allowedOperations: {}
       }
     };
   },

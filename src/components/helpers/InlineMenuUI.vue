@@ -49,14 +49,14 @@
       <button
         v-if="$parent.$parent.blockType === 'publii-list'"
         :class="{ 'wrapper-ui-inline-menu-button': true }"
-        :disabled="!$parent.selectedText.containedTags.indent"
+        :disabled="!$parent.selectedText.allowedOperations.indent"
         @click.stop="$parent.doInlineOperation('indent');">
         <icon name="nesting" />
       </button>
       <button
         v-if="$parent.$parent.blockType === 'publii-list'"
         :class="{ 'wrapper-ui-inline-menu-button': true }"
-        :disabled="!$parent.selectedText.containedTags.outdent"
+        :disabled="!$parent.selectedText.allowedOperations.outdent"
         @click.stop="$parent.doInlineOperation('outdent');">
         <icon name="flattening" />
       </button>
