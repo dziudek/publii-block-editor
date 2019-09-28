@@ -105,6 +105,7 @@ export default {
         // case 'unlink': this.removeLink(savedSel); break;
         case 'indent': this.indentList(); break;
         case 'outdent': this.outdentList(); break;
+        case 'clear': this.clearFormatting(); break;
       }
 
       this.selectedText = new SelectedText(this.$refs[this.inlineMenuContainer], this.$parent.blockType);
@@ -124,6 +125,13 @@ export default {
         newTag.appendChild(range.extractContents());
         range.insertNode(newTag);
       }
+    },
+    clearFormatting () {
+      this.selectedText = new SelectedText(this.$refs[this.inlineMenuContainer], this.$parent.blockType);
+      this.selectedText.removeHTML();
+      setTimeout(() => {
+        this.updateInlineMenuPosition();
+      }, 100);
     },
     indentList () {
       document.execCommand('indent', false, null);

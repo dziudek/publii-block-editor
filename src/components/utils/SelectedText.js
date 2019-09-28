@@ -127,6 +127,16 @@ export default class SelectedText {
     }
   }
 
+  removeHTML () {
+    let range = document.getSelection().getRangeAt(0);
+    let extractedContent = range.extractContents();
+    let tempElement = document.createElement('div');
+    tempElement.appendChild(extractedContent);
+    let textNode = document.createTextNode(tempElement.textContent);
+    range.insertNode(textNode);
+    tempElement.remove();
+  }
+
   checkIfElementCanBeNested () {
     let baseItem = document.getSelection().baseNode;
     let parentList;
