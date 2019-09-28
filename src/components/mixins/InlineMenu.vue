@@ -78,54 +78,24 @@ export default {
         case 'em': document.execCommand('italic', false, null); break;
         case 's': document.execCommand('strikeThrough', false, null); break;
         case 'u': document.execCommand('underline', false, null); break;
-        case 'code': this.execCommand('code', savedSel); break;
-        case 'mark': this.execCommand('mark', savedSel); break;
+        case 'code': this.execCommand('code'); break;
+        case 'mark': this.execCommand('mark'); break;
         case 'link': this.addLink(); break;
         case 'unlink': this.removeLink(savedSel); break;
         case 'indent': this.indentList(); break;
         case 'outdent': this.outdentList(); break;
       }
 
-      this.selectedText = new SelectedText(sel, savedSel, this.$refs[this.inlineMenuContainer]);
+      this.selectedText = new SelectedText(sel, savedSel, this.$refs[this.inlineMenuContainer], this.$parent.blockType);
       this.selectedText.analyzeSelectedText();
       this.$rangy.restoreSelection(savedSel);
       this.$rangy.removeMarkers(savedSel);
     },
-    execCommand (tagToUse, rangyData) {
-      let startID = rangyData.rangeInfos[0].startMarkerId;
-      let endID = rangyData.rangeInfos[0].endMarkerId;
-      let nextNode = document.getElementById(startID).nextSibling;
-      let tagToUseUpperCase = tagToUse.toUpperCase();
-
-      if (nextNode && nextNode.tagName === tagToUseUpperCase) {
-        let html = [
-          '<span id="' + startID + '"></span>',
-          document.getSelection().toString().replace(/&nbsp;/gmi, ''),
-          '<span id="' + endID + '"></span>'
-        ];
-
-        document.execCommand('insertHTML', false, html.join(''));
-        this.selectedTextFeatures[tagToUse] = false;
-      } else {
-        let wrapperTag = document.getElementById(startID).parentNode.tagName;
-        let tagPosition = this.checkTagPosition(tagToUse, startID, endID);
-
-        if ((tagPosition === -1 || tagPosition > 0) && wrapperTag !== tagToUseUpperCase) {
-          let html = [
-            '<span id="' + startID + '"></span>',
-            '<' + tagToUse + '>',
-            document.getSelection().toString().replace(/&nbsp;/gmi, ''),
-            '</' + tagToUse + '>',
-            '<span id="' + endID + '"></span>'
-          ];
-
-          document.execCommand('insertHTML', false, html.join(''));
-          this.selectedTextFeatures[tagToUse] = true;
-        } else {
-          let selection = document.getSelection();
-          this.wrapElementIntoRangy(selection.baseNode, startID, endID);
-        }
-      }
+    execCommand (tagToUse) {
+      let range = window.getSelection().getRangeAt(0);
+      let newTag = document.createElement(tagToUse);
+      newTag.appendChild(range.extractContents());
+      range.insertNode(newTag);
     },
     indentList () {
       document.execCommand('indent', false, null);

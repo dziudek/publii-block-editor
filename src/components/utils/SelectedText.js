@@ -1,7 +1,8 @@
 import Vue from 'vue';
 
 export default class SelectedText {
-  constructor (selection, rangyData, inlineMenuContainer) {
+  constructor (selection, rangyData, inlineMenuContainer, blockType) {
+    this.blockType = blockType;
     this.selection = selection;
     this.rangyData = rangyData;
     this.inlineMenuContainer = inlineMenuContainer;
@@ -52,8 +53,10 @@ export default class SelectedText {
       Vue.set(this.features, this.specialTags[specialTagNames[i]], selectedTextResults[specialTagNames[i]]);
     }
 
-    Vue.set(this.features, 'indent', this.checkIfElementCanBeNested());
-    Vue.set(this.features, 'outdent', this.checkIfElementCanBeFlattened());
+    if (this.blockType === 'publii-list') {
+      Vue.set(this.features, 'indent', this.checkIfElementCanBeNested());
+      Vue.set(this.features, 'outdent', this.checkIfElementCanBeFlattened());
+    }
   }
 
   findTagInSelection (tagNames) {
@@ -97,8 +100,6 @@ export default class SelectedText {
     } else {
       listItem = baseItem.closest('li');
     }
-
-    console.log(parentList, listItem);
 
     if (parentList.children.length <= 1) {
       return false;
