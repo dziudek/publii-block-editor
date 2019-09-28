@@ -3,7 +3,7 @@
     <component
       :is="config.listType"
       contenteditable="true"
-      @keyup="getFocusFromTab($event); handleCaret($event)"
+      @keyup="getFocusFromTab($event); handleCaret($event); handleKeyUp($event);"
       @focus="updateCurrentBlockID"
       @paste="pastePlainText"
       @keydown="handleKeyboard"
@@ -75,6 +75,15 @@ export default {
     }
   },
   methods: {
+    handleKeyUp (e) {
+      this.textIsHighlighted = false;
+
+      if (e.code === 'Backspace') {
+        e.preventDefault();
+        let range = document.getSelection().getRangeAt(0);
+        range.deleteContents();
+      }
+    },
     handleKeyboard (e) {
       if (
         e.code === 'Backspace' &&

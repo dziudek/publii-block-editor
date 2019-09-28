@@ -17,7 +17,7 @@ export default {
     return {
       inlineMenuContainer: 'block',
       selectedText: {
-        features: {}
+        containedTags: {}
       }
     };
   },
@@ -93,13 +93,13 @@ export default {
       // let savedSel = this.$rangy.saveSelection();
 
       switch (operationType) {
-        case 'strong': document.execCommand('bold', false, null); break;
-        case 'em': document.execCommand('italic', false, null); break;
-        case 's': document.execCommand('strikeThrough', false, null); break;
-        case 'u': document.execCommand('underline', false, null); break;
+        case 'strong': this.execCommand('strong'); break;
+        case 'em': this.execCommand('em'); break;
+        case 's': this.execCommand('s'); break;
+        case 'u': this.execCommand('u'); break;
         case 'code': this.execCommand('code'); break;
         case 'mark': this.execCommand('mark'); break;
-        case 'link': this.addLink(); break;
+        case 'a': this.addLink(); break;
         // case 'unlink': this.removeLink(savedSel); break;
         case 'indent': this.indentList(); break;
         case 'outdent': this.outdentList(); break;
@@ -111,7 +111,7 @@ export default {
       // this.$rangy.removeMarkers(savedSel);
     },
     execCommand (tagToUse) {
-      if (this.selectedText.features[tagToUse]) {
+      if (this.selectedText.containedTags[tagToUse]) {
         this.selectedText.removeStyle(tagToUse);
       } else {
         let range = window.getSelection().getRangeAt(0);
@@ -155,7 +155,7 @@ export default {
       }
 
       selection.outerHTML = '<a href="' + this.linkUI.url + '">' + selection.innerHTML + '</a>';
-      this.selectedTextFeatures['link'] = true;
+      this.selectedTextcontainedTags['a'] = true;
     },
     removeLink (rangyData) {
       let startID = rangyData.rangeInfos[0].startMarkerId;
@@ -167,7 +167,7 @@ export default {
       ];
 
       document.execCommand('insertHTML', false, html.join(''));
-      this.selectedTextFeatures['link'] = false;
+      this.selectedTextcontainedTags['a'] = false;
     },
     checkTagPosition (tag, startID, endID) {
       let codeToAnalyze = this.$refs[this.inlineMenuContainer].innerHTML.split(startID)[1];

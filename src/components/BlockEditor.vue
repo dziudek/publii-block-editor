@@ -140,7 +140,7 @@ export default {
         {
           id: 1555941466744,
           type: 'publii-paragraph',
-          content: '',
+          content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Cras mattis consectetur purus sit amet fermentum.',
           config: {}
         }
       ]

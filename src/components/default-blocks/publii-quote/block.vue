@@ -7,7 +7,7 @@
         <div
           class="publii-block-quote-text"
           @focus="updateCurrentBlockID"
-          @keyup="getFocusFromTab($event); handleCaretText($event)"
+          @keyup="getFocusFromTab($event); handleCaretText($event); handleKeyUp($event);"
           @keydown="handleTextKeyboard"
           @paste="pastePlainText"
           @mouseup="handleMouseUp"
@@ -100,6 +100,15 @@ export default {
     this.view = (!this.content.text && !this.content.author) ? 'code' : 'preview';
   },
   methods: {
+    handleKeyUp (e) {
+      this.textIsHighlighted = false;
+
+      if (e.code === 'Backspace') {
+        e.preventDefault();
+        let range = document.getSelection().getRangeAt(0);
+        range.deleteContents();
+      }
+    },
     handleTextKeyboard (e) {
       if (e.code === 'Backspace' && this.$refs['contentText'].value === '' && this.$refs['contentAuthor'].value === '') {
         this.$bus.$emit('block-editor-delete-block', this.id);

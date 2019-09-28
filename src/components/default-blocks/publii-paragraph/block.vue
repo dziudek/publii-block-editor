@@ -5,9 +5,9 @@
       :style="'text-align: ' + config.textAlign + ';'"
       ref="block"
       slot="block"
-      @focus="handleEditFocus();updateCurrentBlockID();"
+      @focus="handleEditFocus(); updateCurrentBlockID();"
       @blur="handleEditBlur"
-      @keyup="getFocusFromTab($event); handleKeyUp($event); handleCaret($event)"
+      @keyup="getFocusFromTab($event); handleKeyUp($event); handleCaret($event);"
       @paste="pastePlainText"
       @keydown="handleKeyboard"
       @mouseup="handleMouseUp"
@@ -345,6 +345,14 @@ export default {
       }
     },
     handleKeyUp (e) {
+      this.textIsHighlighted = false;
+
+      if (e.code === 'Backspace') {
+        e.preventDefault();
+        let range = document.getSelection().getRangeAt(0);
+        range.deleteContents();
+      }
+
       if (!this.showNewBlockUI && this.$refs['block'].innerHTML === '') {
         this.showNewBlockUI = true;
       } else if (this.showNewBlockUI && this.$refs['block'].innerHTML !== '') {
