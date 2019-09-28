@@ -19,69 +19,48 @@ export default class SelectedText {
       outdent: true
     };
 
-    this.tags = [
-      'bold',
-      'italic',
-      'underline',
-      'strikethrough'
-    ];
-
-    this.specialTags = {
+    this.tagsToCheck = {
+      'bold': 'b',
+      'italic': 'i',
+      'underline': 'u',
+      'strikethrough': 's',
       'code': 'code',
       'mark': 'mark',
-      'a': 'link'
+      'link': 'a'
     };
   }
 
+  isProperTextSelection () {
+    return !this.selection || !this.selection.anchorNode || !this.selection.focusNode;
+  }
+
   analyzeSelectedText () {
-    if (
-      !this.selection ||
-      !this.selection.anchorNode ||
-      !this.selection.focusNode
-    ) {
+    if (this.isProperTextSelection()) {
       return;
     }
 
-    for (let i = 0; i < this.tags.length; i++) {
-      this.features[this.tags[i]] = document.queryCommandState(this.tags[i]);
+    let range = this.selection.getRangeAt(0);
+    let tempElement = document.createElement('div');
+    tempElement.appendChild(range.cloneContents());
+    let featuresToCheck = Object.keys(this.tagsToCheck);
+    let htmlToCheck = tempElement.innerHTML;
+
+    for (let i = 0; i < featuresToCheck.length; i++) {
+      let tag = this.tagsToCheck[featuresToCheck[i]];
+
+      if (htmlToCheck.indexOf('<' + tag + ' ') > -1 || htmlToCheck.indexOf('</' + tag + '>') > -1) {
+        Vue.set(this.features, featuresToCheck[i], true);
+      } else {
+        Vue.set(this.features, featuresToCheck[i], false);
+      }
     }
 
-    let specialTagNames = Object.keys(this.specialTags);
-    let selectedTextResults = this.findTagInSelection(specialTagNames);
-
-    for (let i = 0; i < specialTagNames.length; i++) {
-      Vue.set(this.features, this.specialTags[specialTagNames[i]], selectedTextResults[specialTagNames[i]]);
-    }
+    tempElement.remove();
 
     if (this.blockType === 'publii-list') {
       Vue.set(this.features, 'indent', this.checkIfElementCanBeNested());
       Vue.set(this.features, 'outdent', this.checkIfElementCanBeFlattened());
     }
-  }
-
-  findTagInSelection (tagNames) {
-    if (!this.rangyData || this.rangyData.rangeInfos[0].collapsed) {
-      return false;
-    }
-
-    let startID = this.rangyData.rangeInfos[0].startMarkerId;
-    let endID = this.rangyData.rangeInfos[0].endMarkerId;
-    let sourceCode = this.inlineMenuContainer.innerHTML;
-    let partToAnalyze = sourceCode.split(startID)[1];
-    partToAnalyze = partToAnalyze.split(endID)[0];
-    let results = {};
-
-    for (let i = 0; i < tagNames.length; i++) {
-      results[tagNames[i]] = partToAnalyze.indexOf('<' + tagNames[i]) > -1;
-
-      if (results[tagNames[i]] === false) {
-        if (this.inlineMenuContainer.querySelector('#' + startID).parentNode.tagName === tagNames[i].toUpperCase()) {
-          results[tagNames[i]] = true;
-        }
-      }
-    }
-
-    return results;
   }
 
   checkIfElementCanBeNested () {

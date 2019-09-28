@@ -92,10 +92,14 @@ export default {
       this.$rangy.removeMarkers(savedSel);
     },
     execCommand (tagToUse) {
-      let range = window.getSelection().getRangeAt(0);
-      let newTag = document.createElement(tagToUse);
-      newTag.appendChild(range.extractContents());
-      range.insertNode(newTag);
+      if (this.selectedText.features[tagToUse]) {
+
+      } else {
+        let range = window.getSelection().getRangeAt(0);
+        let newTag = document.createElement(tagToUse);
+        newTag.appendChild(range.extractContents());
+        range.insertNode(newTag);
+      }
     },
     indentList () {
       document.execCommand('indent', false, null);
@@ -103,6 +107,21 @@ export default {
     outdentList () {
       document.execCommand('outdent', false, null);
     },
+
+    /*
+
+    -
+
+    -
+
+    -
+
+    -
+
+    -
+
+    -
+    */
     addLink () {
       let selection = document.querySelector('.is-highlighted');
 
