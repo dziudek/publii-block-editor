@@ -1,10 +1,9 @@
 import Vue from 'vue';
 
 export default class SelectedText {
-  constructor (selection, rangyData, inlineMenuContainer, blockType) {
+  constructor (selection, inlineMenuContainer, blockType) {
     this.blockType = blockType;
     this.selection = selection;
-    this.rangyData = rangyData;
     this.inlineMenuContainer = inlineMenuContainer;
 
     this.features = {
@@ -61,6 +60,10 @@ export default class SelectedText {
       Vue.set(this.features, 'indent', this.checkIfElementCanBeNested());
       Vue.set(this.features, 'outdent', this.checkIfElementCanBeFlattened());
     }
+  }
+
+  removeStyle (tag) {
+    // let range = this.selection.getRangeAt(0);
   }
 
   checkIfElementCanBeNested () {

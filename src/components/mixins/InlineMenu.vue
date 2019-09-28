@@ -41,11 +41,11 @@ export default {
     },
     showInlineMenu () {
       let sel = document.getSelection();
-      let savedSel = this.$rangy.saveSelection();
-      this.selectedText = new SelectedText(sel, savedSel, this.$refs[this.inlineMenuContainer]);
+      // let savedSel = this.$rangy.saveSelection();
+      this.selectedText = new SelectedText(sel, this.$refs[this.inlineMenuContainer]);
       this.selectedText.analyzeSelectedText();
-      this.$rangy.restoreSelection(savedSel);
-      this.$rangy.removeMarkers(savedSel);
+      // this.$rangy.restoreSelection(savedSel);
+      // this.$rangy.removeMarkers(savedSel);
       let oRange = sel.getRangeAt(0);
       let oRect = oRange.getBoundingClientRect();
       let wrapperRect = this.$refs[this.inlineMenuContainer].getBoundingClientRect();
@@ -54,6 +54,25 @@ export default {
       let inlineMenuTop = (oRect.top - wrapperRect.top + inlineMenuOffsets.y) + 'px';
       this.$refs['inline-menu'].setPosition(inlineMenuLeft, inlineMenuTop);
       this.$highlighter.removeAllHighlights();
+    },
+    updateInlineMenuPosition () {
+      let sel = document.getSelection();
+
+      if (sel.toString() === '') {
+        this.closeInlineMenu();
+        return;
+      }
+
+      let oRange = sel.getRangeAt(0);
+      let oRect = oRange.getBoundingClientRect();
+      let wrapperRect = this.$refs[this.inlineMenuContainer].getBoundingClientRect();
+      let inlineMenuOffsets = this.getInlineMenuOffsets();
+      let inlineMenuLeft = (((oRect.left - wrapperRect.left) + (oRect.width / 2)) + inlineMenuOffsets.x) + 'px';
+      let inlineMenuTop = (oRect.top - wrapperRect.top + inlineMenuOffsets.y) + 'px';
+      this.$refs['inline-menu'].setPosition(inlineMenuLeft, inlineMenuTop);
+    },
+    closeInlineMenu () {
+      this.textIsHighlighted = false;
     },
     getInlineMenuOffsets () {
       let x = 30;
@@ -71,7 +90,7 @@ export default {
     },
     doInlineOperation (operationType) {
       let sel = document.getSelection();
-      let savedSel = this.$rangy.saveSelection();
+      // let savedSel = this.$rangy.saveSelection();
 
       switch (operationType) {
         case 'strong': document.execCommand('bold', false, null); break;
@@ -81,19 +100,19 @@ export default {
         case 'code': this.execCommand('code'); break;
         case 'mark': this.execCommand('mark'); break;
         case 'link': this.addLink(); break;
-        case 'unlink': this.removeLink(savedSel); break;
+        // case 'unlink': this.removeLink(savedSel); break;
         case 'indent': this.indentList(); break;
         case 'outdent': this.outdentList(); break;
       }
 
-      this.selectedText = new SelectedText(sel, savedSel, this.$refs[this.inlineMenuContainer], this.$parent.blockType);
+      this.selectedText = new SelectedText(sel, this.$refs[this.inlineMenuContainer], this.$parent.blockType);
       this.selectedText.analyzeSelectedText();
-      this.$rangy.restoreSelection(savedSel);
-      this.$rangy.removeMarkers(savedSel);
+      // this.$rangy.restoreSelection(savedSel);
+      // this.$rangy.removeMarkers(savedSel);
     },
     execCommand (tagToUse) {
       if (this.selectedText.features[tagToUse]) {
-
+        this.selectedText.removeStyle(tagToUse);
       } else {
         let range = window.getSelection().getRangeAt(0);
         let newTag = document.createElement(tagToUse);
@@ -103,9 +122,11 @@ export default {
     },
     indentList () {
       document.execCommand('indent', false, null);
+      setTimeout(() => { this.updateInlineMenuPosition(); }, 100);
     },
     outdentList () {
       document.execCommand('outdent', false, null);
+      setTimeout(() => { this.updateInlineMenuPosition(); }, 100);
     },
 
     /*
