@@ -44,7 +44,7 @@ export default {
     showInlineMenu () {
       let sel = document.getSelection();
       // let savedSel = this.$rangy.saveSelection();
-      this.selectedText = new SelectedText(this.$refs[this.inlineMenuContainer]);
+      this.selectedText = new SelectedText(this.$refs[this.inlineMenuContainer], this.$parent.blockType);
       this.selectedText.analyzeSelectedText();
       // this.$rangy.restoreSelection(savedSel);
       // this.$rangy.removeMarkers(savedSel);

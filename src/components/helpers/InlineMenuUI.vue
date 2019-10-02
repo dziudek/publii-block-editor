@@ -47,6 +47,7 @@
         <icon name="marker" />
       </button>
       <button
+        v-if="$parent.$parent.blockType !== 'publii-list'"
         :class="{ 'wrapper-ui-inline-menu-button': true }"
         :disabled="!hasAnyStyling"
         @click.stop="$parent.doInlineOperation('clear');">
