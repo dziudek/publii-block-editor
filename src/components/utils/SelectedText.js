@@ -144,8 +144,6 @@ export default class SelectedText {
       listItem = baseItem.closest('li');
     }
 
-    console.log(parentList);
-
     if (parentList.children.length <= 1 || parentList.children[0] === listItem) {
       return false;
     }
