@@ -47,13 +47,6 @@
         <icon name="marker" />
       </button>
       <button
-        v-if="$parent.$parent.blockType !== 'publii-list'"
-        :class="{ 'wrapper-ui-inline-menu-button': true }"
-        :disabled="!hasAnyStyling"
-        @click.stop="$parent.doInlineOperation('clear');">
-        <icon name="trash" />
-      </button>
-      <button
         v-if="$parent.$parent.blockType === 'publii-list'"
         :class="{ 'wrapper-ui-inline-menu-button': true }"
         :disabled="!$parent.selectedText.allowedOperations.indent"
@@ -82,18 +75,6 @@ export default {
   computed: {
     showInlineMenu () {
       return this.$parent.$parent.isSelected && this.$parent.textIsHighlighted && !this.$parent.$parent.uiOpened;
-    },
-    hasAnyStyling () {
-      let tagsStatus = this.$parent.selectedText.containedTags;
-      let tags = Object.keys(tagsStatus);
-
-      for (let i = 0; i < tags.length; i++) {
-        if (tagsStatus[tags[i]] === true) {
-          return true;
-        }
-      }
-
-      return false;
     }
   },
   watch: {

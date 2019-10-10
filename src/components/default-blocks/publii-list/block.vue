@@ -60,6 +60,11 @@ export default {
           activeState: function () { return this.config.listType === 'ol'; },
           onClick: function () { this.setListType('ol'); },
           icon: 'ordered-list'
+        },
+        {
+          activeState: () => false,
+          onClick: function () { this.clearListHtml(); },
+          icon: 'trash'
         }
       ]
     };
@@ -122,6 +127,29 @@ export default {
         config: JSON.parse(JSON.stringify(this.config)),
         content: this.content
       });
+    },
+    clearListHtml () {
+      let html = this.$refs['block'].innerHTML;
+      let tempNode = document.createElement('div');
+      tempNode.innerHTML = html;
+      let allElements = tempNode.querySelectorAll('*');
+
+      for (let i = 0; i < allElements.length; i++) {
+        if (['UL', 'OL', 'LI'].indexOf(allElements[i].tagName) > -1) {
+          continue;
+        }
+
+        let parent = allElements[i].parentNode;
+
+        while (allElements[i].firstChild) {
+          parent.insertBefore(allElements[i].firstChild, allElements[i]);
+        }
+
+        parent.removeChild(allElements[i]);
+      }
+
+      this.$refs['block'].innerHTML = tempNode.innerHTML;
+      tempNode.remove();
     }
   }
 }

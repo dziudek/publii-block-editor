@@ -252,6 +252,9 @@ export default {
         this.textIsHighlighted = false;
       }
     },
+    clearContentHtml (refID) {
+      this.$refs[refID].innerHTML = this.$refs[refID].innerText;
+    },
     updateCurrentBlockID () {
       this.$bus.$emit('publii-block-editor-update-current-block-id', this.id);
     }

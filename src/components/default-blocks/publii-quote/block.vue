@@ -37,7 +37,7 @@
     <top-menu
       ref="top-menu"
       :conversions="conversions"
-      :config="[]" />
+      :config="topMenuConfig" />
   </div>
 </template>
 
@@ -81,7 +81,14 @@ export default {
         author: ''
       },
       conversions: AvailableConversions,
-      inlineMenuContainer: 'contentText'
+      inlineMenuContainer: 'contentText',
+      topMenuConfig: [
+        {
+          activeState: () => false,
+          onClick: function () { this.clearContentHtml('contentText'); },
+          icon: 'trash'
+        }
+      ]
     };
   },
   watch: {
