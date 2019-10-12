@@ -52,7 +52,6 @@ export default {
       let inlineMenuLeft = (((oRect.left - wrapperRect.left) + (oRect.width / 2)) + inlineMenuOffsets.x) + 'px';
       let inlineMenuTop = ((oRect.top - wrapperRect.top) + oRect.height + inlineMenuOffsets.y) + 'px';
       this.$refs['inline-menu'].setPosition(inlineMenuLeft, inlineMenuTop);
-      this.$highlighter.removeAllHighlights();
     },
     updateInlineMenuPosition () {
       let sel = document.getSelection();

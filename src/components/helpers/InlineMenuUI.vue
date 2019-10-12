@@ -77,13 +77,6 @@ export default {
       return this.$parent.$parent.isSelected && this.$parent.textIsHighlighted && !this.$parent.$parent.uiOpened;
     }
   },
-  watch: {
-    showInlineMenu (newValue, oldValue) {
-      if (!newValue) {
-        this.$highlighter.removeAllHighlights();
-      }
-    }
-  },
   data () {
     return {
       left: '',
