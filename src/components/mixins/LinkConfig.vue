@@ -77,30 +77,32 @@ export default {
       }
     },
     removeHighlight () {
-      let highlightedText = document.querySelector('#link-popup-highlighted-text-' + this.id);
-      let range = document.getSelection().getRangeAt(0);
+      setTimeout(() => {
+        let highlightedText = document.querySelector('#link-popup-highlighted-text-' + this.id);
+        let range = document.getSelection().getRangeAt(0);
 
-      if (highlightedText) {
-        range.setStartBefore(highlightedText);
-        range.setEndAfter(highlightedText);
-
-        setTimeout(() => {
-          let extractedContent = range.extractContents();
-          let extractedContentChildren = extractedContent.children;
-          let nodesToInsert = extractedContentChildren[0].childNodes;
-          let firstNode = nodesToInsert[0];
-          let lastNode = nodesToInsert[nodesToInsert.length - 1];
-
-          for (let i = nodesToInsert.length - 1; i >= 0; i--) {
-            range.insertNode(nodesToInsert[i]);
-          }
+        if (highlightedText) {
+          range.setStartBefore(highlightedText);
+          range.setEndAfter(highlightedText);
 
           setTimeout(() => {
-            range.setStartBefore(firstNode);
-            range.setEndAfter(lastNode);
+            let extractedContent = range.extractContents();
+            let extractedContentChildren = extractedContent.children;
+            let nodesToInsert = extractedContentChildren[0].childNodes;
+            let firstNode = nodesToInsert[0];
+            let lastNode = nodesToInsert[nodesToInsert.length - 1];
+
+            for (let i = nodesToInsert.length - 1; i >= 0; i--) {
+              range.insertNode(nodesToInsert[i]);
+            }
+
+            setTimeout(() => {
+              range.setStartBefore(firstNode);
+              range.setEndAfter(lastNode);
+            }, 0);
           }, 0);
-        }, 0);
-      }
+        }
+      }, 100);
     },
     createNewLinkFromSelection () {
       let highlightedText = document.querySelector('#link-popup-highlighted-text-' + this.id);

@@ -157,6 +157,23 @@ export default {
     findFirstLinkInSelection (selection) {
       let anchorNode = selection.anchorNode;
       let focusNode = selection.focusNode;
+      let range = selection.getRangeAt(0);
+
+      if (
+        anchorNode.previousElementSibling &&
+        anchorNode.previousElementSibling.tagName === 'A' &&
+        range.intersectsNode(anchorNode.previousElementSibling)
+      ) {
+        return anchorNode.previousElementSibling;
+      }
+
+      if (
+        anchorNode.nextElementSibling &&
+        anchorNode.nextElementSibling.tagName === 'A' &&
+        range.intersectsNode(anchorNode.nextElementSibling)
+      ) {
+        return anchorNode.nextElementSibling;
+      }
 
       if (anchorNode.parentNode.tagName === 'A') {
         return anchorNode.parentNode;
@@ -164,6 +181,22 @@ export default {
 
       if (anchorNode.nodeType === 1 && anchorNode.closest('a')) {
         return anchorNode.closest('a');
+      }
+
+      if (
+        focusNode.previousElementSibling &&
+        focusNode.previousElementSibling.tagName === 'A' &&
+        range.intersectsNode(focusNode.previousElementSibling)
+      ) {
+        return focusNode.previousElementSibling;
+      }
+
+      if (
+        focusNode.nextElementSibling &&
+        focusNode.nextElementSibling.tagName === 'A' &&
+        range.intersectsNode(focusNode.nextElementSibling)
+      ) {
+        return focusNode.nextElementSibling;
       }
 
       if (focusNode.parentNode.tagName === 'A') {
