@@ -1,6 +1,6 @@
 <template>
   <div
-    @click.stop="hide()"
+    @click.prevent.stop="hide()"
     :class="{ 'block-link-popup-overlay': true, 'is-visible': isVisible }">
     <div
       @click.prevent.stop
@@ -77,10 +77,10 @@
       </div>
 
       <div class="block-link-popup-buttons">
-        <button @click="save()">
+        <button @click.stop="save()">
           Save
         </button>
-        <button @click="hide()" class="outline">
+        <button @click.stop="hide()" class="outline">
           Cancel
         </button>
       </div>
@@ -124,6 +124,15 @@ export default {
     show (blockID, link) {
       this.isVisible = true;
       this.currentBlockID = blockID;
+      this.linkType = 'post';
+      this.linkSelectedAuthor = '';
+      this.linkSelectedPost = '';
+      this.linkSelectedTag = '';
+      this.link = {
+        url: '',
+        noFollow: false,
+        targetBlank: false
+      };
       this.link = JSON.parse(JSON.stringify(link));
       this.parseLink();
     },
@@ -181,6 +190,19 @@ export default {
           return '#INTERNAL_LINK#/TAG/' + this.linkSelectedTag;
         } else {
           return '';
+        }
+      }
+
+      if (this.link.url[0] && this.link.url[0] !== '#') {
+        if (
+          this.link.url.substr(0, 8) !== 'https://' &&
+          this.link.url.substr(0, 7) !== 'http://' &&
+          this.link.url.substr(0, 6) !== 'dat://' &&
+          this.link.url.substr(0, 6) !== 'ftp://' &&
+          this.link.url.substr(0, 3) !== '://' &&
+          this.link.url.substr(0, 2) !== '//'
+        ) {
+          this.link.url = 'https://' + this.link.url;
         }
       }
 

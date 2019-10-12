@@ -29,7 +29,6 @@ export default {
       this.save();
     },
     showLinkPopup () {
-      this.foundedLink = null;
       this.addHighlight();
 
       if (this.config.link) {
@@ -57,6 +56,7 @@ export default {
 
       if (linkInSelection) {
         this.linkCreationMode = 'edit';
+        linkInSelection.classList.add('is-highlighted');
         this.selectElement(linkInSelection);
         linkInSelection.setAttribute('data-link-popup-id', this.id);
 
@@ -68,24 +68,41 @@ export default {
       } else {
         let wrapper = document.createElement('span');
         wrapper.setAttribute('class', 'is-highlighted');
-        wrapper.setAttribute('id', 'link-popup-highlighted-text-' + this.id);
         let range = selection.getRangeAt(0).cloneRange();
         range.surroundContents(wrapper);
         selection.removeAllRanges();
         selection.addRange(range);
         this.linkCreationMode = 'new';
+
+        this.config.link = {
+          url: '',
+          noFollow: false,
+          targetBlank: false
+        };
       }
+
+      setTimeout(() => {
+        this.updateInlineMenuPosition();
+      }, 0);
     },
     removeHighlight () {
       setTimeout(() => {
-        let highlightedText = document.querySelector('#link-popup-highlighted-text-' + this.id);
-        let range = document.getSelection().getRangeAt(0);
+        let highlightedText = document.querySelector('.is-highlighted');
+        let selection = window.getSelection();
+        let range = document.createRange();
 
         if (highlightedText) {
           range.setStartBefore(highlightedText);
           range.setEndAfter(highlightedText);
 
           setTimeout(() => {
+            if (highlightedText.tagName === 'A') {
+              highlightedText.classList.remove('is-highlighted');
+              selection.removeAllRanges();
+              selection.addRange(range);
+              return;
+            }
+
             let extractedContent = range.extractContents();
             let extractedContentChildren = extractedContent.children;
             let nodesToInsert = extractedContentChildren[0].childNodes;
@@ -99,13 +116,15 @@ export default {
             setTimeout(() => {
               range.setStartBefore(firstNode);
               range.setEndAfter(lastNode);
+              selection.removeAllRanges();
+              selection.addRange(range);
             }, 0);
           }, 0);
         }
       }, 100);
     },
     createNewLinkFromSelection () {
-      let highlightedText = document.querySelector('#link-popup-highlighted-text-' + this.id);
+      let highlightedText = document.querySelector('.is-highlighted');
       let linkElement = document.createElement('a');
       let temporaryID = +new Date();
       linkElement.setAttribute('href', this.config.link.url);
@@ -150,6 +169,7 @@ export default {
 
       setTimeout(() => {
         let selectedLink = document.querySelector('a[data-link-popup-id="' + this.id + '"]');
+        selectedLink.classList.remove('is-highlighted');
         this.selectElement(selectedLink);
 
         setTimeout(() => {
@@ -164,6 +184,10 @@ export default {
       let range = document.createRange();
       range.selectNodeContents(element);
       selection.addRange(range);
+
+      setTimeout(() => {
+        this.updateInlineMenuPosition();
+      }, 0);
     }
   },
   beforeDestroy () {

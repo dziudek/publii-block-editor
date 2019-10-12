@@ -97,7 +97,6 @@ export default {
         case 'unlink': this.removeLink(); break;
         case 'indent': this.indentList(); break;
         case 'outdent': this.outdentList(); break;
-        case 'preview': this.previewLink(); break;
       }
 
       this.selectedText = new SelectedText(this.$refs[this.inlineMenuContainer], this.$parent.blockType);
@@ -150,9 +149,6 @@ export default {
         range.setStartBefore(firstChild);
         range.setEndAfter(lastChild);
       }
-    },
-    previewLink () {
-
     },
     findFirstLinkInSelection (selection) {
       let anchorNode = selection.anchorNode;
