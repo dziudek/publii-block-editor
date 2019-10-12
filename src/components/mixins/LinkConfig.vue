@@ -112,6 +112,8 @@ export default {
         element.removeAttribute('data-temp-id');
         this.selectElement(element);
       }, 0);
+
+      this.selectedText.containedTags.a = true;
     },
     selectElement (element) {
       let selection = window.getSelection();

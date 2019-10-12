@@ -128,8 +128,69 @@ export default {
         this.updateInlineMenuPosition();
       }, 100);
     },
+    removeLink () {
+      let selection = document.getSelection();
+      let linkToRemove = this.findFirstLinkInSelection(selection);
+
+      if (linkToRemove) {
+        let selection = window.getSelection();
+        selection.removeAllRanges();
+        let range = document.createRange();
+        range.selectNodeContents(linkToRemove);
+        selection.addRange(range);
+        let firstChild = linkToRemove.firstChild;
+        let lastChild = linkToRemove.firstChild;
+
+        while (linkToRemove.firstChild) {
+          lastChild = linkToRemove.firstChild;
+          linkToRemove.parentNode.insertBefore(linkToRemove.firstChild, linkToRemove);
+        }
+
+        linkToRemove.parentNode.removeChild(linkToRemove);
+        range.setStartBefore(firstChild);
+        range.setEndAfter(lastChild);
+      }
+    },
     previewLink () {
 
+    },
+    findFirstLinkInSelection (selection) {
+      let anchorNode = selection.anchorNode;
+      let focusNode = selection.focusNode;
+
+      if (anchorNode.previousElementSibling && anchorNode.previousElementSibling.tagName === 'A') {
+        return anchorNode.previousElementSibling;
+      }
+
+      if (anchorNode.nextElementSibling && anchorNode.nextElementSibling.tagName === 'A') {
+        return anchorNode.nextElementSibling;
+      }
+
+      if (anchorNode.parentNode.tagName === 'A') {
+        return anchorNode.parentNode;
+      }
+
+      if (anchorNode.closest('a')) {
+        return anchorNode.closest('a');
+      }
+
+      if (focusNode.previousElementSibling && focusNode.previousElementSibling.tagName === 'A') {
+        return focusNode.previousElementSibling;
+      }
+
+      if (focusNode.nextElementSibling && focusNode.nextElementSibling.tagName === 'A') {
+        return focusNode.nextElementSibling;
+      }
+
+      if (focusNode.parentNode.tagName === 'A') {
+        return focusNode.parentNode;
+      }
+
+      if (focusNode.closest('a')) {
+        return focusNode.closest('a');
+      }
+
+      return null;
     }
   }
 }
