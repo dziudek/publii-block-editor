@@ -72,7 +72,7 @@
 
       <div class="block-link-popup-link-switcher">
         <switcher
-          v-model="link.nofollow" />
+          v-model="link.noFollow" />
         Add rel="nofollow" attribute
       </div>
 
@@ -158,6 +158,10 @@ export default {
     },
     setLinkType (type) {
       this.linkType = type;
+
+      if (type === 'external' && this.link.url.indexOf('#INTERNAL_LINK#') === 0) {
+        this.link.url = '';
+      }
     },
     prepareLink () {
       if (this.linkType === 'post') {

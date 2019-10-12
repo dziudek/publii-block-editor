@@ -63,12 +63,37 @@ export default {
       this.linkCreationMode = 'new';
     },
     removeHighlight () {
+      let highlightedText = document.querySelector('#link-popup-highlighted-text-' + this.id);
+      let range = document.getSelection().getRangeAt(0);
 
+      if (highlightedText) {
+        range.setStartBefore(highlightedText);
+        range.setEndAfter(highlightedText);
+
+        setTimeout(() => {
+          let extractedContent = range.extractContents();
+          let extractedContentChildren = extractedContent.children;
+          let nodesToInsert = extractedContentChildren[0].childNodes;
+          let firstNode = nodesToInsert[0];
+          let lastNode = nodesToInsert[nodesToInsert.length - 1];
+
+          for (let i = nodesToInsert.length - 1; i >= 0; i--) {
+            range.insertNode(nodesToInsert[i]);
+          }
+
+          setTimeout(() => {
+            range.setStartBefore(firstNode);
+            range.setEndAfter(lastNode);
+          }, 0);
+        }, 0);
+      }
     },
     createNewLinkFromSelection () {
       let highlightedText = document.querySelector('#link-popup-highlighted-text-' + this.id);
       let linkElement = document.createElement('a');
+      let temporaryID = +new Date();
       linkElement.setAttribute('href', this.config.link.url);
+      linkElement.setAttribute('data-temp-id', temporaryID);
 
       if (this.config.link.targetBlank) {
         linkElement.setAttribute('target', '_blank');
@@ -79,8 +104,21 @@ export default {
       }
 
       linkElement.innerHTML = highlightedText.innerHTML;
+      highlightedText.parentNode.insertBefore(linkElement, highlightedText);
+      highlightedText.parentNode.removeChild(highlightedText);
 
-      highlightedText.parentNode.replaceChild(linkElement, highlightedText);
+      setTimeout(() => {
+        let element = document.querySelector('a[data-temp-id="' + temporaryID + '"]');
+        element.removeAttribute('data-temp-id');
+        this.selectElement(element);
+      }, 0);
+    },
+    selectElement (element) {
+      let selection = window.getSelection();
+      selection.removeAllRanges();
+      let range = document.createRange();
+      range.selectNodeContents(element);
+      selection.addRange(range);
     }
   },
   beforeDestroy () {

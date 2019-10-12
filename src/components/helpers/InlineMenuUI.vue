@@ -37,6 +37,12 @@
         <icon name="unlink" />
       </button>
       <button
+        v-if="$parent.selectedText.containedTags.a"
+        :class="{ 'wrapper-ui-inline-menu-button': true }"
+        @click.stop="$parent.doInlineOperation('previewLink');">
+        <icon name="preview" />
+      </button>
+      <button
         :class="{ 'wrapper-ui-inline-menu-button': true, 'is-active': $parent.selectedText.containedTags.code }"
         @click.stop="$parent.doInlineOperation('code');">
         <icon name="code" />

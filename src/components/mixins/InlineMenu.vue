@@ -94,10 +94,10 @@ export default {
         case 'u': this.execCommand('u'); break;
         case 'code': this.execCommand('code'); break;
         case 'mark': this.execCommand('mark'); break;
-        case 'a': this.addLink(); break;
-        // case 'unlink': this.removeLink(savedSel); break;
+        case 'unlink': this.removeLink(); break;
         case 'indent': this.indentList(); break;
         case 'outdent': this.outdentList(); break;
+        case 'preview': this.previewLink(); break;
       }
 
       this.selectedText = new SelectedText(this.$refs[this.inlineMenuContainer], this.$parent.blockType);
@@ -128,22 +128,7 @@ export default {
         this.updateInlineMenuPosition();
       }, 100);
     },
-    addLink () {
-      console.log('ADD!');
-      let selection = document.querySelector('.is-highlighted');
-
-      if (!selection) {
-        return;
-      }
-
-      if (this.linkIsInvalid(this.linkUI.url)) {
-        this.linkUI.url = 'https://' + this.linkUI.url;
-      }
-
-      selection.outerHTML = '<a href="' + this.linkUI.url + '">' + selection.innerHTML + '</a>';
-      this.selectedTextcontainedTags['a'] = true;
-    },
-    removeLink (rangyData) {
+    previewLink () {
 
     }
   }
