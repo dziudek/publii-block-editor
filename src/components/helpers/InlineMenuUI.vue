@@ -97,7 +97,7 @@ export default {
 @import '../../assets/vue-multiselect.scss';
 
 .is-highlighted {
-  background: $block-editor-color-gradient-end;
+  background: darken($block-editor-color-gradient-end, 7.5%);
 }
 
 .wrapper-ui-inline-menu {

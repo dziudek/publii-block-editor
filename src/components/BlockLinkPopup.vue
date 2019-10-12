@@ -129,6 +129,7 @@ export default {
     },
     hide () {
       this.isVisible = false;
+      this.$bus.$emit('block-editor-hide-link-popup');
 
       setTimeout(() => {
         this.currentBlockID = '';

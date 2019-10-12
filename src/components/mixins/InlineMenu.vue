@@ -128,22 +128,8 @@ export default {
         this.updateInlineMenuPosition();
       }, 100);
     },
-
-    /*
-
-    -
-
-    -
-
-    -
-
-    -
-
-    -
-
-    -
-    */
     addLink () {
+      console.log('ADD!');
       let selection = document.querySelector('.is-highlighted');
 
       if (!selection) {
@@ -158,26 +144,7 @@ export default {
       this.selectedTextcontainedTags['a'] = true;
     },
     removeLink (rangyData) {
-      let startID = rangyData.rangeInfos[0].startMarkerId;
-      let endID = rangyData.rangeInfos[0].endMarkerId;
-      let html = [
-        '<span id="' + startID + '"></span>',
-        document.getSelection().toString().replace(/&nbsp;/gmi, ''),
-        '<span id="' + endID + '"></span>'
-      ];
 
-      document.execCommand('insertHTML', false, html.join(''));
-      this.selectedTextcontainedTags['a'] = false;
-    },
-    checkTagPosition (tag, startID, endID) {
-      let codeToAnalyze = this.$refs[this.inlineMenuContainer].innerHTML.split(startID)[1];
-      codeToAnalyze = codeToAnalyze.split(endID)[0];
-
-      if (codeToAnalyze.indexOf('<' + tag) > -1) {
-        return codeToAnalyze.indexOf('<' + tag);
-      }
-
-      return -1;
     }
   }
 }
