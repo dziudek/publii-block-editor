@@ -158,35 +158,19 @@ export default {
       let anchorNode = selection.anchorNode;
       let focusNode = selection.focusNode;
 
-      if (anchorNode.previousElementSibling && anchorNode.previousElementSibling.tagName === 'A') {
-        return anchorNode.previousElementSibling;
-      }
-
-      if (anchorNode.nextElementSibling && anchorNode.nextElementSibling.tagName === 'A') {
-        return anchorNode.nextElementSibling;
-      }
-
       if (anchorNode.parentNode.tagName === 'A') {
         return anchorNode.parentNode;
       }
 
-      if (anchorNode.closest('a')) {
+      if (anchorNode.nodeType === 1 && anchorNode.closest('a')) {
         return anchorNode.closest('a');
-      }
-
-      if (focusNode.previousElementSibling && focusNode.previousElementSibling.tagName === 'A') {
-        return focusNode.previousElementSibling;
-      }
-
-      if (focusNode.nextElementSibling && focusNode.nextElementSibling.tagName === 'A') {
-        return focusNode.nextElementSibling;
       }
 
       if (focusNode.parentNode.tagName === 'A') {
         return focusNode.parentNode;
       }
 
-      if (focusNode.closest('a')) {
+      if (focusNode.nodeType === 1 && focusNode.closest('a')) {
         return focusNode.closest('a');
       }
 

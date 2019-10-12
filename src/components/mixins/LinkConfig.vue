@@ -18,15 +18,18 @@ export default {
 
       this.config.link = JSON.parse(JSON.stringify(linkConfig));
 
-      if (this.linkCreationMode === 'new') {
-        this.createNewLinkFromSelection();
-      } else {
-
+      if (this.config.link.url !== '') {
+        if (this.linkCreationMode === 'new') {
+          this.createNewLinkFromSelection();
+        } else if (this.linkCreationMode === 'edit') {
+          this.editSelectedLink();
+        }
       }
 
       this.save();
     },
     showLinkPopup () {
+      this.foundedLink = null;
       this.addHighlight();
 
       if (this.config.link) {
@@ -49,18 +52,29 @@ export default {
       };
     },
     addHighlight () {
-      // create highlight wrapper
-      let wrapper = document.createElement('span');
-      wrapper.setAttribute('class', 'is-highlighted');
-      wrapper.setAttribute('id', 'link-popup-highlighted-text-' + this.id);
-      // make selection
       let selection = document.getSelection();
-      let range = selection.getRangeAt(0).cloneRange();
-      range.surroundContents(wrapper);
-      selection.removeAllRanges();
-      selection.addRange(range);
-      // Set creation mode
-      this.linkCreationMode = 'new';
+      let linkInSelection = this.findFirstLinkInSelection(selection);
+
+      if (linkInSelection) {
+        this.linkCreationMode = 'edit';
+        this.selectElement(linkInSelection);
+        linkInSelection.setAttribute('data-link-popup-id', this.id);
+
+        this.config.link = {
+          url: linkInSelection.getAttribute('href'),
+          noFollow: linkInSelection.getAttribute('rel') === 'nofollow noopener',
+          targetBlank: linkInSelection.getAttribute('target') === '_blank'
+        };
+      } else {
+        let wrapper = document.createElement('span');
+        wrapper.setAttribute('class', 'is-highlighted');
+        wrapper.setAttribute('id', 'link-popup-highlighted-text-' + this.id);
+        let range = selection.getRangeAt(0).cloneRange();
+        range.surroundContents(wrapper);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        this.linkCreationMode = 'new';
+      }
     },
     removeHighlight () {
       let highlightedText = document.querySelector('#link-popup-highlighted-text-' + this.id);
@@ -114,6 +128,33 @@ export default {
       }, 0);
 
       this.selectedText.containedTags.a = true;
+    },
+    editSelectedLink () {
+      if (this.config.link.url === '') {
+        this.removeLink();
+        return;
+      }
+
+      let selectedLink = document.querySelector('a[data-link-popup-id="' + this.id + '"]');
+      selectedLink.setAttribute('href', this.config.link.url);
+
+      if (this.config.link.targetBlank) {
+        selectedLink.setAttribute('target', '_blank');
+      }
+
+      if (this.config.link.noFollow) {
+        selectedLink.setAttribute('rel', 'nofollow noopener');
+      }
+
+      setTimeout(() => {
+        let selectedLink = document.querySelector('a[data-link-popup-id="' + this.id + '"]');
+        this.selectElement(selectedLink);
+
+        setTimeout(() => {
+          let selectedLink = document.querySelector('a[data-link-popup-id="' + this.id + '"]');
+          selectedLink.removeAttribute('data-link-popup-id');
+        }, 0);
+      }, 0);
     },
     selectElement (element) {
       let selection = window.getSelection();

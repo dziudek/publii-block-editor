@@ -165,11 +165,23 @@ export default {
     },
     prepareLink () {
       if (this.linkType === 'post') {
-        return '#INTERNAL_LINK#/POST/' + this.linkSelectedPost;
+        if (this.linkSelectedPost) {
+          return '#INTERNAL_LINK#/POST/' + this.linkSelectedPost;
+        } else {
+          return '';
+        }
       } else if (this.linkType === 'author') {
-        return '#INTERNAL_LINK#/AUTHOR/' + this.linkSelectedAuthor;
+        if (this.linkSelectedAuthor) {
+          return '#INTERNAL_LINK#/AUTHOR/' + this.linkSelectedAuthor;
+        } else {
+          return '';
+        }
       } else if (this.linkType === 'tag') {
-        return '#INTERNAL_LINK#/TAG/' + this.linkSelectedTag;
+        if (this.linkSelectedTag) {
+          return '#INTERNAL_LINK#/TAG/' + this.linkSelectedTag;
+        } else {
+          return '';
+        }
       }
 
       return this.link.url;
