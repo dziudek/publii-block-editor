@@ -43,11 +43,8 @@ export default {
     },
     showInlineMenu () {
       let sel = document.getSelection();
-      // let savedSel = this.$rangy.saveSelection();
       this.selectedText = new SelectedText(this.$refs[this.inlineMenuContainer], this.$parent.blockType);
       this.selectedText.analyzeSelectedText();
-      // this.$rangy.restoreSelection(savedSel);
-      // this.$rangy.removeMarkers(savedSel);
       let oRange = sel.getRangeAt(0);
       let oRect = oRange.getBoundingClientRect();
       let wrapperRect = this.$refs[this.inlineMenuContainer].getBoundingClientRect();
@@ -91,9 +88,6 @@ export default {
       return { x, y };
     },
     doInlineOperation (operationType) {
-      // let sel = document.getSelection();
-      // let savedSel = this.$rangy.saveSelection();
-
       switch (operationType) {
         case 'strong': this.execCommand('strong'); break;
         case 'em': this.execCommand('em'); break;
@@ -109,8 +103,6 @@ export default {
 
       this.selectedText = new SelectedText(this.$refs[this.inlineMenuContainer], this.$parent.blockType);
       this.selectedText.analyzeSelectedText();
-      // this.$rangy.restoreSelection(savedSel);
-      // this.$rangy.removeMarkers(savedSel);
     },
     execCommand (tagToUse) {
       if (this.selectedText.containedTags[tagToUse]) {
@@ -187,42 +179,6 @@ export default {
       }
 
       return -1;
-    },
-    wrapElementIntoRangy (element, startID, endID) {
-      if (element.tagName === 'P') {
-        return;
-      }
-
-      let spanStart = document.createElement('span');
-      spanStart.setAttribute('id', startID);
-      let spanEnd = document.createElement('span');
-      spanEnd.setAttribute('id', endID);
-
-      if (document.getElementById(startID)) {
-        element.removeChild(document.getElementById(startID));
-      }
-
-      if (document.getElementById(endID)) {
-        element.removeChild(document.getElementById(endID));
-      }
-
-      element.parentNode.insertBefore(spanStart, element);
-      element.parentNode.insertBefore(spanEnd, element.nextSibling);
-
-      let rawText = element.innerText.replace(/&nbsp;/gmi, '');
-      let textToModify = this.$refs[this.inlineMenuContainer].innerHTML;
-      textToModify = textToModify.split('<span id="' + startID + '"></span>');
-      textToModify[1] = textToModify[1].split('<span id="' + endID + '"></span>');
-
-      let modifiedText = [
-        textToModify[0],
-        '<span id="' + startID + '"></span>',
-        rawText,
-        '<span id="' + endID + '"></span>',
-        textToModify[1][1]
-      ].join('');
-
-      this.$refs[this.inlineMenuContainer].innerHTML = modifiedText;
     }
   }
 }
