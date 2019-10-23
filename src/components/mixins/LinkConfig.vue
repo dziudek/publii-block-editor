@@ -12,7 +12,11 @@ export default {
   },
   methods: {
     saveLinkConfig (blockID, linkConfig) {
-      if (blockID !== this.id || this.$parent.blockType === 'publii-header') {
+      if (
+        blockID !== this.id ||
+        this.$parent.blockType === 'publii-header' ||
+        this.$parent.blockType === 'publii-image'
+      ) {
         return;
       }
 
@@ -28,6 +32,9 @@ export default {
 
       this.save();
     },
+    showLinkPopupWithoutHighlight () {
+      this.$bus.$emit('block-editor-show-link-popup', this.id, this.config.link);
+    },
     showLinkPopup () {
       this.addHighlight();
 
@@ -37,18 +44,36 @@ export default {
         let linkConfig = {
           url: '',
           noFollow: false,
-          targetBlank: false
+          targetBlank: false,
+          sponsored: false,
+          ugc: false
         };
 
         this.$bus.$emit('block-editor-show-link-popup', this.id, linkConfig);
       }
     },
+    setLink (blockID, linkConfig) {
+      if (blockID !== this.id) {
+        return;
+      }
+
+      this.config.link.url = linkConfig.url;
+      this.config.link.noFollow = linkConfig.noFollow;
+      this.config.link.targetBlank = linkConfig.targetBlank;
+      this.config.link.sponsored = linkConfig.sponsored;
+      this.config.link.ugc = linkConfig.ugc;
+      this.save();
+    },
     removeLink () {
       this.config.link = {
         url: '',
         noFollow: false,
-        targetBlank: false
+        targetBlank: false,
+        sponsored: false,
+        ugc: false
       };
+
+      this.save();
     },
     addHighlight () {
       let selection = document.getSelection();
@@ -62,8 +87,10 @@ export default {
 
         this.config.link = {
           url: linkInSelection.getAttribute('href'),
-          noFollow: linkInSelection.getAttribute('rel') === 'nofollow noopener',
-          targetBlank: linkInSelection.getAttribute('target') === '_blank'
+          targetBlank: linkInSelection.getAttribute('target') === '_blank',
+          noFollow: linkInSelection.getAttribute('rel').indexOf('nofollow noopener') > -1,
+          sponsored: linkInSelection.getAttribute('rel').indexOf('sponsored') > -1,
+          ugc: linkInSelection.getAttribute('rel').indexOf('ugc') > -1
         };
       } else {
         let wrapper = document.createElement('span');
@@ -77,7 +104,9 @@ export default {
         this.config.link = {
           url: '',
           noFollow: false,
-          targetBlank: false
+          targetBlank: false,
+          sponsored: false,
+          ugc: false
         };
       }
 
@@ -127,6 +156,7 @@ export default {
       let highlightedText = document.querySelector('.is-highlighted');
       let linkElement = document.createElement('a');
       let temporaryID = +new Date();
+      let relAttr = [];
       linkElement.setAttribute('href', this.config.link.url);
       linkElement.setAttribute('data-temp-id', temporaryID);
 
@@ -135,7 +165,19 @@ export default {
       }
 
       if (this.config.link.noFollow) {
-        linkElement.setAttribute('rel', 'nofollow noopener');
+        relAttr.push('nofollow noopener');
+      }
+
+      if (this.config.link.sponsored) {
+        relAttr.push('sponsored');
+      }
+
+      if (this.config.link.ugc) {
+        relAttr.push('ugc');
+      }
+
+      if (relAttr.length) {
+        linkElement.setAttribute('rel', relAttr.join(' '));
       }
 
       linkElement.innerHTML = highlightedText.innerHTML;
@@ -158,13 +200,26 @@ export default {
 
       let selectedLink = document.querySelector('a[data-link-popup-id="' + this.id + '"]');
       selectedLink.setAttribute('href', this.config.link.url);
+      let relAttr = [];
 
       if (this.config.link.targetBlank) {
         selectedLink.setAttribute('target', '_blank');
       }
 
       if (this.config.link.noFollow) {
-        selectedLink.setAttribute('rel', 'nofollow noopener');
+        relAttr.push('nofollow noopener');
+      }
+
+      if (this.config.link.sponsored) {
+        relAttr.push('sponsored');
+      }
+
+      if (this.config.link.ugc) {
+        relAttr.push('ugc');
+      }
+
+      if (relAttr.length) {
+        selectedLink.setAttribute('rel', relAttr.join(' '));
       }
 
       setTimeout(() => {

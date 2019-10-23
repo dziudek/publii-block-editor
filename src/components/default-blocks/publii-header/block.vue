@@ -58,7 +58,9 @@ export default {
         link: {
           url: '',
           noFollow: false,
-          targetBlank: false
+          targetBlank: false,
+          sponsored: false,
+          ugc: false
         },
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
@@ -116,7 +118,7 @@ export default {
         },
         {
           activeState: () => this.config.link.url !== '',
-          onClick: this.showLinkPopup,
+          onClick: this.showLinkPopupWithoutHighlight,
           icon: 'link'
         },
         {
@@ -171,25 +173,6 @@ export default {
     setHeadingLevel (level) {
       this.save();
       this.config.headingLevel = level;
-      this.save();
-    },
-    showLinkPopup () {
-      this.$bus.$emit('block-editor-show-link-popup', this.id, this.config.link);
-    },
-    setLink (blockID, linkConfig) {
-      if (blockID !== this.id) {
-        return;
-      }
-
-      this.config.link.url = linkConfig.url;
-      this.config.link.noFollow = linkConfig.noFollow;
-      this.config.link.targetBlank = linkConfig.targetBlank;
-      this.save();
-    },
-    removeLink () {
-      this.config.link.url = '';
-      this.config.link.noFollow = false;
-      this.config.link.targetBlank = false;
       this.save();
     },
     save () {

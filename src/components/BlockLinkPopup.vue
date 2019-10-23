@@ -71,15 +71,9 @@
       </div>
 
       <div class="block-link-popup-link-switcher">
-        <switcher
-          v-model="link.noFollow" />
-         Add rel="nofollow"
-           <switcher
-          v-model="link.sponsored"/>
-          rel="sponsored"
-           <switcher
-          v-model="link.ugc" />
-          rel="ugc"
+        <switcher v-model="link.noFollow" /> Add rel="nofollow"
+        <switcher v-model="link.sponsored"/> rel="sponsored"
+        <switcher v-model="link.ugc" /> rel="ugc"
       </div>
 
       <div class="block-link-popup-buttons">
@@ -119,7 +113,9 @@ export default {
       link: {
         url: '',
         noFollow: false,
-        targetBlank: false
+        targetBlank: false,
+        sponsored: false,
+        ugc: false
       }
     };
   },
@@ -137,9 +133,11 @@ export default {
       this.link = {
         url: '',
         noFollow: false,
-        targetBlank: false
+        targetBlank: false,
+        sponsored: false,
+        ugc: false
       };
-      this.link = JSON.parse(JSON.stringify(link));
+      this.link = Object.assign(this.link, JSON.parse(JSON.stringify(link)));
       this.parseLink();
     },
     hide () {

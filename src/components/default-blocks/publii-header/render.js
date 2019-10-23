@@ -5,11 +5,23 @@ function render (blockData) {
   let html = ``;
 
   if (blockData.config.link.url !== '') {
-    let relNoFollow = '';
     let targetBlank = '';
+    let relAttr = [];
 
     if (blockData.config.link.noFollow) {
-      relNoFollow = ' rel="nofollow"';
+      relAttr.push('nofollow noopener');
+    }
+
+    if (blockData.config.link.sponsored) {
+      relAttr.push('sponsored');
+    }
+
+    if (blockData.config.link.ugc) {
+      relAttr.push('ugc');
+    }
+
+    if (relAttr.length) {
+      relAttr = ' rel="' + relAttr.join(' ') + '"';
     }
 
     if (blockData.config.link.targetBlank) {
@@ -18,7 +30,7 @@ function render (blockData) {
 
     html = `
     <h${headingLevel}${id}${cssClasses}>
-      <a href="${blockData.config.link.url}"${relNoFollow}${targetBlank}>
+      <a href="${blockData.config.link.url}"${relAttr}${targetBlank}>
       ${blockData.content}
       </a>
     </h${headingLevel}>`;

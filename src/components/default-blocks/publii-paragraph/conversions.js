@@ -12,7 +12,9 @@ const availableConversions = [
         link: {
           url: '',
           noFollow: false,
-          targetBlank: false
+          targetBlank: false,
+          sponsored: false,
+          ugc: false
         },
         advanced: {
           cssClasses: config.advanced.cssClasses,

@@ -112,7 +112,9 @@ export default {
         link: {
           url: '',
           noFollow: false,
-          targetBlank: false
+          targetBlank: false,
+          sponsored: false,
+          ugc: false
         },
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
@@ -144,7 +146,7 @@ export default {
         },
         {
           activeState: () => this.config.link.url !== '',
-          onClick: this.showLinkPopup,
+          onClick: this.showLinkPopupWithoutHighlight,
           icon: 'link'
         },
         {
@@ -171,6 +173,7 @@ export default {
     this.view = (this.content.image === '') ? 'code' : 'preview';
     this.initFakeFilePicker();
     this.setParentCssClasses(this.config.imageAlign);
+    this.$bus.$on('block-editor-save-link-popup', this.setLink);
   },
   methods: {
     dragOver (e) {
@@ -407,6 +410,9 @@ export default {
         content: JSON.parse(JSON.stringify(this.content))
       });
     }
+  },
+  beforeDestroy () {
+    this.$bus.$off('block-editor-save-link-popup', this.setLink);
   }
 }
 </script>
@@ -424,7 +430,7 @@ export default {
   & > img {
     display: block;
     height: auto;
-    margin: 0;
+    margin: 0 auto;
     max-width: 100%;
     transition: all .25s ease-out;
   }
