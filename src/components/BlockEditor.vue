@@ -10,27 +10,29 @@
       <button
         v-if="bulkOperationsMode"
         :disabled="bulkOperationsLog.length === 0"
-        @click.stop="undoBulkOperation">
-        <icon name="dot" />
-        Undo
+        @click.stop="undoBulkOperation"
+        class="undo">
+        <icon name="undo"/>
       </button>
       <button
         v-if="!bulkOperationsMode"
-        @click.stop="startBulkOperations">
-        <icon name="edit-mode" />
-        Batch operations
+        @click.stop="startBulkOperations"
+        class="batch">
+        <icon name="gear"
+              :customHeight="19"
+              :customWidth="19"/>
       </button>
       <button
         v-if="bulkOperationsMode"
-        @click.stop="endBulkOperations">
-        <icon name="edit-mode" />
-        Close
+        @click.stop="endBulkOperations"
+        class="save">
+        <icon name="save"/>
       </button>
       <button
         v-if="bulkOperationsMode"
-        @click.stop="cancelBulkOperations">
-        <icon name="enter" />
-        Cancel
+        @click.stop="cancelBulkOperations"
+        class="cancel">
+        <icon name="cancel" />
       </button>
     </div>
     <div
@@ -558,37 +560,193 @@ export default {
     left: 0;
     position: fixed;
     opacity: 0;
-    transition: all .25s ease-out;
+    transition: all .5s cubic-bezier(.17,.67,.01,1.02);
+    will-change: transform;
     width: 100%;
     z-index: 1000;
 
     &.is-visible {
+      background: linear-gradient(to top, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
       bottom: 0;
       opacity: 1;
+
+      & > button.batch::after {
+         animation: batchFocusOut 1s ease-out backwards;
+      }
     }
 
     & > button {
-      background: transparent;
-      box-shadow: inset 0 0 0 2px #ddd;
-      border: none;
-      border-radius: 3px;
-      color: $block-editor-color-text;
+      color: $block-editor-color-text-medium-dark;
       display: inline-block;
-      font-size: 15px;
-      font-weight: 500;
-      padding: 13px 26px;
+      margin: 0;
+      padding: 0;
       position: relative;
       transition: all .25s ease-out;
       user-select: none;
       white-space: nowrap;
 
-      &:hover {
-         box-shadow: inset 0 0 0 2px #aaa;
+      &.batch {
+         background: $block-editor-color-light;
+         box-shadow: 0 0 16px rgba($block-editor-color-shadow, .1);
+         border: 1px solid $block-editor-color-light-dark;
+         border-radius: 30px;
+         color: $block-editor-color-text;
+         font-size: 15px;
+         font-weight: 500;
+         height: 58px;
+         width: 58px;
+
+         &:hover {
+            border: 2px solid $block-editor-form-input-border;
+
+            & > svg {
+               transform: scale(1.1) rotate(180deg);
+            }
+         }
+
+         & > svg {
+            fill: $block-editor-color-text-medium-dark !important;
+         }
+
+         &::after {
+            content:"";
+            border: 2px solid rgba($block-editor-color-primary, .4);
+            border-radius: 50%;
+            height: 58px;
+            left: 50%;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 58px;
+
+            @keyframes batchFocusOut {
+               0% {
+                 opacity: 0;
+               }
+               50% {
+                 opacity: 1;
+                 transform: translate(-50%, -50%) scale(1.4)
+               }
+            }
+         }
+      }
+
+      &.save {
+         background: $block-editor-color-light;
+         border: 2px solid $block-editor-form-input-border;
+         border-radius: 50%;
+         height: 58px;
+         margin: 0 -10px;
+         width: 58px;
+         z-index: 1;
+
+         &::after {
+            content: "";
+            border-radius: 50%;
+            border: 2px solid $block-editor-color-light;
+            position: absolute;
+            left: -4px;
+            top: -4px;
+            width: 62px;
+            height: 62px;
+         }
+
+         &:hover {
+            border-color: $block-editor-color-green;
+            box-shadow: inset 0 0 0 1px $block-editor-color-green;
+
+            & > svg {
+               fill: $block-editor-color-green !important;
+               transform: scale(1.15);
+            }
+         }
+      }
+
+      &.undo,
+      &.cancel {
+         border: 1px solid $block-editor-color-light-dark;
+         box-shadow: 0 0 16px rgba($block-editor-color-shadow, .1);
+         background: $block-editor-color-light;
+         height: 48px;
+         opaciy: 0;
+         width: 70px;
+
+         &::after {
+           content: "";
+           height: 100%; left: 0;
+           position: absolute;
+           top: 0;
+           width: 100%;
+           transition: all .25s ease-out;
+         }
+      }
+
+      &.undo {
+         animation: left .5s cubic-bezier(.17,.67,.6,1.34);
+         border-right: none;
+         border-radius: 30px 0 0 30px;
+
+         &::after {
+              border-radius: 30px 0 0 30px;
+         }
+
+         &:hover {
+            border-color: $block-editor-color-primary;
+
+            &::after {
+               box-shadow: inset 0 0 0 1px $block-editor-color-primary;
+            }
+         }
+
+         @keyframes left {
+            from {
+                margin-right: -20px;
+            }
+            to {
+                margin-right: 0;
+                opacity:1;
+            }
+         }
+      }
+
+      &.cancel {
+         animation: right .5s cubic-bezier(.17,.67,.6,1.34);
+         border-left: none;
+         border-radius: 0 30px 30px 0;
+
+         &::after {
+              border-radius: 0 30px 30px 0;
+         }
+
+         &:hover {
+            border-color: $block-editor-form-input-border;
+
+            &::after {
+               box-shadow: inset 0 0 0 1px $block-editor-form-input-border;
+            }
+         }
+
+         @keyframes right {
+            from {
+                margin-left: -20px;
+            }
+            to {
+                margin-left: 0;
+                opacity:1;
+            }
+         }
       }
 
       & > svg {
-         margin-right: 8px;
          vertical-align: middle;
+         transition: all .25s ease-out;
+      }
+
+      &:disabled  {
+         & > svg {
+            fill: $block-editor-form-input-border !important;
+         }
       }
     }
   }
