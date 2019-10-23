@@ -88,9 +88,9 @@ export default {
         this.config.link = {
           url: linkInSelection.getAttribute('href'),
           targetBlank: linkInSelection.getAttribute('target') === '_blank',
-          noFollow: linkInSelection.getAttribute('rel').indexOf('nofollow noopener') > -1,
-          sponsored: linkInSelection.getAttribute('rel').indexOf('sponsored') > -1,
-          ugc: linkInSelection.getAttribute('rel').indexOf('ugc') > -1
+          noFollow: linkInSelection.getAttribute('rel') && linkInSelection.getAttribute('rel').indexOf('nofollow noopener') > -1,
+          sponsored: linkInSelection.getAttribute('rel') && linkInSelection.getAttribute('rel').indexOf('sponsored') > -1,
+          ugc: linkInSelection.getAttribute('rel') && linkInSelection.getAttribute('rel').indexOf('ugc') > -1
         };
       } else {
         let wrapper = document.createElement('span');

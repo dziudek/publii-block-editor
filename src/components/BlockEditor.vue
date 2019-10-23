@@ -142,7 +142,7 @@ export default {
         {
           id: 1555941466744,
           type: 'publii-paragraph',
-          content: 'Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nulla vitae elit libero, a pharetra augue. Curabitur blandit tempus porttitor. Donec ullamcorper nulla non metus auctor fringilla.',
+          content: '',
           config: {}
         }
       ]
