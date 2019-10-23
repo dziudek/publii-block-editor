@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     saveLinkConfig (blockID, linkConfig) {
-      if (blockID !== this.id) {
+      if (blockID !== this.id || this.$parent.blockType === 'publii-header') {
         return;
       }
 

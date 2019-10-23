@@ -21,11 +21,11 @@ export default {
     },
     'customWidth': {
       default: '',
-      type: String
+      type: [String, Number]
     },
     'customHeight': {
       default: '',
-      type: String
+      type: [String, Number]
     }
   },
   computed: {

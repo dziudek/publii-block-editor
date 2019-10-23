@@ -134,6 +134,7 @@ export default {
   mounted () {
     this.content = this.inputContent;
     this.config.headingLevel = this.inputConfig.headingLevel || 2;
+    this.$bus.$on('block-editor-save-link-popup', this.setLink);
   },
   methods: {
     handleKeyboard (e) {
@@ -172,6 +173,25 @@ export default {
       this.config.headingLevel = level;
       this.save();
     },
+    showLinkPopup () {
+      this.$bus.$emit('block-editor-show-link-popup', this.id, this.config.link);
+    },
+    setLink (blockID, linkConfig) {
+      if (blockID !== this.id) {
+        return;
+      }
+
+      this.config.link.url = linkConfig.url;
+      this.config.link.noFollow = linkConfig.noFollow;
+      this.config.link.targetBlank = linkConfig.targetBlank;
+      this.save();
+    },
+    removeLink () {
+      this.config.link.url = '';
+      this.config.link.noFollow = false;
+      this.config.link.targetBlank = false;
+      this.save();
+    },
     save () {
       this.content = this.$refs['block'].innerHTML.replace('<line-separator></line-separator>', '');
 
@@ -185,6 +205,9 @@ export default {
         content: this.content
       });
     }
+  },
+  beforeDestroy () {
+    this.$bus.$off('block-editor-save-link-popup', this.setLink);
   }
 }
 </script>
