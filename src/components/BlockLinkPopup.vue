@@ -73,7 +73,13 @@
       <div class="block-link-popup-link-switcher">
         <switcher
           v-model="link.noFollow" />
-        Add rel="nofollow" attribute
+         Add rel="nofollow"
+           <switcher
+          v-model="link.sponsored"/>
+          rel="sponsored"
+           <switcher
+          v-model="link.ugc" />
+          rel="ugc"
       </div>
 
       <div class="block-link-popup-buttons">
@@ -308,6 +314,10 @@ export default {
 
       .switcher {
         top: 0;
+
+          & + .switcher {
+              margin-left: 24px;
+          }
       }
 
       &:last-of-type {
