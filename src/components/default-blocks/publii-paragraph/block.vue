@@ -247,7 +247,7 @@ export default {
         if (!this.newBlockUIListVisible) {
           this.showNewBlockUI = false;
         }
-      }, 250);
+      }, 0);
     },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false && this.showNewBlockUI === false) {

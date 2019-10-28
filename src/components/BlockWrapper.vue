@@ -114,7 +114,7 @@ export default {
       this.uiOpened = false;
       this.setSelectionState(true);
 
-      if (e && e.detail === 2 && e.layerX <= 30) {
+      if (e && e.detail === 2 && e.layerX <= 30 && this.$slots.default[0] && !this.$slots.default[0].componentInstance.isEmpty) {
         this.togglePopup();
       }
     },

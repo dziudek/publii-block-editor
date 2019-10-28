@@ -29,6 +29,11 @@ export default {
   components: {
     'top-menu': TopMenuUI
   },
+  computed: {
+    isEmpty () {
+      return false;
+    }
+  },
   data () {
     return {
       config: {

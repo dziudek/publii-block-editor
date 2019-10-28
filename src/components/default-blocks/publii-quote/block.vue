@@ -63,6 +63,11 @@ export default {
     'inline-menu': InlineMenuUI,
     'top-menu': TopMenuUI
   },
+  computed: {
+    isEmpty () {
+      return this.content.text === '' && this.content.author === '';
+    }
+  },
   data () {
     return {
       focusable: ['contentText', 'contentAuthor'],
@@ -199,6 +204,11 @@ export default {
         newView === 'preview'
       ) {
         this.save();
+      }
+
+      if (this.editor.bulkOperationsMode) {
+        this.view = 'preview';
+        return;
       }
 
       if (

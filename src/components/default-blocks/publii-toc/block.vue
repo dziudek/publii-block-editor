@@ -52,7 +52,9 @@ export default {
     };
   },
   computed: {
-
+    isEmpty () {
+      return this.content.title === '' && this.content.toc === '';
+    }
   },
   beforeCreate () {
     this.configForm = ConfigForm;

@@ -12,6 +12,11 @@ export default {
     'inputConfig',
     'editor'
   ],
+  computed: {
+    isEmpty () {
+      return this.content === '';
+    }
+  },
   data () {
     return {
       caretIsAtStart: false,

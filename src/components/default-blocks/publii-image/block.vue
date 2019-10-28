@@ -161,6 +161,9 @@ export default {
   computed: {
     isInsidePublii () {
       return !!window.process;
+    },
+    isEmpty () {
+      return this.content.image === '' && this.content.alt === '' && this.content.caption === '';
     }
   },
   beforeCreate () {
@@ -281,6 +284,11 @@ export default {
         this.save();
       }
 
+      if (this.editor.bulkOperationsMode) {
+        this.view = 'preview';
+        return;
+      }
+
       if (
         !this.content.image &&
         newView === 'preview'
@@ -310,7 +318,7 @@ export default {
       }
     },
     focus () {
-      this.view = 'code';
+      this.setView('code');
 
       setTimeout(() => {
         if (!this.$parent.isSelected) {

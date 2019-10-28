@@ -25,7 +25,7 @@
       <button
         v-if="bulkOperationsMode"
         @click.stop="endBulkOperations"
-        class="save">
+        :class="{ 'save': true, 'is-active': bulkOperationsLog.length }">
         <icon name="save"/>
       </button>
       <button
@@ -355,6 +355,10 @@ export default {
       }, 50);
     },
     addNewParagraphAtEnd () {
+      if (this.bulkOperationsMode) {
+        return;
+      }
+
       let lastContentBlockIndex = this.content.length - 1;
       let lastContentBlock = this.content[lastContentBlockIndex];
 
@@ -452,11 +456,13 @@ export default {
     startBulkOperations () {
       this.bulkOperationsMode = true;
       this.bulkContentBackup = JSON.stringify(this.content);
+      this.$bus.$emit('block-editor-bulk-edit-start');
     },
     endBulkOperations () {
       this.bulkOperationsMode = false;
       this.showBulkOperationsBar = false;
       this.bulkOperationsLog = [];
+      this.$bus.$emit('block-editor-bulk-edit-end');
     },
     undoBulkOperation () {
       let lastOperation = this.bulkOperationsLog.pop();

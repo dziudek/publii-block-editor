@@ -33,7 +33,7 @@
     </button>
     <button
       v-if="$parent.$parent.blockType !== 'publii-readmore'"
-      class="wrapper-ui-top-menu-button"
+      :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': $parent.config.advanced.cssClasses !== '' || $parent.config.advanced.id !== '' }"
       tabindex="-1"
       @click.stop="showAdvancedConfig(); resetDeleteConfirmation();">
       <icon name="gear" />
