@@ -91,6 +91,7 @@ export default {
         case 'cancel': return 13;
         case 'save': return 19;
         case 'undo': return 13;
+        case 'eraser': return 14;
       }
 
       return '16';
@@ -157,6 +158,7 @@ export default {
         case 'cancel': return 13;
         case 'save': return 15;
         case 'undo': return 16;
+        case 'eraser': return 14;
       }
 
       return '16';
