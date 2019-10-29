@@ -658,13 +658,17 @@ export default {
             height: 62px;
          }
 
-         &:hover {
+         &.is-active {
             border-color: $block-editor-color-green;
-            box-shadow: inset 0 0 0 1px $block-editor-color-green;
 
-            & > svg {
+            &:hover {
+               border-color: $block-editor-color-green;
+               box-shadow: inset 0 0 0 1px $block-editor-color-green;
+
+               & > svg {
                fill: $block-editor-color-green !important;
                transform: scale(1.15);
+               }
             }
          }
       }
@@ -697,7 +701,7 @@ export default {
               border-radius: 30px 0 0 30px;
          }
 
-         &:hover {
+         &:not([disabled]):hover {
             border-color: $block-editor-color-primary;
 
             &::after {
@@ -726,10 +730,10 @@ export default {
          }
 
          &:hover {
-            border-color: $block-editor-form-input-border;
+            border-color: $block-editor-color-danger;
 
             &::after {
-               box-shadow: inset 0 0 0 1px $block-editor-form-input-border;
+               box-shadow: inset 0 0 0 1px $block-editor-color-danger;
             }
          }
 
