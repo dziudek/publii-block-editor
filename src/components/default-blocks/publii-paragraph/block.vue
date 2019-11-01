@@ -247,7 +247,7 @@ export default {
         if (!this.newBlockUIListVisible) {
           this.showNewBlockUI = false;
         }
-      }, 0);
+      }, 100);
     },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false && this.showNewBlockUI === false) {
@@ -397,6 +397,7 @@ export default {
       }
     },
     toggleNewBlockUI () {
+      console.log('TB CLICK');
       this.showNewBlockUI = true;
       this.newBlockUIListVisible = !this.newBlockUIListVisible;
     },
