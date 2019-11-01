@@ -54,10 +54,22 @@
         </button>
         <button
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 2 }"
+          @click.stop="addNewBlock('publii-gallery');">
+          <icon name="gallery" />
+          <div
+            v-if="newBlockUIActiveIndex === 2"
+            class="publii-block-paragraph-block-selector-tooltip is-small">
+            <span class="publii-block-paragraph-block-selector-tooltip-label1">
+              Gallery
+            </span>
+          </div>
+        </button>
+        <button
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 3 }"
           @click.stop="addNewBlock('publii-list');">
           <icon name="unordered-list" />
           <div
-            v-if="newBlockUIActiveIndex === 2"
+            v-if="newBlockUIActiveIndex === 3"
             class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               List
@@ -65,11 +77,11 @@
           </div>
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 3 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 4 }"
           @click.stop="addNewBlock('publii-quote');">
           <icon name="quote" />
           <div
-            v-if="newBlockUIActiveIndex === 3"
+            v-if="newBlockUIActiveIndex === 4"
             class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               Quote
@@ -77,11 +89,11 @@
           </div>
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 4 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 5 }"
           @click.stop="addNewBlock('publii-code');">
           <icon name="code" />
           <div
-            v-if="newBlockUIActiveIndex === 4"
+            v-if="newBlockUIActiveIndex === 5"
             class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               Code
@@ -89,11 +101,11 @@
           </div>
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 5 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 6 }"
           @click.stop="addNewBlock('publii-html');">
           <icon name="html" />
           <div
-            v-if="newBlockUIActiveIndex === 5"
+            v-if="newBlockUIActiveIndex === 6"
             class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
             HTML
@@ -101,11 +113,11 @@
           </div>
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 6 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 7 }"
           @click.stop="addNewBlock('publii-separator');">
           <icon name="separator" />
           <div
-            v-if="newBlockUIActiveIndex === 6"
+            v-if="newBlockUIActiveIndex === 7"
             class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               Separator
@@ -114,11 +126,11 @@
         </button>
         <button
           v-if="!editor.hasReadMore"
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 7 }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 8 }"
           @click.stop="addNewBlock('publii-readmore');">
           <icon name="readmore" />
           <div
-            v-if="newBlockUIActiveIndex === 7"
+            v-if="newBlockUIActiveIndex === 8"
             class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               Readmore
@@ -126,11 +138,11 @@
           </div>
         </button>
         <button
-          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 8 : 7) }"
+          :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 9 : 8) }"
           @click.stop="addNewBlock('publii-toc');">
           <icon name="toc" />
           <div
-            v-if="newBlockUIActiveIndex === (!editor.hasReadMore ? 8 : 7)"
+            v-if="newBlockUIActiveIndex === (!editor.hasReadMore ? 9 : 8)"
             class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               TOC
@@ -397,7 +409,6 @@ export default {
       }
     },
     toggleNewBlockUI () {
-      console.log('TB CLICK');
       this.showNewBlockUI = true;
       this.newBlockUIListVisible = !this.newBlockUIListVisible;
     },

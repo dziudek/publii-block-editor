@@ -26,6 +26,7 @@ export default class ShortcutManager {
     this.shortcuts['/embed'] = 'publii-embed';
     this.shortcuts['/image'] = 'publii-image';
     this.shortcuts['/img'] = 'publii-image';
+    this.shortcuts['/gallery'] = 'publii-gallery';
   }
 
   initMarkdownDefaultShortcuts () {
