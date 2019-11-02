@@ -10,7 +10,7 @@
         :width="content.imageWidth" />
 
       <button
-        v-if="view === 'code' && !$parent.uiOpened"
+        v-if="view === 'code' && !$parent.uiOpened && !editor.bulkOperationsMode"
         class="publii-block-image-delete"
         @click.stop.prevent="clearImage()">
         <icon name="trash" />
@@ -22,10 +22,16 @@
     </figure>
 
     <div
+      v-if="(view === 'preview' || content.image === '') && editor.bulkOperationsMode"
+      class="publii-block-image-empty-state">
+      Empty image block
+    </div>
+
+    <div
+      v-if="content.image === '' && !editor.bulkOperationsMode"
       :class="{ 'publii-block-image-form': true, 'is-visible': view === 'code' }"
       ref="block">
       <div
-        v-if="content.image === ''"
         :class="{ 'publii-block-image-uploader': true, 'is-hovered': isHovered }"
         @drag.stop.prevent
         @dragstart.stop.prevent
@@ -98,6 +104,13 @@ export default {
   components: {
     'icon': EditorIcon,
     'top-menu': TopMenuUI
+  },
+  watch: {
+    'editor.bulkOperationsMode': function (newValue, oldValue) {
+      if (newValue === false && oldValue === true && this.content.image === '') {
+        this.setView('code');
+      }
+    }
   },
   data () {
     return {
@@ -446,6 +459,14 @@ export default {
   & > figcaption {
     display: block;
     padding: baseline(3) 0 0;
+  }
+
+  &-empty-state {
+    color: $block-editor-color-text-medium;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
   }
 
   &-delete {

@@ -31,10 +31,16 @@
     </draggable>
 
     <div
+      v-if="content.images.length === 0 && editor.bulkOperationsMode"
+      class="publii-block-gallery-empty-state">
+      Empty gallery block
+    </div>
+
+    <div
+      v-if="content.images.length === 0 && !editor.bulkOperationsMode"
       :class="{ 'publii-block-gallery-form': true, 'is-visible': content.images.length === 0 }"
       ref="block">
       <div
-        v-if="content.images.length === 0"
         :class="{ 'publii-block-gallery-uploader': true, 'is-hovered': isHovered }">
         <div class="publii-block-gallery-uploader-inner">
           <icon
@@ -283,6 +289,14 @@ export default {
   margin: 0 -1%;
   outline: none;
   position: relative;
+
+  &-empty-state {
+    color: $block-editor-color-text-medium;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
 
   &-item {
     cursor: move;
