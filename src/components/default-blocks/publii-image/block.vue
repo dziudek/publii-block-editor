@@ -480,7 +480,7 @@ export default {
     height: 34px;
     justify-content: center;
     position: absolute;
-    right: 20px;
+    left: 20px;
     top: 20px;
     transition: all .25s ease-out;
     width: 34px;

@@ -3,9 +3,10 @@
     class="publii-block-gallery-wrapper"
     @dragover.stop.prevent="dragOver"
     @dragleave.stop.prevent="dragLeave"
-    @drop.stop.prevent="drop">
+    @drop.stop.prevent="drop"
+    @dblclick.stop.prevent="toggleView()">
     <draggable
-      v-if="content.images.length > 0"
+      v-if="content.images.length > 0 && view === 'preview'"
       ref="block"
       v-model="content.images"
       :data-cols="config.advanced.columns"
@@ -31,13 +32,41 @@
     </draggable>
 
     <div
-      v-if="content.images.length === 0 && editor.bulkOperationsMode"
+      v-if="view === 'edit'"
+      class="publii-block-gallery-list">
+      <div
+        v-for="(image, index) of content.images"
+        :key="'gallery-item-' + index"
+        class="publii-block-gallery-list-item">
+        <div class="publii-block-gallery-list-item-image">
+          <img
+            :src="image.src"
+            :height="image.height"
+            :width="image.width" />
+        </div>
+
+        <div class="publii-block-gallery-list-item-config">
+          <p>
+            <label>Image alternative text:</label>
+            <input type="text" v-model="image.alt" />
+          </p>
+
+          <p>
+            <label>Image caption text:</label>
+            <input type="text" v-model="image.caption" />
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      v-if="content.images.length === 0 && editor.bulkOperationsMode && view === 'preview'"
       class="publii-block-gallery-empty-state">
       Empty gallery block
     </div>
 
     <div
-      v-if="content.images.length === 0 && !editor.bulkOperationsMode"
+      v-if="content.images.length === 0 && !editor.bulkOperationsMode && view === 'preview'"
       :class="{ 'publii-block-gallery-form': true, 'is-visible': content.images.length === 0 }"
       ref="block">
       <div
@@ -93,6 +122,7 @@ export default {
       draggingInProgress: false,
       isHovered: false,
       imageUploadInProgress: false,
+      view: 'preview',
       config: {
         imageAlign: 'center',
         advanced: {
@@ -181,7 +211,9 @@ export default {
           this.content.images.push({
             src: window.URL.createObjectURL(blob),
             height: 240,
-            width: 320
+            width: 320,
+            alt: '',
+            caption: ''
           });
         }
       }
@@ -263,6 +295,13 @@ export default {
     removeImage (index) {
       this.content.images.splice(index, 1);
     },
+    toggleView () {
+      if (this.view === 'preview') {
+        this.view = 'edit';
+      } else if (this.view === 'edit') {
+        this.view = 'preview';
+      }
+    },
     save () {
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,
@@ -321,10 +360,10 @@ export default {
       display: flex;
       height: 34px;
       justify-content: center;
+      left: 20px;
       opacity: 0;
       pointer-events: none;
       position: absolute;
-      right: 20px;
       top: 20px;
       transition: all .25s ease-out;
       width: 34px;
@@ -410,6 +449,47 @@ export default {
         &:focus,
         &:hover {
           background: $block-editor-color-text-medium-dark;
+        }
+      }
+    }
+  }
+
+  &-list {
+    &-item {
+      align-items: center;
+      display: flex;
+
+      &-image {
+        height: 120px;
+        margin: 10px 20px 10px 0;
+        overflow: hidden;
+        position: relative;
+        width: 120px;
+
+        img {
+          height: auto;
+          left: 50%;
+          width: 100%;
+          position: absolute;
+          top: 50%;
+          transform: translateX(-50%) translateY(-50%);
+        }
+      }
+
+      &-config {
+        width: calc(100% - 140px);
+
+        p {
+          margin: 0;
+
+          label {
+            display: block;
+            font-size: 12px;
+          }
+
+          input {
+            width: 100%;
+          }
         }
       }
     }
