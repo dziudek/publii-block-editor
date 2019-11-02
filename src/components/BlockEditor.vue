@@ -37,7 +37,7 @@
     </div>
     <div
       v-if="state.externalComponentsLoaded"
-      class="editor-inner">
+      :class="{ 'editor-inner': true, 'is-bulk-edit-mode': bulkOperationsMode }">
       <block-wrapper
         v-for="block of content"
         :id="block.id"
@@ -542,6 +542,12 @@ export default {
       transform: translateX(-50%);
       width: $editor-width;
       z-index: 0;
+    }
+
+    &.is-bulk-edit-mode {
+      .wrapper {
+        width: $editor-width!important;
+      }
     }
   }
 
