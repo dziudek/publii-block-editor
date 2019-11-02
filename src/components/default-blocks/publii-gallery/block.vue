@@ -1,10 +1,15 @@
 <template>
-  <div class="publii-block-gallery-wrapper">
+  <div
+    class="publii-block-gallery-wrapper"
+    @dragover.stop.prevent="dragOver"
+    @dragleave.stop.prevent="dragLeave"
+    @drop.stop.prevent="drop">
     <draggable
       v-if="content.images.length > 0"
       ref="block"
       v-model="content.images"
       :data-cols="config.advanced.columns"
+      :data-count="content.images.length"
       @start="draggingInProgress = true"
       @end="draggingInProgress = false"
       :class="{ 'publii-block-gallery': true, 'is-wide': config.imageAlign === 'wide', 'is-full': config.imageAlign === 'full' }">
@@ -16,6 +21,12 @@
           :src="image.src"
           :height="image.height"
           :width="image.width" />
+
+        <button
+          class="publii-block-gallery-item-delete"
+          @click.stop.prevent="removeImage(index)">
+          <icon name="trash" />
+        </button>
       </div>
     </draggable>
 
@@ -24,14 +35,7 @@
       ref="block">
       <div
         v-if="content.images.length === 0"
-        :class="{ 'publii-block-gallery-uploader': true, 'is-hovered': isHovered }"
-        @drag.stop.prevent
-        @dragstart.stop.prevent
-        @dragend.stop.prevent
-        @dragover.stop.prevent="dragOver"
-        @dragenter.stop.prevent
-        @dragleave.stop.prevent="dragLeave"
-        @drop.stop.prevent="drop">
+        :class="{ 'publii-block-gallery-uploader': true, 'is-hovered': isHovered }">
         <div class="publii-block-gallery-uploader-inner">
           <icon
             v-if="!imageUploadInProgress"
@@ -250,6 +254,9 @@ export default {
         this.$parent.removeCustomCssClass('contains-wide-image');
       }
     },
+    removeImage (index) {
+      this.content.images.splice(index, 1);
+    },
     save () {
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,
@@ -272,6 +279,7 @@ export default {
 
 .publii-block-gallery {
   display: flex;
+  flex-wrap: wrap;
   margin: 0 -1%;
   outline: none;
   position: relative;
@@ -279,80 +287,48 @@ export default {
   &-item {
     cursor: move;
     padding: 1%;
+    position: relative;
     width: calc(100% / 3);
 
     & > img {
+      display: block;
       height: auto;
       max-width: 100%;
       width: auto;
     }
-  }
 
-  & > img {
-    display: block;
-    height: auto;
-    margin: 0 auto;
-    max-width: 100%;
-    transition: all .25s ease-out;
-  }
-
-  & > figcaption {
-    display: block;
-    padding: baseline(3) 0 0;
-  }
-
-  &-delete {
-    align-items: center;
-    background: $block-editor-color-danger;
-    border: none;
-    border-radius: $block-editor-form-input-border-radius;
-    color: $block-editor-color-light;
-    cursor: pointer;
-    display: flex;
-    height: 34px;
-    justify-content: center;
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    transition: all .25s ease-out;
-    width: 34px;
-    z-index: 2;
-
-    &:active,
-    &:focus,
-    &:hover {
-      background: $block-editor-color-light;
-      color: $block-editor-color-danger;
-    }
-  }
-
-  &-form {
-    display: none;
-    padding: baseline(5) 0;
-
-    &.is-visible {
-      display: block;
-      order: -1;
-    }
-
-    input,
-    textarea {
-      border: 1px solid $block-editor-form-input-border;
+    &-delete {
+      align-items: center;
+      background: $block-editor-color-danger;
+      border: none;
       border-radius: $block-editor-form-input-border-radius;
-      display: block;
-      font-size: ms(-1);
-      line-height: inherit;
-      outline: none;
-      padding: baseline(5);
-      width: 100%;
+      color: $block-editor-color-light;
+      cursor: pointer;
+      display: flex;
+      height: 34px;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      transition: all .25s ease-out;
+      width: 34px;
+      z-index: 2;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background: $block-editor-color-light;
+        color: $block-editor-color-danger;
+      }
     }
 
-    input {
-      padding: 10px 20px;
-    }
-
-    input + input {
-      margin-top: 16px;
+    &:hover {
+      .publii-block-gallery-item-delete {
+        opacity: 1;
+        pointer-events: auto;
+      }
     }
   }
 
@@ -426,36 +402,11 @@ export default {
   }
 }
 
-.publii-block-gallery[data-cols="1"] .publii-block-gallery-item {
-  width: 100%;
-}
-
-.publii-block-gallery[data-cols="2"] .publii-block-gallery-item {
-  width: calc(100% / 2);
-}
-
-.publii-block-gallery[data-cols="3"] .publii-block-gallery-item {
-  width: calc(100% / 3);
-}
-
-.publii-block-gallery[data-cols="4"] .publii-block-gallery-item {
-  width: calc(100% / 4);
-}
-
-.publii-block-gallery[data-cols="5"] .publii-block-gallery-item {
-  width: calc(100% / 5);
-}
-
-.publii-block-gallery[data-cols="6"] .publii-block-gallery-item {
-  width: calc(100% / 6);
-}
-
-.publii-block-gallery[data-cols="7"] .publii-block-gallery-item {
-  width: calc(100% / 7);
-}
-
-.publii-block-gallery[data-cols="8"] .publii-block-gallery-item {
-  width: calc(100% / 8);
+@for $i from 1 through 8 {
+  .publii-block-gallery[data-cols="#{$i}"] .publii-block-gallery-item {
+    flex-grow: 1;
+    width: calc(100% / #{$i});
+  }
 }
 
 @keyframes loader {
