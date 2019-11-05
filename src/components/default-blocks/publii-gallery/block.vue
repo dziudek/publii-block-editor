@@ -296,6 +296,10 @@ export default {
       this.content.images.splice(index, 1);
     },
     toggleView () {
+      if (!this.content.images.length) {
+        return;
+      }
+
       if (this.view === 'preview') {
         this.view = 'edit';
       } else if (this.view === 'edit') {
