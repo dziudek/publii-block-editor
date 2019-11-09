@@ -12,7 +12,7 @@
         @dblclick="$parent.togglePopup()" />
 
       <button
-        v-if="!editor.bulkOperationsMode"
+        v-if="$parent.uiOpened && !editor.bulkOperationsMode"
         class="publii-block-image-delete"
         @click.stop.prevent="clearImage()">
         <icon name="trash" />
