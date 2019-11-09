@@ -7,10 +7,12 @@
       <img
         :src="content.image"
         :height="content.imageHeight"
-        :width="content.imageWidth" />
+        :width="content.imageWidth"
+        @click.stop
+        @dblclick="$parent.togglePopup()" />
 
       <button
-        v-if="view === 'code' && !$parent.uiOpened && !editor.bulkOperationsMode"
+        v-if="!editor.bulkOperationsMode"
         class="publii-block-image-delete"
         @click.stop.prevent="clearImage()">
         <icon name="trash" />
@@ -22,14 +24,14 @@
     </figure>
 
     <div
-      v-if="(view === 'preview' || content.image === '') && editor.bulkOperationsMode"
+      v-if="content.image === '' && editor.bulkOperationsMode"
       class="publii-block-image-empty-state">
       Empty image block
     </div>
 
     <div
       v-if="(content.image === '' && !editor.bulkOperationsMode) || $parent.uiOpened"
-      :class="{ 'publii-block-image-form': true, 'is-visible': view === 'code' }"
+      :class="{ 'publii-block-image-form': true, 'is-visible': true }"
       ref="block">
       <div
         v-if="content.image === '' && !editor.bulkOperationsMode"
@@ -427,8 +429,13 @@ export default {
       }
     },
     save () {
-      this.content.alt = this.$refs['contentAlt'].value;
-      this.content.caption = this.$refs['contentCaption'].value;
+      if (this.$refs['contentAlt']) {
+        this.content.alt = this.$refs['contentAlt'].value;
+      }
+
+      if (this.$refs['contentCaption']) {
+        this.content.caption = this.$refs['contentCaption'].value;
+      }
 
       this.$bus.$emit('block-editor-save-block', {
         id: this.id,
