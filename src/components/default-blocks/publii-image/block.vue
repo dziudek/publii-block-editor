@@ -28,10 +28,11 @@
     </div>
 
     <div
-      v-if="content.image === '' && !editor.bulkOperationsMode"
+      v-if="(content.image === '' && !editor.bulkOperationsMode) || $parent.uiOpened"
       :class="{ 'publii-block-image-form': true, 'is-visible': view === 'code' }"
       ref="block">
       <div
+        v-if="content.image === '' && !editor.bulkOperationsMode"
         :class="{ 'publii-block-image-uploader': true, 'is-hovered': isHovered }"
         @drag.stop.prevent
         @dragstart.stop.prevent
@@ -61,18 +62,22 @@
       </div>
 
       <input
+        v-if="(content.image === '' && !editor.bulkOperationsMode) || $parent.uiOpened"
         type="text"
         @focus="updateCurrentBlockID"
         @keydown="handleCaptionKeyboard"
         @keyup="handleCaretCaption"
+        @click.stop
         v-model="content.caption"
         placeholder="Enter a caption"
         ref="contentCaption" />
       <input
+        v-if="(content.image === '' && !editor.bulkOperationsMode) || $parent.uiOpened"
         type="text"
         @focus="updateCurrentBlockID"
         @keydown="handleAltKeyboard"
         @keyup="handleCaretAlt"
+        @click.stop
         v-model="content.alt"
         placeholder="Enter alt text"
         ref="contentAlt" />
