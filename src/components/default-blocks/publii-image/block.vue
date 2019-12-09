@@ -215,9 +215,10 @@ export default {
           this.imageUploadInProgress = false;
         } else {
           this.$ipcRenderer.send('app-image-upload', {
-            'id': this.editor.config.postID,
-            'site': siteName,
-            'path': files[0].path
+            id: this.editor.config.postID,
+            site: siteName,
+            path: files[0].path,
+            imageType: 'contentImages'
           });
 
           this.$ipcRenderer.once('app-image-uploaded', (event, data) => {
@@ -269,7 +270,7 @@ export default {
           this.imageUploadInProgress = true;
           // eslint-disable-next-line
           this.$ipcRenderer.send('app-image-upload', {
-            id: this.postID,
+            id: this.editor.config.postID,
             site: window.publiiSiteName,
             path: filePath,
             imageType: 'contentImages'
