@@ -4,6 +4,10 @@ function render (blockData) {
   let caption = `<figcaption>${blockData.content.caption}</figcaption>`;
   let html = ``;
 
+  if (blockData.content.caption.trim() === '') {
+    caption = '';
+  }
+
   if (blockData.config.link.url !== '') {
     let targetBlank = '';
     let relAttr = [];
