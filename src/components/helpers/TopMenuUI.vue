@@ -42,6 +42,7 @@
           </label>
           <vue-select
             :key="'top-menu-element-' + index"
+            :class="uiElement.cssClasses"
             :options="uiElement.options"
             :clearable="uiElement.clearable"
             :searchable="uiElement.searchable"
@@ -334,6 +335,16 @@ export default {
 
       &::placeholder {
         color: $block-editor-color-light-dark;
+      }
+    }
+
+    &.is-narrow {
+      .multiselect__select {
+        display: none;
+      }
+
+      .multiselect__tags {
+        padding: 6px 15px 6px 14px;
       }
     }
   }

@@ -141,6 +141,7 @@ export default {
           configKey: 'columns',
           clearable: false,
           searchable: false,
+          cssClasses: 'is-narrow',
           options: [1, 2, 3, 4, 5, 6, 7, 8]
         },
         {
