@@ -14,15 +14,13 @@
     </prism-editor>
 
     <div class="publii-block-code-lang">
-      <vue-select
-        :options="availableLanguages"
-        v-model="config.language" />
+
     </div>
 
     <top-menu
       ref="top-menu"
       :conversions="conversions"
-      :config="[]" />
+      :config="topMenuConfig" />
   </div>
 </template>
 
@@ -32,7 +30,6 @@ import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
-import vSelect from 'vue-multiselect/dist/vue-multiselect.min.js';
 
 export default {
   name: 'Code',
@@ -41,8 +38,7 @@ export default {
     ContentEditableImprovements
   ],
   components: {
-    'top-menu': TopMenuUI,
-    'vue-select': vSelect
+    'top-menu': TopMenuUI
   },
   data () {
     return {
@@ -54,7 +50,15 @@ export default {
         }
       },
       content: '',
-      conversions: AvailableConversions
+      conversions: AvailableConversions,
+      topMenuConfig: [
+        {
+          type: 'select',
+          label: 'Language:',
+          configKey: 'language',
+          options: []
+        }
+      ]
     };
   },
   computed: {
@@ -124,6 +128,7 @@ export default {
   },
   mounted () {
     this.content = this.inputContent;
+    this.topMenuConfig[0].options = this.availableLanguages;
   },
   methods: {
     focus () {
@@ -216,62 +221,6 @@ export default {
 
         .multiselect__option:after {
             display: none;
-        }
-    }
-
-    & + .publii-block-code-lang {
-
-        .multiselect {
-  font-size: 13px;
-            &__tags {
-                background: #3b3f48;
-                border: none;
-                 height: 32px;
-        min-height: 100%;
-        padding: 6px 40px 6px 14px;
-            }
-
-            &__single {
-                background: inherit;
-                color: $block-editor-color-light-dark;
-            }
-
-            &__select {
-                height: 28px;
-                &::before {
-                    border-color: $block-editor-color-text-medium transparent transparent;
-                }
-            }
-
-            &__content-wrapper {
-                 background: #30343c;
-                 border: none;
-                 color: $block-editor-color-light-dark;
-            }
-
-            &__option {
-                padding: 7px 14px;
-                min-height: 30px;
-
-                &--highlight {
-                    background: $block-editor-color-primary;
-                }
-
-                &.multiselect__option--selected {
-                    background: $block-editor-color-primary;
-                    color: $block-editor-color-light;
-                }
-            }
-
-            &__input {
-                background: none !important;
-                color: $block-editor-color-light;
-                font-size: 13px;
-
-                &::placeholder {
-                     color: $block-editor-color-light-dark;
-                }
-            }
         }
     }
 }

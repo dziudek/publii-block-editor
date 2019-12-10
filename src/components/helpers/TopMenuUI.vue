@@ -23,40 +23,57 @@
         </span>
       </span>
     </span>
-    <button
-      v-for="(button, index) of filteredConfig"
-      :key="'top-menu-button-' + index"
-      :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': button.activeState.bind($parent)() }"
-      tabindex="-1"
-      @click.stop="button.onClick.bind($parent)(); resetDeleteConfirmation();">
-      <icon :name="button.icon" />
-    </button>
-    <button
-      v-if="$parent.$parent.blockType !== 'publii-readmore'"
-      :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': $parent.config.advanced.cssClasses !== '' || $parent.config.advanced.id !== '' }"
-      tabindex="-1"
-      @click.stop="showAdvancedConfig(); resetDeleteConfirmation();">
-      <icon name="gear" />
-    </button>
-    <button
-      v-if="!confirmDelete"
-      class="wrapper-ui-top-menu-button"
-      tabindex="-1"
-      @click.stop="deleteBlock">
-      <icon name="trash" />
-    </button>
-    <button
-      v-if="confirmDelete"
-      class="wrapper-ui-top-menu-button top-menu-button-trash is-active"
-      tabindex="-1"
-      @click.stop="deleteBlock">
-      <icon name="open-trash" />
-    </button>
+    <div
+      @click.stop
+      class="wrapper-ui-top-menu-options">
+      <template v-for="(uiElement, index) of filteredConfig">
+        <template v-if="!uiElement.type || uiElement.type === 'button'">
+          <button
+            :key="'top-menu-element-' + index"
+            :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': uiElement.activeState.bind($parent)() }"
+            tabindex="-1"
+            @click="uiElement.onClick.bind($parent)(); resetDeleteConfirmation();">
+            <icon :name="uiElement.icon" />
+          </button>
+        </template>
+        <template v-else-if="uiElement.type === 'select'">
+          <label :key="'top-menu-element-label-' + index">
+            {{ uiElement.label }}
+          </label>
+          <vue-select
+            :key="'top-menu-element-' + index"
+            :options="uiElement.options"
+            v-model="$parent.config[uiElement.configKey]" />
+        </template>
+      </template>
+      <button
+        v-if="$parent.$parent.blockType !== 'publii-readmore'"
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': $parent.config.advanced.cssClasses !== '' || $parent.config.advanced.id !== '' }"
+        tabindex="-1"
+        @click.stop="showAdvancedConfig(); resetDeleteConfirmation();">
+        <icon name="gear" />
+      </button>
+      <button
+        v-if="!confirmDelete"
+        class="wrapper-ui-top-menu-button"
+        tabindex="-1"
+        @click.stop="deleteBlock">
+        <icon name="trash" />
+      </button>
+      <button
+        v-if="confirmDelete"
+        class="wrapper-ui-top-menu-button top-menu-button-trash is-active"
+        tabindex="-1"
+        @click.stop="deleteBlock">
+        <icon name="open-trash" />
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
 import EditorIcon from './../elements/EditorIcon.vue';
+import vSelect from 'vue-multiselect/dist/vue-multiselect.min.js';
 
 export default {
   name: 'top-menu-ui',
@@ -71,11 +88,12 @@ export default {
     }
   },
   components: {
-    'icon': EditorIcon
+    'icon': EditorIcon,
+    'vue-select': vSelect
   },
   computed: {
     filteredConfig () {
-      return this.config.filter(button => typeof button.isVisible === 'undefined' || button.isVisible());
+      return this.config.filter(uiElement => typeof uiElement.isVisible === 'undefined' || uiElement.isVisible());
     },
     isVisible () {
       return this.$parent.$parent.uiOpened && !this.$parent.textIsHighlighted;
@@ -229,8 +247,93 @@ export default {
     }
   }
 
+  &-options {
+    align-items: center;
+    display: flex;
+
+    label {
+      font-size: 15px;
+      padding-right: 10px;
+    }
+  }
+
   .top-menu-button-trash {
     color: $block-editor-color-danger;
+  }
+
+  .multiselect {
+    font-size: 13px;
+    margin-left: auto;
+    margin-right: 5px;
+    position: relative;
+    top: 4px;
+    width: auto;
+
+    &__tags {
+      background: #3b3f48;
+      border: none;
+      height: 32px;
+      min-height: 100%;
+      padding: 6px 40px 6px 14px;
+    }
+
+    &__single {
+      background: inherit;
+      color: $block-editor-color-light-dark;
+    }
+
+    &__select {
+      height: 28px;
+      &::before {
+          border-color: $block-editor-color-text-medium transparent transparent;
+      }
+    }
+
+    &__content {
+      margin-left: 0!important;
+    }
+
+    &__element {
+      padding-left: 0!important;
+    }
+
+    &__content-wrapper {
+      background: #30343c;
+      border: none;
+      color: $block-editor-color-light-dark;
+    }
+
+    &__option {
+      padding: 7px 14px;
+      min-height: 30px;
+
+      &--highlight {
+        background: $block-editor-color-primary;
+
+        &:after {
+          display: none;
+        }
+      }
+
+      &.multiselect__option--selected {
+        background: $block-editor-color-primary;
+        color: $block-editor-color-light;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+
+    &__input {
+      background: none !important;
+      color: $block-editor-color-light;
+      font-size: 13px;
+
+      &::placeholder {
+        color: $block-editor-color-light-dark;
+      }
+    }
   }
 }
 </style>
