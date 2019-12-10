@@ -43,6 +43,8 @@
           <vue-select
             :key="'top-menu-element-' + index"
             :options="uiElement.options"
+            :clearable="uiElement.clearable"
+            :searchable="uiElement.searchable"
             v-model="$parent.config[uiElement.configKey]" />
         </template>
       </template>

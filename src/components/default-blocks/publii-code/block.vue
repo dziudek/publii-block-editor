@@ -13,10 +13,6 @@
       :language="config.language">
     </prism-editor>
 
-    <div class="publii-block-code-lang">
-
-    </div>
-
     <top-menu
       ref="top-menu"
       :conversions="conversions"
@@ -56,6 +52,8 @@ export default {
           type: 'select',
           label: 'Language:',
           configKey: 'language',
+          clearable: true,
+          searchable: true,
           options: []
         }
       ]

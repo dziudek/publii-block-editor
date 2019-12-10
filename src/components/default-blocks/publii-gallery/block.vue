@@ -9,7 +9,7 @@
       v-if="content.images.length > 0 && view === 'preview'"
       ref="block"
       v-model="content.images"
-      :data-cols="config.advanced.columns"
+      :data-cols="config.columns"
       :data-count="content.images.length"
       @start="draggingInProgress = true"
       @end="draggingInProgress = false"
@@ -125,16 +125,24 @@ export default {
       view: 'preview',
       config: {
         imageAlign: 'center',
+        columns: 3,
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
-          id: this.getAdvancedConfigDefaultValue('id'),
-          columns: this.getAdvancedConfigDefaultValue('columns')
+          id: this.getAdvancedConfigDefaultValue('id')
         }
       },
       content: {
         images: []
       },
       topMenuConfig: [
+        {
+          type: 'select',
+          label: 'Columns:',
+          configKey: 'columns',
+          clearable: false,
+          searchable: false,
+          options: [1, 2, 3, 4, 5, 6, 7, 8]
+        },
         {
           activeState: function () { return this.config.imageAlign === 'center'; },
           onClick: function () { this.alignImage('center'); },
