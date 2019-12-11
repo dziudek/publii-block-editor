@@ -1,7 +1,15 @@
 function render (blockData) {
   let id = blockData.config.advanced.id ? ' id="' + blockData.config.advanced.id + '"' : '';
-  let cssClasses = ' class="post__image ' + blockData.config.advanced.cssClasses + '"';
   let caption = `<figcaption>${blockData.content.caption}</figcaption>`;
+  let cssClasses = [blockData.config.advanced.cssClasses, 'post__image', 'post__image--' + blockData.config.imageAlign];
+  cssClasses = cssClasses.filter(item => item && item.trim() !== '');
+
+  if (cssClasses.length) {
+    cssClasses = ' class="' + cssClasses.join(' ') + '"';
+  } else {
+    cssClasses = '';
+  }
+
   let html = ``;
 
   if (blockData.content.caption.trim() === '') {
@@ -33,7 +41,7 @@ function render (blockData) {
     }
 
     html = `
-    <figure${id}${cssClasses} data-align="${blockData.config.imageAlign}">
+    <figure${id}${cssClasses}>
       <a href="${blockData.config.link.url}"${relAttr}${targetBlank}>
         <img
           src="${blockData.content.image}"
@@ -45,7 +53,7 @@ function render (blockData) {
     </figure>`;
   } else {
     html = `
-    <figure${id}${cssClasses} data-align="${blockData.config.imageAlign}">
+    <figure${id}${cssClasses}>
       <img
         src="${blockData.content.image}"
         height="${blockData.content.imageHeight}"
