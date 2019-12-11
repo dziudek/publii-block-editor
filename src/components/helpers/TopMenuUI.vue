@@ -273,16 +273,20 @@ export default {
     width: auto;
 
     &__tags {
-      background: #3b3f48;
-      border: none;
-      height: 32px;
+      background: $block-editor-color-light;
+      border: 2px solid $block-editor-color-light-dark;
+      height: 34px;
       min-height: 100%;
-      padding: 6px 40px 6px 14px;
+      padding: 0 !important;
+        text-align: center;
+      width: 34px;
     }
 
     &__single {
       background: inherit;
-      color: $block-editor-color-light-dark;
+      color: $block-editor-color-text;
+      font-weight: $font-weight-semibold;
+      line-height: 28px;
     }
 
     &__select {
@@ -301,17 +305,21 @@ export default {
     }
 
     &__content-wrapper {
-      background: #30343c;
-      border: none;
-      color: $block-editor-color-light-dark;
+      background: $block-editor-color-light;
+      border: 1px solid $block-editor-color-light-dark;
+      border-top: none;
+      color: $block-editor-color-text-medium-dark;
+      margin-top: -1px;
     }
 
     &__option {
-      padding: 7px 14px;
+      padding: 7px 0;
       min-height: 30px;
+      text-align: center;
 
       &--highlight {
-        background: $block-editor-color-primary;
+        background: $color-editor-color-light-medium;
+        color: $block-editor-color-text;
 
         &:after {
           display: none;
