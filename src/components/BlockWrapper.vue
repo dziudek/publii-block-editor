@@ -79,7 +79,8 @@ export default {
   name: 'BlockWrapper',
   props: [
     'id',
-    'blockType'
+    'blockType',
+    'editor'
   ],
   components: {
     'icon': Icon
@@ -111,7 +112,6 @@ export default {
   methods: {
     blockClick (e) {
       this.$bus.$emit('block-editor-deselect-blocks', this.id);
-      this.uiOpened = false;
       this.setSelectionState(true);
 
       if (e && e.detail === 2 && e.layerX <= 30 && this.$slots.default[0] && !this.$slots.default[0].componentInstance.isEmpty) {
