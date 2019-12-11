@@ -267,7 +267,7 @@ export default {
   .multiselect {
     font-size: 13px;
     margin-left: auto;
-    margin-right: 5px;
+    margin-right: 6px;
     position: relative;
     top: 4px;
     width: auto;
@@ -277,20 +277,18 @@ export default {
       border: 2px solid $block-editor-color-light-dark;
       height: 34px;
       min-height: 100%;
-      padding: 0 !important;
-        text-align: center;
-      width: 34px;
+      padding: 4px 40px 5px 14px;
+      min-width: 34px;
     }
 
     &__single {
       background: inherit;
       color: $block-editor-color-text;
-      font-weight: $font-weight-semibold;
-      line-height: 28px;
     }
 
     &__select {
       height: 28px;
+
       &::before {
           border-color: $block-editor-color-text-medium transparent transparent;
       }
@@ -306,16 +304,15 @@ export default {
 
     &__content-wrapper {
       background: $block-editor-color-light;
-      border: 1px solid $block-editor-color-light-dark;
+      border: 2px solid $block-editor-color-light-dark;
       border-top: none;
-      color: $block-editor-color-text-medium-dark;
+      color: $block-editor-color-text;
       margin-top: -1px;
     }
 
     &__option {
-      padding: 7px 0;
+      padding: 8px 14px;
       min-height: 30px;
-      text-align: center;
 
       &--highlight {
         background: $color-editor-color-light-medium;
@@ -338,11 +335,11 @@ export default {
 
     &__input {
       background: none !important;
-      color: $block-editor-color-light;
+      color: $block-editor-color-text;
       font-size: 13px;
 
       &::placeholder {
-        color: $block-editor-color-light-dark;
+        color: $block-editor-color-text-medium-dark;
       }
     }
 
@@ -352,7 +349,14 @@ export default {
       }
 
       .multiselect__tags {
-        padding: 6px 15px 6px 14px;
+        padding: 4px 0 6px 0;
+        text-align: center;
+      }
+
+      .multiselect__option {
+        padding: 8px 0;
+        min-height: 30px;
+        text-align: center;
       }
     }
   }
