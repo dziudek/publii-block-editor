@@ -5,6 +5,7 @@
       ref="post-title"
       class="post-editor-form-title"
       contenteditable="true"
+      @paste.prevent="pasteTitle"
       @keyup="updateTitle"></div>
 
     <block-editor ref="block-editor" />
@@ -60,6 +61,10 @@ export default {
       if (this.$ipcRenderer) {
         this.$ipcRenderer.sendToHost('editor-title-updated', title);
       }
+    },
+    pasteTitle (e) {
+      let text = (e.originalEvent || e).clipboardData.getData('text/plain');
+      document.execCommand('insertHTML', false, text);
     },
     postSave () {
       this.$bus.$emit('publii-block-editor-save');
