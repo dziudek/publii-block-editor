@@ -91,7 +91,7 @@ export default {
         {
           activeState: () => false,
           onClick: function () { this.clearContentHtml('contentText'); },
-          icon: 'trash'
+          icon: 'eraser'
         }
       ]
     };
