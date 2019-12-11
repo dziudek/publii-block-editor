@@ -1,8 +1,16 @@
 function render (blockData) {
   let id = blockData.config.advanced.id ? ' id="' + blockData.config.advanced.id + '"' : '';
-  let cssClasses = blockData.config.advanced.cssClasses ? ' class="' + blockData.config.advanced.cssClasses + '"' : '';
+  let cssClasses = [blockData.config.advanced.cssClasses, blockData.config.advanced.style, 'align-' + blockData.config.textAlign];
   let headingLevel = blockData.config.headingLevel;
   let html = ``;
+
+  cssClasses = cssClasses.filter(item => item && item.trim() !== '' && item !== 'align-left');
+
+  if (cssClasses.length) {
+    cssClasses = ' class="' + cssClasses.join(' ') + '"';
+  } else {
+    cssClasses = '';
+  }
 
   if (blockData.config.link.url !== '') {
     let targetBlank = '';
