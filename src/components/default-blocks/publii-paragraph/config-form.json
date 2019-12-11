@@ -11,19 +11,23 @@
         "type": "select",
         "label": "Paragraph style",
         "tooltip": "Select additional styling for the paragraph block",
-        "values": [
+        "values": [            
             {
-                "value": "warning",
-                "label": "Warning"
+                "value": "msg msg--info",
+                "label": "Info"
             },
             {
-                "value": "alert",
+                "value": "msg msg--highlight",
+                "label": "Highlight"
+            },
+            {
+                "value": "msg msg--success",
                 "label": "Alert"
             },
             {
-                "value": "info",
-                "label": "Info"
-            }
+                "value": "msg msg--warning",
+                "label": "Warning"
+            } 
         ],
         "defaultValue": ""
     },
