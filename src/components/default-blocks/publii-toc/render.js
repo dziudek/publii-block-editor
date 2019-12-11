@@ -1,9 +1,15 @@
 function render (blockData) {
   let id = blockData.config.advanced.id ? ' id="' + blockData.config.advanced.id + '"' : '';
   let cssClasses = blockData.config.advanced.cssClasses ? ' class="' + blockData.config.cssClasses + '"' : '';
+  let tocHeading = '';
+
+  if (blockData.content.title.trim() !== '') {
+    tocHeading = `<h2>${blockData.content.title}</h2>`;
+  }
+
   let html = `
   <div${id}${cssClasses}>
-    <h2>${blockData.content.title}</h2>
+    ${tocHeading}
     <div>
       ${blockData.content.toc}
     </div>
