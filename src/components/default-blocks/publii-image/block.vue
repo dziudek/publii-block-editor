@@ -63,7 +63,7 @@
       </div>
 
       <input
-        v-if="(content.image === '' && !editor.bulkOperationsMode) || $parent.uiOpened"
+        v-if="!editor.bulkOperationsMode && $parent.uiOpened"
         type="text"
         @focus="updateCurrentBlockID"
         @keydown="handleCaptionKeyboard"
@@ -73,7 +73,7 @@
         placeholder="Enter a caption"
         ref="contentCaption" />
       <input
-        v-if="(content.image === '' && !editor.bulkOperationsMode) || $parent.uiOpened"
+        v-if="!editor.bulkOperationsMode && $parent.uiOpened"
         type="text"
         @focus="updateCurrentBlockID"
         @keydown="handleAltKeyboard"
@@ -339,12 +339,6 @@ export default {
     },
     focus () {
       this.setView('code');
-
-      setTimeout(() => {
-        if (!this.$parent.isSelected) {
-          this.setCursorAtEndOfElement('contentCaption', false);
-        }
-      }, 0);
     },
     handleCaptionKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false) {
