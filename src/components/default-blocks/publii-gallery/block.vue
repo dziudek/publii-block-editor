@@ -90,9 +90,11 @@
       </div>
     </div>
 
-    <span
+    <div
       v-if="imageUploadInProgress"
-      class="publii-block-gallery-uploader-loader"></span>
+      class="publii-block-gallery-uploader-loader-overlay">
+      <span class="publii-block-gallery-uploader-loader"></span>
+    </div>
 
     <top-menu
       ref="top-menu"
@@ -426,6 +428,16 @@ export default {
       top: 50%;
       transform: translateX(-50%) translateY(-50%);
       width: 32px!important;
+
+      &-overlay {
+        background: $color-editor-color-light-medium;
+        height: calc(100% - 20px);
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        width: calc(100% - 20px);
+        z-index: 1;
+      }
     }
 
     &-inner {
