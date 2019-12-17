@@ -12,7 +12,7 @@ function render (blockData) {
   let images = ``;
 
   for (let i = 0; i < blockData.content.images.length; i++) {
-    let img = blcokData.content.images[i];
+    let img = blockData.content.images[i];
     let caption = '';
 
     if (img.caption.trim() !== '') {
