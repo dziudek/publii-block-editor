@@ -431,11 +431,11 @@ export default {
 
       &-overlay {
         background: $color-editor-color-light-medium;
-        height: calc(100% - 20px);
+        bottom: 32px;
         position: absolute;
-        left: 10px;
-        top: 10px;
-        width: calc(100% - 20px);
+        left: 32px;
+        right: 32px;
+        top: 62px;
         z-index: 1;
       }
     }
