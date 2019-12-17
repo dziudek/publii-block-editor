@@ -189,33 +189,20 @@ export default {
     },
     drop (e) {
       if (this.$ipcRenderer) {
-        /*
         let files = e.dataTransfer.files;
-        let siteName = window.publiiSiteName;
-        this.imageUploadInProgress = true;
 
         if (!files[0] || !files[0].path) {
           this.imageUploadInProgress = false;
         } else {
-          this.$ipcRenderer.send('app-image-upload', {
-            'id': this.editor.config.postID,
-            'site': siteName,
-            'path': files[0].path
-          });
+          this.imagesQueue = [];
 
-          this.$ipcRenderer.once('app-image-uploaded', (event, data) => {
-            if (data.baseImage && data.baseImage.size && data.baseImage.size.length >= 2) {
-              this.content.imageWidth = data.baseImage.size[0];
-              this.content.imageHeight = data.baseImage.size[1];
-              this.content.images = data.baseImage.url;
-            } else {
-              this.content.images = data.url;
-            }
+          for (let i = 0; i < files.length; i++) {
+            this.imagesQueue.push(files[i].path);
+          }
 
-            this.imageUploadInProgress = false;
-          });
+          this.imageUploadInProgress = true;
+          this.uploadImage();
         }
-        */
       } else {
         for (let i = 0; i < e.dataTransfer.items.length; i++) {
           let blob = e.dataTransfer.items[i].getAsFile();
@@ -258,12 +245,11 @@ export default {
           }
 
           this.imageUploadInProgress = true;
-          this.uploadImage()
+          this.uploadImage();
         }, 50);
       });
     },
     uploadImage () {
-      console.log('QL:', this.imagesQueue.length);
       let filePath = this.imagesQueue.shift();
 
       // eslint-disable-next-line
