@@ -248,7 +248,11 @@ export default {
           }
 
           if (this.imageUploader.files) {
-            this.imagesQueue = this.imageUploader.files.map(file => file.path);
+            this.imagesQueue = [];
+
+            for (let i = 0; i < this.imageUploader.files.length; i++) {
+              this.imagesQueue.push(this.imageUploader.files[i].path);
+            }
           } else {
             return;
           }
