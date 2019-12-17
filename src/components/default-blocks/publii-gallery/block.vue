@@ -21,7 +21,8 @@
         <img
           :src="image.src"
           :height="image.height"
-          :width="image.width" />
+          :width="image.width"
+          @click.stop="$parent.openPopup()" />
 
         <button
           class="publii-block-gallery-item-delete"
@@ -66,7 +67,7 @@
     </div>
 
     <div
-      v-if="content.images.length === 0 && !editor.bulkOperationsMode && view === 'preview'"
+      v-if="(content.images.length === 0 || $parent.uiOpened) && !editor.bulkOperationsMode"
       :class="{ 'publii-block-gallery-form': true, 'is-visible': content.images.length === 0 }"
       ref="block">
       <div
@@ -85,12 +86,13 @@
             @click="filePickerCallback">
             Select files
           </button>
-          <span
-            v-if="imageUploadInProgress"
-            class="publii-block-gallery-uploader-loader"></span>
         </div>
       </div>
     </div>
+
+    <span
+      v-if="imageUploadInProgress"
+      class="publii-block-gallery-uploader-loader"></span>
 
     <top-menu
       ref="top-menu"

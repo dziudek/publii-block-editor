@@ -123,6 +123,13 @@ export default {
         this.setSelectionState(false);
       }
     },
+    openPopup () {
+      this.uiOpened = true;
+      this.$bus.$emit('block-editor-clear-text-selection', this.id);
+    },
+    closePopup () {
+      this.uiOpened = false;
+    },
     togglePopup () {
       this.uiOpened = !this.uiOpened;
 
