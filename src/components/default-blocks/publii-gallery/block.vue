@@ -122,6 +122,8 @@ export default {
       draggingInProgress: false,
       isHovered: false,
       imageUploadInProgress: false,
+      imagesQueue: [],
+      imageUploader: null,
       view: 'preview',
       config: {
         imageAlign: 'center',
@@ -230,15 +232,13 @@ export default {
       this.isHovered = false;
     },
     initFakeFilePicker () {
-      // if (!this.$ipcRenderer) {
-      return false;
-      // }
+      if (!this.$ipcRenderer) {
+        return false;
+      }
 
-      /*
-      let imageUploader = document.getElementById('post-editor-fake-image-uploader');
-
-      imageUploader.addEventListener('change', () => {
-        if (!imageUploader.value) {
+      this.imageUploader = document.getElementById('post-editor-fake-multiple-images-uploader');
+      this.imageUploader.addEventListener('change', () => {
+        if (!this.imageUploader.value) {
           return;
         }
 
@@ -247,42 +247,51 @@ export default {
             return;
           }
 
-          let filePath = false;
-
-          if (imageUploader.files) {
-            filePath = imageUploader.files[0].path;
-          }
-
-          if (!filePath) {
+          if (this.imageUploader.files) {
+            this.imagesQueue = this.imageUploader.files.map(file => file.path);
+          } else {
             return;
           }
 
           this.imageUploadInProgress = true;
-          // eslint-disable-next-line
-          this.$ipcRenderer.send('app-image-upload', {
-            id: this.postID,
-            site: window.publiiSiteName,
-            path: filePath,
-            imageType: 'contentImages'
-          });
-
-          // eslint-disable-next-line
-          this.$ipcRenderer.once('app-image-uploaded', (event, data) => {
-            this.content.imageWidth = data.baseImage.size[0];
-            this.content.imageHeight = data.baseImage.size[1];
-            this.content.image = data.baseImage.url;
-            this.fileSelectionCallback = false;
-            this.imageUploadInProgress = false;
-          });
-
-          imageUploader.value = '';
+          this.uploadImage()
         }, 50);
       });
-      */
+    },
+    uploadImage () {
+      console.log('QL:', this.imagesQueue.length);
+      let filePath = this.imagesQueue.shift();
+
+      // eslint-disable-next-line
+      this.$ipcRenderer.send('app-image-upload', {
+        id: this.postID,
+        site: window.publiiSiteName,
+        path: filePath,
+        imageType: 'galleryImages'
+      });
+
+      // eslint-disable-next-line
+      this.$ipcRenderer.once('app-image-uploaded', (event, data) => {
+        this.content.images.push({
+          src: data.baseImage.url,
+          height: data.baseImage.size[1],
+          width: data.baseImage.size[0],
+          alt: '',
+          caption: ''
+        });
+
+        if (this.imagesQueue.length) {
+          this.uploadImage();
+        } else {
+          this.fileSelectionCallback = false;
+          this.imageUploadInProgress = false;
+          this.imageUploader.value = '';
+        }
+      });
     },
     filePickerCallback () {
       this.fileSelectionCallback = true;
-      document.getElementById('post-editor-fake-image-uploader').click();
+      document.getElementById('post-editor-fake-multiple-images-uploader').click();
     },
     alignImage (newValue) {
       this.config.imageAlign = newValue;

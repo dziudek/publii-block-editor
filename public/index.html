@@ -23,7 +23,8 @@
         -moz-osx-font-smoothing: grayscale;
       }
 
-      #post-editor-fake-image-uploader {
+      #post-editor-fake-image-uploader,
+      #post-editor-fake-multiple-images-uploader {
         display: none;
       }
       </style>
@@ -36,6 +37,12 @@
         id="post-editor-fake-image-uploader"
         class="is-hidden"
         type="file" />
+    <input
+        name="image"
+        id="post-editor-fake-multiple-images-uploader"
+        class="is-hidden"
+        type="file"
+        multiple />
     <!-- built files will be auto injected -->
   </body>
 </html>
