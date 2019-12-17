@@ -40,7 +40,7 @@
         class="publii-block-gallery-list-item">
         <div class="publii-block-gallery-list-item-image">
           <img
-            :src="image.src"
+            :src="image.thumbnailSrc"
             :height="image.height"
             :width="image.width" />
         </div>
@@ -254,7 +254,7 @@ export default {
 
       // eslint-disable-next-line
       this.$ipcRenderer.send('app-image-upload', {
-        id: this.postID,
+        id: this.editor.config.postID,
         site: window.publiiSiteName,
         path: filePath,
         imageType: 'galleryImages'
@@ -264,8 +264,10 @@ export default {
       this.$ipcRenderer.once('app-image-uploaded', (event, data) => {
         this.content.images.push({
           src: data.baseImage.url,
-          height: data.baseImage.size[1],
-          width: data.baseImage.size[0],
+          thumbnailSrc: data.thumbnailPath[0],
+          height: data.thumbnailDimensions ? data.thumbnailDimensions.height : '',
+          width: data.thumbnailDimensions ? data.thumbnailDimensions.width : '',
+          dimensions: data.baseImage.size.join('x'),
           alt: '',
           caption: ''
         });
