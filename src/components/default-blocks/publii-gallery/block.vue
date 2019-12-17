@@ -205,6 +205,7 @@ export default {
           }
 
           this.imageUploadInProgress = true;
+          this.$parent.$el.setAttribute('style', 'height: ' + this.$parent.$el.outerHeight + 'px; overflow: hidden;');
           this.uploadImage();
         }
       } else {
@@ -279,6 +280,7 @@ export default {
         if (this.imagesQueue.length) {
           this.uploadImage();
         } else {
+          this.$parent.$el.removeAttribute('style');
           this.fileSelectionCallback = false;
           this.imageUploadInProgress = false;
           this.imageUploader.value = '';
