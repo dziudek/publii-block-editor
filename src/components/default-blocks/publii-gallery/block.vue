@@ -250,6 +250,7 @@ export default {
           }
 
           this.imageUploadInProgress = true;
+          this.$parent.$el.setAttribute('style', 'height: ' + this.$parent.$el.outerHeight + 'px; overflow: hidden;');
           this.uploadImage();
         }, 50);
       });
