@@ -206,6 +206,7 @@ export default {
 
           this.imageUploadInProgress = true;
           this.$parent.$el.setAttribute('style', 'height: ' + this.$parent.$el.outerHeight + 'px; overflow: hidden;');
+          console.log('height: ' + this.$parent.$el.outerHeight + 'px; overflow: hidden;');
           this.uploadImage();
         }
       } else {
@@ -251,6 +252,7 @@ export default {
 
           this.imageUploadInProgress = true;
           this.$parent.$el.setAttribute('style', 'height: ' + this.$parent.$el.outerHeight + 'px; overflow: hidden;');
+          console.log('height: ' + this.$parent.$el.outerHeight + 'px; overflow: hidden;');
           this.uploadImage();
         }, 50);
       });
@@ -282,6 +284,7 @@ export default {
           this.uploadImage();
         } else {
           this.$parent.$el.removeAttribute('style');
+          console.log('REMOVED STYLE!');
           this.fileSelectionCallback = false;
           this.imageUploadInProgress = false;
           this.imageUploader.value = '';
