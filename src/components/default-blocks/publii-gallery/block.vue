@@ -430,12 +430,14 @@ export default {
       width: 32px!important;
 
       &-overlay {
-        background: $color-editor-color-light-medium;
-        bottom: 32px;
+        background: $block-editor-color-light;
+        border: 1px solid $block-editor-form-input-border;
+        border-radius: $block-editor-form-input-border-radius;
+        bottom: 0;
         position: absolute;
-        left: 32px;
-        right: 32px;
-        top: 62px;
+        left: 0;
+        right: 0;
+        top: 0;
         z-index: 1;
       }
     }
