@@ -3,8 +3,7 @@
     class="publii-block-gallery-wrapper"
     @dragover.stop.prevent="dragOver"
     @dragleave.stop.prevent="dragLeave"
-    @drop.stop.prevent="drop"
-    @dblclick.stop.prevent="toggleView()">
+    @drop.stop.prevent="drop">
     <draggable
       v-if="content.images.length > 0 && view === 'preview'"
       ref="block"
@@ -21,8 +20,7 @@
         <img
           :src="image.src"
           :height="image.height"
-          :width="image.width"
-          @click.stop="$parent.openPopup()" />
+          :width="image.width" />
 
         <button
           class="publii-block-gallery-item-delete"
@@ -32,8 +30,13 @@
       </div>
     </draggable>
 
-    <div
-      v-if="view === 'edit'"
+    <draggable
+      v-if="content.images.length > 0 && view === 'edit'"
+      v-model="content.images"
+      :data-cols="config.columns"
+      :data-count="content.images.length"
+      @start="draggingInProgress = true"
+      @end="draggingInProgress = false"
       class="publii-block-gallery-list">
       <div
         v-for="(image, index) of content.images"
@@ -58,7 +61,7 @@
           </p>
         </div>
       </div>
-    </div>
+    </draggable>
 
     <div
       v-if="content.images.length === 0 && editor.bulkOperationsMode && view === 'preview'"
@@ -67,7 +70,7 @@
     </div>
 
     <div
-      v-if="(content.images.length === 0 || $parent.uiOpened) && !editor.bulkOperationsMode"
+      v-if="(content.images.length === 0 || view === 'edit') && !editor.bulkOperationsMode"
       :class="{ 'publii-block-gallery-form': true, 'is-visible': content.images.length === 0 }"
       ref="block">
       <div
@@ -120,6 +123,19 @@ export default {
     'icon': EditorIcon,
     'top-menu': TopMenuUI,
     'draggable': Draggable
+  },
+  watch: {
+    '$parent.uiOpened': function (newValue) {
+      if (!this.content.images.length) {
+        return;
+      }
+
+      if (newValue) {
+        this.view = 'edit';
+      } else {
+        this.view = 'preview';
+      }
+    }
   },
   data () {
     return {
@@ -311,17 +327,6 @@ export default {
     },
     removeImage (index) {
       this.content.images.splice(index, 1);
-    },
-    toggleView () {
-      if (!this.content.images.length) {
-        return;
-      }
-
-      if (this.view === 'preview') {
-        this.view = 'edit';
-      } else if (this.view === 'edit') {
-        this.view = 'preview';
-      }
     },
     save () {
       this.$bus.$emit('block-editor-save-block', {
