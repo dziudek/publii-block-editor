@@ -44,11 +44,9 @@ export default {
   },
   methods: {
     setPostID (event, postID) {
-      console.log('POST ID:', postID);
       this.$refs['block-editor'].setPostID(postID);
     },
     setPostText (event, postText) {
-      console.log('POST TEXT:', postText);
       document.getElementById('post-editor').value = postText;
 
       setTimeout(() => {
@@ -56,7 +54,6 @@ export default {
       }, 0);
     },
     setPostTitle (event, postTitle) {
-      console.log('POST TITLE:', postTitle);
       this.$refs['post-title'].innerText = postTitle;
     },
     updateTitle () {
