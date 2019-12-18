@@ -3,18 +3,18 @@ export default {
   name: 'link-helpers',
   computed: {
     tagPages () {
-      if (!window.publiiCurrentSiteData || !window.publiiCurrentSiteData.tags.length) {
+      if (!this.$parent.currentSiteData || !this.$parent.currentSiteData.tags.length) {
         return [0];
       }
 
-      return window.publiiCurrentSiteData.tags.map(tag => tag.id);
+      return this.$parent.currentSiteData.tags.map(tag => tag.id);
     },
     authorPages () {
-      if (!window.publiiCurrentSiteData || !window.publiiCurrentSiteData.authors.length) {
+      if (!this.$parent.currentSiteData || !this.$parent.currentSiteData.authors.length) {
         return [''];
       }
 
-      return window.publiiCurrentSiteData.authors.map(author => author.username).sort((a, b) => {
+      return this.$parent.currentSiteData.authors.map(author => author.username).sort((a, b) => {
         if (a.toLowerCase() < b.toLowerCase()) {
           return -1;
         }
@@ -27,11 +27,11 @@ export default {
       });
     },
     postPages () {
-      if (!window.publiiCurrentSiteData || !window.publiiCurrentSiteData.posts.length) {
+      if (!this.$parent.currentSiteData || !this.$parent.currentSiteData.posts.length) {
         return [0];
       }
 
-      return window.publiiCurrentSiteData.posts.map(post => post.id);
+      return this.$parent.currentSiteData.posts.map(post => post.id);
     }
   },
   methods: {
@@ -51,25 +51,25 @@ export default {
       return false;
     },
     customTagLabels (value) {
-      if (!window.publiiCurrentSiteData || !window.publiiCurrentSiteData.tags.length) {
+      if (!this.$parent.currentSiteData || !this.$parent.currentSiteData.tags.length) {
         return '';
       }
 
-      return window.publiiCurrentSiteData.tags.filter(tag => tag.id === value).map(tag => tag.name)[0];
+      return this.$parent.currentSiteData.tags.filter(tag => tag.id === value).map(tag => tag.name)[0];
     },
     customAuthorsLabels (value) {
-      if (!window.publiiCurrentSiteData || !window.publiiCurrentSiteData.authors.length) {
+      if (!this.$parent.currentSiteData || !this.$parent.currentSiteData.authors.length) {
         return '';
       }
 
-      return window.publiiCurrentSiteData.authors.filter(author => author.username === value).map(author => author.name)[0];
+      return this.$parent.currentSiteData.authors.filter(author => author.username === value).map(author => author.name)[0];
     },
     customPostLabels (value) {
-      if (!window.publiiCurrentSiteData || !window.publiiCurrentSiteData.posts.length) {
+      if (!this.$parent.currentSiteData || !this.$parent.currentSiteData.posts.length) {
         return '';
       }
 
-      return window.publiiCurrentSiteData.posts.filter(post => post.id === value).map(post => post.title)[0];
+      return this.$parent.currentSiteData.posts.filter(post => post.id === value).map(post => post.title)[0];
     }
   }
 }

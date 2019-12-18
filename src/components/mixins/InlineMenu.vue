@@ -1,6 +1,5 @@
 <script>
 import EditorIcon from './../elements/EditorIcon.vue';
-import LinkHelpers from './../mixins/LinkHelpers.vue';
 import LinkConfig from './../mixins/LinkConfig.vue';
 import SelectedText from './../utils/SelectedText.js';
 import Vue from 'vue';
@@ -8,8 +7,7 @@ import Vue from 'vue';
 export default {
   name: 'InlineMenu',
   mixins: [
-    LinkConfig,
-    LinkHelpers
+    LinkConfig
   ],
   components: {
     'icon': EditorIcon

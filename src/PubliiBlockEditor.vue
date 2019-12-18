@@ -80,7 +80,7 @@ export default {
       window.publiiSiteName = siteName;
     },
     setCurrentSiteData (event, currentSiteData) {
-      window.publiiCurrentSiteData = currentSiteData;
+      this.$refs['block-editor'].currentSiteData = currentSiteData;
     }
   }
 }

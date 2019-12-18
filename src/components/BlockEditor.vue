@@ -121,6 +121,7 @@ export default {
         postID: ''
       },
       bulkOperationsMode: false,
+      currentSiteData: null,
       showBulkOperationsBar: false,
       bulkContentBackup: '',
       bulkOperationsLog: [],
