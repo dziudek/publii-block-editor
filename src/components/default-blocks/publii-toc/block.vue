@@ -27,6 +27,7 @@
 import Block from './../../Block.vue';
 import ConfigForm from './config-form.json';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
+import Utils from './../../utils/Utils.js';
 
 export default {
   name: 'ToC',
@@ -60,8 +61,7 @@ export default {
     this.configForm = ConfigForm;
   },
   mounted () {
-    this.content.toc = this.inputContent.toc;
-    this.content.title = this.inputContent.title;
+    this.content = Utils.deepMerge(this.content, this.inputContent);
     this.updateToc();
     this.$bus.$on('block-editor-content-updated', this.updateToc);
     this.$bus.$on('block-editor-block-selected', this.selectBlock);

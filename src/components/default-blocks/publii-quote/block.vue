@@ -50,6 +50,7 @@ import HasPreview from './../../mixins/HasPreview.vue';
 import InlineMenu from './../../mixins/InlineMenu.vue';
 import InlineMenuUI from './../../helpers/InlineMenuUI.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
+import Utils from './../../utils/Utils.js';
 
 export default {
   name: 'Paragraph',
@@ -107,8 +108,7 @@ export default {
     this.configForm = ConfigForm;
   },
   mounted () {
-    this.content.text = this.inputContent.text;
-    this.content.author = this.inputContent.author;
+    this.content = Utils.deepMerge(this.content, this.inputContent);
     this.view = (!this.content.text && !this.content.author) ? 'code' : 'preview';
   },
   methods: {

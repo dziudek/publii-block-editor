@@ -135,7 +135,6 @@ export default {
   },
   mounted () {
     this.content = this.inputContent;
-    this.config.headingLevel = this.inputConfig.headingLevel || 2;
     this.$bus.$on('block-editor-save-link-popup', this.setLink);
   },
   methods: {

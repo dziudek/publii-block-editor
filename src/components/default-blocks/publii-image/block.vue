@@ -98,6 +98,7 @@ import EditorIcon from './../../elements/EditorIcon.vue';
 import HasPreview from './../../mixins/HasPreview.vue';
 import LinkConfig from './../../mixins/LinkConfig.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
+import Utils from './../../utils/Utils.js';
 
 export default {
   name: 'PImage',
@@ -189,9 +190,7 @@ export default {
     this.configForm = ConfigForm;
   },
   mounted () {
-    this.content.image = this.inputContent.image || '';
-    this.content.alt = this.inputContent.alt || '';
-    this.content.caption = this.inputContent.caption || '';
+    this.content = Utils.deepMerge(this.content, this.inputContent);
     this.view = (this.content.image === '') ? 'code' : 'preview';
     this.initFakeFilePicker();
     this.setParentCssClasses(this.config.imageAlign);

@@ -112,6 +112,7 @@ import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import EditorIcon from './../../elements/EditorIcon.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
+import Utils from './../../utils/Utils.js';
 
 export default {
   name: 'PGallery',
@@ -196,7 +197,7 @@ export default {
     this.configForm = ConfigForm;
   },
   mounted () {
-    this.content.images = this.inputContent.images || [];
+    this.content = Utils.deepMerge(this.content, this.inputContent);
     this.initFakeFilePicker();
     this.setParentCssClasses(this.config.imageAlign);
   },

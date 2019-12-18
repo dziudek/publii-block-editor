@@ -46,6 +46,7 @@ export default {
     this.configForm = ConfigForm;
   },
   mounted () {
+    this.content = this.inputContent;
     this.$refs['block'].addEventListener('keydown', this.handleKeyboard);
   },
   methods: {
