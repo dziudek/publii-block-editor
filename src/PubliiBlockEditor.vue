@@ -80,7 +80,6 @@ export default {
       window.publiiSiteName = siteName;
     },
     setCurrentSiteData (event, currentSiteData) {
-      console.log('CSD INIT:', currentSiteData);
       this.$refs['block-editor'].currentSiteData = currentSiteData;
     }
   }
