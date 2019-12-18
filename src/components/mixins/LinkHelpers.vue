@@ -3,14 +3,14 @@ export default {
   name: 'link-helpers',
   computed: {
     tagPages () {
-      if (!window.publiiCurrentSiteData.tags.length) {
+      if (!window.publiiCurrentSiteData || !window.publiiCurrentSiteData.tags.length) {
         return [0];
       }
 
       return window.publiiCurrentSiteData.tags.map(tag => tag.id);
     },
     authorPages () {
-      if (!window.publiiCurrentSiteData.authors.length) {
+      if (!window.publiiCurrentSiteData || !window.publiiCurrentSiteData.authors.length) {
         return [''];
       }
 
@@ -27,7 +27,7 @@ export default {
       });
     },
     postPages () {
-      if (!window.publiiCurrentSiteData.posts.length) {
+      if (!window.publiiCurrentSiteData || !window.publiiCurrentSiteData.posts.length) {
         return [0];
       }
 
@@ -51,21 +51,21 @@ export default {
       return false;
     },
     customTagLabels (value) {
-      if (!window.publiiCurrentSiteData.tags.length) {
+      if (!window.publiiCurrentSiteData || !window.publiiCurrentSiteData.tags.length) {
         return '';
       }
 
       return window.publiiCurrentSiteData.tags.filter(tag => tag.id === value).map(tag => tag.name)[0];
     },
     customAuthorsLabels (value) {
-      if (!window.publiiCurrentSiteData.authors.length) {
+      if (!window.publiiCurrentSiteData || !window.publiiCurrentSiteData.authors.length) {
         return '';
       }
 
       return window.publiiCurrentSiteData.authors.filter(author => author.username === value).map(author => author.name)[0];
     },
     customPostLabels (value) {
-      if (!window.publiiCurrentSiteData.posts.length) {
+      if (!window.publiiCurrentSiteData || !window.publiiCurrentSiteData.posts.length) {
         return '';
       }
 
