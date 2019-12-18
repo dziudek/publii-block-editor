@@ -21,11 +21,7 @@ function render (blockData) {
 
     images += `<figure class="gallery__item">
       <a href="${img.src}" data-size="${img.dimensions}">
-        <img
-          src="${img.thumbnailSrc}"
-          height="${img.height}"
-          width="${img.width}"
-          alt="${img.alt}" />
+        <img src="${img.thumbnailSrc}" height="${img.height}" width="${img.width}" alt="${img.alt}" />
       </a>
       ${caption}
     </figure>`;

@@ -43,22 +43,14 @@ function render (blockData) {
     html = `
     <figure${id}${cssClasses}>
       <a href="${blockData.config.link.url}"${relAttr}${targetBlank}>
-        <img
-          src="${blockData.content.image}"
-          height="${blockData.content.imageHeight}"
-          width="${blockData.content.imageWidth}"
-          alt="${blockData.content.alt}" />
+        <img src="${blockData.content.image}" height="${blockData.content.imageHeight}" width="${blockData.content.imageWidth}" alt="${blockData.content.alt}" />
       </a>
       ${caption}
     </figure>`;
   } else {
     html = `
     <figure${id}${cssClasses}>
-      <img
-        src="${blockData.content.image}"
-        height="${blockData.content.imageHeight}"
-        width="${blockData.content.imageWidth}"
-        alt="${blockData.content.alt}" />
+      <img src="${blockData.content.image}" height="${blockData.content.imageHeight}" width="${blockData.content.imageWidth}" alt="${blockData.content.alt}" />
       ${caption}
     </figure>`;
   }
