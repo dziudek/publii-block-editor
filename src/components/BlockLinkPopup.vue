@@ -155,13 +155,13 @@ export default {
       }
 
       if (this.link.url.indexOf('#INTERNAL_LINK#') > -1) {
-        if (this.link.url.indexOf('POST') > -1) {
+        if (this.link.url.indexOf('post') > -1) {
           this.linkType = 'post';
           this.linkSelectedPost = parseInt(this.link.url.split('/').pop(), 10);
-        } else if (this.link.url.indexOf('TAG') > -1) {
+        } else if (this.link.url.indexOf('tag') > -1) {
           this.linkType = 'tag';
           this.linkSelectedTag = parseInt(this.link.url.split('/').pop(), 10);
-        } else if (this.link.url.indexOf('AUTHOR') > -1) {
+        } else if (this.link.url.indexOf('author') > -1) {
           this.linkType = 'author';
           this.linkSelectedAuthor = parseInt(this.link.url.split('/').pop(), 10);
         }
@@ -179,19 +179,19 @@ export default {
     prepareLink () {
       if (this.linkType === 'post') {
         if (this.linkSelectedPost) {
-          return '#INTERNAL_LINK#/POST/' + this.linkSelectedPost;
+          return '#INTERNAL_LINK#/post/' + this.linkSelectedPost;
         } else {
           return '';
         }
       } else if (this.linkType === 'author') {
         if (this.linkSelectedAuthor) {
-          return '#INTERNAL_LINK#/AUTHOR/' + this.linkSelectedAuthor;
+          return '#INTERNAL_LINK#/author/' + this.linkSelectedAuthor;
         } else {
           return '';
         }
       } else if (this.linkType === 'tag') {
         if (this.linkSelectedTag) {
-          return '#INTERNAL_LINK#/TAG/' + this.linkSelectedTag;
+          return '#INTERNAL_LINK#/tag/' + this.linkSelectedTag;
         } else {
           return '';
         }
