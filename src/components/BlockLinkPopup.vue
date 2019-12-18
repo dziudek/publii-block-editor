@@ -37,6 +37,7 @@
         :close-on-select="true"
         :show-labels="false"
         placeholder="Select post page"></vue-select>
+      POSTS: {{ JSON.stringify(postPages) }}
       <vue-select
         v-if="linkType === 'tag'"
         slot="field"
