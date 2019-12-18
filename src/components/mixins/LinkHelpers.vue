@@ -27,7 +27,7 @@ export default {
       });
     },
     postPages () {
-      console.log('CSD:', JSON.stringify(this.$parent.currentSiteData.posts));
+      console.log('CSD:', this.$parent.currentSiteData);
       if (!this.$parent.currentSiteData || !this.$parent.currentSiteData.posts.length) {
         return [0];
       }
