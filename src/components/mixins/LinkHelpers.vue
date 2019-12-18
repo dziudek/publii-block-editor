@@ -7,12 +7,16 @@ export default {
         return [0];
       }
 
+      console.log('TAGS EXISTS');
+
       return this.$parent.currentSiteData.tags.map(tag => tag.id);
     },
     authorPages () {
       if (!this.$parent.currentSiteData || !this.$parent.currentSiteData.authors.length) {
         return [''];
       }
+
+      console.log('AUTHORS EXISTS');
 
       return this.$parent.currentSiteData.authors.map(author => author.username).sort((a, b) => {
         if (a.toLowerCase() < b.toLowerCase()) {
@@ -27,14 +31,11 @@ export default {
       });
     },
     postPages () {
-      if (this.$parent.currentSiteData) {
-        console.log('CSD:', JSON.stringify(this.$parent.currentSiteData.posts));
-      }
-
       if (!this.$parent.currentSiteData || !this.$parent.currentSiteData.posts.length) {
         return [0];
       }
 
+      console.log('RES:', this.$parent.currentSiteData.posts.map(post => post.id));
       return this.$parent.currentSiteData.posts.map(post => post.id);
     }
   },
