@@ -105,9 +105,9 @@ export default {
 @import '../../../assets/mixins.scss';
 
 .publii-block-embed {
-    background: $color-editor-color-light-medium;
-    border-radius: $block-editor-form-input-border-radius;
-    color: $block-editor-form-input-border;
+    background: var(--gray-1);
+    border-radius: var(--border-radius);
+    color: var(--gray-3);
     display: none;
     font-size: ms(-1);
     padding: baseline(6);
@@ -115,10 +115,10 @@ export default {
     width: 100%;
 
     textarea {
-        background: $block-editor-color-light;
-        border: 1px solid $block-editor-form-input-border;
-        border-radius: $block-editor-form-input-border-radius;
-        font-family: $font-monospace;
+        background: var(--white);
+        border: 1px solid var(--gray-3);
+        border-radius: var(--border-radius);
+        font-family: var(--font-monospace);
         font-size: ms(-1);
         min-height: 180px;
         padding: 20px;
@@ -131,7 +131,7 @@ export default {
     }
 
     &-preview {
-        background: $color-editor-color-light-medium;
+        background: var(--gray-1);
         margin: 0;
         padding: 0 0 56.25%;
         position: relative;

@@ -140,6 +140,16 @@ export default {
 @import '../../assets/variables.scss';
 
 .wrapper-ui-top-menu {
+
+  svg {
+    fill: var(--icon-primary-color);
+    transition: var(--transition);
+
+    &:hover {
+       fill: var(--icon-tertiary-color);
+    }
+  }
+
   &-conversions {
     align-items: center;
     display: flex;
@@ -152,14 +162,10 @@ export default {
     position: relative;
     width: 38px;
 
-    & > svg {
-        fill: $block-editor-color-text-medium-dark !important;
-    }
-
     // hover effect
     &::before {
        content: "";
-       background: $block-editor-color-light-dark;
+       background: var(--gray-2);
        border-radius: 3px;
        display: block;
        left: 50%;
@@ -175,10 +181,10 @@ export default {
     }
 
     &-tooltip {
-      background: $color-editor-color-light-medium;
-      border-radius: $block-editor-form-input-border-radius;
+      background: var(--input-bg-light);
+      border-radius: var(--border-radius);
       box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
-      color: $block-editor-color-text;
+      color: var(--text-primary-color);
       display: flex;
       flex-wrap: wrap;
       font-size: 13px;
@@ -195,7 +201,7 @@ export default {
       z-index: 10;
 
       &:after {
-        border: 6px solid $color-editor-color-light-medium;
+        border: 6px solid var(--gray-1);
         border-left-color: transparent;
         border-right-color: transparent;
         border-top-color: transparent;
@@ -245,7 +251,7 @@ export default {
       }
 
       & > svg {
-         fill: $block-editor-color-text !important;
+         fill: var(--icon-tertiary-color);
       }
     }
   }
@@ -261,7 +267,7 @@ export default {
   }
 
   .top-menu-button-trash {
-    color: $block-editor-color-danger;
+    color: var(--warning);
   }
 
   .multiselect {
@@ -273,8 +279,8 @@ export default {
     width: auto;
 
     &__tags {
-      background: $block-editor-color-light;
-      border: 2px solid $block-editor-color-light-dark;
+      background: var(--bg-secondary);
+      border: 2px solid var(--input-border-color);
       height: 34px;
       min-height: 100%;
       padding: 4px 40px 5px 14px;
@@ -283,14 +289,14 @@ export default {
 
     &__single {
       background: inherit;
-      color: $block-editor-color-text;
+      color: var(--text-primary-color);
     }
 
     &__select {
       height: 28px;
 
       &::before {
-          border-color: $block-editor-color-text-medium transparent transparent;
+          border-color: var(--gray-4) transparent transparent;
       }
     }
 
@@ -303,10 +309,10 @@ export default {
     }
 
     &__content-wrapper {
-      background: $block-editor-color-light;
-      border: 2px solid $block-editor-color-light-dark;
+      background: var(--bg-secondary);
+      border: 2px solid var(--input-border-color);
       border-top: none;
-      color: $block-editor-color-text;
+      color: var(--text-primary-color);
       margin-top: -1px;
     }
 
@@ -315,8 +321,8 @@ export default {
       min-height: 30px;
 
       &--highlight {
-        background: $color-editor-color-light-medium;
-        color: $block-editor-color-text;
+        background: var(--input-bg-light);
+        color: var(--text-primary-color);
 
         &:after {
           display: none;
@@ -324,8 +330,8 @@ export default {
       }
 
       &.multiselect__option--selected {
-        background: $block-editor-color-primary;
-        color: $block-editor-color-light;
+        background: var(--primary-color);
+        color: var(--white);
 
         &:after {
           display: none;
@@ -335,11 +341,11 @@ export default {
 
     &__input {
       background: none !important;
-      color: $block-editor-color-text;
+      color: var(--gray-6);
       font-size: 13px;
 
       &::placeholder {
-        color: $block-editor-color-text-medium-dark;
+        color: var(--gray-5);
       }
     }
 

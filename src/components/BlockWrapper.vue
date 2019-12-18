@@ -45,7 +45,6 @@
           <button
             :class="{ 'wrapper-ui-show-options-button': true, 'is-visible': isSelected && !uiOpened }">
             <icon
-              color="#5da4ef"
               name="dotted-line" />
           </button>
 
@@ -201,7 +200,7 @@ export default {
   padding: 0 32px;
   position: relative;
   transition: width .25s ease-out, opacity .35s ease-out;
-  width: $editor-width;
+  width: var(--editor-width);
   z-index: 1;
 
   &[data-block-type="publii-embed"] {
@@ -245,15 +244,16 @@ export default {
   }
 
   &.has-ui-opened {
-    background: $block-editor-color-light;
+    background: var(--bg-secondary);
     border-radius: 6px;
-    box-shadow: 0 0 32px $block-editor-color-shadow;
+    box-shadow: 0 0 32px var(--shadow);
     margin-top: -44px;
     opacity: 1;
+    user-select: none;
     z-index: 2;
 
     &::after {
-      background: $block-editor-color-primary;
+      background: var(--primary-color);
       bottom: -1px;
       content: "";
       position: absolute;
@@ -278,7 +278,7 @@ export default {
   }
 
   &.contains-wide-image {
-      width: calc(#{$editor-width} + 168px)!important;
+      width: calc(var(--editor-width) + 168px)!important;
   }
 
   &.contains-full-image {
@@ -287,7 +287,7 @@ export default {
     .publii-block-image-form input {
       margin-left: auto;
       margin-right: auto;
-      max-width: calc(#{$editor-width} + 84px);
+      max-width: calc(var(--editor-width) + 84px);
     }
   }
 
@@ -323,7 +323,7 @@ export default {
 
         &::after {
           content:"";
-          border: 2px solid rgba($block-editor-color-primary, .4);
+          border: 2px solid rgba(var(--primary-color-rgb), .4);
           border-radius: 50%;
           height: 50px;
           left: 50%;
@@ -344,6 +344,7 @@ export default {
         }
 
         & > svg {
+          fill: var(--primary-color);
           vertical-align: middle;
         }
 
@@ -381,7 +382,6 @@ export default {
         align-items: center;
         background: transparent;
         border: none;
-        color: $block-editor-color-text-medium-dark;
         cursor: pointer;
         display: flex;
         height: 100%;
@@ -394,10 +394,15 @@ export default {
         width: 38px;
         z-index: 0;
 
+        svg {
+          fill: var(--icon-primary-color);
+          transition: var(--transition);
+        }
+
         // hover effect
         &::before {
           content: "";
-          background: $block-editor-color-light-dark;
+          background: var(--gray-2);
           border-radius: 3px;
           display: block;
           left: 50%;
@@ -414,7 +419,10 @@ export default {
 
         &:hover,
         &.is-active {
-          color: $block-editor-color-text;
+
+          svg {
+            fill: var(--icon-tertiary-color);
+          }
 
           &::before {
             opacity: 1;
@@ -442,7 +450,7 @@ export default {
       margin: -9px 0 9px 0;
 
       &-title {
-          color: $block-editor-color-text-medium;
+          color: var(--gray-4);
           display: block;
           font-size: 11px;
           font-weight: 700;
@@ -454,7 +462,6 @@ export default {
         align-items: center;
         background: transparent;
         border: none;
-        color: $block-editor-color-text-medium-dark;
         cursor: pointer;
         display: flex;
         height: 100%;
@@ -465,10 +472,15 @@ export default {
         position: relative;
         width: 38px;
 
+        svg {
+          fill: var(--icon-primary-color);
+          transition: var(--transition);
+        }
+
         // hover effect
         &::before {
           content: "";
-          background: $block-editor-color-light-dark;
+          background: var(--gray-2);
           border-radius: 3px;
           display: block;
           left: 50%;
@@ -485,7 +497,10 @@ export default {
 
         &:hover,
         &.is-active {
-            color: $block-editor-color-text;
+
+          svg {
+            fill: var(--icon-tertiary-color);
+          }
 
           &::before {
             opacity: 1;
@@ -497,21 +512,21 @@ export default {
   }
 
   &-ui-bulk {
-    border-right: 3px solid $block-editor-color-primary;
+    background: var(--bg-secondary);
+    border-right: 3px solid var(--primary-color);
     border-radius: 6px 0 0 6px;
-    box-shadow: 0 0 16px $block-editor-color-shadow;
+    box-shadow: 0 0 16px var(--shadow);
     height: 100%;
     left: 0;
     position: absolute;
     top: 0;
-    width: calc(#{$editor-width} + 4rem);
+    width: calc(var(--editor-width) + 4rem);
 
     &-move,
     &-delete,
     &-duplicate {
         background: transparent;
         border: none;
-        color: $block-editor-color-text-medium-dark;
         cursor: pointer;
         margin: 0;
         outline: none;
@@ -521,10 +536,15 @@ export default {
         transform: translateY(-50%);
         width: 38px;
 
+        svg {
+          fill: var(--icon-primary-color);
+          transition: var(--transition);
+        }
+
         // hover effect
         &::before {
           content: "";
-          background: $block-editor-color-light-dark;
+          background: var(--gray-2);
           border-radius: 3px;
           display: block;
           left: 50%;
@@ -541,7 +561,10 @@ export default {
 
         &:hover,
         &.is-active {
-            color: $block-editor-color-text;
+
+          svg {
+            fill: var(--icon-tertiary-color);
+          }
 
           &::before {
             opacity: 1;

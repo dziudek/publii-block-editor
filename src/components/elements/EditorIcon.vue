@@ -15,10 +15,6 @@ export default {
       default: '',
       type: String
     },
-    'color': {
-      default: 'currentColor',
-      type: String
-    },
     'customWidth': {
       default: '',
       type: [String, Number]
@@ -162,11 +158,6 @@ export default {
       }
 
       return '16';
-    },
-    style () {
-      let style = [];
-      style.push(`fill: ${this.color}`);
-      return style.join(';')
     },
     iconPath () {
       // Detect if editor is running in Publii or standalone

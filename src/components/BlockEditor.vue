@@ -541,13 +541,13 @@ export default {
       position: relative;
       top: 0;
       transform: translateX(-50%);
-      width: $editor-width;
+      width: var(--editor-width);
       z-index: 0;
     }
 
     &.is-bulk-edit-mode {
       .wrapper {
-        width: $editor-width!important;
+        width: var(--editor-width)!important;
       }
     }
   }
@@ -581,7 +581,7 @@ export default {
     z-index: 1000;
 
     &.is-visible {
-      background: linear-gradient(to top, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+      background: linear-gradient(to top, var(--bg-primary) 50%, transparent 100%);
       bottom: 0;
       opacity: 1;
 
@@ -591,7 +591,6 @@ export default {
     }
 
     & > button {
-      color: $block-editor-color-text-medium-dark;
       display: inline-block;
       margin: 0;
       padding: 0;
@@ -600,32 +599,31 @@ export default {
       user-select: none;
       white-space: nowrap;
 
+      & > svg {
+         fill: var(--icon-primary-color);
+      }
+
       &.batch {
-         background: $block-editor-color-light;
-         box-shadow: 0 0 16px rgba($block-editor-color-shadow, .1);
-         border: 1px solid $block-editor-color-light-dark;
+         background: var(--bg-secondary);
+         box-shadow: 0 0 16px rgba(var(--shadow-rgb), .1);
+         border: 1px solid var(--gray-2);
          border-radius: 30px;
-         color: $block-editor-color-text;
          font-size: 15px;
          font-weight: 500;
          height: 58px;
          width: 58px;
 
          &:hover {
-            border: 2px solid $block-editor-form-input-border;
+            border: 2px solid var(--gray-3);
 
             & > svg {
                transform: scale(1.1) rotate(180deg);
             }
          }
 
-         & > svg {
-            fill: $block-editor-color-text-medium-dark !important;
-         }
-
          &::after {
             content:"";
-            border: 2px solid rgba($block-editor-color-primary, .4);
+            border: 2px solid rgba(var(--primary-color-rgb), .4);
             border-radius: 50%;
             height: 58px;
             left: 50%;
@@ -648,8 +646,8 @@ export default {
       }
 
       &.save {
-         background: $block-editor-color-light;
-         border: 2px solid $block-editor-form-input-border;
+         background: var(--input-bg);
+         border: 2px solid var(--gray-3);
          border-radius: 50%;
          height: 58px;
          margin: 0 -10px;
@@ -659,7 +657,7 @@ export default {
          &::after {
             content: "";
             border-radius: 50%;
-            border: 2px solid $block-editor-color-light;
+            border: 2px solid var(--bg-primary);
             position: absolute;
             left: -4px;
             top: -4px;
@@ -668,14 +666,14 @@ export default {
          }
 
          &.is-active {
-            border-color: $block-editor-color-green;
+            border-color: var(--success);
 
             &:hover {
-               border-color: $block-editor-color-green;
-               box-shadow: inset 0 0 0 1px $block-editor-color-green;
+               border-color: var(--success);
+               box-shadow: inset 0 0 0 1px var(--success);
 
                & > svg {
-               fill: $block-editor-color-green !important;
+               fill: var(--success) !important;
                transform: scale(1.15);
                }
             }
@@ -684,9 +682,9 @@ export default {
 
       &.undo,
       &.cancel {
-         border: 1px solid $block-editor-color-light-dark;
-         box-shadow: 0 0 16px rgba($block-editor-color-shadow, .1);
-         background: $block-editor-color-light;
+         border: 1px solid var(--input-border-color);
+         box-shadow: 0 0 16px rgba(var(--shadow-rgb), .1);
+         background: var(--input-bg);
          height: 48px;
          opaciy: 0;
          width: 70px;
@@ -711,10 +709,10 @@ export default {
          }
 
          &:not([disabled]):hover {
-            border-color: $block-editor-color-primary;
+            border-color: var(--primary-color);
 
             &::after {
-               box-shadow: inset 0 0 0 1px $block-editor-color-primary;
+               box-shadow: inset 0 0 0 1px var(--primary-color);
             }
          }
 
@@ -739,10 +737,10 @@ export default {
          }
 
          &:hover {
-            border-color: $block-editor-color-danger;
+            border-color: var(--warning);
 
             &::after {
-               box-shadow: inset 0 0 0 1px $block-editor-color-danger;
+               box-shadow: inset 0 0 0 1px var(--warning);
             }
          }
 
@@ -764,7 +762,7 @@ export default {
 
       &:disabled  {
          & > svg {
-            fill: $block-editor-form-input-border !important;
+            fill: var(--gray-3) !important;
          }
       }
     }

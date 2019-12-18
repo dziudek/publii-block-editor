@@ -115,9 +115,9 @@ export default {
 @import '../../../assets/mixins.scss';
 
 .publii-block-html {
-  border-radius: $block-editor-form-input-border-radius;
-  background: $block-editor-color-code-bg;
-  box-shadow: 2px 4px 26px $block-editor-color-shadow;
+  border-radius: var(--border-radius);
+  background: var(--gray-8);
+  box-shadow: 2px 4px 26px var(--shadow);
   outline: none;
   width: 100%;
 
@@ -129,16 +129,17 @@ export default {
   &.is-visible {
     & > pre,
     & > .prism-editor__line-numbers {
+      background: var(--gray-8) !important;
       display: block;
     }
 
     & > pre {
-      background: $block-editor-color-code-bg !important;
+      background: var(--gray-8) !important;
 
       &:empty {
         &:before {
           content: 'Enter HTML code';
-          opacity: .35;
+          color: var(--gray-4);
         }
       }
     }
@@ -150,15 +151,15 @@ export default {
   }
 
   .prism-editor__line-numbers {
-    background: $block-editor-color-code-bg !important;
+    background: var(--input-bg) !important;
   }
 
   &-preview {
     publii-script {
-      background: $color-editor-color-light-medium;
-      border-left: 4px solid $block-editor-color-primary-dark;
-      border-radius: $block-editor-form-input-border-radius;
-      color: $block-editor-color-text-medium;
+      background: var(--gray-1);
+      border-left: 4px solid var(--secondary-color);
+      border-radius: var(--border-radius);
+      color: var(--gray-4);
       display: block;
       height: baseline(12);
       margin-bottom: baseline(2);
@@ -170,7 +171,7 @@ export default {
       &:after {
         align-content: center;
         align-items: center;
-        background: $color-editor-color-light-medium;
+        background: var(--gray-1);
         content: "JavaScript code is evaluated only in the preview.";
         display: flex;
         font-size: ms(-1);
@@ -194,8 +195,8 @@ export default {
       width: 100%;
 
       iframe {
-        background: $color-editor-color-light-medium;
-        border: 1px solid $block-editor-color-light-dark;
+        background: var(--gray-1);
+        border: 1px solid var(--gray-2);
         border-radius: 5px;
         height: 100%;
         left: 0;

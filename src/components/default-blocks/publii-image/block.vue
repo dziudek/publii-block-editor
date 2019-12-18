@@ -467,7 +467,7 @@ export default {
   }
 
   &-empty-state {
-    color: $block-editor-color-text-medium;
+    color: var(--gray-4);
     font-size: 12px;
     font-weight: bold;
     text-align: center;
@@ -476,10 +476,10 @@ export default {
 
   &-delete {
     align-items: center;
-    background: $block-editor-color-danger;
+    background: var(--warning);
     border: none;
-    border-radius: $block-editor-form-input-border-radius;
-    color: $block-editor-color-light;
+    border-radius: var(--border-radius);
+    color: var(--white);
     cursor: pointer;
     display: flex;
     height: 34px;
@@ -494,8 +494,8 @@ export default {
     &:active,
     &:focus,
     &:hover {
-      background: $block-editor-color-light;
-      color: $block-editor-color-danger;
+      background: var(--white);
+      color: var(--warning);
     }
   }
 
@@ -510,14 +510,20 @@ export default {
 
     input,
     textarea {
-      border: 1px solid $block-editor-form-input-border;
-      border-radius: $block-editor-form-input-border-radius;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border-color);
+      border-radius: var(--border-radius);
+      color: var(--text-primary-color);
       display: block;
       font-size: ms(-1);
       line-height: inherit;
       outline: none;
       padding: baseline(5);
       width: 100%;
+
+      &::placeholder {
+         color: var(--text-light-color);
+      }
     }
 
     input {
@@ -530,21 +536,21 @@ export default {
   }
 
   &-uploader {
-    border: 1px dashed $block-editor-form-input-border;
-    border-radius: $block-editor-form-input-border-radius;
+    border: 2px dashed var(--input-border-color);
+    border-radius: var(--border-radius);
     height: 250px;
     margin: 0 0 16px 0;
-    padding: 10px;
+    padding: 6px;
     position: relative;
     width: 100%;
 
     &.is-hovered {
-      border-color: $block-editor-color-primary;
+      border-color: var(--primary-color);
     }
 
     &-loader {
       animation: loader 1s linear infinite;
-      border: 3px solid $block-editor-color-primary;
+      border: 3px solid var(--primary-color);
       border-left-color: transparent;
       border-radius: 50%;
       display: block;
@@ -558,20 +564,20 @@ export default {
 
     &-inner {
       align-items: center;
-      background: $color-editor-color-light-medium;
+      background: var(--gray-1);
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      height: 228px;
+      height: 234px;
+      padding: 2rem;
       width: 100%;
 
       svg {
-        margin-top: 30px;
-        opacity: .35;
+        fill: var(--icon-secondary-color);
       }
 
       span {
-        color: $block-editor-color-text-medium;
+        color: var(--gray-4);
         display: block;
         font-size: 16px;
         text-align: center;
@@ -579,20 +585,22 @@ export default {
       }
 
       button {
-        background: $block-editor-color-text-medium;
-        border-radius: $block-editor-form-input-border-radius;
-        color: $block-editor-color-light;
+        background: var(--button-gray-bg);
+        border: 1px solid var(--button-gray-bg);
+        border-radius: var(--border-radius);
+        color: var(--white);
         cursor: pointer;
-        font-size: 14px;
         font-weight: 500;
-        height: 40px;
-        margin-bottom: 30px;
-        width: 160px;
+        font-size: 15px;
+        padding: .5rem 2rem;
+        text-align: center;
+        outline: none;
 
         &:active,
         &:focus,
         &:hover {
-          background: $block-editor-color-text-medium-dark;
+          background: var(--button-gray-hover-bg);
+          border-color: var(--button-gray-hover-bg);
         }
       }
     }

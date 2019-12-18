@@ -118,6 +118,7 @@ export default {
 
   hr {
     border: none;
+    cursor: pointer;
     height: baseline(5);
     line-height: 0;
     margin: 0;
@@ -127,7 +128,7 @@ export default {
   hr.long {
 
       &::after {
-          border-bottom: 1px solid;
+          border-bottom: 1px solid var(--input-border-color);
           bottom: baseline(2);
           content: "";
           height: 1px;

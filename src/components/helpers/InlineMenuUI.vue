@@ -97,19 +97,19 @@ export default {
 @import '../../assets/vue-multiselect.scss';
 
 .is-highlighted {
-  background: darken($block-editor-color-gradient-end, 7.5%);
+  background: var(--primary-color);
 }
 
 .wrapper-ui-inline-menu {
   animation: inlineMenuIn .15s ease backwards;
   align-items: center;
-  background: $block-editor-color-light;
+  background: var(--bg-secondary);
   border: none;
   border-radius: 4px;
-  box-shadow: 0 5px 10px -5px $block-editor-color-shadow, 4px -11px 26px -12px $block-editor-color-shadow, 0 24px 50px 2px $block-editor-color-shadow;
+  box-shadow: 0 5px 10px -5px var(--shadow), 4px -11px 26px -12px var(--shadow), 0 24px 50px 2px var(--shadow);
   left: 50%;
   margin-top: 16px;
-  min-height: 43px;
+  min-height: 44px;
   padding: 0 4px;
   position: absolute;
   top: 0%;
@@ -130,7 +130,7 @@ export default {
   }
 
   &::after {
-    border: 9px solid $block-editor-color-light;
+    border: 9px solid var(--bg-secondary);
     border-left-color: transparent;
     border-right-color: transparent;
     border-top-color: transparent;
@@ -148,10 +148,10 @@ export default {
     align-items: center;
     background: transparent;
     border: none;
-    color: $block-editor-color-text-medium-dark;
     cursor: pointer;
     display: flex;
     height: 100%;
+    min-height: 34px;
     justify-content: center;
     margin: 0;
     outline: none;
@@ -164,10 +164,15 @@ export default {
       pointer-events: none;
     }
 
+    svg {
+      fill: var(--icon-primary-color);
+      transition: var(--transition);
+    }
+
     // hover effect
     &::before {
        content: "";
-       background: $block-editor-color-light-dark;
+       background: var(--gray-2);
        border-radius: 3px;
        display: block;
        left: 50%;
@@ -184,7 +189,10 @@ export default {
 
     &:hover,
     &.is-active {
-      color: $block-editor-color-text;
+
+      svg {
+         fill: var(--icon-tertiary-color);
+      }
 
       &::before {
          opacity: 1;

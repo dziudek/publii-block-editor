@@ -90,6 +90,7 @@ export default {
 #post-title {
   border: none;
   box-shadow: none;
+  color: var(--text-primary-color);
   display: block;
   font-family: -apple-system, BlinkMacSystemFont, Arial, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 35px;
@@ -107,11 +108,12 @@ export default {
 }
 
 #post-title:empty {
-  color: #C2C3C5;
+  color: var(--icon-primary-color);
 }
 
 #post-title:empty:before {
-  content: "Add post title"
+  content: "Add post title";
+  color: var(--gray-4);
 }
 
 @media (max-width: 1400px) {

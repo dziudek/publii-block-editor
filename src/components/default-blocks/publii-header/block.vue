@@ -202,7 +202,7 @@ export default {
   &:empty {
     &:before {
       content: 'Add heading';
-      opacity: .4;
+      color: var(--gray-4);
     }
   }
 

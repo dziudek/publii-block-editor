@@ -255,24 +255,27 @@ export default {
     }
 
     input {
-      border: 1px solid $block-editor-form-input-border;
-      border-radius: $block-editor-form-input-border-radius;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border-color);
+      border-radius: var(--border-radius);
+      color: var(--text-primary-color);
       display: block;
       font-size: inherit;
       line-height: inherit;
       outline: none;
-      padding: 20px;
-      width: 100%;
-    }
-
-    input {
       padding: 10px 20px;
+      width: 100%;
+
+      &::placeholder {
+        color: var(--gray-4);
+      }
     }
   }
 
   &-text {
-    border: 1px solid $block-editor-form-input-border;
-    border-radius: $block-editor-form-input-border-radius;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius);
     font-size: inherit;
     line-height: inherit;
     margin-bottom: 16px;
@@ -283,7 +286,7 @@ export default {
     &:empty {
       &:before {
         content: 'Quote text';
-        opacity: .6;
+        color: var(--gray-4);
       }
     }
   }

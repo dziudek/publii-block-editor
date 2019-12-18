@@ -92,15 +92,16 @@ export default {
   width: 100%;
 
   hr {
-    background-color: currentColor;
+    background-color: var(--input-border-color);
+    cursor: default;
     height: 1px;
     border: 0;
   }
 
   &:after {
-    background: $block-editor-color-light;
-    border: 1px solid;
-    border-radius: $block-editor-form-input-border-radius;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius);
     content: "Read More";
     display: inline-block;
     font-size: ms(-3);

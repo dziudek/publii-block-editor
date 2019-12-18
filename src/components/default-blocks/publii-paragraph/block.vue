@@ -449,7 +449,7 @@ export default {
   &:empty {
     &:before {
       content: 'Start writing or press the TAB key to choose a block';
-      opacity: .4;
+      color: var(--gray-4);
     }
   }
 
@@ -462,9 +462,10 @@ export default {
     z-index: 10;
 
     &-tooltip {
-      background: $color-editor-color-light-medium;
-      border-radius: $block-editor-form-input-border-radius;
+      background: var(--input-bg-light);
+      border-radius: var(--border-radius);
       box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
+      color: var(--text-primary-color);
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -478,7 +479,6 @@ export default {
       z-index: 10;
 
       &.is-small {
-        color: $block-editor-color-text;
         display: block;
         height: auto;
         padding: 5px 10px;
@@ -490,7 +490,7 @@ export default {
       }
 
       &:after {
-        border: 6px solid $color-editor-color-light-medium;
+        border: 6px solid var(--gray-1);
         border-left-color: transparent;
         border-right-color: transparent;
         border-top-color: transparent;
@@ -559,13 +559,13 @@ export default {
         }
 
         & > svg {
-          fill: $block-editor-color-primary-dark !important;
+          fill: var(--primary-color);
           vertical-align:text-bottom;
           transition: all .25s ease-out;
         }
 
         &:hover {
-          border: 1px solid $block-editor-color-primary-dark;
+          border: 1px solid var(--secondary-color);
         }
       }
 
@@ -578,11 +578,15 @@ export default {
         outline: none;
         padding: 1px 10px 2px;
         position: relative;
-        transition: all .125s ease-out;
+
+        svg {
+          fill: var(--icon-tertiary-color);
+          transition: all .125s ease-out;
+        }
 
         &.is-active {
           animation: fadeIn .75s 1 forwards;
-          color: $block-editor-color-primary-dark;
+          color: var(--secondary-color);
 
           @keyframes fadeIn {
             0% {
@@ -606,12 +610,14 @@ export default {
         }
 
         &:hover {
-          color: $block-editor-color-primary-dark;
+           svg {
+             fill: var(--primary-color);
+           }
         }
       }
 
       &.is-visible {
-        background: $block-editor-color-light;
+        background: var(--bg-primary);
         display: flex;
       }
     }

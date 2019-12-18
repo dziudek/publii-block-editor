@@ -170,31 +170,33 @@ export default {
 @import '../../../assets/mixins.scss';
 
 .publii-block-code {
-    background: $block-editor-color-code-bg;
-    border-radius: $block-editor-form-input-border-radius;
-    box-shadow: 2px 4px 26px $block-editor-color-shadow;
+    border-radius: var(--border-radius);
+    background: var(--gray-8);
+    border-radius: var(--border-radius);
+    box-shadow: 2px 4px 26px var(--shadow);
     outline: none;
     width: 100%;
 
     &:empty {
         &:before {
             content: 'Enter code';
-            opacity: .35;
+            color: var(--gray-4);
         }
     }
 
     & > .prism-editor__line-numbers {
+        background: var(--gray-8) !important;
         display: block;
     }
 
     & > pre {
-        background: $block-editor-color-code-bg !important;
+        background: var(--gray-8) !important;
         display: block;
 
         &:empty {
             &:before {
                 content: 'Enter HTML code';
-                opacity: .35;
+                color: var(--gray-4);
             }
         }
 

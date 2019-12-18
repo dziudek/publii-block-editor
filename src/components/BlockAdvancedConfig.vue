@@ -126,17 +126,18 @@ export default {
 @import '../assets/variables.scss';
 
 .block-advanced-config {
-  background: $block-editor-color-light;
+   background: var(--popup-bg);
   border-radius: 6px;
-  box-shadow: 0 0 32px $block-editor-color-shadow;
+  box-shadow: 0 0 32px var(--shadow);
   padding: 2rem;
   transform: scale(.5);
   transition: all .24s cubic-bezier(0, 0, 0.25, 0.99);
+  user-select: none;
   width: 580px;
 
   &-overlay {
     align-items: center;
-    background: rgba($block-editor-color-light, .85);
+    background: var(--overlay);
     display: flex;
     height: 100%;
     justify-content: center;
@@ -164,13 +165,13 @@ export default {
 
     &-help {
       align-items: center;
-      background: $block-editor-color-primary;
+      background: var(--primary-color);
       border-radius: 50%;
-      color: $block-editor-color-light;
+      color: var(--white);
       cursor: help;
       display: inline-flex;
       font-size: 10px;
-      font-weight: $font-weight-bold;
+      font-weight: var(--font-weight-bold);
       height: 14px;
       justify-content: center;
       position: relative;
@@ -179,7 +180,7 @@ export default {
     }
 
     label {
-      color: $block-editor-color-text;
+      color: var(--label-color);
       display: block;
       font-size: 14px;
       padding-bottom: 8px;
@@ -187,9 +188,10 @@ export default {
 
     input,
     select {
-      border: 1px solid $block-editor-form-input-border;
-      border-radius: $block-editor-form-input-border-radius;
-      color: $block-editor-color-text;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border-color);
+      border-radius: var(--border-radius);
+      color: var(--text-primary-color);
       display: block;
       font-size: 16px;
       padding: 14px;
@@ -203,7 +205,6 @@ export default {
 
     select {
       appearance: none;
-      background-color: $block-editor-color-light;
       max-width: 100%;
       margin: 0;
     }
@@ -212,33 +213,36 @@ export default {
   &-buttons {
       margin: 3rem -2rem -2rem;
 
-    button {
-      background: $block-editor-color-primary;
+   button {
+      background: var(--button-bg);
       border: none;
       box-shadow: none;
       border-bottom-left-radius: 6px;
-      border-top: 1px solid $block-editor-color-primary;
-      color: $block-editor-color-light;
+      border-top: 1px solid var(--button-bg);
+      color: var(--white);
       cursor: pointer;
       font-size: 15px;
-      font-weight: $font-weight-semibold;
+      font-weight: var(--font-weight-semibold);
       line-height: 1;
       width: 50%;
       padding: 18px;
       transition: all .25s ease-out;
 
       &:hover {
-        background: $block-editor-color-primary-dark;
+        background: var(--button-hover-bg);
+        border-color: var(--button-hover-bg);
       }
 
       &.outline {
-        background: transparent;
+        background: var(--popup-btn-cancel-bg);
+        border: none;
+        border-top: 1px solid var(--input-border-color);
         border-bottom-right-radius: 6px;
-        border-top: 1px solid #ddd;
-        color: $block-editor-color-text-medium-dark;
+        color: var(--popup-btn-cancel-color);
 
         &:hover {
-          background: $color-editor-color-light-medium;
+           background: var(--popup-btn-cancel-hover-bg);
+           color: var(--popup-btn-cancel-hover-color);
         }
       }
     }
