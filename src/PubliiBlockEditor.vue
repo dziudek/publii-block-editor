@@ -39,6 +39,7 @@ export default {
       this.$ipcRenderer.on('set-post-title', this.setPostTitle);
       this.$ipcRenderer.on('post-save', this.postSave);
       this.$ipcRenderer.on('set-site-name', this.setSiteName);
+      this.$ipcRenderer.on('set-current-site-data', this.setCurrentSiteData);
     }
   },
   methods: {
@@ -77,6 +78,9 @@ export default {
     },
     setSiteName (event, siteName) {
       window.publiiSiteName = siteName;
+    },
+    setCurrentSiteData (event, currentSiteData) {
+      window.publiiCurrentSiteData = currentSiteData;
     }
   }
 }

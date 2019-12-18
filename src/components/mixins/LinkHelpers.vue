@@ -3,18 +3,18 @@ export default {
   name: 'link-helpers',
   computed: {
     tagPages () {
-      if (!this.$store) {
-        return [1];
+      if (!window.publiiCurrentSiteData.tags.length) {
+        return [0];
       }
 
-      return this.$store.state.currentSite.tags.map(tag => tag.id);
+      return window.publiiCurrentSiteData.tags.map(tag => tag.id);
     },
     authorPages () {
-      if (!this.$store) {
-        return ['test author'];
+      if (!window.publiiCurrentSiteData.authors.length) {
+        return [''];
       }
 
-      return this.$store.state.currentSite.authors.map(author => author.username).sort((a, b) => {
+      return window.publiiCurrentSiteData.authors.map(author => author.username).sort((a, b) => {
         if (a.toLowerCase() < b.toLowerCase()) {
           return -1;
         }
@@ -27,11 +27,11 @@ export default {
       });
     },
     postPages () {
-      if (!this.$store) {
-        return [1];
+      if (!window.publiiCurrentSiteData.posts.length) {
+        return [0];
       }
 
-      return this.$store.state.currentSite.posts.map(post => post.id);
+      return window.publiiCurrentSiteData.posts.map(post => post.id);
     }
   },
   methods: {
@@ -51,25 +51,25 @@ export default {
       return false;
     },
     customTagLabels (value) {
-      if (!this.$store) {
-        return 'Test tag';
+      if (!window.publiiCurrentSiteData.tags.length) {
+        return '';
       }
 
-      return this.$store.state.currentSite.tags.filter(tag => tag.id === value).map(tag => tag.name)[0];
+      return window.publiiCurrentSiteData.tags.filter(tag => tag.id === value).map(tag => tag.name)[0];
     },
     customAuthorsLabels (value) {
-      if (!this.$store) {
-        return 'Test author';
+      if (!window.publiiCurrentSiteData.authors.length) {
+        return '';
       }
 
-      return this.$store.state.currentSite.authors.filter(author => author.username === value).map(author => author.name)[0];
+      return window.publiiCurrentSiteData.authors.filter(author => author.username === value).map(author => author.name)[0];
     },
     customPostLabels (value) {
-      if (!this.$store) {
-        return 'Test post';
+      if (!window.publiiCurrentSiteData.posts.length) {
+        return '';
       }
 
-      return this.$store.state.currentSite.posts.filter(post => post.id === value).map(post => post.title)[0];
+      return window.publiiCurrentSiteData.posts.filter(post => post.id === value).map(post => post.title)[0];
     }
   }
 }
