@@ -471,6 +471,7 @@ export default {
         cursor: pointer;
         display: flex;
         height: 100%;
+        min-height: 34px;
         justify-content: center;
         margin: 0;
         outline: none;
