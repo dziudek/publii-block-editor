@@ -223,6 +223,7 @@ export default {
   }
 
   &.show-bulk-operations {
+      background: var(--bg-secondary);
       margin-top: baseline(8);
       transition: all .25s ease-out;
 
@@ -518,7 +519,7 @@ export default {
   }
 
   &-ui-bulk {
-    background: var(--bg-secondary);
+    background: transparent;
     border-right: 3px solid var(--primary-color);
     border-radius: 6px 0 0 6px;
     box-shadow: 0 0 16px var(--shadow);
