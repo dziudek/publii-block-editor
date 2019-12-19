@@ -205,7 +205,6 @@ export default {
 
     setTimeout(() => {
       this.internal.editorIsLoaded = true;
-      window.XxX = this.extensions.undoManager;
     }, 1500);
   },
   methods: {
