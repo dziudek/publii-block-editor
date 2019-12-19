@@ -87,8 +87,9 @@ import PubliiSeparator from './default-blocks/publii-separator/block.vue';
 import PubliiToc from './default-blocks/publii-toc/block.vue';
 import PubliiQuote from './default-blocks/publii-quote/block.vue';
 // extensions
-import ShortcutManager from './extensions/ShortcutManager.js';
 import ConversionHelpers from './extensions/ConversionHelpers.js';
+import ShortcutManager from './extensions/ShortcutManager.js';
+import UndoManager from './extensions/UndoManager.js';
 
 export default {
   name: 'BlockEditor',
@@ -138,8 +139,9 @@ export default {
         editorIsLoaded: false
       },
       extensions: {
+        conversionHelpers: new ConversionHelpers(),
         shortcutManager: new ShortcutManager(),
-        conversionHelpers: new ConversionHelpers()
+        undoManager: new UndoManager()
       },
       content: [
         {
@@ -198,6 +200,7 @@ export default {
     this.$bus.$on('publii-block-editor-save', this.saveAllBlocks);
     this.$bus.$on('publii-block-editor-load', this.loadAllBlocks);
     this.$bus.$on('publii-block-editor-update-current-block-id', this.updateCurrentBlockID);
+    this.$bus.$on('undomanager-save-history', this.saveChangesHistory);
     this.initGlobals();
 
     setTimeout(() => {
@@ -499,6 +502,19 @@ export default {
 
         this.internal.currentBlockID = blockID;
       }
+    },
+    undo () {
+      let blockID = this.internal.currentBlockID;
+
+      if (!blockID) {
+        return;
+      }
+
+      let content = this.extensions.undoManager.undoHistory(blockID);
+      this.$refs['block-' + blockID].content = content;
+    },
+    saveChangesHistory (blockID, content) {
+      this.extensions.undoManager.saveHistory(blockID, content);
     }
   },
   beforeDestroy () {
@@ -516,6 +532,7 @@ export default {
     this.$bus.$off('publii-block-editor-save', this.saveAllBlocks);
     this.$bus.$off('publii-block-editor-load', this.loadAllBlocks);
     this.$bus.$off('publii-block-editor-update-current-block-id', this.updateCurrentBlockID);
+    this.$bus.$off('undomanager-save-history', this.saveChangesHistory);
   }
 }
 </script>
