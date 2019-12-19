@@ -432,6 +432,11 @@ export default {
     },
     saveChangesHistory () {
       this.$bus.$emit('undomanager-save-history', this.id, this.$refs['block'].innerHTML);
+    },
+    setContent (newContent) {
+      this.content = newContent;
+      this.$refs['block'].innerHTML = newContent;
+      this.setCursorAtEndOfElement();
     }
   },
   beforeDestroy () {

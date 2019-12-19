@@ -1,7 +1,7 @@
 export default class UndoManager {
   constructor () {
     this.history = [];
-    this.historyMaxLength = 500;
+    this.historyMaxLength = 10;
   }
 
   saveHistory (blockID, blockContent) {
@@ -13,29 +13,19 @@ export default class UndoManager {
     });
 
     if (historyLength > this.historyMaxLength) {
+      console.log('Removed old history');
       this.history = this.history.slice(0, this.historyMaxLength - 1);
     }
   }
 
   undoHistory (blockID) {
     console.log('UNDO', blockID);
-    let skippedFirstItem = false;
 
     for (let i = 0; i < this.history.length; i++) {
       if (this.history[i].id === blockID) {
-        skippedFirstItem = true;
+        let content = JSON.parse(JSON.stringify(this.history[i].content));
         this.history.splice(i, 1);
-        return;
-      }
-    }
-
-    if (skippedFirstItem) {
-      for (let i = 0; i < this.history.length; i++) {
-        if (this.history[i].id === blockID) {
-          let content = JSON.parse(JSON.stringify(this.history[i].content));
-          this.history.splice(i, 1);
-          return content;
-        }
+        return content;
       }
     }
 

@@ -205,7 +205,7 @@ export default {
 
     setTimeout(() => {
       this.internal.editorIsLoaded = true;
-      window.XxX = this.extensions.undoManager;
+      window.xxx = this.undo;
     }, 1500);
   },
   methods: {
@@ -512,7 +512,7 @@ export default {
       }
 
       let content = this.extensions.undoManager.undoHistory(blockID);
-      this.$refs['block-' + blockID].content = content;
+      this.$refs['block-' + blockID][0].setContent(content);
     },
     saveChangesHistory (blockID, content) {
       this.extensions.undoManager.saveHistory(blockID, content);
