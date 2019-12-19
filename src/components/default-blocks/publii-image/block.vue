@@ -10,7 +10,7 @@
         :width="content.imageWidth" />
 
       <button
-        v-if="$parent.uiOpened && !editor.bulkOperationsMode"
+        v-if="!editor.bulkOperationsMode"
         class="publii-block-image-delete"
         @click.stop.prevent="clearImage()">
         <icon name="trash" />
