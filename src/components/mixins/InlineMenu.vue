@@ -99,10 +99,6 @@ export default {
 
       this.selectedText = new SelectedText(this.$refs[this.inlineMenuContainer], this.$parent.blockType);
       this.selectedText.analyzeSelectedText();
-
-      Vue.nextTick(() => {
-        this.$parent.saveChangesHistory();
-      });
     },
     execCommand (tagToUse) {
       if (this.selectedText.containedTags[tagToUse]) {
