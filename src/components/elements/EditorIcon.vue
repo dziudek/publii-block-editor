@@ -1,6 +1,5 @@
 <template>
   <svg
-    :style="style"
     :width="width"
     :height="height">
     <use :xlink:href="iconPath" />
