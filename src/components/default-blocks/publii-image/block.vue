@@ -7,8 +7,7 @@
       <img
         :src="content.image"
         :height="content.imageHeight"
-        :width="content.imageWidth"
-        @click.stop="$parent.togglePopup()" />
+        :width="content.imageWidth" />
 
       <button
         v-if="$parent.uiOpened && !editor.bulkOperationsMode"
