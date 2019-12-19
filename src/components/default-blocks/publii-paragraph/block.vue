@@ -436,7 +436,10 @@ export default {
     setContent (newContent) {
       this.content = newContent;
       this.$refs['block'].innerHTML = newContent;
-      this.setCursorAtEndOfElement();
+
+      setTimeout(() => {
+        this.setCursorAtEndOfElement();
+      }, 0);
     }
   },
   beforeDestroy () {

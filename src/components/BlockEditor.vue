@@ -512,7 +512,10 @@ export default {
       }
 
       let content = this.extensions.undoManager.undoHistory(blockID);
-      this.$refs['block-' + blockID][0].setContent(content);
+
+      if (content) {
+        this.$refs['block-' + blockID][0].setContent(content);
+      }
     },
     saveChangesHistory (blockID, content) {
       this.extensions.undoManager.saveHistory(blockID, content);
