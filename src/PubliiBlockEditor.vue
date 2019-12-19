@@ -40,6 +40,8 @@ export default {
       this.$ipcRenderer.on('post-save', this.postSave);
       this.$ipcRenderer.on('set-site-name', this.setSiteName);
       this.$ipcRenderer.on('set-current-site-data', this.setCurrentSiteData);
+      this.$ipcRenderer.on('block-editor-undo', this.undoAction);
+      this.$ipcRenderer.on('block-editor-redo', this.redoAction);
     }
   },
   methods: {
@@ -81,6 +83,12 @@ export default {
     },
     setCurrentSiteData (event, currentSiteData) {
       this.$refs['block-editor'].currentSiteData = currentSiteData;
+    },
+    undoAction () {
+      document.execCommand('undo', false);
+    },
+    redoAction () {
+      document.execCommand('redo', false);
     }
   }
 }
