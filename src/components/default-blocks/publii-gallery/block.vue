@@ -71,9 +71,9 @@
         <div class="publii-block-gallery-uploader-inner">
           <icon
             v-if="!imageUploadInProgress"
-            name="blank-image"
-            height="48"
-            width="68" />
+            name="blank-gallery"
+            height="50"
+            width="66" />
           <span v-if="!imageUploadInProgress">
             Drop to upload your photos or
           </span>
@@ -443,15 +443,25 @@ export default {
       width: 32px!important;
 
       &-overlay {
-        background: var(--gray-1);
-        border: 1px solid var(--input-border-color);
+        background: var(--bg-primary);
+        border: 2px dashed var(--input-border-color);
         border-radius: var(--border-radius);
         bottom: 0;
+        padding: 6px;
         position: absolute;
-        left: 0;
-        right: 0;
+        left: auto;
+        right: auto;
         top: 0;
+        width: var(--editor-width);
         z-index: 1;
+
+        &::after {
+          content: "";
+          background: var(--gray-1);
+          display: block;
+          height: 100%;
+          width: 100%;
+        }
       }
     }
 
