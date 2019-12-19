@@ -458,6 +458,13 @@ export default {
     margin: 0 auto;
     max-width: 100%;
     transition: all .25s ease-out;
+
+    &:hover {
+      .publii-block-image-delete {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
   }
 
   & > figcaption {
@@ -483,6 +490,8 @@ export default {
     height: 34px;
     justify-content: center;
     left: 20px;
+    opacity: 0;
+    pointer-events: none;
     position: absolute;
     top: 20px;
     transition: var(--transition);
