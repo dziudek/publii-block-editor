@@ -278,11 +278,15 @@ export default {
 
       // eslint-disable-next-line
       this.$ipcRenderer.once('app-image-uploaded', (event, data) => {
+        let thumbnailSrc = data.thumbnailDimensions ? data.thumbnailPath[0] : data.thumbnailPath;
+        let sizeWidth = data.baseImage.size[0] || '';
+        let sizeHeight = data.baseImage.size[1] || '';
+
         this.content.images.push({
           src: data.baseImage.url,
-          thumbnailSrc: data.thumbnailPath[0],
-          height: data.thumbnailDimensions ? data.thumbnailDimensions.height : '',
-          width: data.thumbnailDimensions ? data.thumbnailDimensions.width : '',
+          thumbnailSrc: thumbnailSrc,
+          height: data.thumbnailDimensions ? data.thumbnailDimensions.height : sizeHeight,
+          width: data.thumbnailDimensions ? data.thumbnailDimensions.width : sizeWidth,
           dimensions: data.baseImage.size.join('x'),
           alt: '',
           caption: ''
