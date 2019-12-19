@@ -452,19 +452,19 @@ export default {
   outline: none;
   position: relative;
 
+  &:hover {
+    .publii-block-image-delete {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
   & > img {
     display: block;
     height: auto;
     margin: 0 auto;
     max-width: 100%;
     transition: all .25s ease-out;
-
-    &:hover {
-      .publii-block-image-delete {
-        opacity: 1;
-        pointer-events: auto;
-      }
-    }
   }
 
   & > figcaption {
