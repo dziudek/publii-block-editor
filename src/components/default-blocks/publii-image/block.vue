@@ -479,23 +479,30 @@ export default {
     background: var(--warning);
     border: none;
     border-radius: var(--border-radius);
-    color: var(--white);
     cursor: pointer;
     display: flex;
     height: 34px;
     justify-content: center;
-    position: absolute;
     left: 20px;
+    position: absolute;
     top: 20px;
-    transition: all .25s ease-out;
+    transition: var(--transition);
     width: 34px;
     z-index: 2;
+
+    svg {
+       fill: var(--white);
+       transition: var(--transition);
+    }
 
     &:active,
     &:focus,
     &:hover {
-      background: var(--white);
-      color: var(--warning);
+       background: var(--gray-2);
+
+       svg {
+          fill: var(--warning);
+       }
     }
   }
 

@@ -270,6 +270,12 @@ export default {
       .publii-block-code-lang {
           top: calc(#{baseline(6)} + 44px)!important;
       }
+      .publii-block-code > .prism-editor__line-numbers {
+          background: var(--gray-7) !important;
+      }
+      .publii-block-code > pre {
+          background: var(--gray-7) !important;
+      }
     }
   }
 
@@ -282,7 +288,7 @@ export default {
   }
 
   &.contains-full-image {
-    width: calc(100% - 168px)!important;
+    width: calc(100% - 252px)!important;
 
     .publii-block-image-form input {
       margin-left: auto;

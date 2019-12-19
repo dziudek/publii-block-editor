@@ -4,7 +4,7 @@
     --primary-color-rgb: 66, 165, 245;
     --secondary-color: #2a99f4;    
     --gray-8: #2b2c35;
-    --gray-7: #2a2e30;
+    --gray-7: #2b2c35;
     --gray-6: #3d464e;  
     --gray-5: #6a7081;
     --gray-4: #8e929d;
@@ -75,81 +75,81 @@
     --font-weight-bold: 700;
 }
 
-//// dark 
-//:root {
-//    --primary-color: #1089ff;
-//    --primary-color-rgb: 16, 137, 255;
-//    --secondary-color: #2a99f4;    
-//    --gray-8: #2b2c35;
-//    --gray-7: #2a2e30;
-//    --gray-6: #3d464e;  
-//    --gray-5: #6a7081;
-//    --gray-4: #8e929d;
-//    --gray-3: #4d5567; //
-//    --gray-2: #3e3f4c;
-//    --gray-1: #2b2c35; //
-//    --white: #ffffff;
-//    --warning: #EA1A16;
-//    --success: #40B771;
-//    --yellow: #ff8610;
-//    --yellow-light: #3e3f4c;
-//    --gradient-end: #e9f5ff;
-//    --border-radius: 3px;
-//    --shadow: rgba(30, 33, 40, .25);
-//    
-//    --overlay: rgba(30,33,40, .80);
-//    --popup-bg: #2b2c35;
-//    --popup-btn-cancel-color: #6f7480;
-//    --popup-btn-cancel-hover-color: rgba(255,255,255, .87);
-//    --popup-btn-cancel-bg: #2b2c35;
-//    --popup-btn-cancel-hover-bg: #343540;
-//    
-//    --transition: all .2s ease-out;
-//    
-//    --icon-primary-color: #8e929d;
-//    --icon-secondary-color: #7F838D;
-//    --icon-tertiary-color: rgba(255,255,255, .87);
-//    
-//    --bg-primary: #202128; 
-//    --bg-secondary: #2b2c35; 
-//    
-//    --text-primary-color: rgba(255,255,255, .87); 
-//    --text-light-color: #7F838D; 
-//    --headings-color: rgba(255,255,255, .87);
-//    
-//    --link-primary-color: rgba(255,255,255, .87);
-//    --link-primary-hover-color: #2e98ff; 
-//    --link-secondary-color: #8e929d;
-//    --link-secondary-hover-color: #2e98ff; 
-//    --link-tertiary-color: rgba(255,255,255, .87);
-//    --link-tertiary-hover-color: #2e98ff; 
-//    
-//    --input-bg: #2b2c35;
-//    --input-bg-hover: #343540;
-//    --input-bg-light: #3e3f4c;
-//    --input-border-color: #3e3f4c;
-//    --input-border-focus: #1089ff;
-//    --label-color: #8e929d;
-//    
-//    --button-bg: #1089ff;
-//    --button-hover-bg: #0067cb;    
-//    --button-green-bg: #56a900;
-//    --button-green-hover-bg: #458800;
-//    --button-red-bg: #ed0001;
-//    --button-red-hover-bg: #a90001;
-//    --button-gray-bg: #6f7480;
-//    --button-gray-hover-bg: #1089ff; 
-//    
-//    --editor-width: 42em;
-//    
-//    --font-base: -apple-system, BlinkMacSystemFont, Arial, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";    
-//    --font-serif: Georgia, Times New Roman, Times, Serif;
-//    --font-monospace: Menlo, Monaco, Consolas, Courier New, monospace;
-//    
-//    --font-weight-normal: 400;
-//    --font-weight-semibold: 500;
-//    --font-weight-bold: 700;
-//}
+// dark 
+:root {
+    --primary-color: #1089ff;
+    --primary-color-rgb: 16, 137, 255;
+    --secondary-color: #2a99f4;    
+    --gray-8: #2b2c35;
+    --gray-7: #202128;
+    --gray-6: #3d464e;  
+    --gray-5: #6a7081;
+    --gray-4: #8e929d;
+    --gray-3: #4d5567; //
+    --gray-2: #3e3f4c;
+    --gray-1: #2b2c35; //
+    --white: #ffffff;
+    --warning: #EA1A16;
+    --success: #40B771;
+    --yellow: #ff8610;
+    --yellow-light: #3e3f4c;
+    --gradient-end: #e9f5ff;
+    --border-radius: 3px;
+    --shadow: rgba(30, 33, 40, .25);
+    
+    --overlay: rgba(30,33,40, .80);
+    --popup-bg: #2b2c35;
+    --popup-btn-cancel-color: #6f7480;
+    --popup-btn-cancel-hover-color: rgba(255,255,255, .87);
+    --popup-btn-cancel-bg: #2b2c35;
+    --popup-btn-cancel-hover-bg: #343540;
+    
+    --transition: all .2s ease-out;
+    
+    --icon-primary-color: #8e929d;
+    --icon-secondary-color: #7F838D;
+    --icon-tertiary-color: rgba(255,255,255, .87);
+    
+    --bg-primary: #202128; 
+    --bg-secondary: #2b2c35; 
+    
+    --text-primary-color: rgba(255,255,255, .87); 
+    --text-light-color: #7F838D; 
+    --headings-color: rgba(255,255,255, .87);
+    
+    --link-primary-color: rgba(255,255,255, .87);
+    --link-primary-hover-color: #2e98ff; 
+    --link-secondary-color: #8e929d;
+    --link-secondary-hover-color: #2e98ff; 
+    --link-tertiary-color: rgba(255,255,255, .87);
+    --link-tertiary-hover-color: #2e98ff; 
+    
+    --input-bg: #2b2c35;
+    --input-bg-hover: #343540;
+    --input-bg-light: #3e3f4c;
+    --input-border-color: #3e3f4c;
+    --input-border-focus: #1089ff;
+    --label-color: #8e929d;
+    
+    --button-bg: #1089ff;
+    --button-hover-bg: #0067cb;    
+    --button-green-bg: #56a900;
+    --button-green-hover-bg: #458800;
+    --button-red-bg: #ed0001;
+    --button-red-hover-bg: #a90001;
+    --button-gray-bg: #6f7480;
+    --button-gray-hover-bg: #1089ff; 
+    
+    --editor-width: 42em;
+    
+    --font-base: -apple-system, BlinkMacSystemFont, Arial, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";    
+    --font-serif: Georgia, Times New Roman, Times, Serif;
+    --font-monospace: Menlo, Monaco, Consolas, Courier New, monospace;
+    
+    --font-weight-normal: 400;
+    --font-weight-semibold: 500;
+    --font-weight-bold: 700;
+}
 
 
 

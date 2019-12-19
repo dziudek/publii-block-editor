@@ -384,18 +384,19 @@ export default {
       pointer-events: none;
       position: absolute;
       top: 20px;
-      transition: all .25s ease-out;
+      transition: var(--transition);
       width: 34px;
       z-index: 2;
 
       svg {
         fill: var(--white);
+        transition: var(--transition);
       }
 
       &:active,
       &:focus,
       &:hover {
-        background: var(--bg-secondary);
+        background: var(--gray-2);
 
         svg {
            fill: var(--warning);
