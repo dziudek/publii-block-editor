@@ -5,7 +5,7 @@ export default class UndoManager {
   }
 
   saveHistory (blockID, blockContent) {
-    console.log('SAVE', blockID, blockContent);
+    console.log('SAVE', blockID, blockContent, typeof blockContent);
 
     let historyLength = this.history.unshift({
       id: blockID,
@@ -19,11 +19,23 @@ export default class UndoManager {
 
   undoHistory (blockID) {
     console.log('UNDO', blockID);
+    let skippedFirstItem = false;
 
     for (let i = 0; i < this.history.length; i++) {
       if (this.history[i].id === blockID) {
-        let content = JSON.parse(JSON.stringify(this.history[i].content));
-        return content;
+        skippedFirstItem = true;
+        this.history.splice(i, 1);
+        return;
+      }
+    }
+
+    if (skippedFirstItem) {
+      for (let i = 0; i < this.history.length; i++) {
+        if (this.history[i].id === blockID) {
+          let content = JSON.parse(JSON.stringify(this.history[i].content));
+          this.history.splice(i, 1);
+          return content;
+        }
       }
     }
 

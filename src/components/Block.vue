@@ -263,9 +263,6 @@ export default {
     },
     updateCurrentBlockID () {
       this.$bus.$emit('publii-block-editor-update-current-block-id', this.id);
-    },
-    saveChangesHistory () {
-      this.$bus.$emit('undomanager-save-history', this.id, this.content);
     }
   },
   beforeDestroy () {

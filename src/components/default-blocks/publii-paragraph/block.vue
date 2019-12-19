@@ -429,6 +429,9 @@ export default {
     hideNewBlockUI (blockID) {
       this.showNewBlockUI = false;
       this.newBlockUIListVisible = false;
+    },
+    saveChangesHistory () {
+      this.$bus.$emit('undomanager-save-history', this.id, this.$refs['block'].innerHTML);
     }
   },
   beforeDestroy () {
