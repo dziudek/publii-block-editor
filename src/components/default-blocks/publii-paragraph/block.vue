@@ -370,6 +370,10 @@ export default {
         range.deleteContents();
       }
 
+      if (e.code === 'Space') {
+        this.saveChangesHistory();
+      }
+
       if (!this.showNewBlockUI && this.$refs['block'].innerHTML === '') {
         this.showNewBlockUI = true;
       } else if (this.showNewBlockUI && this.$refs['block'].innerHTML !== '') {

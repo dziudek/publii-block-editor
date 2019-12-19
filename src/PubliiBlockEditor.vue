@@ -85,10 +85,10 @@ export default {
       this.$refs['block-editor'].currentSiteData = currentSiteData;
     },
     undoAction () {
-      document.execCommand('undo', false);
+      this.$refs['block-editor'].undo();
     },
     redoAction () {
-      document.execCommand('redo', false);
+
     }
   }
 }
