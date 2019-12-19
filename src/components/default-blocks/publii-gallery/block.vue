@@ -443,8 +443,8 @@ export default {
       width: 32px!important;
 
       &-overlay {
-        background: var(--white);
-        border: 1px solid var(--gray-3);
+        background: var(--gray-1);
+        border: 1px solid var(--input-border-color);
         border-radius: var(--border-radius);
         bottom: 0;
         position: absolute;
