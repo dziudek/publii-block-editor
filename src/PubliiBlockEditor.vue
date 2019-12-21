@@ -34,6 +34,7 @@ export default {
     window.publiiBlockEditorInstance = this;
 
     if (this.$ipcRenderer) {
+      this.$ipcRenderer.on('set-app-theme', this.setAppTheme);
       this.$ipcRenderer.on('set-post-id', this.setPostID);
       this.$ipcRenderer.on('set-post-text', this.setPostText);
       this.$ipcRenderer.on('set-post-title', this.setPostTitle);
@@ -45,6 +46,13 @@ export default {
     }
   },
   methods: {
+    setAppTheme (event, theme) {
+      if (theme === 'dark') {
+        document.querySelector('html').setAttribute('data-theme', 'dark');
+      } else {
+        document.querySelector('html').setAttribute('data-theme', 'default');
+      }
+    },
     setPostID (event, postID) {
       this.$refs['block-editor'].setPostID(postID);
     },

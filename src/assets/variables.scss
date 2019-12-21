@@ -1,6 +1,5 @@
 //default
-html,
-html[data-theme="light"] {
+html[data-theme="default"] {
     --primary-color: #42a5f5;
     --primary-color-rgb: 66, 165, 245;
     --secondary-color: #2a99f4;    
@@ -151,8 +150,6 @@ html[data-theme="dark"] {
     --font-weight-semibold: 500;
     --font-weight-bold: 700;
 }
-
-
 
 // Breakpoints
 $breakpoints: ( 
