@@ -280,6 +280,7 @@ export default {
       .publii-block-gallery-uploader-loader-overlay {
           height: 250px;
           top: 61px;
+          width: calc(100% - 64px) !important;
       }
     }
   }
