@@ -277,6 +277,10 @@ export default {
       .publii-block-code > pre {
           background: var(--gray-7) !important;
       }
+      .publii-block-gallery-uploader-loader-overlay {
+          height: 250px;
+          top: 61px;
+      }
     }
   }
 
