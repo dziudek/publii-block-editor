@@ -1,5 +1,5 @@
 //default
-html[data-theme="default"] {
+:root {
     --primary-color: #42a5f5;
     --primary-color-rgb: 66, 165, 245;
     --secondary-color: #2a99f4;    
@@ -13,7 +13,9 @@ html[data-theme="default"] {
     --gray-1: #f6f7f8;
     --white: #ffffff;
     --warning: #EA1A16;
+    --warning-rgb: 234,26,22;
     --success: #40B771;
+    --success-rgb: 64,183,113;   
     --yellow: #ffc400;
     --yellow-light: #FFF8E1;
     --gradient-end: #e9f5ff;
@@ -89,9 +91,10 @@ html[data-theme="dark"] {
     --gray-2: #3e3f4c;
     --gray-1: #2b2c35; //
     --white: #ffffff;
-    --warning: #EA1A16;
-    --success: #40B771;
-    --yellow: #ff8610;
+    --warning: #FF1011;
+    --warning-rgb: 255,16,17;
+    --success: #56a900;
+    --success-rgb: 86,169,0;
     --yellow-light: #3e3f4c;
     --gradient-end: #e9f5ff;
     --border-radius: 3px;
