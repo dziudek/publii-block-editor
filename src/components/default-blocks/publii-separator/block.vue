@@ -47,8 +47,8 @@ export default {
       content: '',
       topMenuConfig: [
         {
-          activeState: function () { return this.config.type === 'long'; },
-          onClick: function () { this.setType('long'); },
+          activeState: function () { return this.config.type === 'long-line'; },
+          onClick: function () { this.setType('long-line'); },
           icon: 'long-line'
         },
         {
@@ -125,7 +125,7 @@ export default {
     position: relative;
   }
 
-  hr.long {
+  hr.long-line {
 
       &::after {
           border-bottom: 1px solid var(--input-border-color);

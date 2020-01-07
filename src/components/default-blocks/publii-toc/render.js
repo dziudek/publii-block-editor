@@ -10,9 +10,9 @@ function render (blockData) {
   let html = `
   <div${id}${cssClasses}>
     ${tocHeading}
-    <div>
+    <ul>
       ${blockData.content.toc}
-    </div>
+    </ul>
   </div>
   `;
 
