@@ -22,7 +22,7 @@
             },
             {
                 "value": "msg msg--success",
-                "label": "Alert"
+                "label": "Success"
             },
             {
                 "value": "msg msg--warning",

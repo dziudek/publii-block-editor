@@ -1,6 +1,6 @@
 function render (blockData) {
   let id = blockData.config.advanced.id ? ' id="' + blockData.config.advanced.id + '"' : '';
-  let cssClasses = ['gallery', blockData.config.advanced.cssClasses, 'post__image', 'post__image--' + blockData.config.imageAlign];
+  let cssClasses = ['gallery', blockData.config.advanced.cssClasses, 'gallery--' + blockData.config.imageAlign];
   cssClasses = cssClasses.filter(item => item && item.trim() !== '');
 
   if (cssClasses.length) {

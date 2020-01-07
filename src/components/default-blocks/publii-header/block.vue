@@ -208,7 +208,8 @@ export default {
 
   &.is-link {
     cursor: pointer;
-    border-bottom: 3px solid var(--yellow);
+    text-decoration: underline;
+    text-decoration-color: var(--yellow);
   }
 }
 </style>
