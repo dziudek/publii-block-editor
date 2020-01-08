@@ -1,13 +1,7 @@
 function render (blockData) {
   let id = blockData.config.advanced.id ? ' id="' + blockData.config.advanced.id + '"' : '';
   let cssClasses = ['blockquote', blockData.config.advanced.cssClasses].filter(item => item && item.trim() !== '');
-
-  if (cssClasses.length) {
-    cssClasses = ' class="' + cssClasses.join(' ') + '"';
-  } else {
-    cssClasses = '';
-  }
-
+  cssClasses = cssClasses.length ? ' class="' + cssClasses.join(' ') + '"' : '';
   let html = '';
 
   if (blockData.content.author.trim() !== '') {

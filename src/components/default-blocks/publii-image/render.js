@@ -1,15 +1,8 @@
 function render (blockData) {
   let id = blockData.config.advanced.id ? ' id="' + blockData.config.advanced.id + '"' : '';
   let caption = `<figcaption>${blockData.content.caption}</figcaption>`;
-  let cssClasses = [blockData.config.advanced.cssClasses, 'post__image', 'post__image--' + blockData.config.imageAlign];
-  cssClasses = cssClasses.filter(item => item && item.trim() !== '');
-
-  if (cssClasses.length) {
-    cssClasses = ' class="' + cssClasses.join(' ') + '"';
-  } else {
-    cssClasses = '';
-  }
-
+  let cssClasses = [blockData.config.advanced.cssClasses, 'post__image', 'post__image--' + blockData.config.imageAlign].filter(item => item && item.trim() !== '');
+  cssClasses = cssClasses.length ? ' class="' + cssClasses.join(' ') + '"' : '';
   let html = ``;
 
   if (blockData.content.caption.trim() === '') {
