@@ -51,7 +51,7 @@
       </template>
       <button
         v-if="$parent.$parent.blockType !== 'publii-readmore'"
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': $parent.config.advanced.cssClasses !== '' || $parent.config.advanced.id !== '' }"
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': settingsAreChanged }"
         tabindex="-1"
         @click.stop="showAdvancedConfig(); resetDeleteConfirmation();">
         <icon name="gear" />
@@ -100,6 +100,19 @@ export default {
     },
     isVisible () {
       return this.$parent.$parent.uiOpened && !this.$parent.textIsHighlighted;
+    },
+    settingsAreChanged () {
+      let settingsKeys = Object.keys(this.$parent.config.advanced);
+
+      for (let i = 0; i < settingsKeys.length; i++) {
+        let key = settingsKeys[i];
+
+        if (this.$parent.config.advanced[key] !== this.$parent.getAdvancedConfigDefaultValue(key)) {
+          return true;
+        }
+      }
+
+      return false;
     }
   },
   watch: {
