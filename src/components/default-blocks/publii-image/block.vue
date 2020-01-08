@@ -85,7 +85,8 @@
 
     <top-menu
       ref="top-menu"
-      :config="topMenuConfig" />
+      :config="topMenuConfig"
+      :advancedConfig="configForm" />
   </div>
 </template>
 

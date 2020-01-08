@@ -85,6 +85,10 @@ export default {
       type: Array,
       default: () => ([])
     },
+    'advancedConfig': {
+      type: [Array, Boolean],
+      default: false
+    },
     'conversions': {
       type: Array,
       default: () => ([])
@@ -102,12 +106,20 @@ export default {
       return this.$parent.$parent.uiOpened && !this.$parent.textIsHighlighted;
     },
     settingsAreChanged () {
+      if (!this.advancedConfig) {
+        return false;
+      }
+
       let settingsKeys = Object.keys(this.$parent.config.advanced);
 
       for (let i = 0; i < settingsKeys.length; i++) {
         let key = settingsKeys[i];
 
-        if (this.$parent.config.advanced[key] !== this.$parent.getAdvancedConfigDefaultValue(key)) {
+        if (this.advancedConfig.length && this.settingIsDisabled(key)) {
+          return false;
+        }
+
+        if (this.$parent.config.advanced[key] !== this.getSettingDefaultValue(key)) {
           return true;
         }
       }
@@ -144,6 +156,29 @@ export default {
     },
     resetDeleteConfirmation () {
       this.confirmDelete = false;
+    },
+    settingIsDisabled (fieldName) {
+      let fieldDisabledRules = this.getSetting(fieldName).disabled;
+
+      if (typeof fieldDisabledRules === 'undefined') {
+        return false;
+      }
+
+      for (let rule of fieldDisabledRules) {
+        if (this.$parent.config.advanced[rule.field] === rule.value) {
+          return true;
+        }
+      }
+
+      return false;
+    },
+    getSetting (fieldName) {
+      let index = this.advancedConfig.findIndex(field => field.name === fieldName);
+      return this.advancedConfig[index];
+    },
+    getSettingDefaultValue (fieldName) {
+      let index = this.advancedConfig.findIndex(field => field.name === fieldName);
+      return this.advancedConfig[index].defaultValue;
     }
   }
 }

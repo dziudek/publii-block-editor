@@ -37,7 +37,8 @@
     <top-menu
       ref="top-menu"
       :conversions="conversions"
-      :config="topMenuConfig" />
+      :config="topMenuConfig"
+      :advancedConfig="configForm" />
   </div>
 </template>
 
