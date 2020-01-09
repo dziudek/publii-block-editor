@@ -1,5 +1,11 @@
 {
   "name": "publii-block-editor",
+  "license": "GPL-3.0",
+  "homepage": "https://getpublii.com",
+  "author": {
+    "name": "TidyCustoms",
+    "email": "bob@tidycustoms.net"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
