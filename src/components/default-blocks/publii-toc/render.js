@@ -12,7 +12,7 @@ function render (blockData) {
   <div${id}${cssClasses}>
     ${tocHeading}
     <ul>
-      ${blockData.content.toc}
+      ${blockData.content.toc.replace(/\<ol/gmi, '<ul').replace(/\<\/ol\>/gmi, '</ul>')}
     </ul>
   </div>
   `;
