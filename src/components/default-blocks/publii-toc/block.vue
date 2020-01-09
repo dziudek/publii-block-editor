@@ -158,7 +158,7 @@ export default {
 <style lang="scss">
 .publii-block-toc {
   caret-color: transparent;
-  display: block;  
+  display: block;
   margin: 10px 0;
   padding: 15px 0 15px 20px;
   outline: none;
