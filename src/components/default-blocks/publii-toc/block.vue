@@ -3,13 +3,13 @@
     <div
       class="publii-block-toc-wrapper"
       ref="block">
-      <h2
+      <h3
         class="publii-block-toc-title"
         ref="title"
         @focus="updateCurrentBlockID"
         @keydown="handleKeyboard"
         @keyup="handleCaret($event, 'title')"
-        contenteditable="true" v-html="content.title"></h2>
+        contenteditable="true" v-html="content.title"></h3>
       <ol
         class="publii-block-toc"
         ref="content"
@@ -158,9 +158,7 @@ export default {
 <style lang="scss">
 .publii-block-toc {
   caret-color: transparent;
-  display: block;
-  font-size: 16px;
-  line-height: 1.4;
+  display: block;  
   margin: 10px 0;
   padding: 15px 0 15px 20px;
   outline: none;
