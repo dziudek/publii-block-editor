@@ -11,9 +11,9 @@ function render (blockData) {
   let html = `
   <div${id}${cssClasses}>
     ${tocHeading}
-    <ul>
+    <onblur>
       ${blockData.content.toc}
-    </ul>
+    </ol>
   </div>
   `;
 
