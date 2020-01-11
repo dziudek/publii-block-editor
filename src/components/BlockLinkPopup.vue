@@ -62,6 +62,7 @@
         type="text"
         class="block-link-popup-link-external-input"
         v-model="link.url"
+        :spellcheck="false"
         placeholder="https://example.com"
         @keyup.enter="save()" />
       <div class="block-link-popup-link-switcher">

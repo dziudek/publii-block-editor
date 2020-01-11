@@ -24,6 +24,7 @@
           :key="'field-input-' + index"
           type="text"
           :disabled="getDisabledState(field.disabled)"
+          :spellcheck="field.spellcheck || false"
           v-model="config[field.name]" />
         <switcher
           v-if="field.type === 'checkbox'"
