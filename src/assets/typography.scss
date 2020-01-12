@@ -148,23 +148,24 @@
         }
         
         .msg {
+            border-left: 3px solid transparent;
             border-radius: 3px;
-            padding: baseline(4) baseline(6);
+            padding: baseline(2) 0 baseline(2) baseline(6);
 
             &--highlight {
-                background-color: var(--yellow-light);        
+                border-color: var(--yellow);        
             }
 
             &--info {
-                background-color: rgba(var(--primary-color-rgb), .1);       
+                border-color: rgba(var(--primary-color-rgb), 1);       
             }
 
             &--success {
-                background: rgba(var(--success-rgb), .1);       
+                 border-color: rgba(var(--success-rgb), 1);       
             }
 
             &--warning {
-                background: rgba(var(--warning-rgb), .1);        
+                 border-color: rgba(var(--warning-rgb), 1);        
             }
         }
     }

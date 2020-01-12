@@ -271,10 +271,12 @@ export default {
       .publii-block-code-lang {
           top: calc(#{baseline(6)} + 44px)!important;
       }
-      .publii-block-code > .prism-editor__line-numbers {
+      .publii-block-code > .prism-editor__line-numbers,
+      .publii-block-html > .prism-editor__line-numbers {
           background: var(--gray-7) !important;
       }
-      .publii-block-code > pre {
+      .publii-block-code > pre,
+      .publii-block-html > pre {
           background: var(--gray-7) !important;
       }
       .publii-block-gallery-uploader-loader-overlay {
