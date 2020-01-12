@@ -103,7 +103,7 @@ export default {
       return this.config.filter(uiElement => typeof uiElement.isVisible === 'undefined' || uiElement.isVisible());
     },
     isVisible () {
-      return this.$parent.$parent.uiOpened && !this.$parent.textIsHighlighted;
+      return this.$parent.$parent.uiOpened;
     },
     settingsAreChanged () {
       if (!this.advancedConfig) {
