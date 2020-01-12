@@ -389,7 +389,7 @@ export default {
 
     &__input {
       background: none !important;
-      color: var(--gray-6);
+      color: var(--text-primary-color);
       font-size: 13px;
 
       &::placeholder {
