@@ -41,12 +41,12 @@ fieldset[disabled] .multiselect{pointer-events:none}.multiselect__spinner{positi
         &--highlight,
         &--highlight:after {
             background: var(--input-bg-hover);
-            color: var(--label-color);
+            color: var(--text-primary-color);
         }
 
         &.multiselect__option--selected {
             background: var(--input-bg-hover);
-            color: var(--label-color);
+            color: var(--text-primary-color);
             font-weight: 600;
         }
          
@@ -55,7 +55,7 @@ fieldset[disabled] .multiselect{pointer-events:none}.multiselect__spinner{positi
             &.multiselect__option--highlight,
             &.multiselect__option--highlight:after {
                 background: var(--input-bg-hover);
-                color: var(--label-color);
+                color: var(--text-primary-color);
             }                
         }
     }
