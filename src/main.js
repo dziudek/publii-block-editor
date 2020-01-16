@@ -77,6 +77,8 @@ if (window.process) {
 
 window.publiiSiteName = '';
 
+document.body.setAttribute('spellcheck', !!window.spellCheckerIsActive);
+
 new Vue({
   render: h => h(PubliiBlockEditor)
 }).$mount('#app');
