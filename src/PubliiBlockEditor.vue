@@ -112,11 +112,11 @@ export default {
   font-size: 35px;
   font-weight: 600;
   line-height: 1.2;
-  margin: 0 10% 26px;
+  margin: 0 auto 26px;
   outline: none;
   padding: 0;
   text-align: center;
-  width: 80%;
+  width: 100%;
 }
 
 #post-editor {
@@ -130,20 +130,5 @@ export default {
 #post-title:empty:before {
   content: "Add post title";
   color: var(--gray-4);
-}
-
-@media (max-width: 1400px) {
-  #post-title {
-    font-size: 28px;
-    margin: 0 0 26px;
-  }
-}
-
-@media (max-width: 1600px) {
-  #post-title {
-    font-size: 28px;
-    margin: 0 0 26px;
-    width: 100%;
-  }
 }
 </style>
