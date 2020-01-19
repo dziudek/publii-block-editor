@@ -203,14 +203,14 @@ export default {
   &:empty {
     &:before {
       content: 'Add heading';
-      color: var(--gray-4);
+      color: var(--eb-gray-4);
     }
   }
 
   &.is-link {
     cursor: pointer;
     text-decoration: underline;
-    text-decoration-color: var(--yellow);
+    text-decoration-color: var(--eb-yellow);
   }
 }
 </style>

@@ -1,7 +1,7 @@
 // Links
 @mixin links ($link, $hover, $active, $focus) {
     & {
-        border-bottom: 3px solid var(--yellow);
+        border-bottom: 3px solid var(--eb-yellow);
         color: $link;
         cursor: pointer;
         text-decoration: none !important;
@@ -9,7 +9,7 @@
     }
 
     &:hover {
-        background: var(--yellow-light);
+        background: var(--eb-yellow-light);
         color: $hover;
     }
 
@@ -19,7 +19,7 @@
 
     &:focus {
         color: $focus;
-        outline: 2px dotted var(--secondary-color);
+        outline: 2px dotted var(--eb-secondary-color);
     }
 }
 

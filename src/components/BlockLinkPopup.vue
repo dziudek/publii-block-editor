@@ -229,9 +229,9 @@ export default {
 @import '../assets/variables.scss';
 
 .block-link-popup {
-  background: var(--popup-bg);
+  background: var(--eb-popup-bg);
   border-radius: 6px;
-  box-shadow: 0 0 32px var(--shadow);
+  box-shadow: 0 0 32px var(--eb-shadow);
   padding: 2rem;
   transform: scale(.5);
   transition: all .24s cubic-bezier(0, 0, 0.25, 0.99);
@@ -240,7 +240,7 @@ export default {
 
   &-overlay {
     align-items: center;
-    background: var(--overlay);
+    background: var(--eb-overlay);
     display: flex;
     height: 100%;
     justify-content: center;
@@ -272,8 +272,8 @@ export default {
       margin: -20px 0 3rem;
 
       &-item {
-        border-bottom: 2px solid var(--gray-2);
-        color: var(--label-color);
+        border-bottom: 2px solid var(--eb-gray-2);
+        color: var(--eb-label-color);
         cursor: pointer;
         font-size: 15px;
         font-weight: 500;
@@ -284,22 +284,22 @@ export default {
         width: 25%;
 
         &:hover {
-           border-bottom-color: var(--primary-color);
+           border-bottom-color: var(--eb-primary-color);
         }
 
         &.is-active {
-          border-bottom-color: var(--primary-color);
+          border-bottom-color: var(--eb-primary-color);
           font-weight: var(--font-weight-bold);
-          color: var(--primary-color);
+          color: var(--eb-primary-color);
         }
       }
     }
 
     &-external-input {
-      background: var(--input-border-color);
-      border: 1px solid var(--input-border-color);
-      border-radius: var(--border-radius);
-      color: var(--text-primary-color);
+      background: var(--eb-input-border-color);
+      border: 1px solid var(--eb-input-border-color);
+      border-radius: var(--eb-border-radius);
+      color: var(--eb-text-primary-color);
       display: block;
       font-size: 16px;
       margin: 32px 0 24px;
@@ -307,13 +307,13 @@ export default {
       width: 100%;
 
       &::placeholder {
-        color: var(--text-light-color);
+        color: var(--eb-text-light-color);
       }
     }
 
     &-switcher {
       align-items: center;
-      color: var(--label-color);
+      color: var(--eb-label-color);
       display: flex;
       margin-bottom: 12px;
 
@@ -339,12 +339,12 @@ export default {
     margin: 3rem -2rem -2rem;
 
     button {
-      background: var(--button-bg);
+      background: var(--eb-button-bg);
       border: none;
       box-shadow: none;
       border-bottom-left-radius: 6px;
-      border-top: 1px solid var(--button-bg);
-      color: var(--white);
+      border-top: 1px solid var(--eb-button-bg);
+      color: var(--eb-white);
       cursor: pointer;
       font-size: 15px;
       font-weight: var(--font-weight-semibold);
@@ -354,20 +354,20 @@ export default {
       transition: all .25s ease-out;
 
       &:hover {
-        background: var(--button-hover-bg);
-        border-color: var(--button-hover-bg);
+        background: var(--eb-button-hover-bg);
+        border-color: var(--eb-button-hover-bg);
       }
 
       &.outline {
-        background: var(--popup-btn-cancel-bg);
+        background: var(--eb-popup-btn-cancel-bg);
         border: none;
-        border-top: 1px solid var(--input-border-color);
+        border-top: 1px solid var(--eb-input-border-color);
         border-bottom-right-radius: 6px;
-        color: var(--popup-btn-cancel-color);
+        color: var(--eb-popup-btn-cancel-color);
 
         &:hover {
-           background: var(--popup-btn-cancel-hover-bg);
-           color: var(--popup-btn-cancel-hover-color);
+           background: var(--eb-popup-btn-cancel-hover-bg);
+           color: var(--eb-popup-btn-cancel-hover-color);
         }
       }
     }

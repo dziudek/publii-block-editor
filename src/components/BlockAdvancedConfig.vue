@@ -127,9 +127,9 @@ export default {
 @import '../assets/variables.scss';
 
 .block-advanced-config {
-   background: var(--popup-bg);
+   background: var(--eb-popup-bg);
   border-radius: 6px;
-  box-shadow: 0 0 32px var(--shadow);
+  box-shadow: 0 0 32px var(--eb-shadow);
   padding: 2rem;
   transform: scale(.5);
   transition: all .24s cubic-bezier(0, 0, 0.25, 0.99);
@@ -138,7 +138,7 @@ export default {
 
   &-overlay {
     align-items: center;
-    background: var(--overlay);
+    background: var(--eb-overlay);
     display: flex;
     height: 100%;
     justify-content: center;
@@ -166,9 +166,9 @@ export default {
 
     &-help {
       align-items: center;
-      background: var(--primary-color);
+      background: var(--eb-primary-color);
       border-radius: 50%;
-      color: var(--white);
+      color: var(--eb-white);
       cursor: help;
       display: inline-flex;
       font-size: 10px;
@@ -181,7 +181,7 @@ export default {
     }
 
     label {
-      color: var(--label-color);
+      color: var(--eb-label-color);
       display: block;
       font-size: 14px;
       padding-bottom: 8px;
@@ -189,10 +189,10 @@ export default {
 
     input,
     select {
-      background: var(--input-bg);
-      border: 1px solid var(--input-border-color);
-      border-radius: var(--border-radius);
-      color: var(--text-primary-color);
+      background: var(--eb-input-bg);
+      border: 1px solid var(--eb-input-border-color);
+      border-radius: var(--eb-border-radius);
+      color: var(--eb-text-primary-color);
       display: block;
       font-size: 16px;
       padding: 14px;
@@ -215,12 +215,12 @@ export default {
       margin: 3rem -2rem -2rem;
 
    button {
-      background: var(--button-bg);
+      background: var(--eb-button-bg);
       border: none;
       box-shadow: none;
       border-bottom-left-radius: 6px;
-      border-top: 1px solid var(--button-bg);
-      color: var(--white);
+      border-top: 1px solid var(--eb-button-bg);
+      color: var(--eb-white);
       cursor: pointer;
       font-size: 15px;
       font-weight: var(--font-weight-semibold);
@@ -230,20 +230,20 @@ export default {
       transition: all .25s ease-out;
 
       &:hover {
-        background: var(--button-hover-bg);
-        border-color: var(--button-hover-bg);
+        background: var(--eb-button-hover-bg);
+        border-color: var(--eb-button-hover-bg);
       }
 
       &.outline {
-        background: var(--popup-btn-cancel-bg);
+        background: var(--eb-popup-btn-cancel-bg);
         border: none;
-        border-top: 1px solid var(--input-border-color);
+        border-top: 1px solid var(--eb-input-border-color);
         border-bottom-right-radius: 6px;
-        color: var(--popup-btn-cancel-color);
+        color: var(--eb-popup-btn-cancel-color);
 
         &:hover {
-           background: var(--popup-btn-cancel-hover-bg);
-           color: var(--popup-btn-cancel-hover-color);
+           background: var(--eb-popup-btn-cancel-hover-bg);
+           color: var(--eb-popup-btn-cancel-hover-color);
         }
       }
     }

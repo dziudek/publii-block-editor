@@ -190,11 +190,11 @@ export default {
 .wrapper-ui-top-menu {
 
   svg {
-    fill: var(--icon-primary-color);
-    transition: var(--transition);
+    fill: var(--eb-icon-primary-color);
+    transition: var(--eb-transition);
 
     &:hover {
-       fill: var(--icon-tertiary-color);
+       fill: var(--eb-icon-tertiary-color);
     }
   }
 
@@ -213,7 +213,7 @@ export default {
     // hover effect
     &::before {
        content: "";
-       background: var(--gray-2);
+       background: var(--eb-gray-2);
        border-radius: 3px;
        display: block;
        left: 50%;
@@ -229,10 +229,10 @@ export default {
     }
 
     &-tooltip {
-      background: var(--input-bg-light);
-      border-radius: var(--border-radius);
+      background: var(--eb-input-bg-light);
+      border-radius: var(--eb-border-radius);
       box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
-      color: var(--text-primary-color);
+      color: var(--eb-text-primary-color);
       display: flex;
       flex-wrap: wrap;
       font-size: 13px;
@@ -249,7 +249,7 @@ export default {
       z-index: 10;
 
       &:after {
-        border: 6px solid var(--gray-1);
+        border: 6px solid var(--eb-gray-1);
         border-left-color: transparent;
         border-right-color: transparent;
         border-top-color: transparent;
@@ -299,7 +299,7 @@ export default {
       }
 
       & > svg {
-         fill: var(--icon-tertiary-color);
+         fill: var(--eb-icon-tertiary-color);
       }
     }
   }
@@ -315,7 +315,7 @@ export default {
   }
 
   .top-menu-button-trash {
-    color: var(--warning);
+    color: var(--eb-warning);
   }
 
   .multiselect {
@@ -327,8 +327,8 @@ export default {
     width: auto;
 
     &__tags {
-      background: var(--bg-secondary);
-      border: 2px solid var(--input-border-color);
+      background: var(--eb-bg-secondary);
+      border: 2px solid var(--eb-input-border-color);
       height: 34px;
       min-height: 100%;
       padding: 4px 40px 5px 14px;
@@ -337,14 +337,14 @@ export default {
 
     &__single {
       background: inherit;
-      color: var(--text-primary-color);
+      color: var(--eb-text-primary-color);
     }
 
     &__select {
       height: 28px;
 
       &::before {
-          border-color: var(--gray-4) transparent transparent;
+          border-color: var(--eb-gray-4) transparent transparent;
       }
     }
 
@@ -357,10 +357,10 @@ export default {
     }
 
     &__content-wrapper {
-      background: var(--bg-secondary);
-      border: 2px solid var(--input-border-color);
+      background: var(--eb-bg-secondary);
+      border: 2px solid var(--eb-input-border-color);
       border-top: none;
-      color: var(--text-primary-color);
+      color: var(--eb-text-primary-color);
       margin-top: -1px;
     }
 
@@ -369,8 +369,8 @@ export default {
       min-height: 30px;
 
       &--highlight {
-        background: var(--input-bg-light);
-        color: var(--text-primary-color);
+        background: var(--eb-input-bg-light);
+        color: var(--eb-text-primary-color);
 
         &:after {
           display: none;
@@ -378,8 +378,8 @@ export default {
       }
 
       &.multiselect__option--selected {
-        background: var(--primary-color);
-        color: var(--white);
+        background: var(--eb-primary-color);
+        color: var(--eb-white);
 
         &:after {
           display: none;
@@ -389,11 +389,11 @@ export default {
 
     &__input {
       background: none !important;
-      color: var(--text-primary-color);
+      color: var(--eb-text-primary-color);
       font-size: 13px;
 
       &::placeholder {
-        color: var(--gray-5);
+        color: var(--eb-gray-5);
       }
     }
 

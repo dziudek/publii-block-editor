@@ -355,7 +355,7 @@ export default {
   position: relative;
 
   &-empty-state {
-    color: var(--gray-4);
+    color: var(--eb-gray-4);
     font-size: 12px;
     font-weight: bold;
     text-align: center;
@@ -377,9 +377,9 @@ export default {
 
     &-delete {
       align-items: center;
-      background: var(--warning);
+      background: var(--eb-warning);
       border: none;
-      border-radius: var(--border-radius);
+      border-radius: var(--eb-border-radius);
       cursor: pointer;
       display: flex;
       height: 34px;
@@ -389,22 +389,22 @@ export default {
       pointer-events: none;
       position: absolute;
       top: 20px;
-      transition: var(--transition);
+      transition: var(--eb-transition);
       width: 34px;
       z-index: 2;
 
       svg {
-        fill: var(--white);
-        transition: var(--transition);
+        fill: var(--eb-white);
+        transition: var(--eb-transition);
       }
 
       &:active,
       &:focus,
       &:hover {
-        background: var(--gray-2);
+        background: var(--eb-gray-2);
 
         svg {
-           fill: var(--warning);
+           fill: var(--eb-warning);
         }
       }
     }
@@ -418,8 +418,8 @@ export default {
   }
 
   &-uploader {
-    border: 2px dashed var(--input-border-color);
-    border-radius: var(--border-radius);
+    border: 2px dashed var(--eb-input-border-color);
+    border-radius: var(--eb-border-radius);
     height: 250px;
     margin: 0 0 16px 0;
     padding: 6px;
@@ -427,12 +427,12 @@ export default {
     width: 100%;
 
     &.is-hovered {
-      border-color: var(--primary-color);
+      border-color: var(--eb-primary-color);
     }
 
     &-loader {
       animation: loader 1s linear infinite;
-      border: 3px solid var(--primary-color);
+      border: 3px solid var(--eb-primary-color);
       border-left-color: transparent;
       border-radius: 50%;
       display: block;
@@ -444,21 +444,21 @@ export default {
       width: 32px!important;
 
       &-overlay {
-        background: var(--bg-primary);
-        border: 2px dashed var(--input-border-color);
-        border-radius: var(--border-radius);
+        background: var(--eb-bg-primary);
+        border: 2px dashed var(--eb-input-border-color);
+        border-radius: var(--eb-border-radius);
         bottom: 0;
         padding: 6px;
         position: absolute;
         left: auto;
         right: auto;
         top: 0;
-        width: var(--editor-width);
+        width: var(--eb-editor-width);
         z-index: 1;
 
         &::after {
           content: "";
-          background: var(--gray-1);
+          background: var(--eb-gray-1);
           display: block;
           height: 100%;
           width: 100%;
@@ -468,7 +468,7 @@ export default {
 
    &-inner {
       align-items: center;
-      background: var(--gray-1);
+      background: var(--eb-gray-1);
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -477,11 +477,11 @@ export default {
       width: 100%;
 
       svg {
-        fill: var(--icon-secondary-color);
+        fill: var(--eb-icon-secondary-color);
       }
 
       span {
-        color: var(--gray-4);
+        color: var(--eb-gray-4);
         display: block;
         font-size: 16px;
         text-align: center;
@@ -489,10 +489,10 @@ export default {
       }
 
       button {
-        background: var(--button-gray-bg);
-        border: 1px solid var(--button-gray-bg);
-        border-radius: var(--border-radius);
-        color: var(--white);
+        background: var(--eb-button-gray-bg);
+        border: 1px solid var(--eb-button-gray-bg);
+        border-radius: var(--eb-border-radius);
+        color: var(--eb-white);
         cursor: pointer;
         font-weight: 500;
         font-size: 15px;
@@ -503,8 +503,8 @@ export default {
         &:active,
         &:focus,
         &:hover {
-          background: var(--button-gray-hover-bg);
-          border-color: var(--button-gray-hover-bg);
+          background: var(--eb-button-gray-hover-bg);
+          border-color: var(--eb-button-gray-hover-bg);
         }
       }
     }
@@ -537,10 +537,10 @@ export default {
         width: calc(100% - 140px);
 
         input {
-          background: var(--input-bg);
-          border: 1px solid var(--input-border-color);
-          border-radius: var(--border-radius);
-          color: var(--text-primary-color);
+          background: var(--eb-input-bg);
+          border: 1px solid var(--eb-input-border-color);
+          border-radius: var(--eb-border-radius);
+          color: var(--eb-text-primary-color);
           display: block;
           font-size: ms(-1);
           line-height: inherit;
@@ -549,7 +549,7 @@ export default {
           width: 100%;
 
           &::placeholder {
-             color: var(--text-light-color);
+             color: var(--eb-text-light-color);
           }
 
           & + input {
