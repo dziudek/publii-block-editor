@@ -2,7 +2,9 @@
   <div
     :data-block-type="blockType"
     ref="block-wrapper"
-    :class="{ 'wrapper': true, 'is-selected': isSelected, 'show-bulk-operations': $parent.bulkOperationsMode, 'has-ui-opened': uiOpened, [customCssClasses.join(' ')]: true }"
+    :class="{ 'wrapper': true, 'is-selected': isSelected, 'show-bulk-operations': $parent.bulkOperationsMode, 'has-ui-opened': uiOpened, [customCssClasses.join(' ')]: true, 'is-hovered': isHovered && !uiOpened }"
+    @mouseenter="enterBlock"
+    @mouseleave="leaveBlock"
     @click.stop="blockClick">
     <slot />
 
@@ -68,6 +70,12 @@
           </div>
       </div>
     </div>
+
+    <button
+      class="wrapper-ui-add-block-between"
+      @click="addBlockAfter(id)">
+      <icon name="add" />
+    </button>
   </div>
 </template>
 
@@ -87,6 +95,7 @@ export default {
   data () {
     return {
       customCssClasses: [],
+      isHovered: false,
       isSelected: false,
       uiOpened: false
     };
@@ -121,6 +130,12 @@ export default {
       if (blockID !== this.id) {
         this.setSelectionState(false);
       }
+    },
+    enterBlock () {
+      this.isHovered = true;
+    },
+    leaveBlock () {
+      this.isHovered = false;
     },
     openPopup () {
       this.uiOpened = true;
@@ -178,6 +193,9 @@ export default {
     },
     duplicateBlock () {
       this.$bus.$emit('block-editor-duplicate-block', this.id);
+    },
+    addBlockAfter () {
+      this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
     }
   },
   beforeDestroy () {
@@ -602,6 +620,24 @@ export default {
 
     &-duplicate {
       left: -60px;
+    }
+  }
+
+  &-ui-add-block-between {
+    bottom: -10px;
+    cursor: pointer;
+    display: none;
+    height: 20px;
+    left: 50%;
+    padding: 0!important;
+    position: absolute;
+    transform: translateX(-50%);
+    width: 30px;
+  }
+
+  &.is-hovered {
+    .wrapper-ui-add-block-between {
+      display: block;
     }
   }
 }
