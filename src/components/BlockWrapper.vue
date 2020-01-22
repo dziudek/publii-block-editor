@@ -218,7 +218,7 @@ export default {
   padding: 0 32px;
   position: relative;
   transition: width .25s ease-out, opacity .35s ease-out;
-  width: var(--editor-width);
+  width: var(--eb-editor-width);
   z-index: 1;
 
   &[data-block-type="publii-embed"] {
@@ -241,7 +241,7 @@ export default {
   }
 
   &.show-bulk-operations {
-      background: var(--bg-secondary);
+      background: var(--eb-bg-secondary);
       margin-top: baseline(8);
       transition: all .25s ease-out;
 
@@ -263,16 +263,16 @@ export default {
   }
 
   &.has-ui-opened {
-    background: var(--bg-secondary);
+    background: var(--eb-bg-secondary);
     border-radius: 6px;
-    box-shadow: 0 0 32px var(--shadow);
+    box-shadow: 0 0 32px var(--eb-shadow);
     margin-top: -44px;
     opacity: 1;
     user-select: none;
     z-index: 2;
 
     &::after {
-      background: var(--primary-color);
+      background: var(--eb-primary-color);
       bottom: -1px;
       content: "";
       position: absolute;
@@ -291,11 +291,11 @@ export default {
       }
       .publii-block-code > .prism-editor__line-numbers,
       .publii-block-html > .prism-editor__line-numbers {
-          background: var(--gray-7) !important;
+          background: var(--eb-gray-7) !important;
       }
       .publii-block-code > pre,
       .publii-block-html > pre {
-          background: var(--gray-7) !important;
+          background: var(--eb-gray-7) !important;
       }
       .publii-block-gallery-uploader-loader-overlay {
           height: 250px;
@@ -310,7 +310,7 @@ export default {
   }
 
   &.contains-wide-image {
-      width: calc(var(--editor-width) + 168px)!important;
+      width: calc(var(--eb-editor-width) + 168px)!important;
   }
 
   &.contains-full-image {
@@ -319,7 +319,7 @@ export default {
     .publii-block-image-form input {
       margin-left: auto;
       margin-right: auto;
-      max-width: calc(var(--editor-width) + 84px);
+      max-width: calc(var(--eb-editor-width) + 84px);
     }
   }
 
@@ -355,7 +355,7 @@ export default {
 
         &::after {
           content:"";
-          border: 2px solid rgba(var(--primary-color-rgb), .4);
+          border: 2px solid rgba(var(--eb-primary-color-rgb), .4);
           border-radius: 50%;
           height: 50px;
           left: 50%;
@@ -376,7 +376,7 @@ export default {
         }
 
         & > svg {
-          fill: var(--primary-color);
+          fill: var(--eb-primary-color);
           vertical-align: middle;
         }
 
@@ -427,14 +427,14 @@ export default {
         z-index: 0;
 
         svg {
-          fill: var(--icon-primary-color);
-          transition: var(--transition);
+          fill: var(--eb-icon-primary-color);
+          transition: var(--eb-transition);
         }
 
         // hover effect
         &::before {
           content: "";
-          background: var(--gray-2);
+          background: var(--eb-gray-2);
           border-radius: 3px;
           display: block;
           left: 50%;
@@ -453,7 +453,7 @@ export default {
         &.is-active {
 
           svg {
-            fill: var(--icon-tertiary-color);
+            fill: var(--eb-icon-tertiary-color);
           }
 
           &::before {
@@ -482,7 +482,7 @@ export default {
       margin: -9px 0 9px 0;
 
       &-title {
-          color: var(--gray-4);
+          color: var(--eb-gray-4);
           display: block;
           font-size: 11px;
           font-weight: 700;
@@ -506,14 +506,14 @@ export default {
         width: 38px;
 
         svg {
-          fill: var(--icon-primary-color);
-          transition: var(--transition);
+          fill: var(--eb-icon-primary-color);
+          transition: var(--eb-transition);
         }
 
         // hover effect
         &::before {
           content: "";
-          background: var(--gray-2);
+          background: var(--eb-gray-2);
           border-radius: 3px;
           display: block;
           left: 50%;
@@ -532,7 +532,7 @@ export default {
         &.is-active {
 
           svg {
-            fill: var(--icon-tertiary-color);
+            fill: var(--eb-icon-tertiary-color);
           }
 
           &::before {
@@ -546,14 +546,14 @@ export default {
 
   &-ui-bulk {
     background: transparent;
-    border-right: 3px solid var(--primary-color);
+    border-right: 3px solid var(--eb-primary-color);
     border-radius: 6px 0 0 6px;
-    box-shadow: 0 0 16px var(--shadow);
+    box-shadow: 0 0 16px var(--eb-shadow);
     height: 100%;
     left: 0;
     position: absolute;
     top: 0;
-    width: calc(var(--editor-width) + 4rem);
+    width: calc(var(--eb-editor-width) + 4rem);
 
     &-move,
     &-delete,
@@ -570,14 +570,14 @@ export default {
         width: 38px;
 
         svg {
-          fill: var(--icon-primary-color);
-          transition: var(--transition);
+          fill: var(--eb-icon-primary-color);
+          transition: var(--eb-transition);
         }
 
         // hover effect
         &::before {
           content: "";
-          background: var(--gray-2);
+          background: var(--eb-gray-2);
           border-radius: 3px;
           display: block;
           left: 50%;
@@ -596,7 +596,7 @@ export default {
         &.is-active {
 
           svg {
-            fill: var(--icon-tertiary-color);
+            fill: var(--eb-icon-tertiary-color);
           }
 
           &::before {

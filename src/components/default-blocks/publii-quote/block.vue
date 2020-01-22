@@ -256,10 +256,10 @@ export default {
     }
 
     input {
-      background: var(--input-bg);
-      border: 1px solid var(--input-border-color);
-      border-radius: var(--border-radius);
-      color: var(--text-primary-color);
+      background: var(--eb-input-bg);
+      border: 1px solid var(--eb-input-border-color);
+      border-radius: var(--eb-border-radius);
+      color: var(--eb-text-primary-color);
       display: block;
       font-size: inherit;
       line-height: inherit;
@@ -268,15 +268,15 @@ export default {
       width: 100%;
 
       &::placeholder {
-        color: var(--gray-4);
+        color: var(--eb-gray-4);
       }
     }
   }
 
   &-text {
-    background: var(--input-bg);
-    border: 1px solid var(--input-border-color);
-    border-radius: var(--border-radius);
+    background: var(--eb-input-bg);
+    border: 1px solid var(--eb-input-border-color);
+    border-radius: var(--eb-border-radius);
     font-size: inherit;
     line-height: inherit;
     margin-bottom: 16px;
@@ -287,7 +287,7 @@ export default {
     &:empty {
       &:before {
         content: 'Quote text';
-        color: var(--gray-4);
+        color: var(--eb-gray-4);
       }
     }
   }

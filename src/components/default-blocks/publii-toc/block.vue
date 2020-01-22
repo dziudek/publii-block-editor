@@ -176,7 +176,7 @@ export default {
       &:empty {
         &:before {
           content: "Add label";
-          color: var(--gray-4);
+          color: var(--eb-gray-4);
         }
       }
     }
@@ -189,7 +189,7 @@ export default {
   &:empty {
     &:before {
       content: 'The table of content is generated automatically by collecting headings (H1-H6) of your content.';
-      color: var(--gray-4);
+      color: var(--eb-gray-4);
       display: block;
       text-align: center;
       width: 100%;

@@ -92,16 +92,16 @@ export default {
   width: 100%;
 
   hr {
-    background-color: var(--input-border-color);
+    background-color: var(--eb-input-border-color);
     cursor: default;
     height: 1px;
     border: 0;
   }
 
   &:after {
-    background: var(--input-bg);
-    border: 1px solid var(--input-border-color);
-    border-radius: var(--border-radius);
+    background: var(--eb-input-bg);
+    border: 1px solid var(--eb-input-border-color);
+    border-radius: var(--eb-border-radius);
     content: "Read More";
     display: inline-block;
     font-size: ms(-3);

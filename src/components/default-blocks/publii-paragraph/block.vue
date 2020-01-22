@@ -465,7 +465,7 @@ export default {
   &:empty {
     &:before {
       content: 'Start writing or press the TAB key to choose a block';
-      color: var(--gray-4);
+      color: var(--eb-gray-4);
     }
   }
 
@@ -478,10 +478,10 @@ export default {
     z-index: 10;
 
     &-tooltip {
-      background: var(--input-bg-light);
-      border-radius: var(--border-radius);
+      background: var(--eb-input-bg-light);
+      border-radius: var(--eb-border-radius);
       box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
-      color: var(--text-primary-color);
+      color: var(--eb-text-primary-color);
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -506,7 +506,7 @@ export default {
       }
 
       &:after {
-        border: 6px solid var(--gray-1);
+        border: 6px solid var(--eb-gray-1);
         border-left-color: transparent;
         border-right-color: transparent;
         border-top-color: transparent;
@@ -575,13 +575,13 @@ export default {
         }
 
         & > svg {
-          fill: var(--primary-color);
+          fill: var(--eb-primary-color);
           vertical-align:text-bottom;
           transition: all .25s ease-out;
         }
 
         &:hover {
-          border: 1px solid var(--secondary-color);
+          border: 1px solid var(--eb-secondary-color);
         }
       }
 
@@ -596,13 +596,13 @@ export default {
         position: relative;
 
         svg {
-          fill: var(--icon-tertiary-color);
+          fill: var(--eb-icon-tertiary-color);
           transition: all .125s ease-out;
         }
 
         &.is-active {
           animation: fadeIn .75s 1 forwards;
-          color: var(--secondary-color);
+          color: var(--eb-secondary-color);
 
           @keyframes fadeIn {
             0% {
@@ -627,13 +627,13 @@ export default {
 
         &:hover {
            svg {
-             fill: var(--primary-color);
+             fill: var(--eb-primary-color);
            }
         }
       }
 
       &.is-visible {
-        background: var(--bg-primary);
+        background: var(--eb-bg-primary);
         display: flex;
       }
     }

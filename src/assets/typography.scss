@@ -11,7 +11,7 @@
     @include fluid-type(font-size, $minScreen, $maxScreen, map-get($font, min), map-get($font, max));
 
     & > .wrapper > div {
-        color: var(--text-primary-color);
+        color: var(--eb-text-primary-color);
         -webkit-font-smoothing: antialiased;
         font-family: var(--font-base);
         font-weight: var(--font-weight-normal);
@@ -19,7 +19,7 @@
         font-size: 1em;
 
         a:not(.btn) {
-            @include links (var(--link-primary-color), var(--link-primary-color), var(--link-primary-color), var(--link-primary-color));
+            @include links (var(--eb-link-primary-color), var(--eb-link-primary-color), var(--eb-link-primary-color), var(--eb-link-primary-color));
         }
 
         p,
@@ -43,7 +43,7 @@
         h4,
         h5,
         h6 {
-            color: var(--headings-color);
+            color: var(--eb-headings-color);
             font-family: var(--font-base);
             font-weight: var(--font-weight-bold);
             letter-spacing: -0.03rem;
@@ -89,7 +89,7 @@
             @include fluid-type(font-size, $minScreen, $maxScreen, ms(1), ms(2));
 
             &::before {
-                color: var(--secondary-color);
+                color: var(--eb-secondary-color);
                 content: "“";
                 font: normal 360%/0.9 var(--font-serif);
                 top: baseline(1);
@@ -118,7 +118,7 @@
         code {
             background-color: #ffeeee;
             border-radius: 2px;
-            color: var(--warning);
+            color: var(--eb-warning);
             font-size: ms(-1);
             font-family: var(--font-monospace);
             padding: baseline(1) baseline(2);
@@ -137,13 +137,13 @@
         }
 
         figcaption {
-            color: var(--text-light-color);
+            color: var(--eb-text-light-color);
             font-size: ms(-1);
             text-align: center;
         }
         
         label {
-            color: var(--label-color);
+            color: var(--eb-label-color);
             font-weight: var(--font-weight-normal);
         }
         
@@ -153,19 +153,19 @@
             padding: baseline(2) 0 baseline(2) baseline(6);
 
             &--highlight {
-                border-color: var(--yellow);        
+                border-color: var(--eb-yellow);        
             }
 
             &--info {
-                border-color: rgba(var(--primary-color-rgb), 1);       
+                border-color: rgba(var(--eb-primary-color-rgb), 1);       
             }
 
             &--success {
-                 border-color: rgba(var(--success-rgb), 1);       
+                 border-color: rgba(var(--eb-success-rgb), 1);       
             }
 
             &--warning {
-                 border-color: rgba(var(--warning-rgb), 1);        
+                 border-color: rgba(var(--eb-warning-rgb), 1);        
             }
         }
     }

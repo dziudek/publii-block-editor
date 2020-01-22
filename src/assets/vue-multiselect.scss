@@ -6,17 +6,17 @@ fieldset[disabled] .multiselect{pointer-events:none}.multiselect__spinner{positi
     font-size: 16px;
 
     &__tags {
-        background: var(--input-bg);
-        border-color: var(--input-border-color);
-        border-radius: var(--border-radius);
-        color: var(--text-primary-color);
+        background: var(--eb-input-bg);
+        border-color: var(--eb-input-border-color);
+        border-radius: var(--eb-border-radius);
+        color: var(--eb-text-primary-color);
         height: 48px;
         min-height: 100%;
         padding: 14px 40px 14px 14px;
     }
 
     &__placeholder {
-        color: var(--text-light-color);
+        color: var(--eb-text-light-color);
         display: block;
         font-size: 16px;
         margin-bottom: 0;
@@ -40,13 +40,13 @@ fieldset[disabled] .multiselect{pointer-events:none}.multiselect__spinner{positi
 
         &--highlight,
         &--highlight:after {
-            background: var(--input-bg-hover);
-            color: var(--text-primary-color);
+            background: var(--eb-input-bg-hover);
+            color: var(--eb-text-primary-color);
         }
 
         &.multiselect__option--selected {
-            background: var(--input-bg-hover);
-            color: var(--text-primary-color);
+            background: var(--eb-input-bg-hover);
+            color: var(--eb-text-primary-color);
             font-weight: 600;
         }
          
@@ -54,8 +54,8 @@ fieldset[disabled] .multiselect{pointer-events:none}.multiselect__spinner{positi
         &--group-selected {
             &.multiselect__option--highlight,
             &.multiselect__option--highlight:after {
-                background: var(--input-bg-hover);
-                color: var(--text-primary-color);
+                background: var(--eb-input-bg-hover);
+                color: var(--eb-text-primary-color);
             }                
         }
     }
@@ -68,24 +68,24 @@ fieldset[disabled] .multiselect{pointer-events:none}.multiselect__spinner{positi
         padding: 0 !important;
 
         &::placeholder {
-            color: var(--text-light-color);
+            color: var(--eb-text-light-color);
         }
     }
 
     &__spinner {
-        background: var(--input-bg);
+        background: var(--eb-input-bg);
         height: 46px;
 
         &::after,
         &::before {
-            border-top-color: var(--success);
+            border-top-color: var(--eb-success);
         }
     }
 
     &__content-wrapper {
-        border-color: var(--input-border-color);
-        background: var(--input-bg);
-        color: var(--text-primary-color);
+        border-color: var(--eb-input-border-color);
+        background: var(--eb-input-bg);
+        color: var(--eb-text-primary-color);
     }
 }
 
@@ -95,7 +95,7 @@ fieldset[disabled] .multiselect{pointer-events:none}.multiselect__spinner{positi
     label {
         &.is-invalid {
             .multiselect__tags {
-                border-color: var(--warning);
+                border-color: var(--eb-warning);
             }
         }
     }

@@ -115,9 +115,9 @@ export default {
 @import '../../../assets/mixins.scss';
 
 .publii-block-html {
-  border-radius: var(--border-radius);
-  background: var(--gray-8);
-  box-shadow: 2px 4px 26px var(--shadow);
+  border-radius: var(--eb-border-radius);
+  background: var(--eb-gray-8);
+  box-shadow: 2px 4px 26px var(--eb-shadow);
   outline: none;
   width: 100%;
 
@@ -129,17 +129,17 @@ export default {
   &.is-visible {
     & > pre,
     & > .prism-editor__line-numbers {
-      background: var(--gray-8) !important;
+      background: var(--eb-gray-8) !important;
       display: block;
     }
 
     & > pre {
-      background: var(--gray-8) !important;
+      background: var(--eb-gray-8) !important;
 
       &:empty {
         &:before {
           content: 'Enter HTML code';
-          color: var(--gray-4);
+          color: var(--eb-gray-4);
         }
       }
     }
@@ -151,15 +151,15 @@ export default {
   }
 
   .prism-editor__line-numbers {
-    background: var(--input-bg) !important;
+    background: var(--eb-input-bg) !important;
   }
 
   &-preview {
     publii-script {
-      background: var(--gray-1);
-      border-left: 4px solid var(--secondary-color);
-      border-radius: var(--border-radius);
-      color: var(--gray-4);
+      background: var(--eb-gray-1);
+      border-left: 4px solid var(--eb-secondary-color);
+      border-radius: var(--eb-border-radius);
+      color: var(--eb-gray-4);
       display: block;
       height: baseline(12);
       margin-bottom: baseline(2);
@@ -171,7 +171,7 @@ export default {
       &:after {
         align-content: center;
         align-items: center;
-        background: var(--gray-1);
+        background: var(--eb-gray-1);
         content: "JavaScript code is evaluated only in the preview.";
         display: flex;
         font-size: ms(-1);
@@ -195,8 +195,8 @@ export default {
       width: 100%;
 
       iframe {
-        background: var(--gray-1);
-        border: 1px solid var(--gray-2);
+        background: var(--eb-gray-1);
+        border: 1px solid var(--eb-gray-2);
         border-radius: 5px;
         height: 100%;
         left: 0;

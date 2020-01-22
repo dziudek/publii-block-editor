@@ -97,16 +97,16 @@ export default {
 @import '../../assets/vue-multiselect.scss';
 
 .is-highlighted {
-  background: var(--primary-color);
+  background: var(--eb-primary-color);
 }
 
 .wrapper-ui-inline-menu {
   animation: inlineMenuIn .15s ease backwards;
   align-items: center;
-  background: var(--bg-secondary);
+  background: var(--eb-bg-secondary);
   border: none;
   border-radius: 4px;
-  box-shadow: 0 5px 10px -5px var(--shadow), 4px -11px 26px -12px var(--shadow), 0 24px 50px 2px var(--shadow);
+  box-shadow: 0 5px 10px -5px var(--eb-shadow), 4px -11px 26px -12px var(--eb-shadow), 0 24px 50px 2px var(--eb-shadow);
   left: 50%;
   margin-top: 16px;
   min-height: 44px;
@@ -130,7 +130,7 @@ export default {
   }
 
   &::after {
-    border: 9px solid var(--bg-secondary);
+    border: 9px solid var(--eb-bg-secondary);
     border-left-color: transparent;
     border-right-color: transparent;
     border-top-color: transparent;
@@ -165,14 +165,14 @@ export default {
     }
 
     svg {
-      fill: var(--icon-primary-color);
-      transition: var(--transition);
+      fill: var(--eb-icon-primary-color);
+      transition: var(--eb-transition);
     }
 
     // hover effect
     &::before {
        content: "";
-       background: var(--gray-2);
+       background: var(--eb-gray-2);
        border-radius: 3px;
        display: block;
        left: 50%;
@@ -191,7 +191,7 @@ export default {
     &.is-active {
 
       svg {
-         fill: var(--icon-tertiary-color);
+         fill: var(--eb-icon-tertiary-color);
       }
 
       &::before {
