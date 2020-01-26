@@ -624,20 +624,30 @@ export default {
   }
 
   &-ui-add-block-between {
-    bottom: -10px;
+    background: none;
+    border: none;
+    bottom: -8px;
     cursor: pointer;
     display: none;
-    height: 20px;
+    height: 30px;
     left: 50%;
     padding: 0!important;
     position: absolute;
     transform: translateX(-50%);
-    width: 30px;
+    width: 60px;
+
+    & > svg {
+        fill: var(--eb-primary-color);
+    }
   }
 
   &.is-hovered {
     .wrapper-ui-add-block-between {
       display: block;
+
+      & > svg {
+          animation: fadeInAddButton .12s ease-out forwards;
+      }
     }
   }
 }
