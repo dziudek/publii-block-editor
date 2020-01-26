@@ -11,7 +11,7 @@
       :style="'text-align: ' + config.textAlign + ';'"
       :class="{ 'publii-block-header': true, 'is-link': config.link.url !== '' }"
       :title="config.link.url !== '' ? config.link.url : ''"
-      v-html="content" />
+      v-initial-html="content" />
 
     <top-menu
       ref="top-menu"

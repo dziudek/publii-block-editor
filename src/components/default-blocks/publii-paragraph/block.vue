@@ -12,7 +12,7 @@
       @keydown="handleKeyboard"
       @mouseup="handleMouseUp"
       contenteditable="true"
-      v-html="content">
+      v-initial-html="content">
     </p>
 
     <div

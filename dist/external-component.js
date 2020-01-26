@@ -5,7 +5,7 @@
       contenteditable="true"
       @keyup="getFocusFromTab"
       ref="block"
-      v-html="content" />
+      v-initial-html="content" />
   `);
 
   window.Vue.component('publii-header-custom', {

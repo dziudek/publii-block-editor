@@ -70,6 +70,17 @@ Vue.config.productionTip = false;
 // Global components
 Vue.component('prism-editor', VuePrismEditor);
 
+// Directive for using with initial HTML code for contenteditable elements
+// Register v-pure-html directive
+Vue.directive('initial-html', {
+  inserted: function (el, binding) {
+    if (binding.oldValue === binding.value) {
+      return;
+    }
+    el.innerHTML = binding.value;
+  }
+});
+
 if (window.process) {
   const { ipcRenderer } = window.require('electron');
   Vue.prototype.$ipcRenderer = ipcRenderer;

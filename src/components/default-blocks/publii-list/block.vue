@@ -8,7 +8,7 @@
       @paste="pastePlainText"
       @keydown="handleKeyboard"
       @mouseup="handleMouseUp"
-      v-html="content"
+      v-initial-html="content"
       ref="block"
       class="publii-block-list" />
 

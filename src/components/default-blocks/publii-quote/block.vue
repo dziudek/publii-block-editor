@@ -13,7 +13,7 @@
           @mouseup="handleMouseUp"
           ref="contentText"
           contenteditable="true"
-          v-html="content.text"></div>
+          v-initial-html="content.text"></div>
         <input
           type="text"
           @focus="updateCurrentBlockID"

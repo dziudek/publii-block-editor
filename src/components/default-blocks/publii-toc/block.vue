@@ -9,7 +9,8 @@
         @focus="updateCurrentBlockID"
         @keydown="handleKeyboard"
         @keyup="handleCaret($event, 'title'); debouncedSave()"
-        contenteditable="true" v-html="content.title"></h3>
+        contenteditable="true"
+        v-initial-html="content.title"></h3>
       <ol
         class="publii-block-toc"
         ref="content"
