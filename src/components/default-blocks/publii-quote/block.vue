@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ 'is-empty': isEmpty }">
     <div class="publii-block-quote-wrapper">
       <div
         :class="{ 'publii-block-quote-form': true, 'is-visible': view === 'code' }"
@@ -7,7 +7,7 @@
         <div
           class="publii-block-quote-text"
           @focus="updateCurrentBlockID"
-          @keyup="getFocusFromTab($event); handleCaretText($event); handleKeyUp($event);"
+          @keyup="getFocusFromTab($event); handleCaretText($event); handleKeyUp($event); debouncedSave()"
           @keydown="handleTextKeyboard"
           @paste="pastePlainText"
           @mouseup="handleMouseUp"
@@ -17,7 +17,7 @@
         <input
           type="text"
           @focus="updateCurrentBlockID"
-          @keyup="handleCaretAuthor($event)"
+          @keyup="handleCaretAuthor($event); debouncedSave()"
           @keydown="handleAuthorKeyboard"
           v-model="content.author"
           placeholder="Quote author"
@@ -54,7 +54,7 @@ import TopMenuUI from './../../helpers/TopMenuUI.vue';
 import Utils from './../../utils/Utils.js';
 
 export default {
-  name: 'Paragraph',
+  name: 'Quote',
   mixins: [
     Block,
     ContentEditableImprovements,
@@ -64,11 +64,6 @@ export default {
   components: {
     'inline-menu': InlineMenuUI,
     'top-menu': TopMenuUI
-  },
-  computed: {
-    isEmpty () {
-      return this.content.text === '' && this.content.author === '';
-    }
   },
   data () {
     return {

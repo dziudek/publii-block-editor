@@ -2,8 +2,15 @@
   <div
     :data-block-type="blockType"
     ref="block-wrapper"
-    :class="{ 'wrapper': true, 'is-selected': isSelected, 'show-bulk-operations': $parent.bulkOperationsMode, 'has-ui-opened': uiOpened, [customCssClasses.join(' ')]: true, 'is-hovered': isHovered && !uiOpened }"
-    @mouseenter="enterBlock"
+    :class="{
+      'wrapper': true,
+      'is-selected': isSelected,
+      'show-bulk-operations': $parent.bulkOperationsMode,
+      'has-ui-opened': uiOpened,
+      [customCssClasses.join(' ')]: true,
+      'is-hovered': isHovered && !uiOpened
+    }"
+    @mousemove="moveOverBlock"
     @mouseleave="leaveBlock"
     @click.stop="blockClick">
     <slot />
@@ -46,8 +53,7 @@
         @click.stop="togglePopup">
           <button
             :class="{ 'wrapper-ui-show-options-button': true, 'is-visible': isSelected && !uiOpened }">
-            <icon
-              name="dotted-line" />
+            <icon name="dotted-line" />
           </button>
 
           <div
@@ -97,7 +103,8 @@ export default {
       customCssClasses: [],
       isHovered: false,
       isSelected: false,
-      uiOpened: false
+      uiOpened: false,
+      moveTimeout: false
     };
   },
   watch: {
@@ -131,8 +138,13 @@ export default {
         this.setSelectionState(false);
       }
     },
-    enterBlock () {
+    moveOverBlock () {
+      clearTimeout(this.moveTimeout);
       this.isHovered = true;
+
+      this.moveTimeout = setTimeout(() => {
+        this.isHovered = false;
+      }, 2000);
     },
     leaveBlock () {
       this.isHovered = false;
@@ -302,6 +314,10 @@ export default {
           top: 61px;
           width: calc(100% - 64px) !important;
       }
+    }
+
+    .publii-block-paragraph-block-selector {
+      display: none;
     }
   }
 
@@ -631,6 +647,7 @@ export default {
     display: none;
     height: 30px;
     left: 50%;
+    outline: none;
     padding: 0!important;
     position: absolute;
     transform: translateX(-50%);
@@ -656,5 +673,15 @@ export default {
   .wrapper {
     opacity: 1;
   }
+}
+
+.editor:not([data-ui-opened-block=""]) {
+  .wrapper-ui-add-block-between {
+    display: none!important;
+  }
+}
+
+.is-empty ~ .wrapper-ui-add-block-between {
+  display: none!important;
 }
 </style>

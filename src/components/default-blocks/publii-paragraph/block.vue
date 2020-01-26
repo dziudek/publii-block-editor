@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ 'is-empty': isEmpty }">
     <p
       :class="{ 'publii-block-paragraph': true, [config.advanced.style]: true }"
       :style="'text-align: ' + config.textAlign + ';'"
@@ -7,7 +7,7 @@
       slot="block"
       @focus="handleEditFocus(); updateCurrentBlockID();"
       @blur="handleEditBlur"
-      @keyup="getFocusFromTab($event); handleKeyUp($event); handleCaret($event);"
+      @keyup="getFocusFromTab($event); handleKeyUp($event); handleCaret($event); debouncedSave()"
       @paste="pastePlainText"
       @keydown="handleKeyboard"
       @mouseup="handleMouseUp"
@@ -224,7 +224,7 @@ export default {
     };
   },
   watch: {
-    showNewBlockUI (newValue, oldValue) {
+    showNewBlockUI (newValue) {
       if (newValue) {
         this.$parent.addCustomCssClass('has-block-selector-visible');
       } else {

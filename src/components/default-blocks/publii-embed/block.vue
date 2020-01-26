@@ -1,11 +1,11 @@
 <template>
-  <div class="publii-block-embed-wrapper">
+  <div :class="{ 'publii-block-embed-wrapper': true, 'is-empty': isEmpty }">
     <div
       :class="{ 'publii-block-embed': true, 'is-visible': view === 'code' }"
       ref="block">
       <textarea
         @keydown="handleKeyboard"
-        @keyup="handleCaret"
+        @keyup="handleCaret($event); debouncedSave()"
         ref="code"
         placeholder="Enter URL or embed code..."
         v-model="content"></textarea>

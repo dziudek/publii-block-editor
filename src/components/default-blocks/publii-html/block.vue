@@ -4,7 +4,7 @@
       :class="{ 'publii-block-html': true, 'is-visible': view === 'code' }"
       ref="block"
       @paste="pastePlainText"
-      @keyup="handleKeyboard"
+      @keyup="handleKeyboard($event); debouncedSave()"
       @focus="updateCurrentBlockID"
       :code="content"
       :emitEvents="true"

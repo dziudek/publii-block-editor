@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div :class="{ 'is-empty': isEmpty }">
     <component
       :is="config.listType"
       contenteditable="true"
-      @keyup="getFocusFromTab($event); handleCaret($event); handleKeyUp($event);"
+      @keyup="getFocusFromTab($event); handleCaret($event); handleKeyUp($event); debouncedSave()"
       @focus="updateCurrentBlockID"
       @paste="pastePlainText"
       @keydown="handleKeyboard"

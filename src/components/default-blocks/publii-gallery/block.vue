@@ -1,6 +1,6 @@
 <template>
   <div
-    class="publii-block-gallery-wrapper"
+    :class="{ 'publii-block-gallery-wrapper': true, 'is-empty': isEmpty }"
     @dragover.stop.prevent="dragOver"
     @dragleave.stop.prevent="dragLeave"
     @drop.stop.prevent="drop">
@@ -182,9 +182,6 @@ export default {
   computed: {
     isInsidePublii () {
       return !!window.process;
-    },
-    isEmpty () {
-      return this.content.images.length === 0;
     }
   },
   beforeCreate () {

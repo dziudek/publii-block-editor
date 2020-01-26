@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div :class="{ 'is-empty': isEmpty }">
     <prism-editor
       :class="{ 'publii-block-code': true }"
       ref="block"
       @paste="pastePlainText"
       @focus="updateCurrentBlockID"
-      @keyup="handleKeyboard"
+      @keyup="handleKeyboard($event); debouncedSave()"
       :code="content"
       :emitEvents="true"
       v-model="content"

@@ -15,7 +15,28 @@ export default {
   ],
   computed: {
     isEmpty () {
-      return this.content === '';
+      if (typeof this.content === 'string') {
+        return this.content === '';
+      } else if (typeof this.content === 'boolean') {
+        return false;
+      }
+
+      // When content is an object
+      let keys = Object.keys(this.content);
+
+      for (let i = 0; i < keys.length; i++) {
+        let field = this.content[keys[i]];
+
+        if (typeof field === 'string' && field !== '') {
+          return false;
+        }
+
+        if (typeof field === 'object' && field.length > 0) {
+          return false;
+        }
+      }
+
+      return true;
     }
   },
   data () {
@@ -263,7 +284,10 @@ export default {
     },
     updateCurrentBlockID () {
       this.$bus.$emit('publii-block-editor-update-current-block-id', this.id);
-    }
+    },
+    debouncedSave: Utils.debounce(function (newValue) {
+      this.save();
+    }, 500)
   },
   beforeDestroy () {
     this.$off('block-save', this.save);

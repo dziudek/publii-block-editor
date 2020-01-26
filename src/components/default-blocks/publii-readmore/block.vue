@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ 'is-empty': isEmpty }">
     <div
       class="publii-block-readmore"
       contenteditable="true"
@@ -29,17 +29,12 @@ export default {
   components: {
     'top-menu': TopMenuUI
   },
-  computed: {
-    isEmpty () {
-      return false;
-    }
-  },
   data () {
     return {
       config: {
         advanced: {}
       },
-      content: ''
+      content: false
     };
   },
   beforeCreate () {

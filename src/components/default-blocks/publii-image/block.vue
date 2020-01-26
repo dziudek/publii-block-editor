@@ -1,5 +1,5 @@
 <template>
-  <div class="publii-block-image-wrapper">
+  <div :class="{ 'publii-block-image-wrapper': true, 'is-empty': isEmpty }">
     <figure
       v-if="view === 'preview' || content.image !== ''"
       ref="block"
@@ -181,9 +181,6 @@ export default {
   computed: {
     isInsidePublii () {
       return !!window.process;
-    },
-    isEmpty () {
-      return this.content.image === '' && this.content.alt === '' && this.content.caption === '';
     }
   },
   beforeCreate () {

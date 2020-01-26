@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ 'is-empty': isEmpty }">
     <div
       class="publii-block-separator"
       contenteditable="true"
@@ -31,11 +31,6 @@ export default {
   components: {
     'top-menu': TopMenuUI
   },
-  computed: {
-    isEmpty () {
-      return false;
-    }
-  },
   data () {
     return {
       config: {
@@ -45,7 +40,7 @@ export default {
           id: this.getAdvancedConfigDefaultValue('id')
         }
       },
-      content: '',
+      content: false,
       topMenuConfig: [
         {
           activeState: function () { return this.config.type === 'long-line'; },

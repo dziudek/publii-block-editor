@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ 'is-empty': isEmpty }">
     <div
       class="publii-block-toc-wrapper"
       ref="block">
@@ -8,7 +8,7 @@
         ref="title"
         @focus="updateCurrentBlockID"
         @keydown="handleKeyboard"
-        @keyup="handleCaret($event, 'title')"
+        @keyup="handleCaret($event, 'title'); debouncedSave()"
         contenteditable="true" v-html="content.title"></h3>
       <ol
         class="publii-block-toc"
@@ -51,11 +51,6 @@ export default {
         toc: ''
       }
     };
-  },
-  computed: {
-    isEmpty () {
-      return this.content.title === '' && this.content.toc === '';
-    }
   },
   beforeCreate () {
     this.configForm = ConfigForm;

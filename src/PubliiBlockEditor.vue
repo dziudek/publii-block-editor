@@ -6,6 +6,7 @@
       class="post-editor-form-title"
       contenteditable="true"
       @paste.prevent="pasteTitle"
+      @keydown="detectEnterInTitle"
       @keyup="updateTitle"></div>
 
     <block-editor ref="block-editor" />
@@ -62,6 +63,13 @@ export default {
       setTimeout(() => {
         this.$bus.$emit('publii-block-editor-load');
       }, 0);
+    },
+    detectEnterInTitle (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        let firstBlockID = this.$refs['block-editor'].content[0].id;
+        this.$refs['block-editor'].$refs['block-' + firstBlockID][0].focus();
+      }
     },
     setPostTitle (event, postTitle) {
       this.$refs['post-title'].innerText = postTitle;
@@ -130,5 +138,9 @@ export default {
 #post-title:empty:before {
   content: "Add post title";
   color: var(--eb-gray-4);
+}
+
+#post-title:empty:focus:before {
+  content: "";
 }
 </style>
