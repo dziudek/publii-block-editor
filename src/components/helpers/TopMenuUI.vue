@@ -4,11 +4,6 @@
     v-if="isVisible"
     @click="resetDeleteConfirmation">
     <span
-      v-if="!conversions.length"
-      class="wrapper-ui-top-menu-title">
-      Edit block
-    </span>
-    <span
       v-if="conversions.length"
       class="wrapper-ui-top-menu-title wrapper-ui-top-menu-conversions">
       Convert to:
