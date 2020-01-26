@@ -147,7 +147,7 @@ export default {
         {
           id: 1555941466744,
           type: 'publii-paragraph',
-          content: '',
+          content: 'Lorem ipsum dolor sit amet!',
           config: {}
         }
       ]

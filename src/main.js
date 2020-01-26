@@ -73,11 +73,13 @@ Vue.component('prism-editor', VuePrismEditor);
 // Directive for using with initial HTML code for contenteditable elements
 // Register v-pure-html directive
 Vue.directive('initial-html', {
-  inserted: function (el, binding) {
-    if (binding.oldValue === binding.value) {
+  update: function (el, binding, vnode) {
+    if (el.getAttribute('data-has-initialized-html')) {
       return;
     }
+
     el.innerHTML = binding.value;
+    el.setAttribute('data-has-initialized-html', 'true');
   }
 });
 
