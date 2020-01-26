@@ -46,7 +46,8 @@ export default {
           noFollow: false,
           targetBlank: false,
           sponsored: false,
-          ugc: false
+          ugc: false,
+          download: false
         };
 
         this.$bus.$emit('block-editor-show-link-popup', this.id, linkConfig);
@@ -62,6 +63,7 @@ export default {
       this.config.link.targetBlank = linkConfig.targetBlank;
       this.config.link.sponsored = linkConfig.sponsored;
       this.config.link.ugc = linkConfig.ugc;
+      this.config.link.download = linkConfig.download;
       this.save();
     },
     removeLink () {
@@ -70,7 +72,8 @@ export default {
         noFollow: false,
         targetBlank: false,
         sponsored: false,
-        ugc: false
+        ugc: false,
+        download: false
       };
 
       this.save();
@@ -90,7 +93,8 @@ export default {
           targetBlank: linkInSelection.getAttribute('target') === '_blank',
           noFollow: linkInSelection.getAttribute('rel') && linkInSelection.getAttribute('rel').indexOf('nofollow noopener') > -1,
           sponsored: linkInSelection.getAttribute('rel') && linkInSelection.getAttribute('rel').indexOf('sponsored') > -1,
-          ugc: linkInSelection.getAttribute('rel') && linkInSelection.getAttribute('rel').indexOf('ugc') > -1
+          ugc: linkInSelection.getAttribute('rel') && linkInSelection.getAttribute('rel').indexOf('ugc') > -1,
+          download: linkInSelection.getAttribute('download') !== null
         };
       } else {
         let wrapper = document.createElement('span');
@@ -106,7 +110,8 @@ export default {
           noFollow: false,
           targetBlank: false,
           sponsored: false,
-          ugc: false
+          ugc: false,
+          download: false
         };
       }
 
@@ -180,6 +185,10 @@ export default {
         linkElement.setAttribute('rel', relAttr.join(' '));
       }
 
+      if (this.config.link.download) {
+        linkElement.setAttribute('download', 'download');
+      }
+
       linkElement.innerHTML = highlightedText.innerHTML;
       highlightedText.parentNode.insertBefore(linkElement, highlightedText);
       highlightedText.parentNode.removeChild(highlightedText);
@@ -220,6 +229,10 @@ export default {
 
       if (relAttr.length) {
         selectedLink.setAttribute('rel', relAttr.join(' '));
+      }
+
+      if (this.config.link.download) {
+        selectedLink.setAttribute('download', 'download');
       }
 
       setTimeout(() => {

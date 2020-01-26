@@ -26,6 +26,11 @@
           @click="setLinkType('external')">
           External
         </div>
+        <div
+          :class="{ 'block-link-popup-link-type-item': true, 'is-active': linkType === 'file' }"
+          @click="setLinkType('file')">
+          File
+        </div>
       </div>
       <vue-select
         v-if="linkType === 'post'"
@@ -57,6 +62,15 @@
         :close-on-select="true"
         :show-labels="false"
         placeholder="Select author page"></vue-select>
+      <vue-select
+        v-if="linkType === 'file'"
+        slot="field"
+        ref="fileSelect"
+        :options="filesList"
+        v-model="linkSelectedFile"
+        :close-on-select="true"
+        :show-labels="false"
+        placeholder="Select file from file manager"></vue-select>
       <input
         v-if="linkType === 'external'"
         type="text"
@@ -69,6 +83,12 @@
         <switcher
           v-model="link.targetBlank" />
         Open in new tab
+      </div>
+
+      <div
+        v-if="linkType === 'file'"
+        class="block-link-popup-link-switcher">
+        <switcher v-model="link.download" /> Add "download" attribute
       </div>
 
       <div class="block-link-popup-link-switcher">
@@ -111,14 +131,23 @@ export default {
       linkSelectedAuthor: '',
       linkSelectedPost: '',
       linkSelectedTag: '',
+      linkSelectedFile: '',
       link: {
         url: '',
         noFollow: false,
         targetBlank: false,
         sponsored: false,
-        ugc: false
+        ugc: false,
+        download: false
       }
     };
+  },
+  watch: {
+    linkType (newValue) {
+      if (newValue !== 'file') {
+        this.link.download = false;
+      }
+    }
   },
   mounted () {
     this.$bus.$on('block-editor-show-link-popup', this.show);
@@ -131,12 +160,14 @@ export default {
       this.linkSelectedAuthor = '';
       this.linkSelectedPost = '';
       this.linkSelectedTag = '';
+      this.linkSelectedFile = '';
       this.link = {
         url: '',
         noFollow: false,
         targetBlank: false,
         sponsored: false,
-        ugc: false
+        ugc: false,
+        download: false
       };
       this.link = Object.assign(this.link, JSON.parse(JSON.stringify(link)));
       this.parseLink();
@@ -165,6 +196,9 @@ export default {
         } else if (this.link.url.indexOf('author') > -1) {
           this.linkType = 'author';
           this.linkSelectedAuthor = parseInt(this.link.url.split('/').pop(), 10);
+        } else if (this.link.url.indexOf('file') > -1) {
+          this.linkType = 'file';
+          this.linkSelectedFile = this.link.url.split('/').pop();
         }
       } else {
         this.linkType = 'external';
@@ -193,6 +227,12 @@ export default {
       } else if (this.linkType === 'tag') {
         if (this.linkSelectedTag) {
           return '#INTERNAL_LINK#/tag/' + this.linkSelectedTag;
+        } else {
+          return '';
+        }
+      } else if (this.linkType === 'file') {
+        if (this.linkSelectedFile) {
+          return '#INTERNAL_LINK#/file/' + this.linkSelectedFile;
         } else {
           return '';
         }

@@ -32,6 +32,13 @@ export default {
       }
 
       return this.$parent.currentSiteData.posts.map(post => post.id);
+    },
+    filesList () {
+      if (!this.$parent.currentSiteData || !this.$parent.currentSiteData.files.length) {
+        return [''];
+      }
+
+      return this.$parent.currentSiteData.files;
     }
   },
   methods: {
