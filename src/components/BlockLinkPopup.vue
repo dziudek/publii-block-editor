@@ -198,7 +198,7 @@ export default {
           this.linkSelectedAuthor = parseInt(this.link.url.split('/').pop(), 10);
         } else if (this.link.url.indexOf('file') > -1) {
           this.linkType = 'file';
-          this.linkSelectedFile = this.link.url.split('/').pop();
+          this.linkSelectedFile = this.link.url.replace('#INTERNAL_LINK#/file/', '');
         }
       } else {
         this.linkType = 'external';
