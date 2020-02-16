@@ -264,7 +264,7 @@ export default {
     },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false && this.showNewBlockUI === false) {
-        let newElementName = this.$parent.$parent.extensions.shortcutManager.checkContentForShortcuts(this.$refs['block'].innerHTML);
+        let newElementName = this.$parent.$parent.extensions.shortcutManager.checkContentForShortcuts(this.$refs['block'].innerText);
 
         if (newElementName === 'publii-readmore' && this.editor.hasReadMore) {
           if (window.app) {
