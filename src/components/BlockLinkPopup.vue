@@ -70,7 +70,7 @@
         v-model="linkSelectedFile"
         :close-on-select="true"
         :show-labels="false"
-        placeholder="Select file from file manager"></vue-select>
+        placeholder="Select file from File Manager"></vue-select>
       <input
         v-if="linkType === 'external'"
         type="text"
