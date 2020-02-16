@@ -257,12 +257,6 @@ export default {
       }
 
       this.save();
-
-      setTimeout(() => {
-        if (!this.newBlockUIListVisible) {
-          this.showNewBlockUI = false;
-        }
-      }, 100);
     },
     handleKeyboard (e) {
       if (e.code === 'Enter' && e.shiftKey === false && this.showNewBlockUI === false) {
@@ -319,6 +313,8 @@ export default {
         e.returnValue = false;
         return;
       }
+
+      console.log('STATUS', e.code === 'Tab', this.$refs['block'].innerHTML === '', this.newBlockUIListVisible === true);
 
       if (e.code === 'Tab' && this.$refs['block'].innerHTML === '' && this.newBlockUIListVisible === false) {
         this.toggleNewBlockUI();
@@ -416,6 +412,8 @@ export default {
       }
     },
     toggleNewBlockUI () {
+      console.log('TOGGLE!!!');
+      this.$refs['block'].focus();
       this.showNewBlockUI = true;
       this.newBlockUIListVisible = !this.newBlockUIListVisible;
     },

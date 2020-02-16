@@ -178,6 +178,10 @@ export default {
       this.save();
     },
     save () {
+      if (!this.$refs['block'].innerHTML) {
+        return;
+      }
+
       this.content = this.$refs['block'].innerHTML.replace('<line-separator></line-separator>', '');
 
       if (!this.config.advanced.customId) {
