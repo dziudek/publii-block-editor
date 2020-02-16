@@ -60,17 +60,20 @@ export default {
         {
           activeState: function () { return this.config.listType === 'ul'; },
           onClick: function () { this.setListType('ul'); },
-          icon: 'unordered-list'
+          icon: 'unordered-list',
+          tooltip: 'Use unordered list'
         },
         {
           activeState: function () { return this.config.listType === 'ol'; },
           onClick: function () { this.setListType('ol'); },
-          icon: 'ordered-list'
+          icon: 'ordered-list',
+          tooltip: 'Use ordered list'
         },
         {
           activeState: () => false,
           onClick: function () { this.clearListHtml(); },
-          icon: 'trash'
+          icon: 'erase',
+          tooltip: 'Clear formatting'
         }
       ]
     };

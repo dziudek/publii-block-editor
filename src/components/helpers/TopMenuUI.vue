@@ -10,10 +10,10 @@
       <span
         v-for="(conversion, index) of conversions"
         :key="'conversion-' + index"
-        class="wrapper-ui-top-menu-conversion"
+        class="wrapper-ui-top-menu-conversion has-tooltip"
         @click="makeConversion(conversion.type, conversion.convert); resetDeleteConfirmation();">
         <icon :name="conversion.icon" />
-        <span class="wrapper-ui-top-menu-conversion-tooltip">
+        <span class="ui-top-menu-tooltip">
           {{ conversion.name }}
         </span>
       </span>
@@ -25,10 +25,13 @@
         <template v-if="!uiElement.type || uiElement.type === 'button'">
           <button
             :key="'top-menu-element-' + index"
-            :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': uiElement.activeState.bind($parent)() }"
+            :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': uiElement.activeState.bind($parent)(), 'has-tooltip': true }"
             tabindex="-1"
             @click="uiElement.onClick.bind($parent)(); resetDeleteConfirmation();">
             <icon :name="uiElement.icon" />
+            <span class="ui-top-menu-tooltip has-bigger-space">
+              {{ uiElement.tooltip }}
+            </span>
           </button>
         </template>
         <template v-else-if="uiElement.type === 'select'">
@@ -46,24 +49,33 @@
       </template>
       <button
         v-if="$parent.$parent.blockType !== 'publii-readmore'"
-        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': settingsAreChanged }"
+        :class="{ 'wrapper-ui-top-menu-button': true, 'is-active': settingsAreChanged, 'has-tooltip': true }"
         tabindex="-1"
         @click.stop="showAdvancedConfig(); resetDeleteConfirmation();">
         <icon name="gear" />
+        <span class="ui-top-menu-tooltip has-bigger-space">
+          Advanced options
+        </span>
       </button>
       <button
         v-if="!confirmDelete"
-        class="wrapper-ui-top-menu-button"
+        class="wrapper-ui-top-menu-button has-tooltip"
         tabindex="-1"
         @click.stop="deleteBlock">
         <icon name="trash" />
+        <span class="ui-top-menu-tooltip has-bigger-space">
+          Delete block
+        </span>
       </button>
       <button
         v-if="confirmDelete"
-        class="wrapper-ui-top-menu-button top-menu-button-trash is-active"
+        class="wrapper-ui-top-menu-button top-menu-button-trash is-active has-tooltip"
         tabindex="-1"
         @click.stop="deleteBlock">
         <icon name="open-trash" />
+        <span class="ui-top-menu-tooltip has-bigger-space">
+          Click to confirm
+        </span>
       </button>
     </div>
   </div>
@@ -183,7 +195,6 @@ export default {
 @import '../../assets/variables.scss';
 
 .wrapper-ui-top-menu {
-
   svg {
     fill: var(--eb-icon-primary-color);
     transition: var(--eb-transition);
@@ -223,70 +234,8 @@ export default {
        z-index: -1;
     }
 
-    &-tooltip {
-      background: var(--eb-input-bg-light);
-      border-radius: var(--eb-border-radius);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
-      color: var(--eb-text-primary-color);
-      display: flex;
-      flex-wrap: wrap;
-      font-size: 13px;
-      font-weight: normal;
-      justify-content: center;
-      height: auto;
-      opacity: 0;
-      padding: 5px 8px;
-      pointer-events: none;
-      position: absolute;
-      text-transform: none;
-      top: 34px;
-      min-width: 64px;
-      z-index: 10;
-
-      &:after {
-        border: 6px solid var(--eb-gray-1);
-        border-left-color: transparent;
-        border-right-color: transparent;
-        border-top-color: transparent;
-        content: "";
-        filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, .08));
-        height: 12px;
-        left: 50%;
-        position: absolute;
-        top: -12px;
-        transform: translateX(-50%);
-        width: 12px;
-      }
-    }
-
     &:hover {
       cursor: pointer;
-
-      .wrapper-ui-top-menu-conversion-tooltip {
-        animation: fadeIn .75s forwards;
-        opacity: 1;
-        transform: scale(1) translateX(-50%);
-      }
-
-      @keyframes fadeIn {
-        0% {
-            opacity: 0;
-            transform: scale(.5) translateX(-50%);
-        }
-
-        50% {
-            opacity: 1;
-            transform: scale(1.05) translateX(-50%);
-        }
-
-        70% {
-            transform: scale(.9) translateX(-50%);
-        }
-
-        100% {
-            transform: scale(1) translateX(-50%);
-        }
-      }
 
       &::before {
          opacity: 1;
@@ -408,6 +357,80 @@ export default {
         text-align: center;
       }
     }
+  }
+}
+
+.ui-top-menu-tooltip {
+  background: var(--eb-input-bg-light);
+  border-radius: var(--eb-border-radius);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
+  color: var(--eb-text-primary-color);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px;
+  font-weight: normal;
+  justify-content: center;
+  height: auto;
+  left: 50%;
+  opacity: 0;
+  padding: 5px 8px;
+  pointer-events: none;
+  position: absolute;
+  text-transform: none;
+  top: 34px;
+  min-width: 64px;
+  z-index: 10;
+
+  &.has-bigger-space {
+    top: 42px;
+  }
+
+  &:after {
+    border: 6px solid var(--eb-gray-1);
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    content: "";
+    filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, .08));
+    height: 12px;
+    left: 50%;
+    position: absolute;
+    top: -12px;
+    transform: scale(.5) translateX(-50%);
+    transform-origin: center center;
+    width: 12px;
+  }
+}
+
+.has-tooltip {
+  position: relative;
+
+  &:hover {
+    .ui-top-menu-tooltip {
+      animation: tooltipFadeIn .75s forwards;
+      opacity: 1;
+      transform: scale(1) translateX(-50%);
+    }
+  }
+}
+
+@keyframes tooltipFadeIn {
+  0% {
+      opacity: 0;
+      transform: scale(.5) translateX(-50%);
+  }
+
+  50% {
+      opacity: 1;
+      transform: scale(1.05) translateX(-50%);
+  }
+
+  70% {
+      transform: scale(.9) translateX(-50%);
+  }
+
+  100% {
+      transform: scale(1) translateX(-50%);
   }
 }
 </style>

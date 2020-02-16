@@ -164,17 +164,20 @@ export default {
         {
           activeState: function () { return this.config.imageAlign === 'center'; },
           onClick: function () { this.alignImage('center'); },
-          icon: 'center'
+          icon: 'center',
+          tooltip: 'Centered image'
         },
         {
           activeState: function () { return this.config.imageAlign === 'wide'; },
           onClick: function () { this.alignImage('wide'); },
-          icon: 'wide'
+          icon: 'wide',
+          tooltip: 'Wide image'
         },
         {
           activeState: function () { return this.config.imageAlign === 'full'; },
           onClick: function () { this.alignImage('full'); },
-          icon: 'full'
+          icon: 'full',
+          tooltip: 'Full-width image'
         }
       ]
     };

@@ -88,7 +88,8 @@ export default {
         {
           activeState: () => false,
           onClick: function () { this.clearContentHtml('contentText'); },
-          icon: 'eraser'
+          icon: 'eraser',
+          tooltip: 'Clear formatting'
         }
       ]
     };
