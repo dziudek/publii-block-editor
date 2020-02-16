@@ -75,7 +75,7 @@ import { compileToFunctions } from 'vue-template-compiler';
 import Icon from './elements/EditorIcon.vue';
 // default blocks
 import PubliiCode from './default-blocks/publii-code/block.vue';
-import PubliiEmbed from './default-blocks/publii-embed/block.vue';
+// import PubliiEmbed from './default-blocks/publii-embed/block.vue';
 import PubliiHeader from './default-blocks/publii-header/block.vue';
 import PubliiHtml from './default-blocks/publii-html/block.vue';
 import PubliiImage from './default-blocks/publii-image/block.vue';
@@ -99,7 +99,7 @@ export default {
     'block-wrapper': BlockWrapper,
     'icon': Icon,
     'publii-code': PubliiCode,
-    'publii-embed': PubliiEmbed,
+    // 'publii-embed': PubliiEmbed,
     'publii-header': PubliiHeader,
     'publii-html': PubliiHtml,
     'publii-image': PubliiImage,
