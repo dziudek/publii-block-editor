@@ -235,8 +235,10 @@ export default {
   beforeCreate () {
     this.configForm = ConfigForm;
   },
-  mounted () {
+  beforeMount () {
     this.content = this.inputContent;
+  },
+  mounted () {
     this.$bus.$on('block-editor-deselect-blocks', this.deselectBlock);
     this.$bus.$on('block-editor-close-new-block-ui', this.hideNewBlockUI);
   },

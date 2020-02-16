@@ -56,8 +56,10 @@ export default {
   beforeCreate () {
     this.configForm = ConfigForm;
   },
-  mounted () {
+  beforeMount () {
     this.content = Utils.deepMerge(this.content, this.inputContent);
+  },
+  mounted () {
     this.updateToc();
     this.$bus.$on('block-editor-content-updated', this.updateToc);
     this.$bus.$on('block-editor-block-selected', this.selectBlock);

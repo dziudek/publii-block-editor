@@ -103,8 +103,10 @@ export default {
   beforeCreate () {
     this.configForm = ConfigForm;
   },
-  mounted () {
+  beforeMount () {
     this.content = Utils.deepMerge(this.content, this.inputContent);
+  },
+  mounted () {
     this.view = (!this.content.text && !this.content.author) ? 'code' : 'preview';
   },
   methods: {

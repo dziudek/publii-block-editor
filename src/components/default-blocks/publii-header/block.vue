@@ -134,8 +134,10 @@ export default {
   beforeCreate () {
     this.configForm = ConfigForm;
   },
-  mounted () {
+  beforeMount () {
     this.content = this.inputContent;
+  },
+  mounted () {
     this.$bus.$on('block-editor-save-link-popup', this.setLink);
   },
   methods: {

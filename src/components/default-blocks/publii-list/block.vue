@@ -78,7 +78,7 @@ export default {
   beforeCreate () {
     this.configForm = ConfigForm;
   },
-  mounted () {
+  beforeMount () {
     this.content = this.inputContent;
 
     if (!this.inputContent) {

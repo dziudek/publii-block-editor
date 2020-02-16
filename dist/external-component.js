@@ -22,7 +22,7 @@
       };
     },
     render: template.render,
-    mounted () {
+    beforeMount () {
       this.content = this.inputContent;
     },
     methods: {
