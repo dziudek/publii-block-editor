@@ -318,8 +318,6 @@ export default {
         return;
       }
 
-      console.log('STATUS', e.code === 'Tab', this.$refs['block'].innerHTML === '', this.newBlockUIListVisible === true);
-
       if (e.code === 'Tab' && this.$refs['block'].innerHTML === '' && this.newBlockUIListVisible === false) {
         this.toggleNewBlockUI();
         this.newBlockUIActiveIndex = 0;
