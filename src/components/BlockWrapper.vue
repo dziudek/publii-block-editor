@@ -681,7 +681,7 @@ export default {
   }
 }
 
-.is-empty ~ .wrapper-ui-add-block-between {
+.is-empty:not(.publii-block-image-wrapper):not(.publii-block-gallery-wrapper) ~ .wrapper-ui-add-block-between {
   display: none!important;
 }
 </style>
