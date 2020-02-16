@@ -44,8 +44,8 @@ export default class ShortcutManager {
   }
 
   checkContentForShortcuts (text) {
-    if (text !== '' && text.length < 24 && this.shortcuts[text]) {
-      return this.shortcuts[text];
+    if (text !== '' && text.length < 24 && this.shortcuts[text.trim()]) {
+      return this.shortcuts[text.trim()];
     }
 
     return 'publii-paragraph';
