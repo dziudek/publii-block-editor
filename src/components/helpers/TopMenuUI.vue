@@ -407,7 +407,7 @@ export default {
   position: relative;
 
   &:hover {
-    .ui-top-menu-tooltip {      
+    .ui-top-menu-tooltip {
       opacity: 1;
       transform: scale(1) translateX(-50%);
     }
