@@ -32,9 +32,7 @@
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 0 }"
           @click.stop="addNewBlock('publii-header');">
           <icon name="headings" />
-          <div
-            v-if="newBlockUIActiveIndex === 0"
-            class="publii-block-paragraph-block-selector-tooltip is-small">
+          <div class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               Header
             </span>
@@ -44,9 +42,7 @@
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 1 }"
           @click.stop="addNewBlock('publii-image');">
           <icon name="image" />
-          <div
-            v-if="newBlockUIActiveIndex === 1"
-            class="publii-block-paragraph-block-selector-tooltip is-small">
+          <div class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               Image
             </span>
@@ -56,9 +52,7 @@
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 2 }"
           @click.stop="addNewBlock('publii-gallery');">
           <icon name="gallery" />
-          <div
-            v-if="newBlockUIActiveIndex === 2"
-            class="publii-block-paragraph-block-selector-tooltip is-small">
+          <div class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               Gallery
             </span>
@@ -68,9 +62,7 @@
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 3 }"
           @click.stop="addNewBlock('publii-list');">
           <icon name="unordered-list" />
-          <div
-            v-if="newBlockUIActiveIndex === 3"
-            class="publii-block-paragraph-block-selector-tooltip is-small">
+          <div class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               List
             </span>
@@ -80,9 +72,7 @@
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 4 }"
           @click.stop="addNewBlock('publii-quote');">
           <icon name="quote" />
-          <div
-            v-if="newBlockUIActiveIndex === 4"
-            class="publii-block-paragraph-block-selector-tooltip is-small">
+          <div class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               Quote
             </span>
@@ -92,9 +82,7 @@
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 5 }"
           @click.stop="addNewBlock('publii-code');">
           <icon name="code" />
-          <div
-            v-if="newBlockUIActiveIndex === 5"
-            class="publii-block-paragraph-block-selector-tooltip is-small">
+          <div class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               Code
             </span>
@@ -104,9 +92,7 @@
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 6 }"
           @click.stop="addNewBlock('publii-html');">
           <icon name="html" />
-          <div
-            v-if="newBlockUIActiveIndex === 6"
-            class="publii-block-paragraph-block-selector-tooltip is-small">
+          <div class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
             HTML
             </span>
@@ -116,9 +102,7 @@
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 7 }"
           @click.stop="addNewBlock('publii-separator');">
           <icon name="separator" />
-          <div
-            v-if="newBlockUIActiveIndex === 7"
-            class="publii-block-paragraph-block-selector-tooltip is-small">
+          <div class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               Separator
             </span>
@@ -129,9 +113,7 @@
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === 8 }"
           @click.stop="addNewBlock('publii-readmore');">
           <icon name="readmore" />
-          <div
-            v-if="newBlockUIActiveIndex === 8"
-            class="publii-block-paragraph-block-selector-tooltip is-small">
+          <div class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               Readmore
             </span>
@@ -141,9 +123,7 @@
           :class="{ 'publii-block-paragraph-block-selector-list-button': true, 'is-active': newBlockUIActiveIndex === (!editor.hasReadMore ? 9 : 8) }"
           @click.stop="addNewBlock('publii-toc');">
           <icon name="toc" />
-          <div
-            v-if="newBlockUIActiveIndex === (!editor.hasReadMore ? 9 : 8)"
-            class="publii-block-paragraph-block-selector-tooltip is-small">
+          <div class="publii-block-paragraph-block-selector-tooltip is-small">
             <span class="publii-block-paragraph-block-selector-tooltip-label1">
               TOC
             </span>
@@ -414,7 +394,6 @@ export default {
       }
     },
     toggleNewBlockUI () {
-      console.log('TOGGLE!!!');
       this.$refs['block'].focus();
       this.showNewBlockUI = true;
       this.newBlockUIListVisible = !this.newBlockUIListVisible;
@@ -484,7 +463,7 @@ export default {
       border-radius: var(--eb-border-radius);
       box-shadow: 0 2px 6px rgba(0, 0, 0, .16);
       color: var(--eb-text-primary-color);
-      display: flex;
+      display: none;
       flex-wrap: wrap;
       justify-content: center;
       height: 40px;
@@ -497,7 +476,7 @@ export default {
       z-index: 10;
 
       &.is-small {
-        display: block;
+        display: none;
         height: auto;
         padding: 5px 10px;
         width: auto;
@@ -623,6 +602,24 @@ export default {
 
             100% {
                transform: scale(1);
+            }
+          }
+
+          .publii-block-paragraph-block-selector-tooltip {
+            display: flex;
+
+            &.is-small {
+              display: block;
+            }
+          }
+        }
+
+        &:hover {
+          .publii-block-paragraph-block-selector-tooltip {
+            display: flex;
+
+            &.is-small {
+              display: block;
             }
           }
         }
