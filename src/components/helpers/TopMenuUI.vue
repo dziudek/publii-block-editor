@@ -372,13 +372,14 @@ export default {
   justify-content: center;
   height: auto;
   left: 50%;
+  min-width: 64px;
   opacity: 0;
   padding: 5px 8px;
   pointer-events: none;
   position: absolute;
   text-transform: none;
   top: 34px;
-  min-width: 64px;
+  white-space: nowrap;
   z-index: 10;
 
   &.has-bigger-space {
@@ -406,31 +407,10 @@ export default {
   position: relative;
 
   &:hover {
-    .ui-top-menu-tooltip {
-      animation: tooltipFadeIn .75s forwards;
+    .ui-top-menu-tooltip {      
       opacity: 1;
       transform: scale(1) translateX(-50%);
     }
-  }
-}
-
-@keyframes tooltipFadeIn {
-  0% {
-      opacity: 0;
-      transform: scale(.5) translateX(-50%);
-  }
-
-  50% {
-      opacity: 1;
-      transform: scale(1.05) translateX(-50%);
-  }
-
-  70% {
-      transform: scale(.9) translateX(-50%);
-  }
-
-  100% {
-      transform: scale(1) translateX(-50%);
   }
 }
 </style>

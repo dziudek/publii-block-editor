@@ -204,19 +204,19 @@ export default {
           activeState: function () { return this.config.textAlign === 'left'; },
           onClick: function () { this.alignText('left'); },
           icon: 'align-left',
-          tooltip: 'Set text to align left'
+          tooltip: 'Align text left'
         },
         {
           activeState: function () { return this.config.textAlign === 'center'; },
           onClick: function () { this.alignText('center'); },
           icon: 'align-center',
-          tooltip: 'Set text to align center'
+          tooltip: 'Align text center'
         },
         {
           activeState: function () { return this.config.textAlign === 'right'; },
           onClick: function () { this.alignText('right'); },
           icon: 'align-right',
-          tooltip: 'Set text to align right'
+          tooltip: 'Align text right'
         },
         {
           activeState: () => false,

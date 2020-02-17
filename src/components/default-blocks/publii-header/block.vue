@@ -76,55 +76,55 @@ export default {
           activeState: function () { return this.config.headingLevel === 1; },
           onClick: function () { this.setHeadingLevel(1); },
           icon: 'h1',
-          tooltip: 'Set heading level 1'
+          tooltip: 'Heading 1'
         },
         {
           activeState: function () { return this.config.headingLevel === 2; },
           onClick: function () { this.setHeadingLevel(2); },
           icon: 'h2',
-          tooltip: 'Set heading level 2'
+          tooltip: 'Heading 2'
         },
         {
           activeState: function () { return this.config.headingLevel === 3; },
           onClick: function () { this.setHeadingLevel(3); },
           icon: 'h3',
-          tooltip: 'Set heading level 3'
+          tooltip: 'Heading 3'
         },
         {
           activeState: function () { return this.config.headingLevel === 4; },
           onClick: function () { this.setHeadingLevel(4); },
           icon: 'h4',
-          tooltip: 'Set heading level 4'
+          tooltip: 'Heading 4'
         },
         {
           activeState: function () { return this.config.headingLevel === 5; },
           onClick: function () { this.setHeadingLevel(5); },
           icon: 'h5',
-          tooltip: 'Set heading level 5'
+          tooltip: 'Heading 5'
         },
         {
           activeState: function () { return this.config.headingLevel === 6; },
           onClick: function () { this.setHeadingLevel(6); },
           icon: 'h6',
-          tooltip: 'Set heading level 6'
+          tooltip: 'Heading 6'
         },
         {
           activeState: function () { return this.config.textAlign === 'left'; },
           onClick: function () { this.alignText('left'); },
           icon: 'align-left',
-          tooltip: 'Set text to align left'
+          tooltip: 'Align text left'
         },
         {
           activeState: function () { return this.config.textAlign === 'center'; },
           onClick: function () { this.alignText('center'); },
           icon: 'align-center',
-          tooltip: 'Set text to align center'
+          tooltip: 'Align text center'
         },
         {
           activeState: function () { return this.config.textAlign === 'right'; },
           onClick: function () { this.alignText('right'); },
           icon: 'align-right',
-          tooltip: 'Set text to align right'
+          tooltip: 'Align text right'
         },
         {
           activeState: () => this.config.link.url !== '',

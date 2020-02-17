@@ -46,19 +46,19 @@ export default {
           activeState: function () { return this.config.type === 'long-line'; },
           onClick: function () { this.setType('long-line'); },
           icon: 'long-line',
-          tooltip: 'Set style to long line'
+          tooltip: 'Wide line'
         },
         {
           activeState: function () { return this.config.type === 'dots'; },
           onClick: function () { this.setType('dots'); },
           icon: 'dotted-line',
-          tooltip: 'Set style to dotted line'
+          tooltip: 'Dots'
         },
         {
           activeState: function () { return this.config.type === 'dot'; },
           onClick: function () { this.setType('dot'); },
           icon: 'dot',
-          tooltip: 'Set style to dot'
+          tooltip: 'Dot'
         }
       ],
       conversions: AvailableConversions
