@@ -72,7 +72,7 @@ export default {
         {
           activeState: () => false,
           onClick: function () { this.clearListHtml(); },
-          icon: 'erase',
+          icon: 'eraser',
           tooltip: 'Clear formatting'
         }
       ]
