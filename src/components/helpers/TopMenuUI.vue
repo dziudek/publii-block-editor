@@ -259,7 +259,12 @@ export default {
   }
 
   .top-menu-button-trash {
-    color: var(--eb-warning);
+      &::before {
+         background: var(--eb-warning);
+      }
+         svg {
+         fill: var(--eb-white);
+      }
   }
 
   .multiselect {

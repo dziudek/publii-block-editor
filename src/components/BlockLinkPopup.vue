@@ -336,9 +336,8 @@ export default {
     }
 
     &-external-input {
-      background: var(--eb-input-border-color);
+      background: var(--eb-input-bg);
       border: 1px solid var(--eb-input-border-color);
-      border-radius: var(--eb-border-radius);
       color: var(--eb-text-primary-color);
       display: block;
       font-size: 16px;
