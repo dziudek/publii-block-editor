@@ -120,11 +120,11 @@ export default {
   font-size: 35px;
   font-weight: 600;
   line-height: 1.2;
-  margin: 0 auto 26px;
+  margin: 0 10% 1.6rem;
   outline: none;
   padding: 0;
   text-align: center;
-  width: 100%;
+  width: 80%;
 }
 
 #post-editor {
