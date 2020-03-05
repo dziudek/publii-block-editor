@@ -675,7 +675,8 @@ export default {
   }
 }
 
-.editor:not([data-ui-opened-block=""]) {
+.editor:not([data-ui-opened-block=""]),
+.show-bulk-operations {
   .wrapper-ui-add-block-between {
     display: none!important;
   }
