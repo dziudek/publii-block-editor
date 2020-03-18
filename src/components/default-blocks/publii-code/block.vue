@@ -40,7 +40,7 @@ export default {
   data () {
     return {
       config: {
-        language: 'html',
+        language: this.getLastSelectedLanguage(),
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
           id: this.getAdvancedConfigDefaultValue('id')
@@ -48,6 +48,7 @@ export default {
       },
       content: '',
       conversions: AvailableConversions,
+      lastSelectedLanguage: null,
       topMenuConfig: [
         {
           type: 'select',
@@ -59,6 +60,11 @@ export default {
         }
       ]
     };
+  },
+  watch: {
+    'config.language': function (newValue) {
+      localStorage.setItem('block-editor-last-selected-language', newValue);
+    }
   },
   computed: {
     availableLanguages () {
@@ -159,6 +165,17 @@ export default {
         config: JSON.parse(JSON.stringify(this.config)),
         content: this.content
       });
+    },
+    getLastSelectedLanguage () {
+      let value = localStorage.getItem('block-editor-last-selected-language');
+
+      if (value !== null) {
+        value = value.replace(/[^a-z0-9-]/gmi, '');
+      } else {
+        value = 'html';
+      }
+
+      return value;
     }
   }
 }
