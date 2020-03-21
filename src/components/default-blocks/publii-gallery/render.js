@@ -21,9 +21,11 @@ function render (blockData) {
   }
 
   let html = `
-  <div ${id}${cssClasses} data-columns="${blockData.config.columns}">
-    ${images}
-  </div>`;
+  <div class="gallery-wrapper">
+      <div ${id}${cssClasses} data-columns="${blockData.config.columns}">
+        ${images}
+      </div>
+ </div>`;
 
   return html;
 };
