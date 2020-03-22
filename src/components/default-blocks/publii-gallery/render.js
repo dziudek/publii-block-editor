@@ -9,7 +9,7 @@ function render (blockData) {
     let caption = '';
 
     if (img.caption.trim() !== '') {
-      caption = `<figcaption class="gallery__item-description">${img.caption}</figcaption>`;
+      caption = `<figcaption>${img.caption}</figcaption>`;
     }
 
     images += `<figure class="gallery__item">
