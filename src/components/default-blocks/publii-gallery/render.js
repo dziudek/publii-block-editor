@@ -1,6 +1,6 @@
 function render (blockData) {
   let id = blockData.config.advanced.id ? ' id="' + blockData.config.advanced.id + '"' : '';
-  let cssClasses = ['gallery', blockData.config.advanced.cssClasses, 'gallery--' + blockData.config.imageAlign].filter(item => item && item.trim() !== '');
+  let cssClasses = ['gallery-wrapper', blockData.config.advanced.cssClasses, 'gallery--' + blockData.config.imageAlign].filter(item => item && item.trim() !== '');
   cssClasses = cssClasses.length ? ' class="' + cssClasses.join(' ') + '"' : '';
   let images = ``;
 
@@ -21,11 +21,11 @@ function render (blockData) {
   }
 
   let html = `
-  <div class="gallery-wrapper">
-      <div ${id}${cssClasses} data-columns="${blockData.config.columns}">
-        ${images}
-      </div>
- </div>`;
+  <div ${id}${cssClasses}>
+    <div class="gallery" data-columns="${blockData.config.columns}">
+      ${images}
+    </div>
+  </div>`;
 
   return html;
 };
