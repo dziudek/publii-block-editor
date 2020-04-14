@@ -1,7 +1,7 @@
 <template>
   <div>
     <prism-editor
-      :class="{ 'publii-block-html': true, 'is-visible': view === 'code' }"
+      :class="{ 'publii-block-html': true, 'is-visible': true }"
       ref="block"
       @paste="pastePlainText"
       @keyup="handleKeyboard($event); debouncedSave()"
@@ -12,13 +12,6 @@
       :lineNumbers="true"
       language="html">
     </prism-editor>
-
-    <div
-      v-if="view === 'preview'"
-      v-html="modifiedContent"
-      @click="setView('code')"
-      class="publii-block-html-preview">
-    </div>
 
     <top-menu
       ref="top-menu"
@@ -34,15 +27,13 @@ import ConfigForm from './config-form.json';
 import ContentEditableImprovements from './../../helpers/ContentEditableImprovements.vue';
 import contentFilter from './content-filter.js';
 import addAspectRatio from './aspect-ratio.js';
-import HasPreview from './../../mixins/HasPreview.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
 
 export default {
   name: 'Html',
   mixins: [
     Block,
-    ContentEditableImprovements,
-    HasPreview
+    ContentEditableImprovements
   ],
   components: {
     'top-menu': TopMenuUI
@@ -70,7 +61,6 @@ export default {
   },
   mounted () {
     this.content = this.inputContent;
-    this.view = this.content === '' ? 'code' : 'preview';
   },
   methods: {
     focus () {
@@ -152,87 +142,6 @@ export default {
 
   .prism-editor__line-numbers {
     background: var(--eb-input-bg) !important;
-  }
-
-  &-preview {
-    publii-script {
-      background: var(--eb-gray-1);
-      border-left: 4px solid var(--eb-secondary-color);
-      border-radius: var(--eb-border-radius);
-      color: var(--eb-gray-4);
-      display: block;
-      height: baseline(12);
-      margin-bottom: baseline(2);
-      overflow: hidden;
-      padding: baseline(4);
-      position: relative;
-      width: 100%;
-
-      &:after {
-        align-content: center;
-        align-items: center;
-        background: var(--eb-gray-1);
-        content: "JavaScript code is evaluated only in the preview.";
-        display: flex;
-        font-size: ms(-1);
-        height: 100%;
-        justify-content: center;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-      }
-    }
-
-    .aspect-ratio-21-9,
-    .aspect-ratio-18-9,
-    .aspect-ratio-16-9,
-    .aspect-ratio-4-3,
-    .aspect-ratio-1-1,
-    .aspect-ratio-9-6,
-    .aspect-ratio-1-2 {
-      position: relative;
-      width: 100%;
-
-      iframe {
-        background: var(--eb-gray-1);
-        border: 1px solid var(--eb-gray-2);
-        border-radius: 5px;
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-      }
-    }
-
-    .aspect-ratio-21-9 {
-      padding-bottom: 42.857143%;
-    }
-
-    .aspect-ratio-18-9 {
-      padding-bottom: 50%;
-    }
-
-    .aspect-ratio-16-9 {
-      padding-bottom: 56.25%;
-    }
-
-    .aspect-ratio-4-3 {
-      padding-bottom: 75%;
-    }
-
-    .aspect-ratio-1-1 {
-      padding-bottom: 100%;
-    }
-
-    .aspect-ratio-9-6 {
-      padding-bottom: 66.666666%;
-    }
-
-    .aspect-ratio-1-2 {
-      padding-bottom: 200%;
-    }
   }
 }
 </style>
