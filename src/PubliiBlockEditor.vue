@@ -45,6 +45,8 @@ export default {
       this.$ipcRenderer.on('block-editor-undo', this.undoAction);
       this.$ipcRenderer.on('block-editor-redo', this.redoAction);
     }
+
+    this.$refs['post-title'].focus();
   },
   methods: {
     setAppTheme (event, theme) {
