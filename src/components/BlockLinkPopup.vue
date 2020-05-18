@@ -245,9 +245,15 @@ export default {
           this.link.url.substr(0, 6) !== 'dat://' &&
           this.link.url.substr(0, 6) !== 'ftp://' &&
           this.link.url.substr(0, 3) !== '://' &&
-          this.link.url.substr(0, 2) !== '//'
+          this.link.url.substr(0, 2) !== '//' &&
+          this.link.url.substr(0, 7) !== 'mailto:' &&
+          this.link.url.substr(0, 4) !== 'tel:'
         ) {
-          this.link.url = 'https://' + this.link.url;
+          if (this.link.url.indexOf('@') > -1) {
+            this.link.url = 'mailto:' + this.link.url;
+          } else {
+            this.link.url = 'https://' + this.link.url;
+          }
         }
       }
 
