@@ -21,8 +21,8 @@ function render (blockData) {
   }
 
   let html = `
-  <div ${id}${cssClasses} data-columns="${blockData.config.columns}">
-    <div class="gallery">
+  <div ${id}${cssClasses}>
+    <div class="gallery" data-columns="${blockData.config.columns}">
       ${images}
     </div>
   </div>`;
