@@ -145,4 +145,12 @@ export default {
 #post-title:empty:focus:before {
   content: "";
 }
+
+@media (min-width: 1800px) {
+    #post-title {
+        margin: 0 auto 1.6rem;
+        max-width: calc(100% - 880px);
+        width: 100%;
+    }
+}
 </style>
