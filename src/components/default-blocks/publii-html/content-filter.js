@@ -10,8 +10,8 @@ function contentFilter (code, mode = 'editor') {
     code = code.replace(/&gt;/gmi, '>');
     code = code.replace(/&lt;/gmi, '<');
     code = code.replace(/&nbsp;/gmi, '&');
-    code = code.replace(/<publii\-script/gmi, '<script');
-    code = code.replace(/<\/publii\-script/gmi, '</script');
+    code = code.replace(/<publii-script/gmi, '<script');
+    code = code.replace(/<\/publii-script/gmi, '</script');
     code = code.replace(/<webview[\s\S]*?>[\s\S]*?<\/[\s\S]*?webview>/gmi, '');
   }
 
