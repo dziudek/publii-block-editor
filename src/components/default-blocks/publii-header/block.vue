@@ -153,7 +153,7 @@ export default {
   },
   methods: {
     handleKeyboard (e) {
-      if (e.code === 'Enter' && e.shiftKey === false) {
+      if (e.code === 'Enter' && !e.isComposing && e.shiftKey === false) {
         document.execCommand('insertHTML', false, '<line-separator />');
 
         if (this.$refs['block'].innerHTML.substr(-33) === '<line-separator></line-separator>') {

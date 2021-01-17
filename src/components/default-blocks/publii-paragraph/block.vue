@@ -243,7 +243,7 @@ export default {
       this.save();
     },
     handleKeyboard (e) {
-      if (e.code === 'Enter' && e.shiftKey === false && this.showNewBlockUI === false) {
+      if (e.code === 'Enter' && !e.isComposing && e.shiftKey === false && this.showNewBlockUI === false) {
         let newElementName = this.$parent.$parent.extensions.shortcutManager.checkContentForShortcuts(this.$refs['block'].innerText);
 
         if (newElementName === 'publii-readmore' && this.editor.hasReadMore) {
@@ -318,6 +318,7 @@ export default {
 
       if (
         e.code === 'Enter' &&
+        !e.isComposing &&
         e.shiftKey === false &&
         this.newBlockUIListVisible === false &&
         this.showNewBlockUI === true
@@ -329,6 +330,7 @@ export default {
 
       if (
         e.code === 'Enter' &&
+        !e.isComposing &&
         e.shiftKey === false &&
         this.newBlockUIListVisible === true &&
         this.showNewBlockUI === true

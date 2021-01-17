@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     handleKeyboard (e) {
-      if (e.code === 'Enter' && e.shiftKey === false) {
+      if (e.code === 'Enter' && !e.isComposing && e.shiftKey === false) {
         this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
         e.returnValue = false;
       }

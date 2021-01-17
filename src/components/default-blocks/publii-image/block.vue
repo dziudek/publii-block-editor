@@ -342,7 +342,7 @@ export default {
       this.setView('code');
     },
     handleCaptionKeyboard (e) {
-      if (e.code === 'Enter' && e.shiftKey === false) {
+      if (e.code === 'Enter' && !e.isComposing && e.shiftKey === false) {
         this.$refs['contentAlt'].focus();
         e.returnValue = false;
       }
@@ -353,7 +353,7 @@ export default {
       }
     },
     handleAltKeyboard (e) {
-      if (e.code === 'Enter' && e.shiftKey === false) {
+      if (e.code === 'Enter' && !e.isComposing && e.shiftKey === false) {
         this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
         e.returnValue = false;
       }

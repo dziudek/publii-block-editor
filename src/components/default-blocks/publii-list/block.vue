@@ -111,7 +111,7 @@ export default {
       }
 
       if (
-        e.code === 'Enter' &&
+        e.code === 'Enter' && !e.isComposing &&
         (
           (
             this.$refs['block'].innerHTML.substr(-13) === '<li><br></li>' ||

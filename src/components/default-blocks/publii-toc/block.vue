@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     handleKeyboard (e) {
-      if (e.code === 'Enter') {
+      if (e.code === 'Enter' && !e.isComposing) {
         this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
         e.returnValue = false;
       }

@@ -67,7 +67,7 @@ export default {
       this.$refs['block'].$el.querySelector('pre').focus();
     },
     handleKeyboard (e) {
-      if (e.code === 'Enter' && e.shiftKey === true) {
+      if (e.code === 'Enter' && !e.isComposing && e.shiftKey === true) {
         e.preventDefault();
         this.$bus.$emit('block-editor-add-block', 'publii-paragraph', this.id);
         e.returnValue = false;
