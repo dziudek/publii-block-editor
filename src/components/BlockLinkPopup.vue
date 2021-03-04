@@ -24,7 +24,7 @@
         <div
           :class="{ 'block-link-popup-link-type-item': true, 'is-active': linkType === 'external' }"
           @click="setLinkType('external')">
-          External
+          Custom
         </div>
         <div
           :class="{ 'block-link-popup-link-type-item': true, 'is-active': linkType === 'file' }"
